@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025/10/04-10/12 靜岡旅遊行程</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
+        .navbar {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #3498db;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover, .navbar a.active {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .card-header {
+            background-color: #eaf5ff;
+            color: #2980b9;
+            padding: 15px 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            border-bottom: 1px solid #d6e9f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .card-header::before {
+            content: "📅";
+            margin-right: 10px;
+        }
+        .toggle-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .card-header.collapsed .toggle-btn {
+            transform: rotate(-45deg);
+        }
+        .card-content {
+            padding: 20px;
+            max-height: 5000px; /* A large enough value */
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .card-content.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .info-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .info-card h3 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f2f8fc;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        .notes, .links-section {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .notes h4, .links-section h4 {
+            margin-top: 0;
+            color: #d46b08;
+        }
+        .links-section a {
+            text-decoration: none;
+            color: #0066cc;
+            margin-right: 15px;
+        }
+        .links-section a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #888;
+        }
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 24px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        #backToTopBtn:hover {
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: flex-start;
+            }
+            .navbar a {
+                flex-grow: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>阿宅阿婷靜岡旅遊行程</h1>
+            <p>2025/10/04 - 2025/10/12</p>
+        </div>
+
+        <nav class="navbar">
+            <a href="#summary">行程總覽</a>
+            <a href="#day1">Day 1</a>
+            <a href="#day2">Day 2</a>
+            <a href="#day3">Day 3</a>
+            <a href="#day4">Day 4</a>
+            <a href="#day5">Day 5</a>
+            <a href="#day6">Day 6</a>
+            <a href="#day7">Day 7</a>
+            <a href="#day8">Day 8</a>
+            <a href="#day9">Day 9</a>
+        </nav>
+
+        <div id="summary" class="card">
+            <div class="card-header">行程總覽 & 航班資訊<button class="toggle-btn">-</button></div>
+            <div class="card-content">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>航班資訊 (去程)</h3>
+                        <p><strong>航班:</strong> JX802</p>
+                        <p><strong>日期:</strong> 2025/10/04</p>
+                        <p><strong>出發:</strong> 桃園 T1, 10:40</p>
+                        <p><strong>抵達:</strong> 成田 T2, 15:05</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>航班資訊 (回程)</h3>
+                        <p><strong>航班:</strong> JX803</p>
+                        <p><strong>日期:</strong> 2025/10/12</p>
+                        <p><strong>出發:</strong> 成田 T2, 16:20</p>
+                        <p><strong>抵達:</strong> 桃園 T1, 19:00</p>
+                    </div>
+                </div>
+                
+                <h3>行程總覽</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>星期</th>
+                            <th>主要行程</th>
+                            <th>住宿地點</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2025/10/04</td><td>週六</td><td>抵達東京成田機場 → 搭乘N'EX前往大船</td><td>鎌倉大船JR東日本METS飯店</td></tr>
+                        <tr><td>2025/10/05</td><td>週日</td><td>大船 → 熱海(遊覽) → 靜岡</td><td>ホテルプリヴェ静岡</td></tr>
+                        <tr><td>2025/10/06</td><td>週一</td><td>靜岡 → 日本平夢テラス → 久能山東照宮</td><td>ホテルプリヴェ静岡</td></tr>
+                        <tr><td>2025/10/07</td><td>週二</td><td>靜岡 → 富士(商店街) → 富士宮(淺間大社)</td><td>ホテルプリヴェ静岡</td></tr>
+                        <tr><td>2025/10/08</td><td>週三</td><td>靜岡 → 清水(小丸子樂園) → 搭渡輪至土肥 → 修善寺溫泉</td><td>修善寺温泉 桂川</td></tr>
+                        <tr><td>2025/10/09</td><td>週四</td><td>修善寺 → 三島(天空步道、三嶋大社) → 靜岡</td><td>ホテルプリヴェ静岡</td></tr>
+                        <tr><td>2025/10/10</td><td>週五</td><td>靜岡 → 大船 → 鐮倉一日遊 (大佛、江之島)</td><td>鎌倉大船JR東日本METS飯店</td></tr>
+                        <tr><td>2025/10/11</td><td>週六</td><td>大船 → 橫濱一日遊 (未來港、中華街、夜景)</td><td>橫濱站前里士滿酒店</td></tr>
+                        <tr><td>2025/10/12</td><td>週日</td><td>橫濱 → 品川(寄行李) → 東京市區 → 成田機場返家</td><td>(溫暖的家)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div id="day1" class="card">
+            <div class="card-header">10/04 (週六) - 抵達東京，前往大船<button class="toggle-btn">-</button></div>
+            <div class="card-content">
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>10:40</td><td>桃園機場第一航廈出發</td><td>JX802</td><td></td></tr>
+                        <tr><td>15:05</td><td>抵達成田機場第二航廈</td><td></td><td>準備辦理入境手續、領取行李</td></tr>
+                        <tr><td>15:05 - 16:30</td><td>入境、領取行李、購買N'EX車票</td><td></td><td>N'EX車票可在JR東日本旅行服務中心購買</td></tr>
+                        <tr><td>16:30 - 19:30</td><td>搭乘N'EX前往大船車站</td><td>N'EX 成田特快</td><td>請參考下方的N'EX班次建議</td></tr>
+                        <tr><td>19:30 -</td><td>飯店入住</td><td>步行</td><td>鎌倉大船JR東日本METS飯店</td></tr>
+                    </tbody>
+                </table>
+                <div class="notes">
+                    <h4>N'EX (成田特快) 班次建議</h4>
+                    <table>
+                        <thead><tr><th>班次</th><th>成田機場出發</th><th>抵達大船時間</th></tr></thead>
+                        <tbody>
+                            <tr><td>N'EX 34号</td><td>15:44</td><td>17:34</td></tr>
+                            <tr><td>N'EX 38号</td><td>16:44</td><td>18:32</td></tr>
+                            <tr><td>N'EX 40号</td><td>17:16</td><td>19:09</td></tr>
+                            <tr><td>N'EX 42号</td><td>17:45</td><td>19:38</td></tr>
+                            <tr><td>N'EX 46号</td><td>18:49</td><td>20:41</td></tr>
+                            <tr><td>N'EX 50号</td><td>19:49</td><td>21:41</td></tr>
+                        </tbody>
+                    </table>
+                    <p><strong>重要提醒：</strong>N'EX車票最早於搭乘日前一個月開放購買 (即09/04)。</p>
+                </div>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> 鎌倉大船JR東日本METS飯店<br>
+                   <strong>費用:</strong> 20,952日圓 (含稅)<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                    <p>
+                        <a href="https://www.jreast.co.jp/multi/zh-CHT/nex/" target="_blank">🌐 N'EX 成田特快官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Hotel+Mets+Kamakura+Ofuna" target="_blank">📍 鎌倉大船JR東日本METS飯店地圖</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day2" class="card">
+            <div class="card-header collapsed">10/05 (週日) - 大船→熱海→靜岡<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>上午</td><td>飯店退房，從大船前往熱海</td><td>JR東海道本線 普通車 (約 55-60 分鐘)</td><td>(不使用Pass) 此段車票需另外購買。</td></tr>
+                        <tr><td>10:00 - 10:30</td><td>抵達熱海車站，寄放行李</td><td>步行</td><td>尋找車站內的投幣式置物櫃 (コインロッカー)。</td></tr>
+                        <tr><td>10:30 - 15:00</td><td>自由逛逛熱海市區</td><td>步行</td><td>例如：熱海商店街、熱海陽光海灘等。</td></tr>
+                        <tr><td>15:00左右</td><td>從熱海前往靜岡</td><td>JR東海道本線 普通車 (約 1小時 20 分鐘)</td><td>(使用Pass) 開始使用「富士山・靜岡地區周遊券 Mini」。</td></tr>
+                        <tr><td>16:30 之後</td><td>抵達靜岡，前往飯店辦理入住</td><td>步行</td><td>飯店：ホテルプリヴェ静岡 (Hotel Prive Shizuoka)</td></tr>
+                        <tr><td>傍晚</td><td>自由探索靜岡市區</td><td>步行</td><td>逛逛吳服町商店街、青葉橫丁等，並享用晚餐。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> ホテルプリヴェ静岡 (Hotel Prive Shizuoka)<br>
+                   <strong>費用:</strong> 18,700日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                    <p>
+                        <a href="https://www.atamispa.com/" target="_blank">🌐 熱海市觀光協會</a>
+                        <a href="https://maps.app.goo.gl/6XGQiVwm4Gvu7akc6" target="_blank">📍 熱海車站地圖</a>
+                    </p>
+                    <p>
+                        <a href="https://www.hotel-prive.jp/shizuoka/" target="_blank">🌐 ホテルプリヴェ静岡官網</a>
+                        <a href="https://maps.app.goo.gl/w1yuCRJgJ1tkRrvL6" target="_blank">📍 ホテルプリヴェ静岡地圖</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="day3" class="card">
+            <div class="card-header collapsed">10/06 (週一) - 日本平 & 久能山東照宮<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                 <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>9:00 - 9:50</td><td>從JR靜岡車站出發，前往日本平</td><td>靜鐵Justline巴士 日本平線 (42號) (約 50 分鐘)</td><td>(可使用Pass) JR靜岡車站北口 11號乘車處上車。</td></tr>
+                        <tr><td>10:00 - 11:30</td><td>參觀【日本平夢テラス】</td><td>步行</td><td>在360度的觀景台上欣賞富士山、駿河灣絕景。</td></tr>
+                        <tr><td>11:30 - 11:35</td><td>搭乘纜車前往久能山東照宮</td><td>日本平纜車 (約 5 分鐘)</td><td>此段纜車票需另外購買。建議購買來回票。</td></tr>
+                        <tr><td>11:35 - 14:00</td><td>參觀【久能山東照宮】</td><td>步行</td><td>祭祀德川家康的神社，建築華麗。可在此附近用餐。</td></tr>
+                        <tr><td>14:00 - 14:05</td><td>搭乘纜車返回日本平</td><td>日本平纜車</td><td>使用稍早購買的纜車來回票。</td></tr>
+                        <tr><td>14:30 - 15:20</td><td>從日本平搭乘巴士返回JR靜岡車站</td><td>靜鐵Justline巴士 日本平線 (42號) (約 50 分鐘)</td><td>(可使用Pass) 在原下車處附近搭車返回。</td></tr>
+                        <tr><td colspan="4" style="text-align:center; background-color:#f0f0f0;">--- 如果時間充足，推薦追加以下行程 ---</td></tr>
+                        <tr><td>15:30 - 17:30</td><td>【推薦景點】駿府城公園</td><td>從JR靜岡車站步行約15分鐘</td><td>曾是德川家康的居城。公園免費入場。</td></tr>
+                        <tr><td>17:30 之後</td><td>自由活動或返回飯店休息</td><td>步行</td><td>在靜岡市區享用晚餐。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> ホテルプリヴェ静岡 (Hotel Prive Shizuoka)<br>
+                   <strong>費用:</strong> 16,500日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://yumeterasu.nihondairakankou.com/zh-TW/" target="_blank">🌐 日本平夢テラス官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Nihondaira+Yume+Terrace" target="_blank">📍 日本平夢テラス地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://www.toshogu.or.jp/" target="_blank">🌐 久能山東照宮官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kunozan+Toshogu+Shrine" target="_blank">📍 久能山東照宮地圖</a>
+                     </p>
+                      <p>
+                        <a href="https://sumpu-castle.jp/" target="_blank">🌐 駿府城公園官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Sumpu+Castle+Park" target="_blank">📍 駿府城公園地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day4" class="card">
+            <div class="card-header collapsed">10/07 (週二) - 富士 & 富士宮<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>8:30 - 9:05</td><td>從靜岡搭車到 JR富士站</td><td>JR東海道本線 (約 35 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>9:05 - 10:45</td><td>參觀【富士本町商店街】</td><td>從JR富士站北口步行約 5-10 分鐘</td><td>體驗富士市在地商店街的氛圍。</td></tr>
+                        <tr><td>11:00 - 11:20</td><td>返回JR富士站，轉車前往富士宮站</td><td>JR身延線 (約 20 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>11:30 - 14:00</td><td>抵達富士宮，參觀與午餐</td><td>步行</td><td>午餐建議品嚐「富士宮炒麵」。參觀富士山本宮淺間大社、靜岡縣富士山世界遺產中心。</td></tr>
+                        <tr><td colspan="4" style="text-align:center; background-color:#f0f0f0;">--- 選項行程 ---</td></tr>
+                        <tr><td>14:00 - 14:30</td><td>(選項) 從富士宮車站搭巴士前往白絲瀑布</td><td>富士急巴士 (約 30 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>14:30 - 15:30</td><td>(選項)【推薦景點】白絲瀑布 (白糸ノ滝)</td><td>步行</td><td>如果時間允許，非常推薦的自然景點。</td></tr>
+                        <tr><td>15:30 - 16:00</td><td>(選項) 搭乘巴士返回JR富士宮車站</td><td>富士急巴士 (約 30 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>16:30 之後</td><td>從富士宮搭車返回靜岡</td><td>JR身延線 → JR東海道本線</td><td>(可使用Pass) 預計18:00-18:30左右可回到靜岡。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> ホテルプリヴェ静岡 (Hotel Prive Shizuoka)<br>
+                   <strong>費用:</strong> 17,050日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="http://fuji-hongou.com/" target="_blank">🌐 富士本町商店街</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fuji+Honcho+Shopping+Street" target="_blank">📍 富士本町商店街地圖</a>
+                     </p>
+                     <p>
+                        <a href="http://fuji-hongu.or.jp/sengen/" target="_blank">🌐 富士山本宮淺間大社官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fujisan+Hongu+Sengen+Taisha" target="_blank">📍 富士山本宮淺間大社地圖</a>
+                     </p>
+                      <p>
+                        <a href="https://www.shiraito-no-taki.com/" target="_blank">🌐 白絲瀑布(觀光組合)</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Shiraito+Falls+Fujinomiya" target="_blank">📍 白絲瀑布地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day5" class="card">
+            <div class="card-header collapsed">10/08 (週三) - 橫渡駿河灣，前往修善寺<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <table>
+                     <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                     <tbody>
+                        <tr><td>8:30 - 9:00</td><td>飯店退房，行李寄放在飯店</td><td>步行</td><td></td></tr>
+                        <tr><td>9:00 - 9:15</td><td>從JR靜岡站前往JR清水站</td><td>JR東海道本線 (約 11 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>9:20 - 9:35</td><td>從JR清水站搭車到S-Pulse Dream Plaza</td><td>免費接駁巴士 (約 10-15 分鐘)</td><td>在清水站東口(港口側)搭乘。</td></tr>
+                        <tr><td>9:45 - 11:30</td><td>參觀【櫻桃小丸子樂園】</td><td>位於 S-Pulse Dream Plaza 3樓</td><td>(不使用Pass) 門票需另外購買。可在此用午餐。</td></tr>
+                        <tr><td>11:45 - 13:05</td><td>從清水港搭船前往土肥港</td><td>駿河灣渡輪 (約 70 分鐘)</td><td>(可使用Pass) 請務必提早到碼頭。</td></tr>
+                        <tr><td>13:15 - 14:05</td><td>從土肥港搭公車前往修善寺溫泉</td><td>東海巴士 (約 50 分鐘)</td><td>(可使用Pass)</td></tr>
+                        <tr><td>14:15</td><td>抵達修善寺溫泉，前往飯店辦理入住</td><td>步行</td><td>因含晚餐，建議提早Check-in。</td></tr>
+                        <tr><td>15:00 - 17:30</td><td>參觀【修善寺溫泉區景點】</td><td>步行</td><td>參觀修禪寺、竹林小徑、渡月橋等。</td></tr>
+                        <tr><td colspan="4" style="text-align:center; background-color:#f0f0f0;">--- 隔日行程建議 ---</td></tr>
+                        <tr><td>(隔天)</td><td>【修善寺自然公園 もみじ林】</td><td>步行或搭乘計程車</td><td>10月初楓葉可能還未轉紅，主要是欣賞綠林。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> 修善寺温泉 桂川<br>
+                   <strong>費用:</strong> 33,600日圓<br>
+                   <strong>餐飲:</strong> 含早晚餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://chibimarukochan-land.com/" target="_blank">🌐 櫻桃小丸子樂園官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Chibi+Maruko-chan+Land" target="_blank">📍 櫻桃小丸子樂園地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://www.223-ferry.or.jp/" target="_blank">🌐 駿河灣渡輪官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Suruga+Bay+Ferry+Shimizu+Port" target="_blank">📍 清水港渡輪站地圖</a>
+                     </p>
+                      <p>
+                        <a href="http://www.shuzenji-kankou.com/" target="_blank">🌐 修善寺溫泉觀光協會</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Shuzenji+Onsen" target="_blank">📍 修善寺溫泉地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day6" class="card">
+            <div class="card-header collapsed">10/09 (週四) - 三島天空步道<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <div class="notes"><h4>行李策略</h4><p>早上從修善寺搭巴士先到終點「三島站」寄放行李，再從三島站搭巴士往返天空步道。</p></div>
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>9:00 - 10:00</td><td>飯店退房後，從修善寺溫泉前往JR三島站</td><td>東海巴士 (約 50 分鐘)</td><td>(可使用Pass)。</td></tr>
+                        <tr><td>10:15 - 10:40</td><td>從三島站搭巴士前往天空步道</td><td>東海巴士 (約 20-25 分鐘)</td><td>(可使用Pass)。在三島站南口5號乘車處搭車。</td></tr>
+                        <tr><td>10:40 - 13:00</td><td>【主要目標】三島天空步道</td><td>步行</td><td>體驗日本最長吊橋。門票需另外購買。</td></tr>
+                        <tr><td>13:00 - 13:30</td><td>從天空步道搭巴士返回JR三島站</td><td>東海巴士</td><td>(可使用Pass)。</td></tr>
+                        <tr><td>13:45 - 15:30</td><td>參觀【三嶋大社】與【源兵衛川】</td><td>從三島站步行約 12-15 分鐘</td><td>三嶋大社是伊豆地區地位最崇高的神社。</td></tr>
+                        <tr><td colspan="4" style="text-align:center; background-color:#f0f0f0;">--- 選項行程 ---</td></tr>
+                        <tr><td>15:30 - 16:30</td><td>(選項)【柿田川湧水群】</td><td>從三島站搭巴士約15分鐘</td><td>欣賞夢幻的「藍洞」泉水。巴士也可使用Pass。</td></tr>
+                        <tr><td>17:00 之後</td><td>從JR三島站返回靜岡</td><td>JR東海道本線 (約 50-60 分鐘)</td><td>(可使用Pass)。取回行李後搭車返回靜岡。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> ホテルプリヴェ静岡 (Hotel Prive Shizuoka)<br>
+                   <strong>費用:</strong> 17,600日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://mishima-skywalk.jp/" target="_blank">🌐 三島天空步道官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Mishima+Skywalk" target="_blank">📍 三島天空步道地圖</a>
+                     </p>
+                     <p>
+                        <a href="http://www.mishimataisha.or.jp/" target="_blank">🌐 三嶋大社官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Mishima+Taisha" target="_blank">📍 三嶋大社地圖</a>
+                     </p>
+                      <p>
+                        <a href="https://www.kakitagawa.or.jp/" target="_blank">🌐 柿田川公園官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kakita+River+Park" target="_blank">📍 柿田川公園地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="day7" class="card">
+            <div class="card-header collapsed">10/10 (週五) - 鐮倉 & 江之島<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <div class="notes"><h4>交通票券</h4><p>在鐮倉站購買「江之電一日乘車券 (800日圓)」，可無限次搭乘江之電。</p></div>
+                 <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>9:00 - 10:30</td><td>從靜岡出發，搭車前往大船</td><td>JR東海道本線 (約 1.5 小時)</td><td>Pass使用至熱海，出站時在人工窗口補 熱海→大船 的票價。</td></tr>
+                        <tr><td>10:30 - 11:00</td><td>抵達大船，前往飯店寄放行李</td><td>步行</td><td></td></tr>
+                        <tr><td>11:00 - 11:10</td><td>從大船站前往鐮倉站</td><td>JR橫須賀線 (約 6 分鐘)</td><td>此段需另外購票或刷IC卡。</td></tr>
+                        <tr><td>11:10</td><td>購買並啟用【江之電一日券】</td><td>江之電售票機 (鐮倉站)</td><td>直接轉乘江之電。</td></tr>
+                        <tr><td>11:20 - 12:30</td><td>前往「長谷站」，參觀高德院鐮倉大佛</td><td>江之電 + 步行</td><td>為江之島爭取時間，此方案跳過長谷寺。</td></tr>
+                        <tr><td>12:40 - 13:10</td><td>前往「鐮倉高校前站」朝聖</td><td>江之電 + 步行</td><td>參觀經典的「灌籃高手平交道」。</td></tr>
+                        <tr><td>13:20 之後</td><td>前往「江之島站」，展開深度遊</td><td>江之電 + 步行</td><td>本日重點，有充足時間可完整遊覽。</td></tr>
+                        <tr><td>18:00 之後</td><td>從江之島返回大船飯店</td><td>江之電 + JR 或 湘南單軌電車</td><td>可搭江之電到藤澤轉JR，或體驗湘南單軌電車(需另購票)。</td></tr>
+                    </tbody>
+                </table>
+                <div class="notes">
+                    <h4>江之島深度遊覽建議路線</h4>
+                    <ol>
+                        <li><strong>抵達與美食</strong>：從「江之島站」步行過跨海大橋，先逛青銅鳥居前的商店街。</li>
+                        <li><strong>神社參拜</strong>：搭乘付費電扶梯「江之島Escar」(或步行)開始參拜江島神社的三個宮。</li>
+                        <li><strong>登高望遠</strong>：前往「江之島海蠟燭」(展望燈塔)與「Samuel Cocking苑」(花園)。</li>
+                        <li><strong>洞窟探險</strong>：探訪「江之島岩屋」天然海蝕洞。</li>
+                        <li><strong>欣賞日落</strong>：在「稚兒之淵」欣賞壯麗的海岸線。</li>
+                    </ol>
+                </div>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> 鎌倉大船JR東日本METS飯店<br>
+                   <strong>費用:</strong> 20,952日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://www.kotoku-in.jp/zh-hant/" target="_blank">🌐 鐮倉大佛(高德院)官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kotoku-in+Great+Buddha" target="_blank">📍 鐮倉大佛地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://enoshimajinja.or.jp/" target="_blank">🌐 江島神社官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Enoshima+Island" target="_blank">📍 江之島地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day8" class="card">
+            <div class="card-header collapsed">10/11 (週六) - 橫濱一日遊<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <div class="notes"><h4>交通票券</h4><p>建議在橫濱站購買「港灣漫遊車票 (500日圓)」，可無限次搭乘市中心指定路線的地下鐵與巴士。</p></div>
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>9:30 - 10:00</td><td>從大船的飯店退房，搭車前往橫濱</td><td>JR根岸線 或 JR東海道本線 (約 15-20 分鐘)</td><td>(此段不包含在票券內) 需另外購票或刷IC卡。</td></tr>
+                        <tr><td>10:00 - 10:30</td><td>抵達JR橫濱站，前往飯店寄放行李</td><td>步行</td><td></td></tr>
+                        <tr><td>10:30 - 13:00</td><td>遊覽【港未來21】區域</td><td>從「橫濱站」搭乘 市營地下鐵藍線 至「櫻木町站」</td><td>(可使用港灣漫遊車票)。可參觀合味道紀念館等。</td></tr>
+                        <tr><td>13:00 - 15:00</td><td>參觀【橫濱紅磚倉庫】</td><td>步行或搭乘 紅鞋觀光巴士</td><td>(巴士可使用港灣漫遊車票)。可在此處逛街與用午餐。</td></tr>
+                        <tr><td>15:00 - 16:00</td><td>漫步【山下公園】</td><td>步行或搭乘 紅鞋觀光巴士</td><td>(巴士可使用港灣漫遊車票)。</td></tr>
+                        <tr><td>16:00 - 18:00</td><td>探索【橫濱中華街】</td><td>從山下公園步行約 5-10 分鐘</td><td>在熱鬧的街道尋找小吃。</td></tr>
+                        <tr><td>18:00 - 20:00</td><td>晚餐與欣賞夜景</td><td>從「元町・中華街站」搭乘 港未來線 返回「港未來站」或「櫻木町站」</td><td>(可使用港灣漫遊車票)。晚餐可在地標塔或皇后廣場解決。</td></tr>
+                        <tr><td>20:00 - 21:00</td><td>登上【橫濱地標塔空中花園】</td><td>步行</td><td>本日重點。從69樓觀景台俯瞰橫濱港的璀璨夜景。</td></tr>
+                        <tr><td>21:00 之後</td><td>返回飯店辦理入住</td><td>從「櫻木町站」搭乘 JR根岸線 或從「港未來站」搭乘 港未來線 返回「橫濱站」</td><td>(可使用港灣漫遊車票)。車程僅約3分鐘。</td></tr>
+                    </tbody>
+                </table>
+                <h4>住宿資訊</h4>
+                <p><strong>飯店名稱:</strong> 橫濱站前里士滿酒店<br>
+                   <strong>費用:</strong> 25,008日圓<br>
+                   <strong>餐飲:</strong> 不含早餐</p>
+                <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://www.cupnoodles-museum.jp/ja/yokohama/" target="_blank">🌐 合味道紀念館(橫濱)官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Cup+Noodles+Museum+Yokohama" target="_blank">📍 合味道紀念館地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://www.yokohama-akarenga.jp/" target="_blank">🌐 橫濱紅磚倉庫官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Yokohama+Red+Brick+Warehouse" target="_blank">📍 橫濱紅磚倉庫地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://www.yokohama-landmark.jp/skygarden/" target="_blank">🌐 橫濱地標塔空中花園官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Yokohama+Landmark+Tower" target="_blank">📍 橫濱地標塔地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="day9" class="card">
+            <div class="card-header collapsed">10/12 (週日) - 東京市區最終巡禮 & 返家<button class="toggle-btn">+</button></div>
+            <div class="card-content collapsed">
+                <table>
+                    <thead><tr><th>時間 (預計)</th><th>行程內容</th><th>交通方式</th><th>備註</th></tr></thead>
+                    <tbody>
+                        <tr><td>8:30 - 9:00</td><td>從橫濱的飯店退房，前往JR品川站</td><td>JR東海道本線 (約 20 分鐘)</td><td>此段需另外購票或刷IC卡。</td></tr>
+                        <tr><td>9:00 - 9:30</td><td>抵達JR品川站，寄放大型行李</td><td>步行至車站內的投幣式置物櫃</td><td>品川是個大站，置物櫃很多。</td></tr>
+                        <tr><td>9:30 - 10:00</td><td>【推薦景點一】澀谷 (Shibuya)</td><td>從「品川站」搭乘 JR山手線 至「澀谷站」 (約 13 分鐘)</td><td>體驗世界知名的「澀谷十字路口」。</td></tr>
+                        <tr><td>10:00 - 11:30</td><td>【推薦景點二】原宿 (Harajuku)</td><td>從「澀谷站」搭乘 JR山手線 至「原宿站」 (約 2 分鐘)</td><td>參觀都市中的綠洲「明治神宮」。</td></tr>
+                        <tr><td>11:30 - 12:30</td><td>最後的採購與午餐</td><td>在原宿或返回澀谷/品川</td><td>享用您在日本的最後一餐。</td></tr>
+                        <tr><td>12:30 - 13:00</td><td>返回JR品川站，取回寄放的行李</td><td>JR山手線</td><td></td></tr>
+                        <tr><td>13:19 - 14:28</td><td>搭乘 N'EX 前往成田機場</td><td>N'EX 成田特快 (約 1 小時 10 分鐘)</td><td>從品川站上車，直達成田機場第二航廈。</td></tr>
+                        <tr><td>14:30 之後</td><td>辦理登機手續，準備回家</td><td></td><td>準備搭乘 16:20 的 JX803 班機。</td></tr>
+                    </tbody>
+                </table>
+                 <div class="links-section">
+                    <h4>相關連結</h4>
+                     <p>
+                        <a href="https://www.shibuyascramble-square.com/sky/" target="_blank">🌐 澀谷 Scramble Square 觀景台</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Shibuya+Crossing" target="_blank">📍 澀谷十字路口地圖</a>
+                     </p>
+                     <p>
+                        <a href="https://www.meijijingu.or.jp/" target="_blank">🌐 明治神宮官網</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Meiji+Jingu" target="_blank">📍 明治神宮地圖</a>
+                     </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>行程由 Gemini AI 助理協助規劃與製作</p>
+            <p>祝您旅途愉快！</p>
+        </div>
+
+    </div>
+    
+    <button id="backToTopBtn" title="回到頂部">↑</button>
+
+    <script>
+        // Back to Top Button
+        let mybutton = document.getElementById("backToTopBtn");
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+          if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+        mybutton.addEventListener('click', function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        // Accordion for cards
+        document.addEventListener('DOMContentLoaded', function () {
+            const headers = document.querySelectorAll('.card-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function () {
+                    const content = this.nextElementSibling;
+                    const btn = this.querySelector('.toggle-btn');
+
+                    if (content.classList.contains('collapsed')) {
+                        content.classList.remove('collapsed');
+                        btn.textContent = '-';
+                        btn.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.classList.add('collapsed');
+                        btn.textContent = '+';
+                        btn.style.transform = 'rotate(135deg)';
+                    }
+                });
+            });
+             // Collapse all but the first card initially
+            const allContent = document.querySelectorAll('.card-content');
+            allContent.forEach((content, index) => {
+                if (index > 0) { // Keep the first one (index 0) open
+                    const header = content.previousElementSibling;
+                    const btn = header.querySelector('.toggle-btn');
+                    content.classList.add('collapsed');
+                    btn.textContent = '+';
+                    btn.style.transform = 'rotate(135deg)';
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

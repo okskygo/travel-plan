@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+   <head>
+      <meta charset="utf-8"/>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+      <title>2025/08/15-08/18 鳥取旅遊行程</title>
+      <style>
+         html { scroll-behavior: smooth; }
+         body {
+         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+         background-color: #f0ede0;
+         color: #333;
+         margin: 0;
+         line-height: 1.6;
+         }
+         .container {
+         max-width: 1000px;
+         margin: 0 auto;
+         padding: 20px;
+         }
+         .header {
+         background-color: #6b8e23;
+         color: #fff;
+         padding: 40px 20px;
+         text-align: center;
+         border-radius: 8px;
+         margin-bottom: 20px;
+         }
+         .header h1 {
+         margin: 0;
+         font-size: 2.3em;
+         }
+         .header p { margin: 5px 0 0; font-size: 1.1em; }
+         .navbar {
+         background: #fff;
+         padding: 10px;
+         border-radius: 8px;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+         margin-bottom: 20px;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 10px;
+         }
+         .navbar a {
+         text-decoration: none;
+         color: #6b8e23;
+         padding: 10px 15px;
+         border-radius: 5px;
+         font-weight: 600;
+         transition: background-color 0.3s, color 0.3s;
+         }
+         .navbar a:hover, .navbar a.active {
+         background-color: #6b8e23;
+         color: #fff;
+         }
+         .card {
+         background-color: #fff;
+         border-radius: 8px;
+         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+         margin-bottom: 25px;
+         overflow: hidden;
+         }
+         .card-header {
+         background-color: #f5f5dc;
+         color: #5d6b2c;
+         padding: 15px 20px;
+         font-size: 1.3em;
+         font-weight: 700;
+         border-bottom: 1px solid #ddd0b4;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         cursor: pointer;
+         }
+         .toggle-btn {
+         background-color: #6b8e23;
+         color: white;
+         border: none;
+         border-radius: 50%;
+         width: 30px;
+         height: 30px;
+         font-size: 20px;
+         font-weight: bold;
+         line-height: 30px;
+         text-align: center;
+         cursor: pointer;
+         transition: transform 0.3s;
+         }
+         .card-header.collapsed .toggle-btn {
+         transform: rotate(-45deg);
+         }
+         .card-content {
+         padding: 20px;
+         max-height: 5000px;
+         transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+         overflow: hidden;
+         }
+         .card-content.collapsed {
+         max-height: 0;
+         padding-top: 0;
+         padding-bottom: 0;
+         }
+         .summary-section {
+         margin-bottom: 26px;
+         }
+         .summary-section h3 {
+         margin: 0 0 8px 0;
+         color: #6b8e23;
+         font-size: 1.12em;
+         }
+         .summary-table {
+         width: 100%;
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+         border-collapse: collapse;
+         font-size: 1.07em;
+         overflow-x: auto;
+         margin-bottom: 8px;
+         }
+         .summary-table th, .summary-table td {
+         border: 1px solid #f3efe0;
+         padding: 11px 15px;
+         text-align: left;
+         }
+         .summary-table th {
+         background: #f5f5dc;
+         color: #485a15;
+         font-weight: bold;
+         }
+         .summary-table tr:nth-child(even) {
+         background: #f9f9f6;
+         }
+         .summary-link {
+         color: #2060c0;
+         text-decoration: underline;
+         word-break: break-all;
+         }
+         @media (max-width: 768px) {
+         .navbar { justify-content: flex-start; }
+         .navbar a { flex-grow: 1; text-align: center; }
+         .summary-table th, .summary-table td { font-size: 1em; padding: 8px 8px; }
+         }
+         /* 以下 Day 卡片原樣 */
+         .timeline {
+         position: relative;
+         margin: 20px 0;
+         padding-left: 30px;
+         border-left: 3px solid #6b8e23;
+         }
+         .timeline-item {
+         position: relative;
+         margin-bottom: 18px;
+         padding-left: 20px;
+         }
+         .timeline-item::before {
+         content: "";
+         position: absolute;
+         left: -11px;
+         top: 6px;
+         width: 14px;
+         height: 14px;
+         background-color: #6b8e23;
+         border: 2px solid #fff;
+         border-radius: 50%;
+         box-shadow: 0 0 0 2px #6b8e23;
+         }
+         .timeline-time {
+         font-weight: bold;
+         color: #5d6b2c;
+         margin-bottom: 5px;
+         font-size: 0.95em;
+         }
+         .timeline-content {
+         background: #f9f9f9;
+         padding: 10px 15px;
+         border-radius: 8px;
+         box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+         }
+         .timeline-content p { margin: 4px 0; }
+         .timeline-content .transport {
+         font-size: 0.88em;
+         color: #555;
+         }
+         .timeline-content .note {
+         font-size: 0.88em;
+         color: #888;
+         font-style: italic;
+         }
+         .timeline-content .todo {
+         color: #b23f00;
+         font-weight: bold;
+         font-style: italic;
+         margin-top: 2px;
+         }
+         .hotel-link, .place-link {
+         color: #2060c0;
+         text-decoration: underline;
+         word-break: break-all;
+         }
+         /* --- Image grid & lightbox (base) --- */
+         .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:8px}
+         .photo-grid img{width:100%;height:100%;object-fit:cover;border-radius:8px;cursor:pointer}
+         .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999}
+         .lightbox.show{display:flex}
+         .lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+         /* --- Override: make images fit width by default --- */
+         .photo-grid{grid-template-columns:1fr !important}
+         .photo-grid img,
+         img[data-lightbox]{width:100%;max-width:100%;height:auto;object-fit:contain}
+         /* Optional utilities if you want grid thumbnails later */
+         .photo-grid.grid-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+         .photo-grid.grid-3{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+         .photo-grid.grid-4{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+         .photo-grid.tight{gap:4px}
+         .photo-grid.loose{gap:12px}
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <div class="header">
+            <h1>2025/08/15 - 08/18 鳥取旅遊行程</h1>
+            <p>4天3夜 | 阿宅阿婷行程表</p>
+         </div>
+         <nav class="navbar">
+            <a href="#summary">行程總覽</a>
+            <a href="#day1">Day 1</a>
+            <a href="#day2">Day 2</a>
+            <a href="#day3">Day 3</a>
+            <a href="#day4">Day 4</a>
+         </nav>
+         <!-- Summary Card (三段合一) -->
+         <div class="card" id="summary">
+            <div class="card-header">行程總覽 &amp; 交通資訊 <button class="toggle-btn">-</button></div>
+            <div class="card-content">
+               <div class="summary-section">
+                  <h3>航班資訊</h3>
+                  <table class="summary-table">
+                     <tr>
+                        <th>去程</th>
+                        <td>08/15　IT724 TPE 13:20 → YGJ 16:50</td>
+                     </tr>
+                     <tr>
+                        <th>回程</th>
+                        <td>08/18　IT725 YGJ 13:00 → TPE 15:05</td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="summary-section">
+                  <h3>日期／車程／車種</h3>
+                  <table class="summary-table">
+                     <thead>
+                        <tr>
+                           <th>日期</th>
+                           <th>車程</th>
+                           <th>車種</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>8/15</td>
+                           <td>18:38(起站)米子よなごえき Yonago<br/>   ｜<br/>19:43(到站)鳥取とっとり Tottori</td>
+                           <td>山陰本線特急 <br/>超級松風<br/>スーパーまつかぜ Super Matsukaze</td>
+                        </tr>
+                        <tr>
+                           <td>8/17</td>
+                           <td>8:25 鳥取 とっとり Tottori<br/>  |<br/>8:55 倉吉 くらよし Kurayoshi<br/><br/>9:18 倉吉 くらよし Kurayoshi<br/>  |<br/>9:32 由良 ゆら Yura</td>
+                           <td></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="summary-section">
+                  <h3>住宿</h3>
+                  <table class="summary-table">
+                     <tr>
+                        <th>日期</th>
+                        <th>住宿</th>
+                        <th>價格</th>
+                     </tr>
+                     <tr>
+                        <td>8/15</td>
+                        <td><a class="place-link" href="https://maps.app.goo.gl/U9qKdi3wUgdX3Vh98" target="_blank">鳥取グリーンホテルモーリス</a></td>
+                        <td>21,100 JPY</td>
+                     </tr>
+                     <tr>
+                        <td>8/16</td>
+                        <td><a class="summary-link" href="https://maps.app.goo.gl/w25eb9qacsTF9NzG7" target="_blank">Onsen Ryokan Marumo</a></td>
+                        <td>33,000 JPY</td>
+                     </tr>
+                     <tr>
+                        <td>8/17</td>
+                        <td><a class="summary-link" href="https://maps.app.goo.gl/R5qXJEoawbmUpCy39" target="_blank">グリーンリッチホテル 米子駅前</a></td>
+                        <td>2,870 TWD</td>
+                     </tr>
+                  </table>
+               </div>
+               <div class="summary-section">
+                  <h3>票券</h3>
+                  <table class="summary-table">
+                     <tr>
+                        <th>票券</th>
+                        <th>價格</th>
+                     </tr>
+                     <tbody>
+                        <tr>
+                           <td>機票</td>
+                           <td>15,756 TWD（2人）</td>
+                        </tr>
+                        <tr>
+                           <td>鳥取松江3 days 周遊券</td>
+                           <td>8,000 JPY（2人）</td>
+                        </tr>
+                        <tr>
+                           <td>觀光計程車</td>
+                           <td>4,000 JPY（2人）</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div class="summary-section">
+                  <h3>相關資訊</h3>
+                  <div class="photo-grid">
+                     <img src="image/img1.png" data-full="image/img1.png" loading="lazy" data-lightbox>
+                  </div>
+                  <div class="photo-grid">
+                     <img src="image/img2.png" data-full="image/img2.png" loading="lazy" data-lightbox>
+                  </div>
+                  <div class="photo-grid grid-2 tight">
+                     <img src="image/img3.png" data-full="image/img3.png" loading="lazy" data-lightbox>
+                     <img src="image/img4.png" data-full="image/img4.png" loading="lazy" data-lightbox>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Day 1 -->
+         <div class="card" id="day1">
+            <div class="card-header collapsed">08/15 (週五) - 桃園→米子→鳥取 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+            <div class="card-content collapsed">
+               <div class="timeline">
+                  <div class="timeline-item">
+                     <div class="timeline-time">11:00</div>
+                     <div class="timeline-content">
+                        <p>記得要在最後一節車廂上車<br/>出站才能直上手扶梯</p>
+                     </div>
+                     <div class="photo-grid">
+                        <img src="image/img5.png" data-full="image/img5.png" loading="lazy" data-lightbox>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">13:00</div>
+                     <div class="timeline-content">
+                        <p>13:20 -16:50 Flight</p>
+                        <div class="meta"><span>🚉 IT724</span></div>
+                        <div class="note">希望班機不要delay ＋ 提早入境</div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">17:00</div>
+                     <div class="timeline-content">
+                        <p>17:52 搭境線到米子車站<br/>預計18:23抵達<br/>使用金錢的力量！！<br/>出境直接搭計程車到米子車站</p>
+                        <div class="meta"><span>🚉 米子車站<br/>よなごえき Yonago eki</span></div>
+                        <div class="note">到米子車站兌換周遊券<br/>買完車票記得買點東西吃</div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">18:00</div>
+                     <div class="timeline-content">
+                        <p>18:38 - 19:43<br/>山陰本線特急 超級松風<br/>スーパーまつかぜ Super Matsukaze</p>
+                        <div class="meta"><span>🚉 (起站)米子よなごえき Yonago<br/>   ｜<br/>(到站)鳥取とっとり Tottori</span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">20:00</div>
+                     <div class="timeline-content">
+                        <p>20:00 - 21:00<br/>市民納涼花火大会 <br/><br/>20:40 離開搭接駁車<br/>21:20最後一班</p>
+                        <div class="meta"><span>🚉 JR 鳥取站 轉搭有料接駁車</span></div>
+                        <div class="note"><a href="https://hanabi-nihonkai.com/" target="_blank">https://hanabi-nihonkai.com/</a></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">21:00</div>
+                     <div class="timeline-content">
+                        <p>看完煙火 → 前往住宿：<a class="place-link" href="https://maps.app.goo.gl/U9qKdi3wUgdX3Vh98" target="_blank">鳥取グリーンホテルモーリス</a>，辦理 check-in</p>
+                        <div class="meta"><span>🚉 從鳥取車站走路約五分鐘到飯店</span></div>
+                        <div class="note">飯店2樓有免費拉麵、洗烘衣免費</div>
+                     </div>
+                  </div>
+                  <div class="photo-grid grid-2 tight">
+                     <img src="image/img6.png" data-full="image/img6.png" loading="lazy" data-lightbox>
+                     <img src="image/img7.png" data-full="image/img7.png" loading="lazy" data-lightbox>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Day 2 -->
+         <div class="card" id="day2">
+            <div class="card-header collapsed">08/16 (週六) - 鳥取砂丘、百名城、美食 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+            <div class="card-content collapsed">
+               <div class="timeline">
+                  <div class="timeline-item">
+                     <div class="timeline-time">07:00</div>
+                     <div class="timeline-content">
+                        <p>早上先走去溫泉旅館寄放行李</p>
+                        <div class="meta"><span>🚉 走路約10分鐘</span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">08:00</div>
+                     <div class="timeline-content">
+                        <p>吃早餐</p>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">09:00</div>
+                     <div class="timeline-content">
+                        <p>鳥取城跡<br/>蓋百名城章</p>
+                        <div class="note">百名城章在仁風閣<br/><a href="https://maps.app.goo.gl/GaPotuED9iLfVc3y7" target="_blank">https://maps.app.goo.gl/GaPotuED9iLfVc3y7</a></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">10:00</div>
+                     <div class="timeline-content">
+                        <p>TRUFFLE DONUT<br/>在丸由百貨五樓 <br/>10:00 -18:30</p>
+                        <div class="meta"><span>🚉 <a class="place-link" href="https://maps.app.goo.gl/RaAAzZroYr6F5zzP8" target="_blank">https://maps.app.goo.gl/RaAAzZroYr6F5zzP8</a></span></div>
+                        <div class="note">人氣甜甜圈易完售 早點去買！</div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">12:00</div>
+                     <div class="timeline-content">
+                        <p>吃完dount前往預約<br/>3小時周遊計程車 <br/>路線F ：要改在鳥取砂丘柯南機場(鳥取砂丘コナン空港)下車<br/><br/>鳥取砂丘 - 砂之美術館 - 白兔神社 - 賀露市場 - 鳥取砂丘柯南機場</p>
+                        <div class="meta"><span>🚉 3小時周遊計程車</span></div>
+                        <div class="note">「鳥取市國際遊客服務中心」預約，位置就在JR鳥取車站北口出去右轉<br/><br/>記得蓋國家公園章 遊客中心9:00開</div>
+                     </div>
+                     <div class="photo-grid">
+                        <img src="image/img8.png" data-full="image/img8.png" loading="lazy" data-lightbox>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">15:00</div>
+                     <div class="timeline-content">
+                        <p>14:59 搭鳥取機場交通車回鳥取站</p>
+                        <div class="meta"><span>🚉 <a class="place-link" href="https://maps.app.goo.gl/xeHBikZ8fE2cXB8e6" target="_blank">https://maps.app.goo.gl/xeHBikZ8fE2cXB8e6</a></span></div>
+                     </div>
+                     <div class="photo-grid">
+                        <img src="image/img9.png" data-full="image/img9.png" loading="lazy" data-lightbox>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">17:00</div>
+                     <div class="timeline-content">
+                        <p>可以回飯店泡個溫泉再去吃晚餐</p>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">20:00</div>
+                     <div class="timeline-content">
+                        <p>晚上沒事可以劃8/17的票</p>
+                        <div class="note">"8:25 - 8:55 鳥取 - 倉吉（山陰本線特急）
+                           9:18 - 9:32 倉吉 - 由良（山陰本線）
+                           or
+                           山陰本線
+                           7:29 - 8:45 鳥取 - 由良"
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Day 3 -->
+         <div class="card" id="day3">
+            <div class="card-header collapsed">08/17 (週日) - 柯南街、米子逛街 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+            <div class="card-content collapsed">
+               <div class="timeline">
+                  <div class="timeline-item">
+                     <div class="timeline-time">07:00</div>
+                     <div class="timeline-content">
+                        <p>7:00 早餐</p>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">08:00</div>
+                     <div class="timeline-content">
+                        <p>8:25 - 8:55 鳥取 - 倉吉（山陰本線特急）<br/>9:18 - 9:32 倉吉 - 由良（山陰本線）<br/>or<br/>山陰本線<br/>7:29 - 8:45 鳥取 - 由良</p>
+                        <div class="meta"><span>🚉 鳥取 とっとり Tottori<br/>倉吉 くらよし Kurayoshi<br/>由良 ゆら Yura</span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">09:00</div>
+                     <div class="timeline-content">
+                        <p>由良車站右前方的計程車行寄放行李<br/>一件200yen</p>
+                        <div class="meta"><span>🚉 <a class="place-link" href="https://maps.app.goo.gl/Hy5zsjsSBt36EAn96" target="_blank">https://maps.app.goo.gl/Hy5zsjsSBt36EAn96</a></span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">10:00</div>
+                     <div class="timeline-content">
+                        <p>柯南之家 米花商店街<br/><a href="https://share.google/c3gz65QUpuVvVAjbz&lt;br&gt;&lt;br&gt;新一的家&lt;br&gt;https://maps.app.goo.gl/hBkyWXLU2x93t3ev9" target="_blank">https://share.google/c3gz65QUpuVvVAjbz<br/><br/>新一的家<br/>https://maps.app.goo.gl/hBkyWXLU2x93t3ev9</a> <br/><br/>青山剛昌故鄉館<br/><a href="https://maps.app.goo.gl/KrB3DD6V3yHFi3uFA" target="_blank">https://maps.app.goo.gl/KrB3DD6V3yHFi3uFA</a> <br/><br/>gelato CODA <br/><a href="https://maps.app.goo.gl/nf83Y689ALNU7k916" target="_blank">https://maps.app.goo.gl/nf83Y689ALNU7k916</a> <br/><br/>ベイクショップ 小僧ロップ （麵包店）-&gt;去程先買<br/><a href="https://maps.app.goo.gl/MLdeEVh2Gw4PCti2A" target="_blank">https://maps.app.goo.gl/MLdeEVh2Gw4PCti2A</a></p>
+                        <div class="note">記得拿導覽地圖</div>
+                     </div>
+                     <div class="photo-grid">
+                        <img src="image/img10.png" data-full="image/img10.png" loading="lazy" data-lightbox>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">11:00</div>
+                     <div class="timeline-content">
+                        <p>（已預約購票）青山剛昌故鄉館<br/>進場時間11:00 ~ 11:30</p>
+                        <div class="note">購票紀錄在email</div>
+                     </div>
+                     <div class="photo-grid">
+                        <img src="image/img11.png" data-full="image/img11.png" loading="lazy" data-lightbox>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">13:00</div>
+                     <div class="timeline-content">
+                        <p>故鄉館                      -&gt;由良站<br/>12:35/13:20/14:05</p>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">14:00</div>
+                     <div class="timeline-content">
+                        <p>回米子時間選項：<br/>- 13:38<br/>- 14:50(但要停留倉吉約40分鐘)<br/>- 15:05</p>
+                        <div class="meta"><span>🚉 <a class="place-link" href="https://maps.app.goo.gl/9qghbzrSjeXvgBsq7" target="_blank">https://maps.app.goo.gl/9qghbzrSjeXvgBsq7</a></span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">15:00</div>
+                     <div class="timeline-content">
+                        <p>回到米子市區<br/>去飯店寄放行李</p>
+                        <div class="meta"><span>🚉 走路四分鐘<br/><a class="place-link" href="https://maps.app.goo.gl/aWgyymnMTydKp2XG9" target="_blank">https://maps.app.goo.gl/aWgyymnMTydKp2XG9</a></span></div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">16:00</div>
+                     <div class="timeline-content">
+                        <p>可以去的地方：<br/>米子市立山陰歴史博物館<br/><a href="https://maps.app.goo.gl/UGV6w4QG6v5CLPma8" target="_blank">https://maps.app.goo.gl/UGV6w4QG6v5CLPma8</a> <br/><br/>米子城跡<br/><a href="https://maps.app.goo.gl/KmRcrK3UYUSGeMkB9" target="_blank">https://maps.app.goo.gl/KmRcrK3UYUSGeMkB9</a></p>
+                        <div class="note">可以蓋百名城章</div>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">17:00</div>
+                     <div class="timeline-content">
+                        <p>aeon mall 米子站前店<br/>22:00打烊<br/><a href="https://share.google/2ynF2hYRofXVNqD3y&lt;br&gt;&lt;br&gt;米子天滿屋" target="_blank">https://share.google/2ynF2hYRofXVNqD3y<br/><br/>米子天滿屋</a> -&gt;有旋轉手扶梯<br/><a href="https://maps.app.goo.gl/Nq4gMBKzKfW5dKEv5" target="_blank">https://maps.app.goo.gl/Nq4gMBKzKfW5dKEv5</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- Day 4 -->
+         <div class="card" id="day4">
+            <div class="card-header collapsed">08/18 (週一) - 境港、鬼太郎、回程 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+            <div class="card-content collapsed">
+               <div class="timeline">
+                  <div class="timeline-item">
+                     <div class="timeline-time">08:00</div>
+                     <div class="timeline-content">
+                        <p>鬼太郎車站</p>
+                     </div>
+                  </div>
+                  <div class="timeline-item">
+                     <div class="timeline-time">13:00</div>
+                     <div class="timeline-content">
+                        <p>13:00 - 15:05 Flight</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <script>
+            // 展開/收合卡片內容
+            document.querySelectorAll('.card-header').forEach(function(header){
+              header.addEventListener('click', function(){
+                const content = header.nextElementSibling;
+                const btn = header.querySelector('.toggle-btn');
+                content.classList.toggle('collapsed');
+                header.classList.toggle('collapsed');
+                if (btn) btn.textContent = content.classList.contains('collapsed') ? '+' : '-';
+                if (btn) btn.style.transform = content.classList.contains('collapsed') ? 'rotate(135deg)' : 'rotate(0deg)';
+              });
+            });
+            // 讓 summary 預設展開，其他預設收合
+            document.querySelectorAll('.card-content').forEach(function(content, i){
+              if(i === 0) content.classList.remove('collapsed');
+              else content.classList.add('collapsed');
+            });
+            document.querySelectorAll('.card-header').forEach(function(header, i){
+              if(i === 0) header.classList.remove('collapsed');
+              else header.classList.add('collapsed');
+            });
+         </script>
+      </div>
+      <div class="lightbox" id="global-lightbox"><img alt=""/></div>
+      <script>
+         (function(){
+           const lb = document.getElementById('global-lightbox');
+           const lbImg = lb ? lb.querySelector('img') : null;
+           document.addEventListener('click', function(e){
+             const t = e.target;
+             if(t && t.tagName==='IMG' && (t.closest('.photo-grid') || t.hasAttribute('data-lightbox'))){
+               if(lb && lbImg){
+                 lbImg.src = t.getAttribute('data-full') || t.src;
+                 lb.classList.add('show');
+               }
+             } else if (t && t.id==='global-lightbox'){
+               lb.classList.remove('show');
+               if(lbImg) lbImg.src = '';
+             }
+           }, false);
+         })();
+      </script>
+   </body>
+</html>

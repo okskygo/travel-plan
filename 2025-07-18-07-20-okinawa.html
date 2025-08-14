@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>2025/07/18 - 07/20 沖繩 阿宅生日之旅</title>
+<style>
+
+         html { scroll-behavior: smooth; }
+         body {
+         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+         background-color: #f0ede0;
+         color: #333;
+         margin: 0;
+         line-height: 1.6;
+         }
+         .container {
+         max-width: 1000px;
+         margin: 0 auto;
+         padding: 20px;
+         }
+         .header {
+         background-color: #6b8e23;
+         color: #fff;
+         padding: 40px 20px;
+         text-align: center;
+         border-radius: 8px;
+         margin-bottom: 20px;
+         }
+         .header h1 {
+         margin: 0;
+         font-size: 2.3em;
+         }
+         .header p { margin: 5px 0 0; font-size: 1.1em; }
+         .navbar {
+         background: #fff;
+         padding: 10px;
+         border-radius: 8px;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+         margin-bottom: 20px;
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         gap: 10px;
+         }
+         .navbar a {
+         text-decoration: none;
+         color: #6b8e23;
+         padding: 10px 15px;
+         border-radius: 5px;
+         font-weight: 600;
+         transition: background-color 0.3s, color 0.3s;
+         }
+         .navbar a:hover, .navbar a.active {
+         background-color: #6b8e23;
+         color: #fff;
+         }
+         .card {
+         background-color: #fff;
+         border-radius: 8px;
+         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+         margin-bottom: 25px;
+         overflow: hidden;
+         }
+         .card-header {
+         background-color: #f5f5dc;
+         color: #5d6b2c;
+         padding: 15px 20px;
+         font-size: 1.3em;
+         font-weight: 700;
+         border-bottom: 1px solid #ddd0b4;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         cursor: pointer;
+         }
+         .toggle-btn {
+         background-color: #6b8e23;
+         color: white;
+         border: none;
+         border-radius: 50%;
+         width: 30px;
+         height: 30px;
+         font-size: 20px;
+         font-weight: bold;
+         line-height: 30px;
+         text-align: center;
+         cursor: pointer;
+         transition: transform 0.3s;
+         }
+         .card-header.collapsed .toggle-btn {
+         transform: rotate(-45deg);
+         }
+         .card-content {
+         padding: 20px;
+         max-height: 5000px;
+         transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+         overflow: hidden;
+         }
+         .card-content.collapsed {
+         max-height: 0;
+         padding-top: 0;
+         padding-bottom: 0;
+         }
+         .summary-section {
+         margin-bottom: 26px;
+         }
+         .summary-section h3 {
+         margin: 0 0 8px 0;
+         color: #6b8e23;
+         font-size: 1.12em;
+         }
+         .summary-table {
+         width: 100%;
+         background: #fff;
+         border-radius: 10px;
+         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+         border-collapse: collapse;
+         font-size: 1.07em;
+         overflow-x: auto;
+         margin-bottom: 8px;
+         }
+         .summary-table th, .summary-table td {
+         border: 1px solid #f3efe0;
+         padding: 11px 15px;
+         text-align: left;
+         }
+         .summary-table th {
+         background: #f5f5dc;
+         color: #485a15;
+         font-weight: bold;
+         }
+         .summary-table tr:nth-child(even) {
+         background: #f9f9f6;
+         }
+         .summary-link {
+         color: #2060c0;
+         text-decoration: underline;
+         word-break: break-all;
+         }
+         @media (max-width: 768px) {
+         .navbar { justify-content: flex-start; }
+         .navbar a { flex-grow: 1; text-align: center; }
+         .summary-table th, .summary-table td { font-size: 1em; padding: 8px 8px; }
+         }
+         /* 以下 Day 卡片原樣 */
+         .timeline {
+         position: relative;
+         margin: 20px 0;
+         padding-left: 30px;
+         border-left: 3px solid #6b8e23;
+         }
+         .timeline-item {
+         position: relative;
+         margin-bottom: 18px;
+         padding-left: 20px;
+         }
+         .timeline-item::before {
+         content: "";
+         position: absolute;
+         left: -11px;
+         top: 6px;
+         width: 14px;
+         height: 14px;
+         background-color: #6b8e23;
+         border: 2px solid #fff;
+         border-radius: 50%;
+         box-shadow: 0 0 0 2px #6b8e23;
+         }
+         .timeline-time {
+         font-weight: bold;
+         color: #5d6b2c;
+         margin-bottom: 5px;
+         font-size: 0.95em;
+         }
+         .timeline-content {
+         background: #f9f9f9;
+         padding: 10px 15px;
+         border-radius: 8px;
+         box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+         }
+         .timeline-content p { margin: 4px 0; }
+         .timeline-content .transport {
+         font-size: 0.88em;
+         color: #555;
+         }
+         .timeline-content .note {
+         font-size: 0.88em;
+         color: #888;
+         font-style: italic;
+         }
+         .timeline-content .todo {
+         color: #b23f00;
+         font-weight: bold;
+         font-style: italic;
+         margin-top: 2px;
+         }
+         .hotel-link, .place-link {
+         color: #2060c0;
+         text-decoration: underline;
+         word-break: break-all;
+         }
+         /* --- Image grid & lightbox (base) --- */
+         .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:8px}
+         .photo-grid img{width:100%;height:100%;object-fit:cover;border-radius:8px;cursor:pointer}
+         .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999}
+         .lightbox.show{display:flex}
+         .lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+         /* --- Override: make images fit width by default --- */
+         .photo-grid{grid-template-columns:1fr !important}
+         .photo-grid img,
+         img[data-lightbox]{width:100%;max-width:100%;height:auto;object-fit:contain}
+         /* Optional utilities if you want grid thumbnails later */
+         .photo-grid.grid-2{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+         .photo-grid.grid-3{grid-template-columns:repeat(3,minmax(0,1fr)) !important}
+         .photo-grid.grid-4{grid-template-columns:repeat(4,minmax(0,1fr)) !important}
+         .photo-grid.tight{gap:4px}
+         .photo-grid.loose{gap:12px}
+      
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>2025/07/18 - 07/20 沖繩 阿宅生日之旅</h1>
+    <p>3天2夜 | 行程表（CSV 原樣呈現＋自動連結）</p>
+  </div>
+  <nav class="navbar">
+    <a href="#summary">行程總覽</a>
+    <a href="#day1">Day 1</a>
+    <a href="#day2">Day 2</a>
+    <a href="#day3">Day 3</a>
+  </nav>
+
+  <div class="card" id="summary">
+    <div class="card-header">行程總覽 &amp; 交通資訊 <button class="toggle-btn">-</button></div>
+    <div class="card-content">
+      <table class="summary-table"><tr><th>C1</th><th>C2</th><th>C3</th></tr><tr><td>Flight</td><td></td><td></td></tr><tr><td></td><td>TPE</td><td>OKA</td></tr><tr><td>IT232</td><td>18:20</td><td>20:50</td></tr><tr><td>IT231</td><td>10:10</td><td>10:40</td></tr><tr><td>Cost</td><td></td><td></td></tr><tr><td>機票</td><td>9586</td><td>2人</td></tr><tr><td>住宿</td><td></td><td></td></tr><tr><td>Gangala tour</td><td>5000日幣</td><td></td></tr><tr><td>KKDay one day tour</td><td>1440</td><td>已付</td></tr><tr><td>建議攜帶</td><td></td><td></td></tr><tr><td>遮陽防曬用品</td><td>墨鏡、帽子、防曬乳</td><td></td></tr><tr><td>海灘用品</td><td>拖鞋、毛巾</td><td></td></tr><tr><td>消暑用品</td><td>濕紙巾、扇子</td><td></td></tr></table>
+    </div>
+  </div>
+
+  <div class="card" id="day1">
+    <div class="card-header collapsed">07/18 (週五) - Day 1 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+    <div class="card-content collapsed">
+      <table class="summary-table"><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th><th>C6</th></tr><tr><td>7/18 DAY1</td><td></td><td></td><td></td><td></td><td>* 5% coupon</td></tr><tr><td>時間</td><td>項目</td><td>交通方式</td><td>補充說明</td><td>住宿資訊</td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td>無早餐
+看網路評論說加入會員可以用1000日圓加購早餐可考慮
+
+<a class="place-link" href="https://maps.app.goo.gl/j9jmfmdKR4X1hrRv6" target="_blank">https://maps.app.goo.gl/j9jmfmdKR4X1hrRv6</a>
+"格拉斯麗那霸酒店
+ホテルグレイスリー那覇"</td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td>考慮請整天或是半天特休</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>10</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>11</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>13</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>14</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>15</td><td>15:50 開始報到</td><td></td><td></td><td></td><td></td></tr><tr><td>16</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>17</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>18</td><td>18:20</td><td>起飛</td><td>IT232</td><td></td><td></td></tr><tr><td>19</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>20</td><td>20:50</td><td>著陸</td><td></td><td></td><td></td></tr><tr><td>21</td><td>方案A
+前往飯店
+<a class="place-link" href="https://maps.app.goo.gl/ZkBHDNHp2PgYKDxXA" target="_blank">https://maps.app.goo.gl/ZkBHDNHp2PgYKDxXA</a></td><td></td><td>出關再確認是不是只剩單軌電車
+如果有其他公車就搭
+因為單軌是雙倍時間QQ</td><td></td><td></td></tr><tr><td>22</td><td>方案B
+去AEON那霸店 
+<a class="place-link" href="https://maps.app.goo.gl/CRBUoxQemQNLWPFJ9" target="_blank">https://maps.app.goo.gl/CRBUoxQemQNLWPFJ9</a></td><td>單軌電車 小祿車站(おろくえき)下車</td><td>* 5% coupon</td><td></td><td></td></tr><tr><td>23</td><td>23:00 AEON 打烊
+回飯店</td><td>單軌電車 縣府前下車再走路到飯店</td><td></td><td></td><td></td></tr><tr><td></td><td>去AEON</td><td><a class="place-link" href="https://world.aeon-ryukyu.jp/tc/store/aeon/naha/" target="_blank">https://world.aeon-ryukyu.jp/tc/store/aeon/naha/</a></td><td></td><td></td><td></td></tr><tr><td></td><td>從AEON回飯店</td><td></td><td></td><td></td><td></td></tr></table>
+    </div>
+  </div>
+
+  <div class="card" id="day2">
+    <div class="card-header collapsed">07/19 (週六) - Day 2 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+    <div class="card-content collapsed">
+      <table class="summary-table"><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th></tr><tr><td>7/19 DAY2</td><td></td><td></td><td></td><td></td></tr><tr><td>時間</td><td>項目</td><td>交通方式</td><td>補充說明</td><td>住宿資訊</td></tr><tr><td>6</td><td></td><td></td><td></td><td><a class="place-link" href="https://maps.app.goo.gl/j9jmfmdKR4X1hrRv6" target="_blank">https://maps.app.goo.gl/j9jmfmdKR4X1hrRv6</a>
+"格拉斯麗那霸酒店
+ホテルグレイスリー那覇"</td></tr><tr><td>7</td><td>從飯店走過去集合點約五分鐘</td><td></td><td></td><td></td></tr><tr><td>8</td><td>8:45 集合
+集合點 <a class="place-link" href="https://maps.app.goo.gl/f1ryPEjAv6iZgPVq8" target="_blank">https://maps.app.goo.gl/f1ryPEjAv6iZgPVq8</a> 
+
+KKDay tour NOTICE</td><td>KKDay一日行程</td><td>請識別巴士車身或
+擋風玻璃前OKINAWA FunPass標誌</td><td></td></tr><tr><td>9</td><td>9:40 Gangala之谷導覽
+遊覽車會停在玉泉洞停車場
+要走到對面參加tour
+*預約記錄在已加星號mail</td><td></td><td>tour 約80分鐘
+cash only
+*有提供中文導覽字卡或語音導覽 記得跟工作人員索取</td><td></td></tr><tr><td>10</td><td></td><td></td><td></td><td></td></tr><tr><td>11</td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td>系滿漁市場</td><td></td><td>停留一小時</td><td></td></tr><tr><td>13</td><td></td><td></td><td></td><td></td></tr><tr><td>14</td><td>DMM水族館
+豐崎購物中心
+
+在購物中心的時候可以去 美麗SUN海灘
+<a class="place-link" href="https://maps.app.goo.gl/Q6tk14Gok9xVvQEC8" target="_blank">https://maps.app.goo.gl/Q6tk14Gok9xVvQEC8</a></td><td></td><td></td><td></td></tr><tr><td>15</td><td></td><td></td><td></td><td></td></tr><tr><td>16</td><td>瀨長島</td><td></td><td></td><td></td></tr><tr><td>17</td><td></td><td></td><td></td><td></td></tr><tr><td>18</td><td>回集合點下車
+可以逛百貨 <a class="place-link" href="https://maps.app.goo.gl/SGHHCAsPhqyqBTGx7" target="_blank">https://maps.app.goo.gl/SGHHCAsPhqyqBTGx7</a> 
+或是逛逛國際通</td><td></td><td>*集合點Blue Seal 是有名的冰淇淋店 only in 沖繩</td><td></td></tr><tr><td>19</td><td></td><td></td><td></td><td></td></tr><tr><td>20</td><td>燒肉or阿古豬</td><td></td><td></td><td></td></tr><tr><td>21</td><td></td><td></td><td></td><td></td></tr><tr><td>22</td><td></td><td></td><td></td><td></td></tr><tr><td>23</td><td></td><td></td><td></td><td></td></tr><tr><td>KKDay tour NOTICE</td><td></td><td></td><td></td><td></td></tr></table>
+    </div>
+  </div>
+
+  <div class="card" id="day3">
+    <div class="card-header collapsed">07/20 (週日) - Day 3 <button class="toggle-btn" style="transform: rotate(135deg);">+</button></div>
+    <div class="card-content collapsed">
+      <table class="summary-table"><tr><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>C5</th></tr><tr><td>7/20 DAY3</td><td></td><td></td><td></td><td></td></tr><tr><td>時間</td><td>項目</td><td>交通方式</td><td>補充說明</td><td>住宿資訊</td></tr><tr><td>6</td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td></tr><tr><td>9</td><td>早餐可以在機場吃有名的沖繩飯糰
+ポーたま　國際線國內線都有
+<a class="place-link" href="https://alinalife.tw/porktamago/" target="_blank">https://alinalife.tw/porktamago/</a></td><td></td><td></td><td></td></tr><tr><td>10</td><td>10:10</td><td>起飛</td><td>IT231</td><td></td></tr><tr><td>11</td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td></td><td></td><td></td><td></td></tr><tr><td>13</td><td></td><td></td><td></td><td></td></tr><tr><td>14</td><td></td><td></td><td></td><td></td></tr><tr><td>15</td><td></td><td></td><td></td><td></td></tr><tr><td>16</td><td></td><td></td><td></td><td></td></tr><tr><td>17</td><td></td><td></td><td></td><td></td></tr><tr><td>18</td><td></td><td></td><td></td><td></td></tr><tr><td>19</td><td></td><td></td><td></td><td></td></tr><tr><td>20</td><td></td><td></td><td></td><td></td></tr><tr><td>21</td><td></td><td></td><td></td><td></td></tr><tr><td>22</td><td></td><td></td><td></td><td></td></tr><tr><td>23</td><td></td><td></td><td></td><td></td></tr></table>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="global-lightbox"><img alt=""/></div>
+
+<script>
+            // 展開/收合卡片內容
+            document.querySelectorAll('.card-header').forEach(function(header){
+              header.addEventListener('click', function(){
+                const content = header.nextElementSibling;
+                const btn = header.querySelector('.toggle-btn');
+                content.classList.toggle('collapsed');
+                header.classList.toggle('collapsed');
+                if (btn) btn.textContent = content.classList.contains('collapsed') ? '+' : '-';
+                if (btn) btn.style.transform = content.classList.contains('collapsed') ? 'rotate(135deg)' : 'rotate(0deg)';
+              });
+            });
+            // 讓 summary 預設展開，其他預設收合
+            document.querySelectorAll('.card-content').forEach(function(content, i){
+              if(i === 0) content.classList.remove('collapsed');
+              else content.classList.add('collapsed');
+            });
+            document.querySelectorAll('.card-header').forEach(function(header, i){
+              if(i === 0) header.classList.remove('collapsed');
+              else header.classList.add('collapsed');
+            });
+         </script><script>
+         (function(){
+           const lb = document.getElementById('global-lightbox');
+           const lbImg = lb ? lb.querySelector('img') : null;
+           document.addEventListener('click', function(e){
+             const t = e.target;
+             if(t && t.tagName==='IMG' && (t.closest('.photo-grid') || t.hasAttribute('data-lightbox'))){
+               if(lb && lbImg){
+                 lbImg.src = t.getAttribute('data-full') || t.src;
+                 lb.classList.add('show');
+               }
+             } else if (t && t.id==='global-lightbox'){
+               lb.classList.remove('show');
+               if(lbImg) lbImg.src = '';
+             }
+           }, false);
+         })();
+      </script>
+</body>
+</html>

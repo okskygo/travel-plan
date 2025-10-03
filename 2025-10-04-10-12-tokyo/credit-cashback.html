@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 信用卡回饋活動</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .bank-section {
+            margin-bottom: 50px;
+        }
+
+        .bank-title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #007bff;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-name {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-link {
+            display: inline-block;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: #e3f2fd;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card-link:hover {
+            background: #bbdefb;
+            transform: translateY(-1px);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .benefit-list {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .benefit-list h4 {
+            color: #28a745;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .benefit-list ol, .benefit-list ul {
+            padding-left: 20px;
+        }
+
+        .benefit-list li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .strong-text {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 40px 0;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .bank-title {
+                font-size: 1.5em;
+            }
+            
+            .card-item {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← 返回行程</a>
+            <h1>💳 信用卡回饋活動</h1>
+            <p>日韓旅遊最佳回饋方案</p>
+        </div>
+
+        <div class="content">
+            <!-- 富邦銀行區域 -->
+            <div class="bank-section">
+                <h2 class="bank-title">🏦 富邦銀行</h2>
+
+                <div class="card-item">
+                    <h3 class="card-name">富邦J卡</h3>
+                    <a href="https://www.fubon.com/banking/Personal/credit_card/all_card/omiyage/omiyage.htm" target="_blank" class="card-link">
+                        🔗 官方活動頁面
+                    </a>
+                    
+                    <div class="highlight-box">
+                        【日韓3%無上限、泰國1%無上限】
+                    </div>
+
+                    <div class="benefit-list">
+                        <h4>📋 基本回饋條件</h4>
+                        <ol>
+                            <li>活動期間以富邦J卡於日韓地區新增之一般消費享<span class="strong-text">3%無上限回饋</span>，泰國地區新增之一般消費享<span class="strong-text">1%無上限回饋</span>，以上消費需於<span class="strong-text">2026/1/15前請款</span>方可享回饋。</li>
+                            <li>日韓地區消費定義係消費幣別為日圓、韓圜或消費國別為日本、韓國。泰國地區消費定義係消費幣別為泰銖或消費國別為泰國。</li>
+                            <li>本活動消費金額以國際信用卡組織於匯率換算後入帳至持卡人帳單上之新臺幣為準。消費金額之計算以實際授權金額計算。</li>
+                        </ol>
+                    </div>
+
+                    <div class="highlight-box">
+                        【<span class="strong-text">日韓加碼3%</span>、泰國加碼5%】
+                    </div>
+
+                    <div class="benefit-list">
+                        <h4>🎁 加碼回饋條件</h4>
+                        <ol>
+                            <li>限日韓泰當地實體消費且成功登錄始可享回饋。活動期間每季每戶加碼<span class="strong-text">上限1,000元</span>，每季限量60,000名，須以正卡持卡人資料登錄，額滿後恕無法補登及享有回饋資格，登錄未成功者亦同，登錄結果以本行系統顯示為準。</li>
+                            <li>實體消費定義：該筆刷卡交易請款時，商店登記之國別碼為日本、韓國或泰國，且須為面對面交易，儲值不列入計算。</li>
+                            <li>加碼回饋採每季以刷卡金回饋，2025/10/1~2025/12/31之消費且於2026/1/15前請款入帳之交易，預計於2026/2底起回饋。</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 玉山銀行區域 -->
+            <div class="bank-section">
+                <h2 class="bank-title">🏔️ 玉山銀行</h2>
+
+                <div class="card-item">
+                    <h3 class="card-name">熊本熊卡</h3>
+                    <div class="image-container">
+                        <img src="https://github.com/user-attachments/assets/09b426fc-37ba-47b7-84f0-000799b18cbd" alt="熊本熊卡活動資訊" />
+                    </div>
+                </div>
+
+                <div class="card-item">
+                    <h3 class="card-name">玉山PayPay樂享券</h3>
+                    <div class="image-container">
+                        <img src="https://github.com/user-attachments/assets/bd905274-b92e-426e-a1bb-f886424e909b" alt="玉山PayPay樂享券" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 使用建議 -->
+            <div class="card-item" style="border-left-color: #28a745;">
+                <h3 class="card-name" style="color: #28a745;">💡 使用建議</h3>
+                <div class="benefit-list">
+                    <ul>
+                        <li><strong>富邦J卡</strong>：適合日韓旅遊，基本3%回饋無上限，加碼回饋需登錄且有季度上限</li>
+                        <li><strong>玉山熊本熊卡</strong>：詳細優惠請參考上方圖片資訊</li>
+                        <li><strong>記得登錄</strong>：大部分銀行的海外回饋活動都需要事前登錄才能享有優惠</li>
+                        <li><strong>注意期限</strong>：請款期限通常有限制，記得在規定時間內完成請款</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

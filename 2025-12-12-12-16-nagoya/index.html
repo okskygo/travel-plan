@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋五天四夜行程總覽</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff8ba7;
+            --primary-blue: #89c4e1;
+            --primary-yellow: #fae3d9;
+            --bg-cream: #fdfbf7;
+            --text-color: #555;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-container {
+            background-color: var(--bg-cream);
+            width: 100%;
+            max-width: 1000px;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-radius: 10px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 2.8em;
+            color: #333;
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .sub-title {
+            font-family: cursive;
+            font-size: 1.5em;
+            color: var(--primary-pink);
+            margin-top: 10px;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* Day Card Styles */
+        .day-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 60px; /* Increased margin */
+            box-shadow: var(--card-shadow);
+            position: relative;
+            border: 2px solid #fff;
+            transition: transform 0.2s;
+        }
+
+        /* Layout Change: Stack photo on top of content */
+        .day-card-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        /* Fun Photo Styling - Tape effect */
+        .day-photo-container {
+            position: relative;
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+        
+        .day-card:nth-child(even) .day-photo-container {
+            transform: rotate(2deg);
+        }
+
+        .day-photo-container:hover {
+            transform: rotate(0deg) scale(1.02);
+            z-index: 10;
+        }
+
+        .day-photo-container::before {
+            /* Tape effect */
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 5;
+            border-left: 2px solid rgba(255,255,255,0.8);
+            border-right: 2px solid rgba(255,255,255,0.8);
+        }
+
+        .day-photo {
+            width: 100%;
+            height: auto; /* Let height be natural */
+            max-height: 300px; /* Cap height but allow full view */
+            object-fit: contain; /* Show full image */
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .day-card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-yellow);
+            border-radius: 20px;
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .day-card:nth-child(even)::before {
+            transform: rotate(1deg);
+            background-color: #e0f0f5;
+        }
+
+        /* Left Column: Day Info & Photo */
+        .day-info {
+            text-align: center;
+        }
+
+        .day-tag {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 15px;
+            transform: rotate(-3deg);
+        }
+
+        .day-card:nth-child(even) .day-tag {
+            background-color: var(--primary-pink);
+            transform: rotate(3deg);
+        }
+
+        .day-date {
+            font-size: 1.1em;
+            color: #888;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            .day-card-content {
+                grid-template-columns: 1fr;
+            }
+            .day-photo-container {
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto 30px auto;
+            }
+        }
+
+
+        /* Right Column: Timeline */
+        .timeline {
+            padding-left: 20px;
+            border-left: 2px dashed #ccc;
+            margin-left: 10px;
+        }
+
+        .timeline-item {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+        }
+
+        .day-card:nth-child(even) .timeline-item::after {
+            border-color: var(--primary-pink);
+        }
+
+        .time-slot {
+            display: inline-block;
+            font-weight: bold;
+            color: #888;
+            font-size: 0.9em;
+            width: 60px;
+            vertical-align: top;
+        }
+
+        .activity {
+            display: inline-block;
+            width: calc(100% - 70px);
+            vertical-align: top;
+        }
+
+        .activity-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .activity-desc {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .highlight-tag {
+            display: inline-block;
+            background-color: #fff4e6;
+            color: #d97706;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-top: 5px;
+            border: 1px solid #fcd34d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .day-card {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                margin-bottom: 40px;
+            }
+            .main-title {
+                font-size: 2em;
+            }
+            .page-container {
+                padding: 20px;
+            }
+            .acc-info-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .acc-key {
+                color: var(--primary-blue);
+                font-size: 0.9em;
+                margin-bottom: -5px;
+            }
+            .flight-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .flight-details {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .time-slot {
+                display: block;
+                width: 100%;
+                margin-bottom: 5px;
+                color: var(--primary-pink);
+            }
+            .activity {
+                display: block;
+                width: 100%;
+                padding-bottom: 15px;
+                border-bottom: 1px dashed #eee;
+                margin-bottom: 15px;
+            }
+            .timeline-item:last-child .activity {
+                border-bottom: none;
+            }
+            .timeline-item::after {
+                top: 0;
+            }
+        }
+
+        .sticker {
+            position: absolute;
+            font-size: 1.5em;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Flight Section Styles */
+        .flight-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 50px;
+            box-shadow: var(--card-shadow);
+            border: 2px dashed #d1d5db;
+            position: relative;
+        }
+
+        .flight-label {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-cream);
+            padding: 0 20px;
+            color: #888;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+        }
+
+        .flight-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .flight-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .flight-row:first-of-type {
+            padding-top: 5px;
+        }
+
+        .flight-tag {
+            color: white;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+            margin-right: 15px;
+        }
+
+        .flight-details {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .flight-time {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Segoe UI', sans-serif; /* Better for numbers */
+        }
+
+        .flight-route {
+            color: #666;
+            font-size: 1em;
+            background-color: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .flight-code {
+            color: #9ca3af;
+            font-family: monospace;
+            font-size: 1em;
+        }
+
+        .flight-duration {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 2px;
+            display: block;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        .flight-terminal {
+            font-size: 0.8em;
+            color: #666;
+            background-color: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .flight-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .flight-details {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        .accommodation-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 50px;
+            box-shadow: var(--card-shadow);
+            border: 2px dashed #d1d5db;
+            text-align: left;
+            position: relative;
+        }
+        
+        .acc-label {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--bg-cream);
+            padding: 0 20px;
+            color: #888;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+        }
+
+        .acc-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .acc-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .acc-title-main {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .acc-title-main svg {
+            margin-right: 8px;
+            color: var(--primary-blue);
+        }
+
+        .acc-price-tag {
+            background-color: #fff0f3;
+            color: var(--primary-pink);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95em;
+            border: 1px solid #ffcdd2;
+        }
+
+        .acc-info-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 20px;
+            font-size: 0.95em;
+        }
+
+        .acc-key {
+            color: #888;
+            font-weight: 500;
+            min-width: 80px;
+        }
+
+        .acc-val {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .acc-code {
+            font-family: monospace;
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #4b5563;
+            letter-spacing: 1px;
+        }
+
+        .acc-link-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 2px;
+            font-size: 0.9em;
+        }
+
+        .acc-link-btn:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <div class="header">
+            <h1 class="main-title">名古屋・五天四夜之旅</h1>
+            <div class="sub-title">Nagoya Travel Trip 2025</div>
+            <div class="date-badge">12.12 FRI - 12.16 TUE</div>
+            
+            <div class="sticker" style="top: 10px; right: 20px; transform: rotate(15deg);">✈️</div>
+            <div class="sticker" style="bottom: -20px; left: 20px; transform: rotate(-10deg);">🍘</div>
+        </div>
+
+        <div class="flight-section">
+            <div class="flight-label">FLIGHT INFO</div>
+            
+            <div class="flight-row">
+                <div class="flight-tag" style="background-color: var(--primary-blue);">去程</div>
+                <div class="flight-details">
+                    <div class="flight-code">CX530</div>
+                    <div>
+                        <div class="flight-time">12:00 ➔ 16:40</div>
+                        <span class="flight-duration">飛行 2小時 40分</span>
+                    </div>
+                    <div class="flight-route">
+                        TPE <span class="flight-terminal">T1</span> ➔ NGO <span class="flight-terminal">T1</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flight-row">
+                <div class="flight-tag" style="background-color: var(--primary-pink);">回程</div>
+                <div class="flight-details">
+                    <div class="flight-code">CX531</div>
+                    <div>
+                        <div class="flight-time">15:35 ➔ 19:15</div>
+                        <span class="flight-duration">飛行 3小時 40分</span>
+                    </div>
+                    <div class="flight-route">
+                        NGO <span class="flight-terminal">T1</span> ➔ TPE <span class="flight-terminal">T1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accommodation-section">
+            <div class="acc-label">HOTEL INFO</div>
+            
+            <div class="acc-content-wrapper">
+                <div class="acc-header-row">
+                    <div class="acc-title-main">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        相鐵FRESA INN 名古屋站櫻通口
+                    </div>
+                    <div class="acc-price-tag">¥ 67,692 (不含早餐)</div>
+                </div>
+                
+                <div class="acc-info-grid">
+                    <div class="acc-key">預約號碼</div>
+                    <div class="acc-val"><span class="acc-code">T2E26A502E02D</span></div>
+                    
+                    <div class="acc-key">地址</div>
+                    <div class="acc-val">
+                        450-0002 愛知県名古屋市中村区名駅４丁目４−１５<br>
+                        <a href="https://maps.app.goo.gl/XR1PznLHDKm5FGLK9" target="_blank" class="acc-link-btn">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            開啟 Google Maps
+                        </a>
+                    </div>
+                    
+                    <div class="acc-key">電話</div>
+                    <div class="acc-val">052-551-2031</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 1 -->
+        <div class="day-card">
+            <div class="day-card-content">
+                <div class="day-info">
+                    <div class="day-tag">Day 1</div>
+                    <div class="day-date">12.12 (五)</div>
+                    <div class="day-photo-container">
+                        <img src="resources/day1.png" alt="Day 1 Photo" class="day-photo">
+                    </div>
+                    <p style="margin-top:10px; font-size:0.9em; color:#888;">名古屋市區</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-slot">12:00</span>
+                        <div class="activity">
+                            <div class="activity-title">桃園機場出發 (CX530)</div>
+                            <div class="activity-desc">準備開啟美好的旅程！</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">16:40</span>
+                        <div class="activity">
+                            <div class="activity-title">抵達中部國際機場</div>
+                            <div class="activity-desc">搭乘 μSKY 特急列車前往名古屋市區 (約28分)</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">18:00</span>
+                        <div class="activity">
+                            <div class="activity-title">飯店 Check-in</div>
+                            <div class="activity-desc">相鐵FRESA INN 名古屋站櫻通口</div>
+                            <div class="highlight-tag">交通便利</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">19:00</span>
+                        <div class="activity">
+                            <div class="activity-title">綠洲21 & 名古屋電視塔</div>
+                            <div class="activity-desc">欣賞「水的宇宙船」夜景，晚餐享用矢場味噌豬排或鰻魚飯。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="day-card">
+            <div class="day-card-content">
+                <div class="day-info">
+                    <div class="day-tag">Day 2</div>
+                    <div class="day-date">12.13 (六)</div>
+                    <div class="day-photo-container">
+                        <img src="resources/day2.png" alt="Ise Jingu" class="day-photo">
+                    </div>
+                    <p style="margin-top:10px; font-size:0.9em; color:#888;">伊勢神宮</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-slot">07:20</span>
+                        <div class="activity">
+                            <div class="activity-title">集合出發</div>
+                            <div class="activity-desc">前往參加伊勢神宮一日遊行程。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">10:00</span>
+                        <div class="activity">
+                            <div class="activity-title">二見興玉神社 & 伊勢神宮外宮</div>
+                            <div class="activity-desc">參觀著名的夫婦岩，感受神聖氛圍。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">13:00</span>
+                        <div class="activity">
+                            <div class="activity-title">伊勢神宮內宮 & 托福橫丁</div>
+                            <div class="activity-desc">參拜內宮，在橫丁品嚐赤福、松阪牛串燒 (停留約3小時)。</div>
+                            <div class="highlight-tag">必吃赤福</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">18:30</span>
+                        <div class="activity">
+                            <div class="activity-title">返回名古屋 & 大須商店街</div>
+                            <div class="activity-desc">晚上可至大須觀音參拜，逛逛商店街或榮商圈購物。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="day-card">
+            <div class="day-card-content">
+                <div class="day-info">
+                    <div class="day-tag">Day 3</div>
+                    <div class="day-date">12.14 (日)</div>
+                    <div class="day-photo-container">
+                        <img src="resources/day3.png" alt="Gifu Castle" class="day-photo">
+                    </div>
+                    <p style="margin-top:10px; font-size:0.9em; color:#888;">岐阜一日遊</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-slot">08:00</span>
+                        <div class="activity">
+                            <div class="activity-title">名古屋特色早餐</div>
+                            <div class="activity-desc">前往 Coffee Shop Kako 體驗名古屋特有的早晨文化。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">10:00</span>
+                        <div class="activity">
+                            <div class="activity-title">前往岐阜</div>
+                            <div class="activity-desc">使用岐阜城套票，搭乘名鐵特急前往岐阜 (約30分)。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">11:00</span>
+                        <div class="activity">
+                            <div class="activity-title">岐阜城 & 金華山松鼠村</div>
+                            <div class="activity-desc">搭乘纜車登頂，俯瞰岐阜市景，與可愛松鼠互動。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">14:30</span>
+                        <div class="activity">
+                            <div class="activity-title">川原町散策</div>
+                            <div class="activity-desc">漫步於古色古香的街道，感受歷史氛圍。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">18:00</span>
+                        <div class="activity">
+                            <div class="activity-title">蓬萊軒鰻魚飯</div>
+                            <div class="activity-desc">回到名古屋，享用著名的鰻魚飯三吃 (需預留排隊時間)。</div>
+                            <div class="highlight-tag">必吃美食</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="day-card">
+            <div class="day-card-content">
+                <div class="day-info">
+                    <div class="day-tag">Day 4</div>
+                    <div class="day-date">12.15 (一)</div>
+                    <div class="day-photo-container">
+                        <img src="resources/day4.png" alt="Inuyama" class="day-photo">
+                    </div>
+                    <p style="margin-top:10px; font-size:0.9em; color:#888;">犬山 & 明治村</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-slot">09:00</span>
+                        <div class="activity">
+                            <div class="activity-title">前往明治村</div>
+                            <div class="activity-desc">搭乘名鐵巴士前往博物館明治村，體驗明治時代風情。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">13:00</span>
+                        <div class="activity">
+                            <div class="activity-title">國寶犬山城</div>
+                            <div class="activity-desc">參觀日本現存最古老的天守閣，逛逛城下町吃小吃。</div>
+                            <div class="highlight-tag">戀人聖地</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">16:00</span>
+                        <div class="activity">
+                            <div class="activity-title">三光稻荷神社</div>
+                            <div class="activity-desc">祈求良緣，著名的愛心繪馬與紅色鳥居隧道。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">19:00</span>
+                        <div class="activity">
+                            <div class="activity-title">名古屋市區晚餐</div>
+                            <div class="activity-desc">最後一晚，在榮或名古屋車站周邊享受美食與購物。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="day-card">
+            <div class="day-card-content">
+                <div class="day-info">
+                    <div class="day-tag">Day 5</div>
+                    <div class="day-date">12.16 (二)</div>
+                    <div class="day-photo-container">
+                        <img src="resources/day5.png" alt="Noritake Garden" class="day-photo">
+                    </div>
+                    <p style="margin-top:10px; font-size:0.9em; color:#888;">最後採買 & 返家</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="time-slot">10:00</span>
+                        <div class="activity">
+                            <div class="activity-title">Noritake之森 (ノリタケの森)</div>
+                            <div class="activity-desc">參觀紅磚建築園區，或至鄰近的 AEON Mall 最後採買。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">12:30</span>
+                        <div class="activity">
+                            <div class="activity-title">前往機場</div>
+                            <div class="activity-desc">搭乘 μSKY 前往中部國際機場 (需預留時間逛機場)。</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="time-slot">15:35</span>
+                        <div class="activity">
+                            <div class="activity-title">搭機返台 (CX531)</div>
+                            <div class="activity-desc">滿載而歸，平安回家！</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; color: #888;">
+            <p>Enjoy your trip to Nagoya! 🎌</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

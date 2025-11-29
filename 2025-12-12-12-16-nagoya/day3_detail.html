@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3 - 岐阜一日遊</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff8ba7;
+            --primary-blue: #89c4e1;
+            --primary-yellow: #fae3d9;
+            --bg-cream: #fdfbf7;
+            --text-color: #333;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        /* Inner Background Image */
+        .page-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('resources/day3.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-container {
+            background-color: var(--bg-cream);
+            width: 100%;
+            max-width: 800px;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ensure content sits above the background */
+        .page-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            transform: rotate(-2deg);
+        }
+
+        .main-title {
+            font-size: 2em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        /* Ticket Card */
+        .ticket-card {
+            background: #fff0f3;
+            border: 2px dashed var(--primary-pink);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .ticket-label {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-pink);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .ticket-content {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .ticket-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .coupon-list {
+            text-align: left;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            border: 1px solid #ffcdd2;
+        }
+
+        .coupon-item {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .coupon-icon {
+            margin-right: 8px;
+            color: var(--primary-pink);
+        }
+
+        /* Itinerary List */
+        .itinerary-list {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .it-time {
+            width: 100px; /* Wider for time ranges */
+            font-weight: bold;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+            padding-top: 2px;
+            font-size: 1.1em;
+        }
+
+        .it-content {
+            flex-grow: 1;
+            padding-left: 25px;
+            border-left: 3px solid #eee;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .it-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 6px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--primary-yellow);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px var(--primary-blue);
+        }
+
+        .it-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .it-desc {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-blue);
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .itinerary-item {
+                flex-direction: column;
+            }
+            .it-time {
+                width: 100%;
+                margin-bottom: 5px;
+                padding-left: 25px; /* Align with content border */
+                box-sizing: border-box;
+            }
+            .it-content {
+                padding-left: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <a href="index.html" class="back-btn">← 回總覽</a>
+
+        <div class="header-section">
+            <div class="day-badge">Day 3 Detail</div>
+            <h1 class="main-title">岐阜城．戰國歷史漫步</h1>
+            <p style="color: #888;">名古屋 ➔ 岐阜市一日遊</p>
+        </div>
+
+        <!-- Ticket Info Card -->
+        <div class="ticket-card">
+            <div class="ticket-label">✨ 必買優惠套票</div>
+            <div class="ticket-content">
+                <div class="ticket-title">岐阜城下町套票 (Gifu Castle Town Ticket)</div>
+                <div style="text-align: left; display: inline-block; width: 100%;">
+                    <strong>📍 購買地點：</strong>名鐵名古屋站 (有人售票櫃台)<br>
+                    
+                    <div class="coupon-list">
+                        <strong>🎟️ 套票包含：</strong><br>
+                        <div class="coupon-item"><span class="coupon-icon">✓</span> 名鐵電車往返車票 (名鐵名古屋 ⇄ 名鐵岐阜)</div>
+                        <div class="coupon-item"><span class="coupon-icon">✓</span> 岐阜巴士指定區間一日券</div>
+                        <div class="coupon-item"><span class="coupon-icon">✓</span> 金華山纜車往返乘車券</div>
+                        <div class="coupon-item"><span class="coupon-icon">✓</span> 岐阜城入場券</div>
+                        
+                        <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+                            <strong>🎁 優惠券 (六選一)：</strong>
+                            <div style="color: #666; font-size: 0.9em; margin-left: 5px;">
+                                1. <strong>金華山松鼠村</strong>：入園券 (含松鼠飼料)<br>
+                                2. <strong>綠水庵 (川原町店)</strong>：香魚點心/麻糬套餐<br>
+                                3. <strong>Klingeln (德國熟食)</strong>：手工德國香腸 1份 (3根)<br>
+                                4. <strong>長良川百貨</strong>：葛冰棒 1支<br>
+                                5. <strong>鵜飼茶屋 (Shaguma)</strong>：一口外郎糕 3個<br>
+                                6. <strong>岐阜樂市</strong>：指定店舖折扣優惠券
+                            </div>
+                            <div style="font-size: 0.8em; color: #e74c3c; margin-top: 5px;">
+                                * 我們本次行程安排選擇「松鼠村」，記得把券留給松鼠村喔！
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+                            <strong>🛍️ 其他特典：</strong>
+                            <div style="color: #666; font-size: 0.9em; margin-left: 5px;">
+                                • 展望餐廳用餐優惠<br>
+                                • 土產店購物折扣<br>
+                                • 合作設施入場折扣 (如鵜飼博物館)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://zh-tw-19826.site-translation.com/ichioshi.php?eid=00065" target="_blank" style="color: var(--primary-blue); display: block; margin-top: 10px; text-align: center; font-weight: bold;">🔗 查看官方詳細優惠內容</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Itinerary List -->
+        <div class="itinerary-list">
+            
+            <!-- 09:00 - 10:00 -->
+            <div class="itinerary-item">
+                <div class="it-time">09:00 - 10:00</div>
+                <div class="it-content">
+                    <div class="it-title">啟程：前往岐阜</div>
+                    <div class="it-desc">
+                        從名鐵名古屋站出發，搭乘名鐵電車前往名鐵岐阜站。<br>
+                        <span style="color: #888; font-size: 0.9em;">(車程約 30 分鐘，使用套票中的電車券)</span>
+                        <!-- Google Map: 名古屋 -> 岐阜 -->
+                        <div style="margin-top: 10px; width: 100%; height: 250px; border-radius: 10px; overflow: hidden; border: 1px solid #ddd;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d161571.4718780908!2d136.80020371011324!3d35.28726382579714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x600376dd9276717d%3A0xc86e7a7613d8c6d0!2z5pel5pys44CSNDUwLTAwMDIgQWljaGksIE5hZ295YSwgTmFrYW11cmEgV2FyZCwgTWVpZWtpLCAxIENob21l4oiSMuKIkjEg5ZCN6ZC15ZCN5Y-k5bGLIOeVquWPtw!3m2!1d35.169745!2d136.88380429999998!4m5!1s0x6003a93856443a7b%3A0x86539dc698d4cc43!2z5pel5pys5bKQ6Zic57ij5bKQ6Zic5biCIEthbmRhbWFjaGksIDkgQ2hvbWUsIOWQjemQteWykOmYnOi7iuermQ!3m2!1d35.4114425!2d136.7597572!5e0!3m2!1szh-TW!2stw!4v1764439178645!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10:00 - 10:45 -->
+            <div class="itinerary-item">
+                <div class="it-time">10:00 - 10:45</div>
+                <div class="it-content">
+                    <div class="it-title">轉乘巴士</div>
+                    <div class="it-desc">
+                        抵達名鐵岐阜站後，出站轉乘岐阜巴士。<br>
+                        <strong>目標站點：</strong>岐阜公園歷史博物館前 (Gifu Park)<br>
+                        <span style="color: #888; font-size: 0.9em;">(使用套票中的巴士一日券)</span>
+                        <!-- Google Map: 岐阜站 -> 岐阜城 -->
+                        <div style="margin-top: 10px; width: 100%; height: 250px; border-radius: 10px; overflow: hidden; border: 1px solid #ddd;">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d13936.063418113814!2d136.76888325605358!3d35.42271294341628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x6003a93856443a7b%3A0x86539dc698d4cc43!2z5pel5pys5bKQ6Zic57ij5bKQ6Zic5biCIEthbmRhbWFjaGksIDkgQ2hvbWUsIOWQjemQteWykOmYnOi7iuermQ!3m2!1d35.4114425!2d136.7597572!4m5!1s0x6003a9798f2e0eab%3A0x2871c3655542c94a!2z5pel5pys5bKQ6Zic57ij5bKQ6Zic5biCIFRlbnNodWtha3UsIOWykOmYnOWfjiDlspDpmJzln44!3m2!1d35.433918!2d136.78207129999998!5e0!3m2!1szh-TW!2stw!4v1764439218794!5m2!1szh-TW!2stw" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10:45 - 12:00 -->
+            <div class="itinerary-item">
+                <div class="it-time">10:45 - 12:00</div>
+                <div class="it-content">
+                    <div class="it-title">金華山纜車 & 岐阜城</div>
+                    <div class="it-desc">
+                        搭乘纜車登上金華山頂，參觀織田信長的居城「岐阜城」。<br>
+                        俯瞰岐阜市區的壯麗景色，感受戰國時代的氛圍。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12:00 - 13:00 -->
+            <div class="itinerary-item">
+                <div class="it-time">12:00 - 13:00</div>
+                <div class="it-content">
+                    <div class="it-title">松鼠村互動體驗</div>
+                    <div class="it-desc">
+                        <strong>金華山松鼠村 (Kinkazan Squirrel Village)</strong><br>
+                        就在纜車山頂站旁邊，可以近距離與可愛的松鼠互動、餵食。<br>
+                        <span style="color: var(--primary-blue); font-size: 0.9em;">💡 記得使用套票中的「六選一優惠券」兌換入園 (含飼料)。</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13:00 - 16:30 -->
+            <div class="itinerary-item">
+                <div class="it-time">13:00 - 16:30</div>
+                <div class="it-content">
+                    <div class="it-title">川原町老街 & 午餐</div>
+                    <div class="it-desc">
+                        下山後步行至川原町，漫步於古色古香的街道。<br>
+                        這裡保留了江戶時代的格子窗建築，非常有韻味。
+                        
+                        <!-- 散步地圖 -->
+                        <div style="margin-top: 20px;">
+                            <div style="font-weight: bold; color: var(--primary-blue); margin-bottom: 10px; text-align: center;">👣 川原町散步地圖</div>
+                            
+                            <div class="map-vertical-line" style="position: relative; border-left: 4px dashed #e0c097; margin-left: 20px; padding-left: 25px; padding-bottom: 20px;">
+                                
+                                <!-- Direction Top -->
+                                <div style="position: absolute; top: -10px; left: -8px; color: #aaa; font-size: 0.8em; background: white; padding: 2px;">北 (往 岐阜公園)</div>
+
+                                <!-- Spot 1 -->
+                                <div style="margin-bottom: 20px; position: relative; top: 20px;">
+                                    <strong style="color: #d35400;">🏠 川原町屋 (Kawaramachi-ya)</strong><br>
+                                    <span style="color: #666; font-size: 0.9em;">👉 門口有一個復古紅色圓郵筒 <span style="color: #e74c3c; font-weight: bold;">(必拍地標！)</span></span>
+                                </div>
+
+                                <!-- Spot 2 -->
+                                <div style="margin-bottom: 20px; position: relative; top: 20px;">
+                                    <strong style="color: #d35400;">🏠 玉井屋本舖 (Tamaiya)</strong><br>
+                                    <span style="color: #666; font-size: 0.9em;">👉 必買「登り鮎」甜點</span>
+                                </div>
+
+                                <!-- Spot 2.5 (New) -->
+                                <div style="margin-bottom: 20px; position: relative; top: 20px;">
+                                    <strong style="color: #d35400;">🏠 綠水庵 川原町店</strong><br>
+                                    <span style="color: #666; font-size: 0.9em;">👉 必吃烤糰子、香魚點心 (套票優惠店！)</span>
+                                </div>
+
+                                <!-- Spot 3 -->
+                                <div style="margin-bottom: 20px; position: relative; top: 20px;">
+                                    <strong style="color: #d35400;">🏠 長良川百貨 (Nagaragawa Dept.)</strong><br>
+                                    <span style="color: #666; font-size: 0.9em;">👉 精緻選物、和傘、燈籠</span>
+                                </div>
+
+                                <!-- Walk time -->
+                                <div style="margin-bottom: 20px; color: #888; font-size: 0.85em; font-style: italic; position: relative; top: 20px;">
+                                    ⬇ (步行約 1-2 分鐘)
+                                </div>
+
+                                <!-- Spot 4 -->
+                                <div style="margin-bottom: 20px; position: relative; top: 20px;">
+                                    <strong style="color: #2980b9;">🚢 鵜飼觀覽船事務所</strong><br>
+                                    <span style="color: #666; font-size: 0.9em;">👉 夏天看捕魚的報到處</span>
+                                </div>
+
+                                <!-- Spot 5 -->
+                                <div style="position: relative; top: 20px;">
+                                    <strong style="color: #27ae60;">🚏 [長良橋] 公車站 / 長良橋</strong>
+                                </div>
+                                
+                                <!-- Direction Bottom -->
+                                <div style="position: absolute; bottom: -25px; left: -8px; color: #aaa; font-size: 0.8em; background: white; padding: 2px;">南 (往 岐阜車站)</div>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box" style="margin-top: 40px;">
+                            <strong>🍽️ 午餐推薦：</strong><br>
+                            可以在老街找間咖啡廳或餐廳用餐，享受悠閒的午後時光。
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16:30 - 19:30 -->
+            <div class="itinerary-item">
+                <div class="it-time">16:30 - 19:30</div>
+                <div class="it-content">
+                    <div class="it-title">返回名古屋</div>
+                    <div class="it-desc">
+                        搭乘巴士返回名鐵岐阜站，再轉乘名鐵電車回到名古屋站。<br>
+                        晚餐可以安排在名古屋車站周邊享用。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

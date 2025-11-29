@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 - 出發・名古屋</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-pink: #ff8ba7;
+            --primary-blue: #89c4e1;
+            --primary-yellow: #fae3d9;
+            --bg-cream: #fdfbf7;
+            --text-color: #333;
+            --card-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        /* Inner Background Image */
+        .page-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('resources/day1_background.png'); /* Updated to day1_background */
+            background-size: 300px; /* Consistent with Day 2 */
+            background-repeat: repeat;
+            background-position: top left;
+            opacity: 0.75; /* Consistent with Day 2 */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-container {
+            background-color: var(--bg-cream);
+            width: 100%;
+            max-width: 800px;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ensure content sits above the background */
+        .page-container > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+            color: var(--primary-blue);
+        }
+
+        /* Header */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            transform: rotate(-2deg);
+        }
+
+        .main-title {
+            font-size: 2em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        /* Itinerary List */
+        .itinerary-list {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque to read over background */
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .it-time {
+            width: 70px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+            padding-top: 2px;
+            font-size: 1.1em;
+        }
+
+        .it-content {
+            flex-grow: 1;
+            padding-left: 25px;
+            border-left: 3px solid #eee;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .it-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 6px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--primary-yellow);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px var(--primary-blue);
+        }
+
+        .it-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .it-desc {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Flight Card inside Itinerary */
+        .flight-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            margin-top: 10px;
+        }
+        
+        .flight-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .flight-highlight {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #fffbe6;
+            border-left: 4px solid #ffd591;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .it-time {
+                width: 55px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <a href="index.html" class="back-btn">← 回總覽</a>
+
+        <div class="header-section">
+            <div class="day-badge">Day 1 Detail</div>
+            <h1 class="main-title">啟程・前往名古屋</h1>
+            <p style="color: #888;">台北 ➔ 名古屋中部國際機場</p>
+        </div>
+
+        <!-- 詳細行程表 -->
+        <div class="itinerary-list">
+            
+            <!-- 09:00 -->
+            <div class="itinerary-item">
+                <div class="it-time">09:00</div>
+                <div class="it-content">
+                    <div class="it-title">準備出門</div>
+                    <div class="it-desc">
+                        檢查護照、機票、隨身物品是否帶齊。<br>
+                        <span style="font-size: 0.9em; color: #888;">(建議再確認一次網卡/漫遊是否設定完成)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 09:30 -->
+            <div class="itinerary-item">
+                <div class="it-time">09:30</div>
+                <div class="it-content">
+                    <div class="it-title">搭乘機場捷運</div>
+                    <div class="it-desc">
+                        從台北車站搭乘機場捷運直達車前往桃園機場。
+                        <!-- 機捷時刻表 -->
+                        <div class="flight-card" style="margin-top: 10px; text-align: center;">
+                            <img src="resources/image_1689995207_3.jpg" alt="機場捷運時刻表" style="max-width: 100%; border-radius: 5px; height: auto;">
+                            <p style="font-size: 0.8em; color: #888; margin-top: 5px;">機場捷運時刻表</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10:07 -->
+            <div class="itinerary-item">
+                <div class="it-time">10:07</div>
+                <div class="it-content">
+                    <div class="it-title">抵達第一航廈</div>
+                    <div class="it-desc">
+                        辦理報到與行李託運。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12:00 Flight -->
+            <div class="itinerary-item">
+                <div class="it-time">12:00</div>
+                <div class="it-content">
+                    <div class="it-title">搭乘飛機 (CX530)</div>
+                    <div class="it-desc">
+                        國泰航空 Cathay Pacific<br>
+                        TPE (T1) ➔ NGO (T1)
+                        <div class="flight-card">
+                            <div class="flight-row">
+                                <span>起飛：12:00 (台北)</span>
+                                <span class="flight-highlight">第一航廈</span>
+                            </div>
+                            <div class="flight-row">
+                                <span>抵達：16:40 (名古屋)</span>
+                                <span class="flight-highlight">第一航廈</span>
+                            </div>
+                            <div class="flight-row" style="color: #888; font-size: 0.85em; margin-top: 5px;">
+                                飛行時間：2小時40分
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 16:40 Arrival -->
+            <div class="itinerary-item">
+                <div class="it-time">16:40</div>
+                <div class="it-content">
+                    <div class="it-title">抵達名古屋中部國際機場</div>
+                    <div class="it-desc">
+                        入境手續、提領行李。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transport -->
+            <div class="itinerary-item">
+                <div class="it-time">17:30</div>
+                <div class="it-content">
+                    <div class="it-title">前往名古屋市區</div>
+                    <div class="it-desc">
+                        搭乘 <strong>μSKY (ミュースカイ)</strong> 特急列車前往名古屋站。
+                        <ul>
+                            <li>車程：約 28 分鐘</li>
+                            <li>費用：¥980 (乘車券) + ¥450 (μticket) = <strong>¥1,430</strong></li>
+                            <li>備註：全車指定席，需在售票機加購 μticket。</li>
+                        </ul>
+                        
+                        <!-- μSKY 時刻表 -->
+                        <div class="flight-card" style="margin-top: 10px; text-align: center;">
+                            <img src="resources/image_1689995207_1.jpg" alt="μSKY 特急列車時刻表" style="max-width: 100%; border-radius: 5px; height: auto;">
+                            <p style="font-size: 0.8em; color: #888; margin-top: 5px;">μSKY 特急列車時刻表</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel -->
+            <div class="itinerary-item">
+                <div class="it-time">18:30</div>
+                <div class="it-content">
+                    <div class="it-title">飯店 Check-in</div>
+                    <div class="it-desc">
+                        <strong>相鐵FRESA INN 名古屋站櫻通口</strong><br>
+                        放置行李，準備出門享用名古屋的第一餐！
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

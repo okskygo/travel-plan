@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋五天四夜・地圖行程表</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-pink: #bcaaa4; /* Light Brown/Beige (Header) */
+            --primary-blue: #ffab91; /* Soft Terracotta (Pins/Accents) */
+            --primary-yellow: #fff3e0; /* Pale Orange (Highlights) */
+            --bg-cream: #fdfbf7; /* Warm Creamy White */
+            --text-color: #4e342e; /* Dark Coffee */
+            --header-height: 60px;
+            --tab-height: 50px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-color);
+            overflow: hidden; /* Prevent body scroll, use inner scroll */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layout */
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - var(--header-height));
+            overflow: hidden;
+        }
+
+        /* Left Side: Itinerary List (30%) */
+        .sidebar {
+            width: 350px;
+            min-width: 350px;
+            background-color: white;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Right Side: Map (70%) */
+        .map-container {
+            flex-grow: 1;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Header */
+        header {
+            height: var(--header-height);
+            background-color: var(--primary-pink);
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background-color: #efebe9; /* Light Beige Background */
+            height: var(--tab-height);
+            overflow-x: auto; /* Allow horizontal scroll on mobile */
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            border: none;
+            background: none;
+            padding: 0 15px;
+            font-family: inherit;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            min-width: 70px;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-pink);
+            border-bottom-color: var(--primary-pink);
+            background-color: white;
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(255,255,255,0.5);
+        }
+
+        /* Itinerary Content */
+        .itinerary-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-image: radial-gradient(#e6e6e6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .day-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .day-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .day-date {
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary-blue);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item.active-item {
+            border-left-color: var(--primary-pink);
+            background-color: #efebe9; /* Light Beige Highlight */
+        }
+
+        .time {
+            font-weight: bold;
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .location-name {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .item-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-blue);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .timeline-item.active-item .item-number {
+            background-color: var(--primary-pink);
+        }
+
+        /* Custom Marker Icon Style */
+        .custom-div-icon {
+            background: none;
+            border: none;
+        }
+
+        .marker-pin {
+            width: 30px;
+            height: 30px;
+            border-radius: 50% 50% 50% 0;
+            background: var(--primary-blue);
+            position: absolute;
+            transform: rotate(-45deg);
+            left: 50%;
+            top: 50%;
+            margin: -15px 0 0 -15px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .marker-pin::after {
+            content: '';
+            width: 24px;
+            height: 24px;
+            margin: 3px 0 0 3px;
+            background: #fff;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .marker-pin span {
+            transform: rotate(45deg);
+            z-index: 10;
+            font-weight: bold;
+            color: var(--primary-blue);
+            font-size: 12px;
+            margin-left: 5px; /* Adjust for rotation alignment */
+            margin-bottom: 5px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column-reverse; /* Map on top, List below */
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 50%; /* Half screen for list */
+                min-width: auto;
+            }
+
+            .map-container {
+                height: 50%; /* Half screen for map */
+            }
+            
+            /* Reorder for mobile: Map Top, List Bottom */
+            .main-container {
+                flex-direction: column; 
+            }
+            
+            .map-container {
+                height: 40vh;
+                flex-grow: 0;
+            }
+            
+            .sidebar {
+                height: calc(60vh - var(--header-height));
+                flex-grow: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>名古屋旅圖 🗺️</h1>
+    <a href="index.html" class="back-link">← 回首頁</a>
+</header>
+
+<div class="main-container">
+    <div class="sidebar">
+        <!-- Day Tabs -->
+        <div class="tabs" id="dayTabs">
+            <!-- JS will populate this -->
+        </div>
+
+        <!-- Itinerary List -->
+        <div class="itinerary-content" id="itineraryList">
+            <!-- JS will populate this -->
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script>
+    // 📅 行程資料
+    const itineraryData = {
+        "day1": {
+            "date": "12.12 (五)",
+            "title": "啟程・名古屋",
+            "locations": [
+                { "time": "12:00", "name": "桃園機場 T1 (CX530)", "lat": 25.0817, "lng": 121.2386, "desc": "搭機前往名古屋" },
+                { "time": "16:40", "name": "中部國際機場 (NGO)", "lat": 34.8584, "lng": 136.8053, "desc": "抵達日本，搭乘 μSKY 前往市區" },
+                { "time": "18:30", "name": "相鐵FRESA INN 名古屋站櫻通口", "lat": 35.1715, "lng": 136.8858, "desc": "飯店 Check-in" },
+                { "time": "19:00", "name": "Unimall 地下街", "lat": 35.1712, "lng": 136.8860, "desc": "逛街購物" },
+                { "time": "20:30", "name": "Sky Promenade 展望台", "lat": 35.1693, "lng": 136.8856, "desc": "Midland Square 欣賞夜景" }
+            ]
+        },
+        "day2": {
+            "date": "12.13 (六)",
+            "title": "伊勢神宮一日遊",
+            "locations": [
+                { "time": "07:40", "name": "名古屋 VIP Lounge", "lat": 35.1679, "lng": 136.8795, "desc": "集合出發" },
+                { "time": "10:00", "name": "二見興玉神社 (夫婦岩)", "lat": 34.5089, "lng": 136.7877, "desc": "海邊神社參拜" },
+                { "time": "11:00", "name": "伊勢神宮 外宮", "lat": 34.4877, "lng": 136.7042, "desc": "豐受大神宮參拜" },
+                { "time": "12:00", "name": "伊勢神宮 內宮 & 托福橫丁", "lat": 34.4550, "lng": 136.7258, "desc": "皇大神宮參拜、享用赤福與午餐" },
+                { "time": "18:00", "name": "大須觀音 & 商店街", "lat": 35.1598, "lng": 136.8997, "desc": "參拜與逛街" },
+                { "time": "19:30", "name": "熱田蓬萊軒 (松阪屋店)", "lat": 35.1643, "lng": 136.9077, "desc": "晚餐：鰻魚飯三吃" }
+            ]
+        },
+        "day3": {
+            "date": "12.14 (日)",
+            "title": "岐阜城戰國漫步",
+            "locations": [
+                { "time": "09:00", "name": "名鐵名古屋站", "lat": 35.1695, "lng": 136.8842, "desc": "搭車前往岐阜" },
+                { "time": "10:45", "name": "岐阜城 (金華山)", "lat": 35.4339, "lng": 136.7821, "desc": "搭纜車登頂、松鼠村互動" },
+                { "time": "13:00", "name": "川原町老街", "lat": 35.4370, "lng": 136.7725, "desc": "古街散步、綠水庵吃甜點" },
+                { "time": "18:00", "name": "名古屋車站周邊", "lat": 35.1709, "lng": 136.8815, "desc": "返回市區晚餐" }
+            ]
+        },
+        "day4": {
+            "date": "12.15 (一)",
+            "title": "名古屋城 & 榮商圈",
+            "locations": [
+                { "time": "09:30", "name": "名古屋城", "lat": 35.1848, "lng": 136.9000, "desc": "參觀天守閣與本丸御殿" },
+                { "time": "13:00", "name": "榮商圈 (Sakae)", "lat": 35.1685, "lng": 136.9073, "desc": "百貨購物、午餐" },
+                { "time": "15:30", "name": "中部電力 MIRAI TOWER", "lat": 35.1723, "lng": 136.9083, "desc": "綠洲21 拍照" },
+                { "time": "18:30", "name": "ふみ屋 錦店", "lat": 35.1702, "lng": 136.9035, "desc": "晚餐：手羽先居酒屋" }
+            ]
+        },
+        "day5": {
+            "date": "12.16 (二)",
+            "title": "最後採買 & 返家",
+            "locations": [
+                { "time": "10:00", "name": "Noritake之森", "lat": 35.1795, "lng": 136.8782, "desc": "紅磚建築拍照、AEON Mall" },
+                { "time": "12:30", "name": "名鐵名古屋站", "lat": 35.1695, "lng": 136.8842, "desc": "搭乘 μSKY 前往機場" },
+                { "time": "15:35", "name": "中部國際機場 (CX531)", "lat": 34.8584, "lng": 136.8053, "desc": "搭機返台" }
+            ]
+        }
+    };
+
+    // Initialize Map
+    const map = L.map('map').setView([35.1709, 136.8815], 13);
+    
+    // Add CartoDB Voyager Tile Layer (Color but clean)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(map);
+
+    let markers = [];
+    let currentDay = 'day1';
+
+    // Elements
+    const dayTabs = document.getElementById('dayTabs');
+    const itineraryList = document.getElementById('itineraryList');
+
+    // Create Tabs
+    Object.keys(itineraryData).forEach(dayKey => {
+        const btn = document.createElement('button');
+        btn.className = `tab-btn ${dayKey === currentDay ? 'active' : ''}`;
+        btn.textContent = dayKey.replace('day', 'Day ');
+        btn.onclick = () => switchDay(dayKey);
+        dayTabs.appendChild(btn);
+    });
+
+    // Custom Icon Function
+    function createCustomIcon(number) {
+        return L.divIcon({
+            className: 'custom-div-icon',
+            html: `<div class='marker-pin'><span>${number}</span></div>`,
+            iconSize: [30, 42],
+            iconAnchor: [15, 42]
+        });
+    }
+
+    // Switch Day Function
+    function switchDay(dayKey) {
+        currentDay = dayKey;
+        
+        // Update Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.toLowerCase().replace(' ', '') === dayKey);
+        });
+
+        // Clear existing markers
+        markers.forEach(marker => map.removeLayer(marker));
+        markers = [];
+        
+        // Clear list
+        itineraryList.innerHTML = '';
+
+        const dayData = itineraryData[dayKey];
+
+        // Add Header
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'day-header';
+        headerDiv.innerHTML = `
+            <div class="day-date">${dayData.date}</div>
+            <div class="day-title">${dayData.title}</div>
+        `;
+        itineraryList.appendChild(headerDiv);
+
+        // Add Locations and Markers
+        const bounds = L.latLngBounds();
+
+        dayData.locations.forEach((loc, index) => {
+            const num = index + 1;
+            
+            // 1. Create List Item
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            item.innerHTML = `
+                <div class="item-number">${num}</div>
+                <span class="time">${loc.time}</span>
+                <div class="location-name">${loc.name}</div>
+                <div class="desc">${loc.desc}</div>
+            `;
+            
+            // Interaction: Click list item -> Fly to map
+            item.onclick = () => {
+                // Remove active class from all items
+                document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active-item'));
+                // Add active class to clicked
+                item.classList.add('active-item');
+                
+                // Map movement
+                map.flyTo([loc.lat, loc.lng], 16, { duration: 1.5 });
+                markers[index].openPopup();
+            };
+
+            itineraryList.appendChild(item);
+
+            // 2. Add Marker to Map
+            const googleMapUrl = `https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`;
+            
+            const marker = L.marker([loc.lat, loc.lng], { icon: createCustomIcon(num) })
+                .addTo(map)
+                .bindPopup(`
+                    <div style="text-align:center;">
+                        <b>${loc.time} ${loc.name}</b><br>
+                        <div style="margin: 5px 0; color: #666;">${loc.desc}</div>
+                        <a href="${googleMapUrl}" target="_blank" style="
+                            display: inline-block;
+                            margin-top: 5px;
+                            padding: 5px 10px;
+                            background-color: #4285f4;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 4px;
+                            font-size: 12px;
+                            font-weight: bold;
+                        ">📍 Google Maps 導航</a>
+                    </div>
+                `);
+            
+            // Interaction: Click marker -> Highlight list item
+            marker.on('click', () => {
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active-item'));
+                item.classList.add('active-item');
+            });
+
+            markers.push(marker);
+            bounds.extend([loc.lat, loc.lng]);
+        });
+
+        // Fit map bounds to show all markers for the day
+        if (markers.length > 0) {
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+    }
+
+    // Initial Load
+    switchDay('day1');
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2 - Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #004e92;
+            --ice-blue: #e0f7fa;
+            --snow-white: #ffffff;
+            --accent-orange: #ff7e5f;
+            --text-dark: #2c3e50;
+            --card-radius: 16px;
+            --card-shadow: 0 4px 15px rgba(0, 78, 146, 0.1);
+            --warning-bg: #fff3cd;
+            --warning-border: #ffeeba;
+            --warning-text: #856404;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .page-container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 800px;
+            min-height: 100vh;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: var(--card-radius);
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--ice-blue);
+            padding-bottom: 20px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .main-title {
+            font-size: 2em;
+            margin: 10px 0;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* Itinerary Timeline Styles */
+        .itinerary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Gap handled by margin-bottom of items */
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .it-time {
+            width: 70px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+            padding-top: 2px;
+            font-size: 1.1em;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .it-content {
+            flex-grow: 1;
+            padding-left: 25px;
+            border-left: 3px solid var(--ice-blue);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .it-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px var(--primary-blue);
+        }
+
+        .it-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .it-desc {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Info Card */
+        .info-card {
+            background-color: var(--ice-blue);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px dashed var(--primary-blue);
+            margin-top: 10px;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .info-highlight {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Ski Info Table */
+        .ski-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        .ski-table th, .ski-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .ski-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .ski-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .it-time {
+                width: 55px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> &nbsp; Back</a>
+
+        <div class="header-section">
+            <div class="day-badge">Day 2</div>
+            <h1 class="main-title">田澤湖滑雪場</h1>
+            <p style="color: #666;"><i class="fa-solid fa-snowflake"></i> 享受日本最深湖泊的絕景滑道</p>
+        </div>
+
+        <div class="itinerary-list">
+
+            <!-- Morning -->
+            <div class="itinerary-item">
+                <div class="it-time">Morning</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-utensils"></i> 飯店早餐 & 出發</div>
+                    <div class="it-desc">
+                        在飯店享用早餐，補充滿滿能量。
+                        <br>隨後搭乘接駁車前往田澤湖滑雪場。
+                        <div class="info-card">
+                            <i class="fa-solid fa-bus"></i> <strong>飯店 ⇆ 滑雪場接駁車</strong>
+                            <br><span style="font-size: 0.9em; color: #666;">(詳細時刻表請依飯店公告為準)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skiing -->
+            <div class="itinerary-item">
+                <div class="it-time">All Day</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-person-skiing-nordic"></i> 田澤湖滑雪場 (Tazawako Ski Resort)</div>
+                    <div class="it-desc">
+                        盡情享受滑雪樂趣！可以一邊滑雪一邊俯瞰美麗的田澤湖。
+                        
+                        <img src="resource/ph01.jpg" alt="田澤湖滑雪場雪道圖" class="ski-image">
+
+                        <div style="font-weight: bold; margin-bottom: 5px;">票價與租賃資訊 (KKday已預訂)：</div>
+                        <table class="ski-table">
+                            <tr>
+                                <th>項目</th>
+                                <th>價格</th>
+                            </tr>
+                            <tr>
+                                <td>一日票 (Lift Ticket)</td>
+                                <td>¥5,300</td>
+                            </tr>
+                            <tr>
+                                <td>單板滑雪兩件套 (板+靴)</td>
+                                <td>¥5,000</td>
+                            </tr>
+                        </table>
+                        <div style="margin-top: 5px; font-size: 0.9em; color: #28a745;">
+                            <i class="fa-solid fa-check-circle"></i> 一日券跟雪板租用已在 KKday 完成預定
+                        </div>
+
+                        <div style="margin-top: 10px;">
+                            <a href="https://maps.app.goo.gl/DRtVbZTpw7fJBXBi6" target="_blank" class="loc-btn"><i class="fa-solid fa-location-dot"></i> 田澤湖滑雪場地圖</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="itinerary-item">
+                <div class="it-time">Lunch</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-burger"></i> 滑雪場午餐</div>
+                    <div class="it-desc">
+                        在滑雪場內的餐廳享用熱騰騰的午餐，稍作休息。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evening -->
+            <div class="itinerary-item">
+                <div class="it-time">Evening</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-house-user"></i> 返回飯店 & 晚餐</div>
+                    <div class="it-desc">
+                        滑雪結束後，搭乘接駁車返回 Hotel Grand Tencoo。
+                        <br>晚餐在飯店內享用，並可以泡溫泉放鬆疲憊的肌肉。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

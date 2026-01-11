@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名古屋五天四夜・女子旅手帳</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 變數定義 --- */
+        :root {
+            --primary-pink: #ff8ba7;
+            --primary-blue: #89c4e1;
+            --bg-beige: #f9f7f2;
+            --card-bg: #ffffff;
+            --text-main: #5d5d5d;
+            --text-light: #888;
+            --accent: #ffc6c7;
+        }
+
+        /* --- 全局設定 --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: var(--bg-beige);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* 防止整個頁面捲動 */
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--primary-pink);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* --- Tabs --- */
+        .tabs-container {
+            background-color: var(--bg-beige);
+            padding: 10px 10px 0 10px;
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #eaddcf;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(2px); /* 稍微下沉 */
+        }
+
+        .tab:hover:not(.active) {
+            background-color: var(--accent);
+        }
+
+        /* --- 主要內容區塊 --- */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 左側行程列表 */
+        .itinerary-panel {
+            width: 30%;
+            overflow-y: auto;
+            padding: 20px;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px; /* 點點筆記本背景 */
+            border-right: 4px dashed var(--primary-pink);
+        }
+
+        .day-title {
+            font-size: 1.4rem;
+            color: var(--primary-pink);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-pink);
+        }
+
+        /* 行程卡片 */
+        .location-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .location-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-blue);
+        }
+
+        .location-card.active-card {
+            border-color: var(--primary-pink);
+            background-color: #fff9fa;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-number {
+            background-color: var(--primary-pink);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .card-time {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+            margin-right: 10px;
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-left: 34px; /* 對齊標題 */
+            line-height: 1.5;
+        }
+
+        /* 右側地圖 */
+        #map {
+            width: 70%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- Leaflet 客製化樣式 --- */
+        /* 自訂編號標記 */
+        .custom-marker-icon {
+            background-color: var(--primary-pink);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px; /* 30px (icon size) - 6px (border) */
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            padding: 5px;
+        }
+        
+        .leaflet-popup-content b {
+            color: var(--primary-pink);
+            font-size: 1.1em;
+        }
+
+        /* --- 響應式設計 (手機版) --- */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            /* 手機版：地圖在上方，佔 40vh */
+            #map {
+                width: 100%;
+                height: 40vh;
+                order: 1; /* Flex 順序 */
+                border-bottom: 4px dashed var(--primary-pink);
+            }
+
+            /* 手機版：列表在下方，佔剩餘空間 */
+            .itinerary-panel {
+                width: 100%;
+                height: auto; /* flex grow 會處理 */
+                flex: 1;
+                order: 2;
+                border-right: none;
+                background-image: none; /* 手機版簡化背景 */
+                background-color: var(--bg-beige);
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✈️ 名古屋五天四夜</h1>
+        <span>Nagoya Travel Diary</span>
+    </header>
+
+    <nav class="tabs-container" id="tabs">
+        </nav>
+
+    <div class="main-container">
+        <div class="itinerary-panel" id="itinerary-panel">
+            <h2 class="day-title" id="current-day-title"></h2>
+            <div id="itinerary-list">
+                </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // --- 1. 行程資料 (JSON) ---
+        const itineraryData = {
+          "day1": {
+            "date": "12.12 (五)",
+            "title": "啟程・名古屋",
+            "locations": [
+              { "time": "12:00", "name": "桃園機場 T1 (CX530)", "lat": 25.0817, "lng": 121.2386, "desc": "搭機前往名古屋" },
+              { "time": "16:40", "name": "中部國際機場 (NGO)", "lat": 34.8584, "lng": 136.8053, "desc": "抵達日本，搭乘 μSKY 前往市區" },
+              { "time": "18:30", "name": "相鐵FRESA INN 名古屋站櫻通口", "lat": 35.1715, "lng": 136.8858, "desc": "飯店 Check-in" },
+              { "time": "19:00", "name": "Unimall 地下街", "lat": 35.1712, "lng": 136.8860, "desc": "逛街購物" },
+              { "time": "20:30", "name": "Sky Promenade 展望台", "lat": 35.1693, "lng": 136.8856, "desc": "Midland Square 欣賞夜景" }
+            ]
+          },
+          "day2": {
+            "date": "12.13 (六)",
+            "title": "伊勢神宮一日遊",
+            "locations": [
+              { "time": "07:40", "name": "名古屋 VIP Lounge", "lat": 35.1679, "lng": 136.8795, "desc": "集合出發" },
+              { "time": "10:00", "name": "二見興玉神社 (夫婦岩)", "lat": 34.5089, "lng": 136.7877, "desc": "海邊神社參拜" },
+              { "time": "11:00", "name": "伊勢神宮 外宮", "lat": 34.4877, "lng": 136.7042, "desc": "豐受大神宮參拜" },
+              { "time": "12:00", "name": "伊勢神宮 內宮 & 托福橫丁", "lat": 34.4550, "lng": 136.7258, "desc": "皇大神宮參拜、享用赤福與午餐" },
+              { "time": "18:00", "name": "大須觀音 & 商店街", "lat": 35.1598, "lng": 136.8997, "desc": "參拜與逛街" },
+              { "time": "19:30", "name": "熱田蓬萊軒 (松阪屋店)", "lat": 35.1643, "lng": 136.9077, "desc": "晚餐：鰻魚飯三吃" }
+            ]
+          },
+          "day3": {
+            "date": "12.14 (日)",
+            "title": "岐阜城戰國漫步",
+            "locations": [
+              { "time": "09:00", "name": "名鐵名古屋站", "lat": 35.1695, "lng": 136.8842, "desc": "搭車前往岐阜" },
+              { "time": "10:45", "name": "岐阜城 (金華山)", "lat": 35.4339, "lng": 136.7821, "desc": "搭纜車登頂、松鼠村互動" },
+              { "time": "13:00", "name": "川原町老街", "lat": 35.4370, "lng": 136.7725, "desc": "古街散步、綠水庵吃甜點" },
+              { "time": "18:00", "name": "名古屋車站周邊", "lat": 35.1709, "lng": 136.8815, "desc": "返回市區晚餐" }
+            ]
+          },
+          "day4": {
+            "date": "12.15 (一)",
+            "title": "名古屋城 & 榮商圈",
+            "locations": [
+              { "time": "09:30", "name": "名古屋城", "lat": 35.1848, "lng": 136.9000, "desc": "參觀天守閣與本丸御殿" },
+              { "time": "13:00", "name": "榮商圈 (Sakae)", "lat": 35.1685, "lng": 136.9073, "desc": "百貨購物、午餐" },
+              { "time": "15:30", "name": "中部電力 MIRAI TOWER", "lat": 35.1723, "lng": 136.9083, "desc": "綠洲21 拍照" },
+              { "time": "18:30", "name": "ふみ屋 錦店", "lat": 35.1702, "lng": 136.9035, "desc": "晚餐：手羽先居酒屋" }
+            ]
+          },
+          "day5": {
+            "date": "12.16 (二)",
+            "title": "最後採買 & 返家",
+            "locations": [
+              { "time": "10:00", "name": "Noritake之森", "lat": 35.1795, "lng": 136.8782, "desc": "紅磚建築拍照、AEON Mall" },
+              { "time": "12:30", "name": "名鐵名古屋站", "lat": 35.1695, "lng": 136.8842, "desc": "搭乘 μSKY 前往機場" },
+              { "time": "15:35", "name": "中部國際機場 (CX531)", "lat": 34.8584, "lng": 136.8053, "desc": "搭機返台" }
+            ]
+          }
+        };
+
+        // --- 2. 初始化全域變數 ---
+        let map;
+        let markersLayer = L.layerGroup();
+        let currentMarkers = [];
+
+        // --- 3. 初始化地圖 ---
+        function initMap() {
+            // 預設中心 (會隨資料調整，這裡先設名古屋)
+            map = L.map('map', {
+                zoomControl: false // 手機版將 Zoom Control 移開或調整，這裡為了簡潔先隱藏，或可設為 true
+            }).setView([35.1815, 136.9066], 13);
+
+            // 加入 Zoom Control 到右下角 (避免擋住上方內容)
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            // 加入 OpenStreetMap 圖資
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            markersLayer.addTo(map);
+        }
+
+        // --- 4. 渲染頁面功能 ---
+        function renderDay(dayKey) {
+            const data = itineraryData[dayKey];
+            const listContainer = document.getElementById('itinerary-list');
+            const titleElement = document.getElementById('current-day-title');
+            
+            // 1. 更新標題
+            titleElement.textContent = `${data.date} ${data.title}`;
+            
+            // 2. 清空列表與地圖標記
+            listContainer.innerHTML = '';
+            markersLayer.clearLayers();
+            currentMarkers = [];
+
+            // 3. 建立 Bounds 用於自動縮放
+            const latlngs = [];
+
+            // 4. 遍歷地點，生成列表與標記
+            data.locations.forEach((loc, index) => {
+                const markerNum = index + 1;
+
+                // --- 建立地圖標記 (Custom DivIcon) ---
+                const customIcon = L.divIcon({
+                    className: 'custom-marker-icon',
+                    html: `<div>${markerNum}</div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30], // Tip 在底部中央
+                    popupAnchor: [0, -32]
+                });
+
+                const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
+                    .bindPopup(`<b>${loc.time} ${loc.name}</b><br>${loc.desc}`);
+                
+                markersLayer.addLayer(marker);
+                currentMarkers.push(marker);
+                latlngs.push([loc.lat, loc.lng]);
+
+                // --- 建立列表卡片 ---
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-number">${markerNum}</div>
+                        <div class="card-time">${loc.time}</div>
+                    </div>
+                    <div class="card-name">${loc.name}</div>
+                    <div class="card-desc">${loc.desc}</div>
+                `;
+
+                // --- 互動事件 ---
+                card.addEventListener('click', () => {
+                    // 移除其他卡片的 active 樣式
+                    document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active-card'));
+                    card.classList.add('active-card');
+
+                    // 地圖飛到該點
+                    map.flyTo([loc.lat, loc.lng], 16, {
+                        animate: true,
+                        duration: 1.5
+                    });
+
+                    // 打開 Popup
+                    marker.openPopup();
+                });
+
+                listContainer.appendChild(card);
+            });
+
+            // 5. 自動調整地圖視野以包含所有點
+            if (latlngs.length > 0) {
+                map.fitBounds(latlngs, { padding: [50, 50] });
+            }
+        }
+
+        // --- 5. 初始化 Tabs ---
+        function initTabs() {
+            const tabsContainer = document.getElementById('tabs');
+            const dayKeys = Object.keys(itineraryData);
+
+            dayKeys.forEach((key, index) => {
+                const tab = document.createElement('div');
+                tab.className = 'tab';
+                tab.textContent = `Day ${index + 1}`;
+                
+                if (index === 0) tab.classList.add('active'); // 預設選取第一天
+
+                tab.addEventListener('click', () => {
+                    // 切換 Tab 樣式
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // 渲染該日行程
+                    renderDay(key);
+                    
+                    // 手機版切換時，滾動到列表頂部
+                    document.getElementById('itinerary-panel').scrollTop = 0;
+                });
+
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        // --- 6. 啟動程式 ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            initTabs();
+            renderDay('day1'); // 預設顯示 Day 1
+        });
+
+    </script>
+</body>
+</html>

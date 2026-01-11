@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 - Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #004e92;
+            --ice-blue: #e0f7fa;
+            --snow-white: #ffffff;
+            --accent-orange: #ff7e5f;
+            --text-dark: #2c3e50;
+            --card-radius: 16px;
+            --card-shadow: 0 4px 15px rgba(0, 78, 146, 0.1);
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .page-container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 800px;
+            min-height: 100vh;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: var(--card-radius);
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--ice-blue);
+            padding-bottom: 20px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .main-title {
+            font-size: 2em;
+            margin: 10px 0;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* Itinerary Timeline Styles */
+        .itinerary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .it-time {
+            width: 70px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+            padding-top: 2px;
+            font-size: 1.1em;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .it-content {
+            flex-grow: 1;
+            padding-left: 25px;
+            border-left: 3px solid var(--ice-blue);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .it-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px var(--primary-blue);
+        }
+
+        .it-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .it-desc {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Location Link Button */
+        .loc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-top: 5px;
+            transition: background-color 0.2s;
+            border: 1px solid #ddd;
+        }
+        
+        .loc-btn:hover {
+            background-color: #e0e0e0;
+            color: var(--primary-blue);
+        }
+
+        /* Backup Plan Box */
+        .backup-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        
+        .backup-title {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .it-time {
+                width: 55px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> &nbsp; Back</a>
+
+        <div class="header-section">
+            <div class="day-badge">Day 4</div>
+            <h1 class="main-title">移動日・盛岡文化巡禮</h1>
+            <p style="color: #666;"><i class="fa-solid fa-route"></i> 田澤湖 ➔ 盛岡市區 ➔ 購物</p>
+        </div>
+
+        <div class="itinerary-list">
+
+            <!-- Morning Transport -->
+            <div class="itinerary-item">
+                <div class="it-time">Morning</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-suitcase-rolling"></i> 移動：前往盛岡</div>
+                    <div class="it-desc">
+                        從 <strong>Hotel Grand Tencoo</strong> 退房，搭車前往盛岡。
+                        <br>抵達後先至 <strong>Richmond Hotel 盛岡站前</strong> 寄放行李。
+                        <br>
+                        <a href="https://maps.app.goo.gl/qNu2xT1mxo8voi787" target="_blank" class="loc-btn"><i class="fa-solid fa-map-pin"></i> Richmond Hotel</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="itinerary-item">
+                <div class="it-time">Lunch</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-utensils"></i> 肴町商店街 (Nakanohashi)</div>
+                    <div class="it-desc">
+                        搭乘公車前往肴町商店街 (Hotto line Sakana-cho)，在此享用午餐並稍微逛逛。
+                        <br>
+                        <a href="https://maps.app.goo.gl/ufaKG7jrM4qcLGv5A" target="_blank" class="loc-btn"><i class="fa-solid fa-map-pin"></i> 肴町商店街</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Afternoon: Shrine -->
+            <div class="itinerary-item">
+                <div class="it-time">Afternoon</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-torii-gate"></i> 盛岡八幡宮</div>
+                    <div class="it-desc">
+                        搭乘公車前往盛岡八幡宮參拜，感受當地信仰中心。
+                        <br>
+                        <a href="https://maps.app.goo.gl/r2QGG1qhAYSDL9sX6" target="_blank" class="loc-btn"><i class="fa-solid fa-map-pin"></i> 盛岡八幡宮</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping: Workman -->
+            <div class="itinerary-item">
+                <div class="it-time">Shopping</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-shirt"></i> WORKMAN</div>
+                    <div class="it-desc">
+                        步行前往 WORKMAN 採購高CP值機能服飾。
+                        <br>
+                        <a href="https://maps.app.goo.gl/2xUiR57LuYkCyFRJ6" target="_blank" class="loc-btn"><i class="fa-solid fa-map-pin"></i> WORKMAN 盛岡南店</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping: AEON & Electronics -->
+            <div class="itinerary-item">
+                <div class="it-time">Shopping</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-bag-shopping"></i> 電器與大型商場</div>
+                    <div class="it-desc">
+                        搭乘計程車前往盛岡南區購物圈。
+                        <ul style="padding-left: 20px; margin-top: 5px;">
+                            <li>建議先搭計程車到 <strong>YAMADA Denki (家電)</strong>。</li>
+                            <li>再步行前往 <strong>Aeon Mall Morioka Minami (永旺夢樂城)</strong>。</li>
+                        </ul>
+                        
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                            <a href="https://maps.app.goo.gl/JM1NJjyHK2DcSrsx6" target="_blank" class="loc-btn"><i class="fa-solid fa-plug"></i> YAMADA Denki</a>
+                            <a href="https://maps.app.goo.gl/Q4KKmMcZnE2pmjEt8" target="_blank" class="loc-btn"><i class="fa-solid fa-cart-shopping"></i> Aeon Mall</a>
+                        </div>
+
+                        <!-- Backup Plan -->
+                        <div class="backup-box">
+                            <div class="backup-title"><i class="fa-solid fa-clipboard-list"></i> 周邊備選店家</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <a href="https://maps.app.goo.gl/aayJx9G5e1bouNDN9" target="_blank" class="loc-btn"><i class="fa-solid fa-person-running"></i> Super Sports Xebio</a>
+                                <a href="https://maps.app.goo.gl/t7LU2QsaQdMK1NWd9" target="_blank" class="loc-btn"><i class="fa-solid fa-baseball-bat-ball"></i> SPORTS DEPO</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+             <!-- Dinner -->
+             <div class="itinerary-item">
+                <div class="it-time">Dinner</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-utensils"></i> 晚餐</div>
+                    <div class="it-desc">
+                        可於 Aeon Mall 內享用，或回到盛岡站前用餐。
+                        <br>隨後返回 Richmond Hotel 休息。
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

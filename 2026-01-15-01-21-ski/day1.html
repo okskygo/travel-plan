@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 1 - Detail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #004e92;
+            --ice-blue: #e0f7fa;
+            --snow-white: #ffffff;
+            --accent-orange: #ff7e5f;
+            --text-dark: #2c3e50;
+            --card-radius: 16px;
+            --card-shadow: 0 4px 15px rgba(0, 78, 146, 0.1);
+            --warning-bg: #fff3cd;
+            --warning-border: #ffeeba;
+            --warning-text: #856404;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        .page-container {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 800px;
+            min-height: 100vh;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            padding: 30px;
+            box-sizing: border-box;
+            border-radius: var(--card-radius);
+            position: relative;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--ice-blue);
+            padding-bottom: 20px;
+        }
+
+        .day-badge {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .main-title {
+            font-size: 2em;
+            margin: 10px 0;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        /* Itinerary Timeline Styles */
+        .itinerary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Gap handled by margin-bottom of items */
+        }
+
+        .itinerary-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .itinerary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .it-time {
+            width: 70px;
+            font-weight: bold;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+            padding-top: 2px;
+            font-size: 1.1em;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .it-content {
+            flex-grow: 1;
+            padding-left: 25px;
+            border-left: 3px solid var(--ice-blue);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .it-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px var(--primary-blue);
+        }
+
+        .it-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .it-desc {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Flight/Transport Card */
+        .transport-card {
+            background-color: var(--ice-blue);
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px dashed var(--primary-blue);
+            margin-top: 10px;
+        }
+        
+        .transport-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .transport-highlight {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Attention Box */
+        .attention-box {
+            background-color: var(--warning-bg);
+            border-left: 5px solid #ffcc00;
+            color: var(--warning-text);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .attention-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            color: #d32f2f; /* Red for attention */
+        }
+
+        a {
+            color: var(--primary-blue);
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: var(--accent-orange);
+        }
+
+        @media (max-width: 600px) {
+            .page-container {
+                padding: 20px;
+            }
+            .main-title {
+                font-size: 1.5em;
+            }
+            .it-time {
+                width: 55px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> &nbsp; Back</a>
+
+        <div class="header-section">
+            <div class="day-badge">Day 1</div>
+            <h1 class="main-title">啟程・前往雪國秋田</h1>
+            <p style="color: #666;"><i class="fa-solid fa-plane-departure"></i> 台北 (TPE) ➔ 秋田 (AXT)</p>
+        </div>
+
+        <div class="itinerary-list">
+
+            <!-- 05:40 Pickup -->
+            <div class="itinerary-item">
+                <div class="it-time">05:40</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-car-side"></i> 機場接送出發</div>
+                    <div class="it-desc">
+                        送機路線：
+                        <ul style="margin-top: 5px; padding-left: 20px;">
+                            <li><strong>05:40</strong> 內湖出發</li>
+                            <li><strong>06:00</strong> 信義區接人</li>
+                            <li><strong>06:20</strong> 三重接人</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 07:00 Arrival TPE -->
+            <div class="itinerary-item">
+                <div class="it-time">07:00</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-building"></i> 抵達桃園機場</div>
+                    <div class="it-desc">
+                        預計抵達桃園國際機場 <strong>第一航廈 (Terminal 1)</strong>。<br>
+                        辦理報到、掛行李、安檢。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 08:30 Flight -->
+            <div class="itinerary-item">
+                <div class="it-time">08:30</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-plane-up"></i> 搭乘飛機</div>
+                    <div class="it-desc">
+                        前往秋田機場 (AXT)。
+                        <div class="transport-card">
+                            <div class="transport-row">
+                                <span><i class="fa-solid fa-plane-departure"></i> TPE 台北桃園</span>
+                                <span class="transport-highlight">08:30 AM (T1)</span>
+                            </div>
+                            <div class="transport-row">
+                                <span><i class="fa-solid fa-plane-arrival"></i> AXT 秋田機場</span>
+                                <span class="transport-highlight">12:40 PM</span>
+                            </div>
+                            <div class="transport-row" style="color: #666; font-size: 0.85em; margin-top: 5px;">
+                                日期：2026-01-15 (週四)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12:40 Arrival AXT -->
+            <div class="itinerary-item">
+                <div class="it-time">12:40</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-passport"></i> 抵達秋田機場</div>
+                    <div class="it-desc">
+                        入境審查、領取行李。
+                        
+                        <!-- ATTENTION BOX -->
+                        <div class="attention-box">
+                            <div class="attention-title"><i class="fa-solid fa-circle-exclamation"></i> 重要提醒：採買物資！</div>
+                            <p>到達時<strong>必須</strong>先在機場買好 <strong>Day 4 晚餐的泡麵</strong> 以及 <strong>啤酒/飲料</strong>。</p>
+                            <p style="margin-top: 5px; font-size: 0.9em; color: #555;">(離開機場後，接下來行程周邊都沒有便利商店！)</p>
+                            <div style="margin-top: 10px;">
+                                <a href="https://www.akita-airport.com/tw/pages/tw-shop" target="_blank"><i class="fa-solid fa-store"></i> 秋田機場商店資訊</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15:25 Transport -->
+            <div class="itinerary-item">
+                <div class="it-time">15:25</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-van-shuttle"></i> 搭乘接駁車/計程車</div>
+                    <div class="it-desc">
+                        搭乘已預訂的 Airportliner 前往田澤湖飯店。
+                        <div class="transport-card">
+                            <div class="transport-row">
+                                <span>出發：秋田機場</span>
+                                <span class="transport-highlight">15:25</span>
+                            </div>
+                            <div class="transport-row">
+                                <span>抵達：Hotel Grand Tencoo</span>
+                                <span class="transport-highlight">17:15</span>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <a href="https://akita.airportliner.net/jp/taxi_stand/" target="_blank"><i class="fa-solid fa-map-location-dot"></i> 計程車搭乘地點詳細指引</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 17:15 Hotel -->
+            <div class="itinerary-item">
+                <div class="it-time">17:15</div>
+                <div class="it-content">
+                    <div class="it-title"><i class="fa-solid fa-hotel"></i> 飯店 Check-in</div>
+                    <div class="it-desc">
+                        <strong>Hotel Grand Tencoo (ホテルグランド天空)</strong><br>
+                        辦理入住，享受晚餐與溫泉，準備明天的滑雪行程！
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

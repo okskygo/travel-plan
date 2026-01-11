@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本秋田岩手滑雪之旅・地圖手帳</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 變數定義 --- */
+        :root {
+            --primary-blue: #004e92;
+            --ice-blue: #e0f7fa;
+            --accent-orange: #ff7e5f;
+            --bg-light: #f0f8ff;
+            --card-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-light: #546e7a;
+        }
+
+        /* --- 全局設定 --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* 防止整個頁面捲動 */
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, #004e92 0%, #2b7ebb 100%);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 1; }
+
+        /* --- Tabs --- */
+        .tabs-container {
+            background-color: var(--bg-light);
+            padding: 10px 10px 0 10px;
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #dbe9f4;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-light);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .tab.active {
+            background-color: var(--primary-blue);
+            color: white;
+            transform: translateY(0px);
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #cce0ef;
+        }
+
+        /* --- 主要內容區塊 --- */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 左側行程列表 */
+        .itinerary-panel {
+            width: 30%;
+            min-width: 300px;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-right: 1px solid #ddd;
+        }
+
+        .day-title {
+            font-size: 1.2rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--ice-blue);
+            font-weight: 700;
+        }
+
+        /* 行程卡片 */
+        .location-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .location-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 4px 12px rgba(0, 78, 146, 0.1);
+        }
+
+        .location-card.active-card {
+            border-left: 5px solid var(--accent-orange);
+            background-color: #fbfdff;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-number {
+            background-color: var(--primary-blue);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .card-time {
+            font-weight: 700;
+            color: var(--accent-orange);
+            font-size: 0.9rem;
+            margin-right: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.4;
+            color: var(--text-main);
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-left: 34px; /* 對齊標題 */
+            line-height: 1.5;
+            margin-top: 5px;
+        }
+
+        /* 右側地圖 */
+        #map {
+            width: 70%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* --- Leaflet 客製化樣式 --- */
+        /* 自訂編號標記 */
+        .custom-marker-icon {
+            background-color: var(--primary-blue);
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 26px; /* 30px (icon size) - 4px (border) */
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .active-marker {
+            background-color: var(--accent-orange) !important;
+            transform: scale(1.1);
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .leaflet-popup-content {
+            margin: 10px 15px;
+            line-height: 1.5;
+        }
+        
+        .leaflet-popup-content b {
+            color: var(--primary-blue);
+            font-size: 1em;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* --- 響應式設計 (手機版) --- */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            /* 手機版：地圖在上方，佔 45vh */
+            #map {
+                width: 100%;
+                height: 45vh;
+                order: 1; /* Flex 順序 */
+                border-bottom: 4px solid var(--primary-blue);
+            }
+
+            /* 手機版：列表在下方，佔剩餘空間 */
+            .itinerary-panel {
+                width: 100%;
+                height: auto; /* flex grow 會處理 */
+                flex: 1;
+                order: 2;
+                border-right: none;
+                background-color: var(--bg-light);
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            header h1 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> 回總覽</a>
+        <h1><i class="fa-solid fa-map-location-dot"></i> 互動地圖手帳</h1>
+        <div style="width: 60px;"></div> <!-- Spacer -->
+    </header>
+
+    <nav class="tabs-container" id="tabs">
+        <!-- Tabs created by JS -->
+    </nav>
+
+    <div class="main-container">
+        <div class="itinerary-panel" id="itinerary-panel">
+            <h2 class="day-title" id="current-day-title"></h2>
+            <div id="itinerary-list">
+                <!-- List items created by JS -->
+            </div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        // --- 1. 行程資料 (JSON) ---
+        // 座標為估算值
+        const itineraryData = {
+          "day1": {
+            "date": "1/15 (四)",
+            "title": "啟程・前往秋田",
+            "locations": [
+              { "time": "08:30", "name": "桃園機場 T1", "lat": 25.0817, "lng": 121.2386, "desc": "IT256 飛往秋田" },
+              { "time": "12:40", "name": "秋田機場 (AXT)", "lat": 39.6156, "lng": 140.2186, "desc": "抵達、採買 Day 4 晚餐泡麵" },
+              { "time": "17:15", "name": "Hotel Grand Tencoo", "lat": 39.7567, "lng": 140.7325, "desc": "入住田澤湖畔溫泉飯店<br><span style='font-size:0.85em; color:#666;'>Komagatake-2-16 Tazawako Obonai, Semboku</span>", "address": "Komagatake-2-16 Tazawako Obonai, Semboku, Akita 014-1201" }
+            ]
+          },
+          "day2": {
+            "date": "1/16 (五)",
+            "title": "田澤湖滑雪場",
+            "locations": [
+              { "time": "09:00", "name": "Hotel Grand Tencoo", "lat": 39.7567, "lng": 140.7325, "desc": "早餐後搭接駁車出發", "address": "Komagatake-2-16 Tazawako Obonai, Semboku, Akita 014-1201" },
+              { "time": "09:30", "name": "田澤湖滑雪場", "lat": 39.7636, "lng": 140.7631, "desc": "全日滑雪、午餐" },
+              { "time": "17:00", "name": "Hotel Grand Tencoo", "lat": 39.7567, "lng": 140.7325, "desc": "返回飯店晚餐、溫泉", "address": "Komagatake-2-16 Tazawako Obonai, Semboku, Akita 014-1201" }
+            ]
+          },
+          "day3": {
+            "date": "1/17 (六)",
+            "title": "田澤湖粉雪挑戰",
+            "locations": [
+              { "time": "09:00", "name": "Hotel Grand Tencoo", "lat": 39.7567, "lng": 140.7325, "desc": "早餐後搭接駁車出發", "address": "Komagatake-2-16 Tazawako Obonai, Semboku, Akita 014-1201" },
+              { "time": "09:30", "name": "田澤湖滑雪場", "lat": 39.7636, "lng": 140.7631, "desc": "第二天滑雪挑戰" },
+              { "time": "17:00", "name": "Hotel Grand Tencoo", "lat": 39.7567, "lng": 140.7325, "desc": "晚餐：泡麵派對 (不含餐)", "address": "Komagatake-2-16 Tazawako Obonai, Semboku, Akita 014-1201" }
+            ]
+          },
+          "day4": {
+            "date": "1/18 (日)",
+            "title": "移動・盛岡市區",
+            "locations": [
+              { "time": "Morning", "name": "Richmond Hotel 盛岡站前", "lat": 39.7014, "lng": 141.1364, "desc": "寄放行李" },
+              { "time": "Lunch", "name": "肴町商店街 (Nakanohashi)", "lat": 39.6994, "lng": 141.1578, "desc": "午餐、逛街" },
+              { "time": "Afternoon", "name": "盛岡八幡宮", "lat": 39.6947, "lng": 141.1633, "desc": "參拜" },
+              { "time": "Shopping", "name": "WORKMAN 盛岡南店", "lat": 39.6736, "lng": 141.1353, "desc": "機能服飾採買" },
+              { "time": "Shopping", "name": "YAMADA Denki", "lat": 39.6700, "lng": 141.1300, "desc": "電器採買" },
+              { "time": "Shopping", "name": "Aeon Mall 盛岡南", "lat": 39.6683, "lng": 141.1325, "desc": "大型商場購物" }
+            ]
+          },
+          "day5": {
+            "date": "1/19 (一)",
+            "title": "岩手高原 Snow Park",
+            "locations": [
+              { "time": "08:30", "name": "盛岡站西口 (27號站牌)", "lat": 39.7018, "lng": 141.1336, "desc": "搭乘免費接駁車" },
+              { "time": "09:15", "name": "岩手高原 Snow Park", "lat": 39.8167, "lng": 140.9833, "desc": "全日滑雪" },
+              { "time": "17:15", "name": "盛岡站", "lat": 39.7014, "lng": 141.1364, "desc": "返回市區晚餐" }
+            ]
+          },
+          "day6": {
+            "date": "1/20 (二)",
+            "title": "安比高原滑雪場",
+            "locations": [
+              { "time": "07:40", "name": "盛岡站西口 (26號站牌)", "lat": 39.7018, "lng": 141.1336, "desc": "搭乘巴士前往安比" },
+              { "time": "09:00", "name": "安比高原滑雪場", "lat": 39.9950, "lng": 140.9681, "desc": "東北最大級滑雪場" },
+              { "time": "17:05", "name": "盛岡站", "lat": 39.7014, "lng": 141.1364, "desc": "慶功宴晚餐" }
+            ]
+          },
+          "day7": {
+            "date": "1/21 (三)",
+            "title": "最後採買 & 返家",
+            "locations": [
+              { "time": "10:00", "name": "Aeon Mall Morioka (前潟)", "lat": 39.7136, "lng": 141.0978, "desc": "最後購物、午餐" },
+              { "time": "15:04", "name": "盛岡站東口", "lat": 39.7014, "lng": 141.1364, "desc": "搭乘機場巴士" },
+              { "time": "15:50", "name": "花卷機場 (HNA)", "lat": 39.4286, "lng": 141.1367, "desc": "IT259 返台" }
+            ]
+          }
+        };
+
+        // --- 2. 初始化變數 ---
+        let map;
+        let markersLayer = L.layerGroup();
+        let currentMarkers = [];
+
+        // --- 3. 初始化地圖 ---
+        function initMap() {
+            // 預設中心 (盛岡)
+            map = L.map('map', {
+                zoomControl: false 
+            }).setView([39.7014, 141.1364], 10);
+
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            markersLayer.addTo(map);
+        }
+
+        // --- 4. 渲染頁面功能 ---
+        function renderDay(dayKey) {
+            const data = itineraryData[dayKey];
+            const listContainer = document.getElementById('itinerary-list');
+            const titleElement = document.getElementById('current-day-title');
+            
+            titleElement.textContent = `${data.date} ${data.title}`;
+            
+            listContainer.innerHTML = '';
+            markersLayer.clearLayers();
+            currentMarkers = [];
+
+            const latlngs = [];
+
+            data.locations.forEach((loc, index) => {
+                const markerNum = index + 1;
+
+                const customIcon = L.divIcon({
+                    className: 'custom-marker-icon',
+                    html: `<div>${markerNum}</div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -32]
+                });
+
+                const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
+                    .bindPopup(`
+                        <b>${loc.time} ${loc.name}</b>
+                        <br>${loc.desc}
+                        <br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.name + " " + (loc.address || ""))}" target="_blank" style="display:inline-block; margin-top:8px; color:var(--primary-blue); font-weight:bold; text-decoration:underline;">
+                            <i class="fa-solid fa-map-location-dot"></i> 開啟 Google Maps
+                        </a>
+                    `);
+                
+                markersLayer.addLayer(marker);
+                currentMarkers.push(marker);
+                latlngs.push([loc.lat, loc.lng]);
+
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-number">${markerNum}</div>
+                        <div class="card-time">${loc.time}</div>
+                    </div>
+                    <div class="card-name">${loc.name}</div>
+                    <div class="card-desc">${loc.desc}</div>
+                `;
+
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active-card'));
+                    card.classList.add('active-card');
+
+                    map.flyTo([loc.lat, loc.lng], 14, {
+                        animate: true,
+                        duration: 1
+                    });
+
+                    marker.openPopup();
+                });
+
+                listContainer.appendChild(card);
+            });
+
+            if (latlngs.length > 0) {
+                map.fitBounds(latlngs, { padding: [50, 50] });
+            }
+        }
+
+        // --- 5. 初始化 Tabs ---
+        function initTabs() {
+            const tabsContainer = document.getElementById('tabs');
+            const dayKeys = Object.keys(itineraryData);
+
+            dayKeys.forEach((key, index) => {
+                const tab = document.createElement('div');
+                tab.className = 'tab';
+                tab.textContent = `Day ${index + 1}`;
+                
+                if (index === 0) tab.classList.add('active');
+
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderDay(key);
+                    document.getElementById('itinerary-panel').scrollTop = 0;
+                });
+
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        // --- 6. 啟動程式 ---
+        window.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            initTabs();
+            renderDay('day1');
+        });
+
+    </script>
+</body>
+</html>

@@ -294,21 +294,39 @@
             .day-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .day-card { padding: 20px; }
             .day-image-container { height: 180px; } /* Smaller height on mobile */
+            
             /* Info Section layout on mobile */
             .info-section { 
                 grid-template-columns: 1fr; /* Stack vertically */
-                gap: 15px; /* Reduce gap */
+                gap: 15px; 
             }
-            .info-card {
-                padding: 15px; /* Reduce padding inside cards */
-            }
+            /* Reset padding inside cards for mobile */
+            .info-card { padding: 20px; } 
+            
+            /* Flight & Hotel Rows - Stack content vertically */
             .flight-row, .hotel-row {
-                margin-bottom: 10px; /* Reduce spacing between rows */
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+                margin-bottom: 20px;
+                border-bottom: 1px dashed rgba(0,0,0,0.1); /* Separator */
+                padding-bottom: 10px;
             }
-            /* Adjust FAB position to avoid being blocked */
-            .fab-container {
-                bottom: 80px; /* Move up */
-                right: 15px;
+            .flight-row:last-child, .hotel-row:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            
+            .flight-icon { 
+                margin-bottom: 5px; 
+                width: auto;
+                text-align: left;
+            }
+            
+            .hotel-date {
+                margin-bottom: 5px;
+                display: inline-block;
             }
         }
 

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>岡山廣島八日遊・互動地圖</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-red: #E24536;
+            --deep-blue: #2B4B77;
+            --accent-orange: #F5A623;
+            --bg-cream: #FDF8F3;
+            --card-bg: #ffffff;
+            --text-main: #5d5d5d;
+            --text-light: #888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .tabs-container {
+            background-color: var(--bg-cream);
+            padding: 10px 10px 0 10px;
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            flex-shrink: 0;
+            border-bottom: 2px solid var(--deep-blue);
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #f5e6dc;
+            border-radius: 15px 15px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background-color: var(--deep-blue);
+            color: white;
+            transform: translateY(2px);
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #ffd4c4;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .itinerary-panel {
+            width: 30%;
+            overflow-y: auto;
+            padding: 20px;
+            background-image: radial-gradient(#e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+            border-right: 4px dashed var(--primary-red);
+        }
+
+        .day-title {
+            font-size: 1.4rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        .location-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.05);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .location-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--deep-blue);
+        }
+
+        .location-card.active-card {
+            border-color: var(--primary-red);
+            background-color: #fff9f7;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-number {
+            background-color: var(--primary-red);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .card-time {
+            font-weight: 700;
+            color: var(--deep-blue);
+            font-size: 0.95rem;
+            margin-right: 10px;
+        }
+
+        .card-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-left: 34px;
+            line-height: 1.5;
+        }
+
+        #map {
+            width: 70%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .custom-marker-icon {
+            background-color: var(--primary-red);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 5px;
+        }
+        
+        .leaflet-popup-content b {
+            color: var(--primary-red);
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            #map {
+                width: 100%;
+                height: 40vh;
+                order: 1;
+                border-bottom: 4px dashed var(--primary-red);
+            }
+
+            .itinerary-panel {
+                width: 100%;
+                height: auto;
+                flex: 1;
+                order: 2;
+                border-right: none;
+                background-image: none;
+                background-color: var(--bg-cream);
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>⛩️ 岡山廣島八日遊</h1>
+        <span>Okayama & Hiroshima Travel Map</span>
+    </header>
+
+    <nav class="tabs-container" id="tabs"></nav>
+
+    <div class="main-container">
+        <div class="itinerary-panel" id="itinerary-panel">
+            <h2 class="day-title" id="current-day-title"></h2>
+            <div id="itinerary-list"></div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        const itineraryData = {
+          "day1": {
+            "date": "2/15 (日)",
+            "title": "抵達岡山",
+            "locations": [
+              { "time": "11:10", "name": "桃園國際機場 T1", "lat": 25.0817, "lng": 121.2386, "desc": "IT214 出發前往岡山" },
+              { "time": "14:35", "name": "岡山桃太郎機場 (OKJ)", "lat": 34.7569, "lng": 133.8553, "desc": "抵達日本" },
+              { "time": "15:30", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "搭乘機場巴士抵達" },
+              { "time": "16:00", "name": "Hotel Granvia Okayama", "lat": 34.6649, "lng": 133.9189, "desc": "飯店 Check-in" },
+              { "time": "18:00", "name": "岡山站周邊", "lat": 34.6660, "lng": 133.9175, "desc": "逛街、晚餐" }
+            ]
+          },
+          "day2": {
+            "date": "2/16 (一)",
+            "title": "倉敷美觀地區",
+            "locations": [
+              { "time": "09:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "搭乘JR山陽本線" },
+              { "time": "09:20", "name": "倉敷站", "lat": 34.6036, "lng": 133.7714, "desc": "抵達倉敷" },
+              { "time": "10:00", "name": "倉敷美觀地區", "lat": 34.5966, "lng": 133.7722, "desc": "白壁倉庫街散策" },
+              { "time": "10:30", "name": "倉敷川遊船", "lat": 34.5961, "lng": 133.7725, "desc": "搭乘小舟遊覽" },
+              { "time": "11:30", "name": "大原美術館", "lat": 34.5970, "lng": 133.7715, "desc": "日本最早的西洋美術館" },
+              { "time": "14:00", "name": "倉敷牛仔褲街", "lat": 34.5958, "lng": 133.7708, "desc": "兒島牛仔褲專賣店" },
+              { "time": "17:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "返回岡山" }
+            ]
+          },
+          "day3": {
+            "date": "2/17 (二)",
+            "title": "廣島・宮島 [Pass Day 1]",
+            "locations": [
+              { "time": "09:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "搭新幹線前往廣島" },
+              { "time": "10:00", "name": "廣島站", "lat": 34.3974, "lng": 132.4753, "desc": "抵達廣島" },
+              { "time": "10:30", "name": "原爆圓頂館", "lat": 34.3955, "lng": 132.4536, "desc": "世界遺產" },
+              { "time": "11:00", "name": "廣島和平紀念公園", "lat": 34.3915, "lng": 132.4536, "desc": "和平紀念資料館" },
+              { "time": "13:00", "name": "宮島口站", "lat": 34.3436, "lng": 132.3328, "desc": "轉搭渡輪" },
+              { "time": "14:00", "name": "嚴島神社", "lat": 34.2959, "lng": 132.3198, "desc": "海上大鳥居" },
+              { "time": "18:00", "name": "Hotel Granvia Hiroshima", "lat": 34.3975, "lng": 132.4751, "desc": "飯店 Check-in" }
+            ]
+          },
+          "day4": {
+            "date": "2/18 (三)",
+            "title": "秋芳洞・界 長門 [Pass Day 2]",
+            "locations": [
+              { "time": "09:11", "name": "廣島站", "lat": 34.3974, "lng": 132.4753, "desc": "搭新幹線前往新山口" },
+              { "time": "09:42", "name": "新山口站", "lat": 34.1711, "lng": 131.5033, "desc": "抵達，轉搭巴士" },
+              { "time": "10:40", "name": "秋芳洞", "lat": 34.2306, "lng": 131.3056, "desc": "日本最大鐘乳石洞" },
+              { "time": "14:38", "name": "秋芳洞巴士中心", "lat": 34.2289, "lng": 131.3089, "desc": "搭巴士前往美祢站" },
+              { "time": "15:06", "name": "美祢站", "lat": 34.1667, "lng": 131.2000, "desc": "轉搭JR代行巴士" },
+              { "time": "15:53", "name": "長門湯本站", "lat": 34.3419, "lng": 131.1881, "desc": "抵達溫泉街" },
+              { "time": "16:10", "name": "星野集團 界 長門", "lat": 34.3425, "lng": 131.1875, "desc": "溫泉旅館 Check-in" }
+            ]
+          },
+          "day5": {
+            "date": "2/19 (四)",
+            "title": "錦帶橋・岩國城 [Pass Day 3]",
+            "locations": [
+              { "time": "11:40", "name": "界 長門", "lat": 34.3425, "lng": 131.1875, "desc": "搭乘 Super Hagi-go 出發" },
+              { "time": "12:45", "name": "新山口站", "lat": 34.1711, "lng": 131.5033, "desc": "轉搭新幹線" },
+              { "time": "13:30", "name": "新岩國站", "lat": 34.1594, "lng": 132.1372, "desc": "抵達" },
+              { "time": "13:50", "name": "錦帶橋", "lat": 34.1683, "lng": 132.1742, "desc": "木造五連拱橋" },
+              { "time": "15:00", "name": "岩國城", "lat": 34.1750, "lng": 132.1703, "desc": "搭纜車上山" },
+              { "time": "17:00", "name": "Hotel Granvia Hiroshima", "lat": 34.3975, "lng": 132.4751, "desc": "返回廣島" }
+            ]
+          },
+          "day6": {
+            "date": "2/20 (五)",
+            "title": "尾道・千光寺 [Pass Day 4]",
+            "locations": [
+              { "time": "09:00", "name": "廣島站", "lat": 34.3974, "lng": 132.4753, "desc": "搭車前往尾道" },
+              { "time": "10:30", "name": "尾道站", "lat": 34.4091, "lng": 133.2050, "desc": "抵達尾道" },
+              { "time": "11:00", "name": "千光寺山纜車", "lat": 34.4089, "lng": 133.2019, "desc": "搭纜車上山" },
+              { "time": "11:30", "name": "千光寺公園", "lat": 34.4078, "lng": 133.1986, "desc": "俯瞰瀨戶內海" },
+              { "time": "13:00", "name": "貓之細道", "lat": 34.4075, "lng": 133.2003, "desc": "尋找福石貓" },
+              { "time": "14:00", "name": "尾道商店街", "lat": 34.4095, "lng": 133.2039, "desc": "尾道拉麵、散策" },
+              { "time": "17:00", "name": "Hotel Granvia Hiroshima", "lat": 34.3975, "lng": 132.4751, "desc": "返回廣島" }
+            ]
+          },
+          "day7": {
+            "date": "2/21 (六)",
+            "title": "廣島城・後樂園 [Pass Day 5]",
+            "locations": [
+              { "time": "09:00", "name": "廣島城", "lat": 34.4014, "lng": 132.4594, "desc": "復原天守閣" },
+              { "time": "11:00", "name": "廣島市區", "lat": 34.3853, "lng": 132.4553, "desc": "逛街購物" },
+              { "time": "14:00", "name": "廣島站", "lat": 34.3974, "lng": 132.4753, "desc": "搭新幹線前往岡山" },
+              { "time": "15:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "抵達岡山" },
+              { "time": "15:30", "name": "岡山後樂園", "lat": 34.6694, "lng": 133.9353, "desc": "日本三名園之一" },
+              { "time": "17:00", "name": "岡山城", "lat": 34.6656, "lng": 133.9361, "desc": "烏城" },
+              { "time": "18:00", "name": "Hotel Granvia Okayama", "lat": 34.6649, "lng": 133.9189, "desc": "飯店 Check-in" }
+            ]
+          },
+          "day8": {
+            "date": "2/22 (日)",
+            "title": "返程",
+            "locations": [
+              { "time": "09:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "出發前往鷲羽山" },
+              { "time": "10:00", "name": "鷲羽山遊客中心", "lat": 34.4425, "lng": 133.8183, "desc": "瀨戶大橋絕景、蓋章" },
+              { "time": "12:00", "name": "岡山站", "lat": 34.6653, "lng": 133.9180, "desc": "返回岡山" },
+              { "time": "13:30", "name": "岡山桃太郎機場", "lat": 34.7569, "lng": 133.8553, "desc": "辦理登機手續" },
+              { "time": "15:25", "name": "岡山機場 (IT215)", "lat": 34.7569, "lng": 133.8553, "desc": "起飛返台" },
+              { "time": "17:30", "name": "桃園國際機場 T1", "lat": 25.0817, "lng": 121.2386, "desc": "抵達台灣" }
+            ]
+          }
+        };
+
+        let map;
+        let markersLayer = L.layerGroup();
+        let currentMarkers = [];
+
+        function initMap() {
+            map = L.map('map', {
+                zoomControl: false
+            }).setView([34.5, 133.0], 8);
+
+            L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+
+            markersLayer.addTo(map);
+        }
+
+        function renderDay(dayKey) {
+            const data = itineraryData[dayKey];
+            const listContainer = document.getElementById('itinerary-list');
+            const titleElement = document.getElementById('current-day-title');
+            
+            titleElement.textContent = `${data.date} ${data.title}`;
+            
+            listContainer.innerHTML = '';
+            markersLayer.clearLayers();
+            currentMarkers = [];
+
+            const latlngs = [];
+
+            data.locations.forEach((loc, index) => {
+                const markerNum = index + 1;
+
+                const customIcon = L.divIcon({
+                    className: 'custom-marker-icon',
+                    html: `<div>${markerNum}</div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -32]
+                });
+
+                const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
+                    .bindPopup(`<b>${loc.time} ${loc.name}</b><br>${loc.desc}`);
+                
+                markersLayer.addLayer(marker);
+                currentMarkers.push(marker);
+                latlngs.push([loc.lat, loc.lng]);
+
+                const card = document.createElement('div');
+                card.className = 'location-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-number">${markerNum}</div>
+                        <div class="card-time">${loc.time}</div>
+                    </div>
+                    <div class="card-name">${loc.name}</div>
+                    <div class="card-desc">${loc.desc}</div>
+                `;
+
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active-card'));
+                    card.classList.add('active-card');
+
+                    map.flyTo([loc.lat, loc.lng], 15, {
+                        animate: true,
+                        duration: 1.5
+                    });
+
+                    marker.openPopup();
+                });
+
+                listContainer.appendChild(card);
+            });
+
+            if (latlngs.length > 0) {
+                map.fitBounds(latlngs, { padding: [50, 50] });
+            }
+        }
+
+        function initTabs() {
+            const tabsContainer = document.getElementById('tabs');
+            const dayKeys = Object.keys(itineraryData);
+
+            dayKeys.forEach((key, index) => {
+                const tab = document.createElement('div');
+                tab.className = 'tab';
+                tab.textContent = `Day ${index + 1}`;
+                
+                if (index === 0) tab.classList.add('active');
+
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    renderDay(key);
+                    
+                    document.getElementById('itinerary-panel').scrollTop = 0;
+                });
+
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            initTabs();
+            renderDay('day1');
+        });
+
+    </script>
+</body>
+</html>

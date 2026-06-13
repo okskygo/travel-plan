@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BALI · 峇里島 6天5夜 | 2026.10.06–10.11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --jungle:#0C3528;
+  --jungle-2:#10402F;
+  --jungle-3:#16513C;
+  --coral:#E2724E;
+  --coral-deep:#C9512E;
+  --gold:#CBA45A;
+  --gold-soft:#E2C98A;
+  --sand:#F6EEE1;
+  --sand-2:#EFE2CD;
+  --ink:#231A12;
+  --muted:#6F6354;
+  --cream:#F8F1E5;
+  --shadow:0 24px 60px -20px rgba(12,53,40,.45);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--sand);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* grain overlay */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.display{font-family:'Fraunces',serif;}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px clamp(20px,5vw,60px);
+  transition:background .4s ease, padding .4s ease, box-shadow .4s;
+}
+nav.scrolled{background:rgba(12,53,40,.92);backdrop-filter:blur(14px);padding:12px clamp(20px,5vw,60px);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+nav .brand{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem;color:var(--sand);letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+nav .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px rgba(226,114,78,.25)}
+nav .links{display:flex;gap:28px;align-items:center}
+nav .links a{color:rgba(248,241,229,.82);text-decoration:none;font-size:.86rem;font-weight:500;letter-spacing:.06em;position:relative;transition:color .25s}
+nav .links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--coral);transition:width .3s}
+nav .links a:hover{color:#fff}
+nav .links a:hover::after{width:100%}
+nav .links a.cta{background:var(--coral);color:#fff;padding:8px 18px;border-radius:30px;letter-spacing:.04em}
+nav .links a.cta::after{display:none}
+nav .links a.cta:hover{background:var(--coral-deep)}
+.nav-toggle{display:none;background:none;border:none;color:var(--sand);font-size:1.4rem;cursor:pointer}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:0 clamp(22px,6vw,90px);
+  background:
+    radial-gradient(120% 90% at 78% 8%, rgba(226,114,78,.55) 0%, rgba(226,114,78,0) 45%),
+    radial-gradient(90% 80% at 12% 95%, rgba(203,164,90,.35) 0%, rgba(203,164,90,0) 50%),
+    linear-gradient(160deg,#0A2D22 0%,#0C3528 45%,#103D2D 100%);
+  overflow:hidden;
+}
+/* sun */
+.hero .sun{
+  position:absolute;top:11%;right:11%;width:min(34vw,360px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #FBD9A6 0%, #F0A85E 38%, #E2724E 70%, rgba(226,114,78,0) 72%);
+  filter:blur(2px);opacity:.92;animation:floatSun 9s ease-in-out infinite;
+}
+@keyframes floatSun{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+/* palm silhouettes */
+.hero .leaf{position:absolute;opacity:.5;pointer-events:none}
+.hero .leaf.l1{top:-40px;left:-60px;width:380px;color:#082016;transform:rotate(8deg)}
+.hero .leaf.l2{bottom:-80px;right:-40px;width:460px;color:#0A2B1F;transform:rotate(-12deg) scaleX(-1)}
+.hero .leaf.l3{bottom:-30px;left:6%;width:240px;color:#0A2B1F;opacity:.4;transform:rotate(20deg)}
+.hero-inner{position:relative;z-index:3;max-width:1100px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;color:var(--gold-soft);
+  font-size:.82rem;letter-spacing:.42em;text-transform:uppercase;font-weight:600;margin-bottom:26px;
+  opacity:0;animation:rise .9s .15s forwards;
+}
+.eyebrow .line{width:48px;height:1px;background:var(--gold-soft);opacity:.6}
+h1.title{
+  font-family:'Fraunces',serif;color:var(--sand);font-weight:300;line-height:.95;
+  font-size:clamp(4.6rem,17vw,15rem);letter-spacing:-.02em;
+}
+h1.title .b{display:block;overflow:hidden;padding-bottom:.12em}
+h1.title .b span{display:block;transform:translateY(105%);animation:reveal 1.1s cubic-bezier(.16,1,.3,1) forwards}
+h1.title .b1 span{animation-delay:.25s}
+h1.title .b2 span{animation-delay:.4s;font-style:italic;font-weight:500;color:var(--coral)}
+.hero-sub{
+  margin-top:30px;max-width:540px;color:rgba(248,241,229,.8);font-size:clamp(1rem,1.4vw,1.18rem);
+  line-height:1.7;font-weight:300;opacity:0;animation:rise 1s .7s forwards;
+}
+.hero-meta{
+  margin-top:42px;display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:rise 1s .9s forwards;
+}
+.chip{
+  display:inline-flex;align-items:center;gap:9px;padding:11px 20px;border-radius:40px;
+  background:rgba(248,241,229,.07);border:1px solid rgba(248,241,229,.18);color:var(--sand);
+  font-size:.9rem;font-weight:500;backdrop-filter:blur(6px);
+}
+.chip i{color:var(--coral)}
+.scroll-cue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;color:rgba(248,241,229,.6);font-size:.72rem;letter-spacing:.3em;text-align:center;animation:rise 1s 1.2s forwards;opacity:0}
+.scroll-cue .bar{width:1px;height:38px;background:linear-gradient(rgba(248,241,229,.6),transparent);margin:10px auto 0;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+@keyframes reveal{to{transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== SECTIONS ===== */
+section{position:relative}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(70px,11vw,140px) clamp(22px,5vw,40px)}
+.sec-head{margin-bottom:54px;max-width:680px}
+.sec-tag{display:inline-flex;align-items:center;gap:10px;color:var(--coral-deep);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;font-weight:700;margin-bottom:18px}
+.sec-tag .num{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:1rem}
+.sec-title{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.05;color:var(--jungle);letter-spacing:-.01em}
+.sec-title em{font-style:italic;color:var(--coral)}
+.sec-desc{margin-top:18px;color:var(--muted);font-size:1.02rem;line-height:1.8;font-weight:300}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== QUICK FACTS ===== */
+.facts{background:var(--jungle);color:var(--sand);position:relative;overflow:hidden}
+.facts .leaf{position:absolute;bottom:-60px;right:-40px;width:300px;color:#0A2B1F;opacity:.5}
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;position:relative;z-index:2}
+.fact{text-align:center}
+.fact .big{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.4rem,5vw,3.6rem);color:var(--gold-soft);line-height:1}
+.fact .lbl{margin-top:10px;font-size:.84rem;letter-spacing:.12em;color:rgba(248,241,229,.7)}
+.fact .sub{margin-top:4px;font-size:.78rem;color:rgba(248,241,229,.45)}
+
+/* ===== INFO CARDS (flights + stay) ===== */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{
+  background:#fff;border-radius:var(--r);padding:34px;box-shadow:var(--shadow);
+  border:1px solid rgba(203,164,90,.18);position:relative;overflow:hidden;
+}
+.card .corner{position:absolute;top:0;right:0;width:90px;height:90px;background:radial-gradient(circle at 100% 0,rgba(226,114,78,.16),transparent 70%)}
+.card h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.4rem;color:var(--jungle);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.card h3 i{width:42px;height:42px;border-radius:12px;background:var(--coral);color:#fff;display:grid;place-items:center;font-size:1rem}
+.flight{display:flex;align-items:center;gap:18px;padding:16px 0;border-bottom:1px dashed rgba(35,26,18,.13)}
+.flight:last-child{border-bottom:none}
+.flight .dir{width:38px;height:38px;border-radius:50%;background:var(--sand-2);color:var(--coral-deep);display:grid;place-items:center;flex-shrink:0}
+.flight .route{flex:1}
+.flight .no{font-weight:700;color:var(--jungle);font-size:.92rem;letter-spacing:.02em}
+.flight .path{font-family:'Fraunces',serif;font-size:1.25rem;color:var(--ink);margin:3px 0;font-weight:500}
+.flight .when{font-size:.85rem;color:var(--muted)}
+.flight .dur{font-size:.74rem;color:var(--coral-deep);background:#FBEAE0;padding:3px 10px;border-radius:20px;font-weight:600}
+/* stay timeline mini */
+.stay-row{display:flex;gap:16px;padding:14px 0;border-bottom:1px dashed rgba(35,26,18,.13);align-items:flex-start}
+.stay-row:last-child{border-bottom:none}
+.stay-row .ni{font-family:'Fraunces',serif;font-weight:600;color:#fff;background:var(--jungle-3);min-width:54px;text-align:center;padding:6px 4px;border-radius:10px;font-size:.82rem;line-height:1.3}
+.stay-row.ubud .ni{background:var(--coral)}
+.stay-row .info b{display:block;color:var(--jungle);font-size:1rem}
+.stay-row .info span{font-size:.85rem;color:var(--muted)}
+
+.tip-banner{
+  margin-top:28px;background:linear-gradient(135deg,#FBEEE2,#F6E6CF);border:1px dashed var(--gold);
+  border-radius:16px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start;
+}
+.tip-banner .ic{font-size:1.4rem;color:var(--coral-deep);margin-top:2px}
+.tip-banner b{color:var(--jungle)}
+.tip-banner p{font-size:.92rem;color:var(--muted);line-height:1.7;margin-top:4px}
+
+/* ===== ITINERARY ===== */
+.itin{background:linear-gradient(180deg,var(--sand) 0%,#F1E6D3 100%)}
+.day{
+  display:grid;grid-template-columns:200px 1fr;gap:40px;padding:46px 0;
+  border-top:1px solid rgba(35,26,18,.12);
+}
+.day:last-child{border-bottom:1px solid rgba(35,26,18,.12)}
+.day .meta{position:sticky;top:100px;align-self:start}
+.day .dnum{font-family:'Fraunces',serif;font-weight:300;font-size:4.4rem;line-height:.8;color:var(--coral);letter-spacing:-.03em}
+.day .dnum small{display:block;font-size:.82rem;letter-spacing:.28em;color:var(--gold);font-family:'Noto Sans TC';font-weight:700;margin-bottom:10px}
+.day .ddate{margin-top:14px;font-size:.9rem;color:var(--muted);font-weight:500}
+.day .dloc{margin-top:8px;font-family:'Fraunces',serif;font-size:1.5rem;color:var(--jungle);font-weight:500;line-height:1.2}
+.day .badge{display:inline-block;margin-top:14px;font-size:.72rem;letter-spacing:.1em;padding:5px 12px;border-radius:20px;background:var(--jungle);color:var(--gold-soft);font-weight:600}
+.acts{list-style:none}
+.acts li{display:flex;gap:18px;padding:15px 0;border-bottom:1px dashed rgba(35,26,18,.1)}
+.acts li:last-child{border-bottom:none}
+.acts li .ic{width:40px;height:40px;border-radius:12px;background:#fff;color:var(--coral-deep);display:grid;place-items:center;flex-shrink:0;box-shadow:0 6px 16px -8px rgba(201,81,46,.5);font-size:1rem}
+.acts li .txt b{color:var(--jungle);font-size:1.02rem}
+.acts li .txt p{color:var(--muted);font-size:.9rem;line-height:1.65;margin-top:3px}
+.acts li .txt .hl{color:var(--coral-deep);font-weight:600}
+.stay-pill{margin-top:22px;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(203,164,90,.3);padding:9px 18px;border-radius:30px;font-size:.88rem;color:var(--jungle);font-weight:500;box-shadow:0 8px 20px -12px rgba(12,53,40,.4)}
+.stay-pill i{color:var(--coral)}
+
+/* ===== PRACTICAL ===== */
+.prac{background:var(--jungle);color:var(--sand);position:relative;overflow:hidden}
+.prac .leaf{position:absolute;top:-50px;left:-50px;width:320px;color:#0A2B1F;opacity:.45;transform:rotate(160deg)}
+.prac .sec-tag{color:var(--gold-soft)}
+.prac .sec-title{color:var(--sand)}
+.prac-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;position:relative;z-index:2}
+.pcard{background:rgba(248,241,229,.05);border:1px solid rgba(248,241,229,.13);border-radius:var(--r);padding:30px;backdrop-filter:blur(4px)}
+.pcard h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.3rem;color:var(--gold-soft);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.pcard h4 i{color:var(--coral)}
+.pcard ul{list-style:none}
+.pcard ul li{position:relative;padding:9px 0 9px 24px;font-size:.93rem;line-height:1.65;color:rgba(248,241,229,.85);border-bottom:1px solid rgba(248,241,229,.07)}
+.pcard ul li:last-child{border-bottom:none}
+.pcard ul li::before{content:"";position:absolute;left:2px;top:17px;width:7px;height:7px;border-radius:50%;background:var(--coral)}
+.pcard ul li b{color:#fff}
+.checklist li::before{content:"\f00c";font-family:"Font Awesome 6 Free";font-weight:900;background:none;color:var(--gold);left:0;top:9px;font-size:.8rem;width:auto;height:auto}
+.checklist li{padding-left:26px}
+
+/* ===== BUDGET CTA ===== */
+.budget-cta{background:linear-gradient(135deg,#E2724E 0%,#C9512E 100%);color:#fff;position:relative;overflow:hidden}
+.budget-cta .leaf{position:absolute;bottom:-70px;right:-30px;width:380px;color:rgba(0,0,0,.12)}
+.bc-inner{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+.bc-inner h2{font-family:'Fraunces',serif;font-weight:400;font-size:clamp(2rem,4.5vw,3rem);line-height:1.1;max-width:560px}
+.bc-inner h2 em{font-style:italic}
+.bc-inner p{margin-top:14px;font-size:1rem;opacity:.9;max-width:480px;line-height:1.7;font-weight:300}
+.bc-btn{display:inline-flex;align-items:center;gap:14px;background:#fff;color:var(--coral-deep);padding:20px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:1.05rem;box-shadow:0 18px 40px -14px rgba(0,0,0,.5);transition:transform .3s,box-shadow .3s;white-space:nowrap}
+.bc-btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 26px 50px -14px rgba(0,0,0,.55)}
+.bc-btn i{transition:transform .3s}
+.bc-btn:hover i{transform:translateX(6px)}
+.bc-mini{display:flex;gap:30px;margin-top:30px}
+.bc-mini div{text-align:left}
+.bc-mini .v{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:500}
+.bc-mini .k{font-size:.78rem;opacity:.85;letter-spacing:.08em}
+
+/* ===== FOOTER ===== */
+footer{background:#08251B;color:rgba(248,241,229,.55);text-align:center;padding:60px 20px 80px}
+footer .fbig{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1.8rem,4vw,2.6rem);color:var(--sand);margin-bottom:18px}
+footer .fmeta{font-size:.85rem;letter-spacing:.1em}
+footer .fl{color:var(--coral);text-decoration:none}
+
+/* ===== FAB ===== */
+.fab{position:fixed;bottom:26px;right:26px;z-index:1000;display:flex;flex-direction:column;gap:14px}
+.fab a{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.2rem;text-decoration:none;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);transition:transform .25s;position:relative}
+.fab a.b1{background:var(--coral)}
+.fab a.b2{background:var(--jungle-3)}
+.fab a:hover{transform:scale(1.12)}
+.fab a .tip{position:absolute;right:70px;background:rgba(8,37,27,.92);color:#fff;padding:6px 12px;border-radius:8px;font-size:.78rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s}
+.fab a:hover .tip{opacity:1}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .info-grid,.facts-grid,.prac-grid{grid-template-columns:1fr}
+  .facts-grid{gap:36px}
+  .day{grid-template-columns:1fr;gap:22px;padding:38px 0}
+  .day .meta{position:static}
+  .day .dnum{font-size:3.4rem}
+}
+@media(max-width:680px){
+  nav .links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;background:rgba(10,45,34,.98);backdrop-filter:blur(16px);flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);padding:40px}
+  nav .links.open{transform:translateX(0)}
+  nav .links a{font-size:1.05rem}
+  .nav-toggle{display:block;z-index:1001}
+  .bc-inner{flex-direction:column;align-items:flex-start}
+  .bc-mini{flex-wrap:wrap;gap:20px}
+  .fab{bottom:18px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="brand"><span class="dot"></span>BALI ’26</div>
+  <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
+  <div class="links" id="navLinks">
+    <a href="#facts">概覽</a>
+    <a href="#stay">航班住宿</a>
+    <a href="#itin">行程</a>
+    <a href="#prac">須知</a>
+    <a href="budget.html" class="cta">預算 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="sun"></div>
+  <!-- palm leaves -->
+  <svg class="leaf l1" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <svg class="leaf l2" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <svg class="leaf l3" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="line"></span>Indonesia · 印尼峇里島</div>
+    <h1 class="title">
+      <span class="b b1"><span>BALI</span></span>
+      <span class="b b2"><span>島嶼時光</span></span>
+    </h1>
+    <p class="hero-sub">ok峇里島go、六天五夜。從水明漾的海灘俱樂部夕陽，到烏布山林裡的私廚晚餐與漂浮早餐，再到 Nusa Penida 的碧海離島。一趟慢下來、好好放鬆的度假。</p>
+    <div class="hero-meta">
+      <span class="chip"><i class="fa-solid fa-calendar-days"></i> 2026.10.06 – 10.11</span>
+      <span class="chip"><i class="fa-solid fa-user-group"></i> 4 人 · ok峇里島go</span>
+      <span class="chip"><i class="fa-solid fa-plane"></i> 星宇航空直飛</span>
+      <span class="chip"><i class="fa-solid fa-umbrella-beach"></i> 6 天 5 夜</span>
+    </div>
+  </div>
+  <div class="scroll-cue">SCROLL<div class="bar"></div></div>
+</header>
+
+<!-- QUICK FACTS -->
+<section class="facts" id="facts">
+  <svg class="leaf" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <div class="wrap" style="padding-top:clamp(60px,9vw,100px);padding-bottom:clamp(60px,9vw,100px)">
+    <div class="facts-grid">
+      <div class="fact reveal"><div class="big">6</div><div class="lbl">天 / 5 夜</div><div class="sub">Tue → Sun</div></div>
+      <div class="fact reveal"><div class="big">3</div><div class="lbl">個落腳區域</div><div class="sub">水明漾 · 烏布 · 水明漾</div></div>
+      <div class="fact reveal"><div class="big">1</div><div class="lbl">離島一日遊</div><div class="sub">Nusa Penida</div></div>
+      <div class="fact reveal"><div class="big">∞</div><div class="lbl">夕陽與雞蛋花</div><div class="sub">Sunset & Frangipani</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLIGHTS + STAY -->
+<section id="stay">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">01</span> Logistics</div>
+      <h2 class="sec-title">航班與 <em>住宿配置</em></h2>
+      <p class="sec-desc">頭尾住同一間水明漾飯店，去烏布那兩晚把大行李寄放櫃台，只帶過夜小包上山——省事又輕鬆。</p>
+    </div>
+
+    <div class="info-grid">
+      <!-- FLIGHTS -->
+      <div class="card reveal">
+        <div class="corner"></div>
+        <h3><i class="fa-solid fa-plane-up"></i> 星宇航空 Starlux</h3>
+        <div class="flight">
+          <div class="dir"><i class="fa-solid fa-plane-departure"></i></div>
+          <div class="route">
+            <div class="no">去程 · 10/6 (二)</div>
+            <div class="path">TPE → DPS</div>
+            <div class="when">10:10 → 15:40　台北桃園 → 峇里島登巴薩</div>
+          </div>
+          <span class="dur">5h 30m</span>
+        </div>
+        <div class="flight">
+          <div class="dir"><i class="fa-solid fa-plane-arrival"></i></div>
+          <div class="route">
+            <div class="no">回程 · 10/11 (日)</div>
+            <div class="path">DPS → TPE</div>
+            <div class="when">17:20 → 22:50　登巴薩 → 台北桃園</div>
+          </div>
+          <span class="dur">5h 30m</span>
+        </div>
+      </div>
+
+      <!-- STAY -->
+      <div class="card reveal">
+        <div class="corner"></div>
+        <h3><i class="fa-solid fa-bed"></i> 住宿 · 水明漾 ⇄ 烏布</h3>
+        <div class="stay-row">
+          <div class="ni">N1<small style="display:block;font-size:.62rem;font-weight:400">10/6</small></div>
+          <div class="info"><b>水明漾 Seminyak</b><span>五星海灘度假村 / private pool villa</span></div>
+        </div>
+        <div class="stay-row ubud">
+          <div class="ni">N2·N3<small style="display:block;font-size:.62rem;font-weight:400">10/7–8</small></div>
+          <div class="info"><b>烏布 Ubud Villa</b><span>含早餐＋villa 活動，可加購私廚晚餐</span></div>
+        </div>
+        <div class="stay-row">
+          <div class="ni">N4·N5<small style="display:block;font-size:.62rem;font-weight:400">10/9–10</small></div>
+          <div class="info"><b>水明漾 Seminyak</b><span>方便逛街、海灘俱樂部、離島接送</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-banner reveal">
+      <div class="ic"><i class="fa-solid fa-suitcase-rolling"></i></div>
+      <div>
+        <b>省事招</b>
+        <p>頭尾訂同一間水明漾飯店，去烏布那兩晚把大行李寄放櫃台，只帶過夜小包上山，回來行李還在。烏布部分 villa 位於深山、階梯多、入夜後周邊沒商店，訂房前留意交通與位置。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itin" id="itin">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">02</span> Day by Day</div>
+      <h2 class="sec-title">六天 <em>行程</em></h2>
+      <p class="sec-desc">水明漾的海灘與夜生活，烏布的山林與療癒，再到 Nusa Penida 的碧海離島——一天排 3–4 個景點為上限，留足交通彈性。</p>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 01</small>1</div>
+        <div class="ddate">10/6 (二)</div>
+        <div class="dloc">抵達 · 水明漾</div>
+        <span class="badge">Arrival</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>15:40 落地 DPS</b><p>過海關＋提行李約抓到 17:00。建議先用 Klook / KKday <span class="hl">預約機場接送</span>（約 45–60 分到水明漾）。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>傍晚～晚上：水明漾市區</b><p>吃飯、逛街、放鬆，不用一下飛機就拉車。</p></div></li>
+        </ul>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · 水明漾 Seminyak</span>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 02</small>2</div>
+        <div class="ddate">10/7 (三)</div>
+        <div class="dloc">水明漾 → 烏布 🌿</div>
+        <span class="badge">Nature</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>早上退房，包車北上</b><p>有中文司機的 10 小時包車最方便，沿途玩大自然。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-leaf"></i></div><div class="txt"><b>Alas Harum 莊園</b><p>梯田、<span class="hl">叢林鞦韆</span>、貓屎咖啡。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-water"></i></div><div class="txt"><b>Tegenungan 瀑布</b><p>下午進烏布 villa check in。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-fire"></i></div><div class="txt"><b>晚上：villa 私廚／燭光晚餐</b><p>在 villa 裡享受第一晚的山林夜晚。</p></div></li>
+        </ul>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · 烏布 Ubud Villa</span>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 03</small>3</div>
+        <div class="ddate">10/8 (四)</div>
+        <div class="dloc">烏布 Villa 活動日</div>
+        <span class="badge">Wellness</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-spa"></i></div><div class="txt"><b>上午：villa 內含活動</b><p>瑜伽／煮飯課 ＋ <span class="hl">漂浮早餐</span>放空。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-landmark"></i></div><div class="txt"><b>下午：烏布市區散策</b><p>烏布皇宮、烏布市集、聖猴森林。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚上：烏布市區用餐</b><p>逛逛夜晚的烏布街區。</p></div></li>
+        </ul>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · 烏布 Ubud Villa</span>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 04</small>4</div>
+        <div class="ddate">10/9 (五)</div>
+        <div class="dloc">烏布 → 水明漾 🍹</div>
+        <span class="badge">Beach Club</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>早上退房南下回水明漾</b><p>車程約 1.5 小時。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-martini-glass"></i></div><div class="txt"><b>海灘俱樂部看夕陽</b><p><span class="hl">Potato Head · La Plancha · Finns</span> 類，傍晚開始逛街。</p></div></li>
+        </ul>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · 水明漾 Seminyak</span>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 05</small>5</div>
+        <div class="ddate">10/10 (六)</div>
+        <div class="dloc">Nusa Penida 離島 🏝️</div>
+        <span class="badge">Island</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-ship"></i></div><div class="txt"><b>約 6:30 從 Sanur 碼頭出發</b><p>快船約 30–45 分上島。建議直接訂含<span class="hl">船票＋司機＋飯店接送</span>的一日遊套裝。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-mountain-sun"></i></div><div class="txt"><b>恐龍灣 Kelingking Beach</b><p>峇里島最具代表性的懸崖海灣。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-droplet"></i></div><div class="txt"><b>天使浴池 · 破碎海灘</b><p>Angel's Billabong & Broken Beach。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-mask-snorkel"></i></div><div class="txt"><b>水晶灣浮潛</b><p>滿操的一天，傍晚回水明漾輕鬆吃飯。</p></div></li>
+        </ul>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · 水明漾 Seminyak</span>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day reveal">
+      <div class="meta">
+        <div class="dnum"><small>DAY 06</small>6</div>
+        <div class="ddate">10/11 (日)</div>
+        <div class="dloc">採買 → 機場</div>
+        <span class="badge">Departure</span>
+      </div>
+      <div>
+        <ul class="acts">
+          <li><div class="ic"><i class="fa-solid fa-hand-sparkles"></i></div><div class="txt"><b>上午：SPA 或最後採買</b><p>把握最後的悠閒時光。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-car"></i></div><div class="txt"><b>14:30 前出發去機場</b><p><span class="hl">週日南部易塞車</span>，提早出發趕 17:20 班機。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-plane-departure"></i></div><div class="txt"><b>17:20 DPS → TPE</b><p>星宇航空，22:50 抵達桃園。</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICAL -->
+<section class="prac" id="prac">
+  <svg class="leaf" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">03</span> Good to Know</div>
+      <h2 class="sec-title">行前 <em>須知</em></h2>
+    </div>
+    <div class="prac-grid">
+      <div class="pcard reveal">
+        <h4><i class="fa-solid fa-car-side"></i> 包車與交通</h4>
+        <ul>
+          <li>烏布那兩天（Day 2 / 3）用<b>中文司機 10 小時包車</b>最方便；不含門票與餐費，現場自付。</li>
+          <li>一天景點抓 <b>3–4 個</b>為上限，景點間車程 30–90 分還可能塞車。</li>
+          <li>市區塞車時段約 <b>早上 10 點～晚上 8 點</b>（機場、水明漾、庫塔、登巴薩）。</li>
+          <li>短程移動用 <b>Grab／Gojek</b> 或藍鳥計程車即可。</li>
+          <li>Nusa Penida 訂套裝最省事；島上自行包車約 Rp 70–80 萬／天（約 TWD 1,300–1,500）。</li>
+        </ul>
+      </div>
+      <div class="pcard reveal">
+        <h4><i class="fa-solid fa-hand-holding-dollar"></i> 小費（非強制）</h4>
+        <ul>
+          <li>包車司機：Rp 5–10 萬／天（約 TWD 100–200）。</li>
+          <li>搬行李：Rp 1–2 萬／件。</li>
+          <li>餐廳：帳單多已含 10% 服務費，可不另給。</li>
+        </ul>
+        <h4 style="margin-top:24px"><i class="fa-solid fa-triangle-exclamation"></i> 提醒</h4>
+        <ul>
+          <li>烏魯瓦圖／聖猴森林<b>猴子多</b>，會搶眼鏡、手機、帽子，貴重物收好。</li>
+          <li>參觀神廟需穿<b>沙龍</b>（現場多可免費借）。</li>
+          <li>10 月旺季尾、偶有午後陣雨，行程多留交通彈性。</li>
+        </ul>
+      </div>
+      <div class="pcard reveal" style="grid-column:1/-1">
+        <h4><i class="fa-solid fa-list-check"></i> 出發前訂票清單</h4>
+        <ul class="checklist" style="columns:2;column-gap:40px">
+          <li>機場接送（去程 Day 1）</li>
+          <li>烏布 villa（含活動方案）＋水明漾住宿</li>
+          <li>包車（Day 2、Day 3，選中文司機）</li>
+          <li>Nusa Penida 一日遊套裝（Day 5）</li>
+          <li>烏魯瓦圖 Kecak 火舞門票（彈性）</li>
+          <li>WhatsApp（聯絡司機用）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET CTA -->
+<section class="budget-cta">
+  <svg class="leaf" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <div class="wrap" style="padding-top:clamp(60px,8vw,90px);padding-bottom:clamp(60px,8vw,90px)">
+    <div class="bc-inner reveal">
+      <div>
+        <h2>三種玩法，<em>三種預算</em></h2>
+        <p>從精打細算到衝頂級——全團 4 人、含機票簽證住宿包車活動餐食的完整估算，一頁看懂。</p>
+        <div class="bc-mini">
+          <div><div class="v">≈ 39.5k</div><div class="k">精打細算 / 每人</div></div>
+          <div><div class="v">≈ 50.5k</div><div class="k">舒適升級 / 每人</div></div>
+          <div><div class="v">≈ 82k</div><div class="k">衝頂級 / 每人</div></div>
+        </div>
+      </div>
+      <a href="budget.html" class="bc-btn">看完整預算 <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbig">“Bali is not a place, it's a feeling.”</div>
+  <div class="fmeta">峇里島 6 天 5 夜 · 2026.10.06 – 10.11 · 4 人 · ok峇里島go</div>
+</footer>
+
+<!-- FAB -->
+<div class="fab">
+  <a href="budget.html" class="b1"><i class="fa-solid fa-wallet"></i><span class="tip">預算試算</span></a>
+  <a href="../index.html" class="b2"><i class="fa-solid fa-house"></i><span class="tip">所有行程</span></a>
+</div>
+
+<script>
+// nav scroll state
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+// mobile menu
+const tgl=document.getElementById('navToggle'),lnk=document.getElementById('navLinks');
+tgl.addEventListener('click',()=>lnk.classList.toggle('open'));
+lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classList.remove('open')));
+// reveal on scroll
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});
+</script>
+</body>
+</html>

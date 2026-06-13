@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>預算試算 · BALI 峇里島 6天5夜</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --jungle:#0C3528;--jungle-3:#16513C;
+  --coral:#E2724E;--coral-deep:#C9512E;
+  --gold:#CBA45A;--gold-soft:#E2C98A;
+  --sand:#F6EEE1;--sand-2:#EFE2CD;
+  --ink:#231A12;--muted:#6F6354;
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--sand);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.display{font-family:'Fraunces',serif}
+
+/* top bar */
+.bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(20px,5vw,50px);background:rgba(12,53,40,.92);backdrop-filter:blur(14px)}
+.bar a.back{color:rgba(248,241,229,.85);text-decoration:none;font-size:.9rem;font-weight:500;display:flex;align-items:center;gap:9px;transition:color .25s}
+.bar a.back:hover{color:#fff}
+.bar a.back i{transition:transform .25s}
+.bar a.back:hover i{transform:translateX(-4px)}
+.bar .brand{font-family:'Fraunces',serif;font-weight:600;color:var(--sand);letter-spacing:.04em;display:flex;align-items:center;gap:9px}
+.bar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--coral)}
+
+/* hero */
+.bhead{
+  position:relative;padding:clamp(120px,16vw,180px) clamp(22px,6vw,60px) clamp(50px,8vw,80px);
+  background:radial-gradient(110% 90% at 80% 0%,rgba(226,114,78,.5),rgba(226,114,78,0) 45%),linear-gradient(160deg,#0A2D22,#0C3528);
+  color:var(--sand);overflow:hidden;
+}
+.bhead .leaf{position:absolute;bottom:-70px;left:-40px;width:320px;color:#0A2B1F;opacity:.5;transform:rotate(150deg)}
+.bhead-in{position:relative;z-index:2;max-width:1180px;margin:0 auto}
+.bhead .eyebrow{color:var(--gold-soft);font-size:.8rem;letter-spacing:.4em;text-transform:uppercase;font-weight:600;margin-bottom:18px}
+.bhead h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(2.8rem,8vw,5.5rem);line-height:.92;letter-spacing:-.02em}
+.bhead h1 em{font-style:italic;color:var(--coral)}
+.bhead p{margin-top:22px;max-width:560px;color:rgba(248,241,229,.78);font-weight:300;line-height:1.7;font-size:1.05rem}
+.assump{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+.assump span{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;background:rgba(248,241,229,.08);border:1px solid rgba(248,241,229,.16);padding:8px 16px;border-radius:30px}
+.assump i{color:var(--coral)}
+
+/* segmented toggle (mobile tier switch) */
+.seg{display:none;max-width:1180px;margin:24px auto -10px;padding:0 clamp(22px,5vw,40px);gap:8px}
+.seg button{flex:1;padding:12px;border:none;border-radius:14px;background:#fff;color:var(--muted);font-family:'Noto Sans TC';font-weight:700;font-size:.9rem;cursor:pointer;box-shadow:0 6px 16px -10px rgba(12,53,40,.4);transition:all .25s}
+.seg button.active{background:var(--coral);color:#fff}
+
+/* table */
+.tablewrap{max-width:1180px;margin:0 auto;padding:clamp(40px,7vw,70px) clamp(22px,5vw,40px) 40px}
+.ptable{width:100%;border-collapse:separate;border-spacing:14px}
+.ptable th,.ptable td{text-align:left;vertical-align:top}
+/* tier header cards */
+.ptable thead th{padding:0}
+.tier{
+  background:#fff;border-radius:var(--r);padding:26px 24px;box-shadow:0 18px 44px -22px rgba(12,53,40,.4);
+  border:1px solid rgba(203,164,90,.2);position:relative;overflow:hidden;transition:transform .3s;
+}
+.tier .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:1.1rem;color:#fff;margin-bottom:16px}
+.tier.t1 .ic{background:var(--jungle-3)}
+.tier.t2 .ic{background:var(--coral)}
+.tier.t3 .ic{background:linear-gradient(135deg,var(--gold),#B8893A)}
+.tier h2{font-family:'Fraunces',serif;font-weight:500;font-size:1.6rem;color:var(--jungle);line-height:1.1}
+.tier .en{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.tier .pp{margin-top:18px;font-family:'Fraunces',serif;font-size:2.6rem;font-weight:400;color:var(--coral-deep);line-height:1}
+.tier .pp small{font-size:.9rem;color:var(--muted);font-weight:400;font-family:'Noto Sans TC'}
+.tier .total{margin-top:6px;font-size:.86rem;color:var(--muted)}
+.tier.t2{transform:scale(1.04)}
+.tier.t2::before{content:"推薦";position:absolute;top:16px;right:-30px;background:var(--coral);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;padding:5px 36px;transform:rotate(38deg)}
+.ribbon-label{display:none}
+
+/* row label */
+.rowlabel{font-weight:500;color:var(--jungle);font-size:.96rem;display:flex;align-items:center;gap:11px;padding:18px 4px}
+.rowlabel i{width:34px;height:34px;border-radius:10px;background:var(--sand-2);color:var(--coral-deep);display:grid;place-items:center;font-size:.85rem;flex-shrink:0}
+.cell{background:#fff;border-radius:14px;padding:18px 20px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:500;color:var(--ink);box-shadow:0 8px 22px -16px rgba(12,53,40,.4);border:1px solid rgba(203,164,90,.12)}
+.cell.t2c{background:linear-gradient(180deg,#FFF8F0,#FDEFE2);border-color:rgba(226,114,78,.3)}
+.cell .u{font-size:.7rem;color:var(--muted);font-family:'Noto Sans TC';font-weight:400;margin-left:3px}
+/* total row */
+.ptable tr.totalrow .rowlabel{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--coral-deep)}
+.ptable tr.totalrow .cell{background:var(--jungle);color:var(--gold-soft);font-size:1.6rem;border:none}
+.ptable tr.totalrow .cell.t2c{background:linear-gradient(135deg,var(--coral),var(--coral-deep));color:#fff}
+.ptable tr.pprow .cell{background:#08251B;color:#fff;font-size:1.5rem}
+.ptable tr.pprow .cell.t2c{background:linear-gradient(135deg,var(--gold),#B8893A);color:#fff}
+.ptable tr.pprow .rowlabel{color:var(--jungle)}
+
+/* note */
+.note{max-width:1180px;margin:10px auto 0;padding:0 clamp(22px,5vw,40px) 80px}
+.notecard{background:#fff;border-radius:var(--r);padding:30px 34px;box-shadow:0 18px 44px -24px rgba(12,53,40,.4);border:1px solid rgba(203,164,90,.18)}
+.notecard h3{font-family:'Fraunces',serif;font-weight:500;color:var(--jungle);font-size:1.3rem;display:flex;align-items:center;gap:11px;margin-bottom:16px}
+.notecard h3 i{color:var(--coral)}
+.notecard ul{list-style:none}
+.notecard li{position:relative;padding:8px 0 8px 22px;color:var(--muted);font-size:.92rem;line-height:1.7;border-bottom:1px dashed rgba(35,26,18,.1)}
+.notecard li:last-child{border-bottom:none}
+.notecard li::before{content:"";position:absolute;left:2px;top:16px;width:6px;height:6px;border-radius:50%;background:var(--coral)}
+.notecard li b{color:var(--jungle)}
+
+footer{background:#08251B;color:rgba(248,241,229,.5);text-align:center;padding:50px 20px 70px}
+footer .fl{color:var(--coral);text-decoration:none}
+footer .big{font-family:'Fraunces',serif;font-style:italic;color:var(--sand);font-size:1.5rem;margin-bottom:14px}
+
+@media(max-width:820px){
+  .seg{display:flex}
+  .ptable{border-spacing:0;display:block}
+  .ptable thead,.ptable tbody,.ptable tr{display:block}
+  /* hide all tier columns except active */
+  .ptable thead tr{display:grid;grid-template-columns:1fr;gap:0}
+  .ptable thead th.lblcol{display:none}
+  .ptable thead th[data-tier]{display:none;margin-bottom:8px}
+  .ptable thead th[data-tier].show{display:block}
+  .ptable tbody tr{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;padding:6px 0;align-items:center}
+  .ptable tbody td[data-tier]{display:none}
+  .ptable tbody td[data-tier].show{display:block}
+  .rowlabel{padding:10px 0;font-size:.9rem}
+  .cell{font-size:1.15rem;padding:14px 16px}
+  .tier.t2{transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a href="index.html" class="back"><i class="fa-solid fa-arrow-left"></i> 回行程</a>
+  <div class="brand"><span class="dot"></span>BALI ’26 · 預算</div>
+</div>
+
+<header class="bhead">
+  <svg class="leaf" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
+  <div class="bhead-in">
+    <div class="eyebrow">Budget Estimate · 全團 4 人 / 全程</div>
+    <h1>三種玩法，<br><em>三種預算</em></h1>
+    <p>同一套 6 天 5 夜行程，依住宿、餐食、活動與 SPA 的升級程度，估出三個級距。金額單位為 TWD。</p>
+    <div class="assump">
+      <span><i class="fa-solid fa-user-group"></i> 4 人 · ok峇里島go</span>
+      <span><i class="fa-solid fa-moon"></i> 5 晚</span>
+      <span><i class="fa-solid fa-plane"></i> 星宇來回 80,000（4 人）</span>
+    </div>
+  </div>
+</header>
+
+<!-- mobile tier switch -->
+<div class="seg" id="seg">
+  <button data-t="1">精打細算</button>
+  <button data-t="2" class="active">舒適升級</button>
+  <button data-t="3">衝頂級</button>
+</div>
+
+<div class="tablewrap">
+  <table class="ptable">
+    <thead>
+      <tr>
+        <th class="lblcol"></th>
+        <th data-tier="1">
+          <div class="tier t1">
+            <div class="ic"><i class="fa-solid fa-piggy-bank"></i></div>
+            <h2>精打細算</h2><div class="en">Smart Saver</div>
+            <div class="pp">39,500<small> /人</small></div>
+            <div class="total">全團約 157,900</div>
+          </div>
+        </th>
+        <th data-tier="2" class="show">
+          <div class="tier t2">
+            <div class="ic"><i class="fa-solid fa-umbrella-beach"></i></div>
+            <h2>舒適升級</h2><div class="en">Comfort Plus</div>
+            <div class="pp">50,500<small> /人</small></div>
+            <div class="total">全團約 201,800</div>
+          </div>
+        </th>
+        <th data-tier="3">
+          <div class="tier t3">
+            <div class="ic"><i class="fa-solid fa-crown"></i></div>
+            <h2>衝頂級</h2><div class="en">Ultimate</div>
+            <div class="pp">82,000<small> /人</small></div>
+            <div class="total">全團約 328,000</div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-plane-up"></i> 機票 (星宇來回, 4人)</div></td>
+        <td data-tier="1"><div class="cell">80,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">80,000</div></td>
+        <td data-tier="3"><div class="cell">80,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-passport"></i> 簽證 (VOA, 4人)</div></td>
+        <td data-tier="1"><div class="cell">4,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">4,000</div></td>
+        <td data-tier="3"><div class="cell">4,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-bed"></i> 住宿 (5晚)</div></td>
+        <td data-tier="1"><div class="cell">40,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">60,000</div></td>
+        <td data-tier="3"><div class="cell">130,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-van-shuttle"></i> 包車＋機場接送＋Grab</div></td>
+        <td data-tier="1"><div class="cell">8,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">11,000</div></td>
+        <td data-tier="3"><div class="cell">16,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-ticket"></i> 活動＋門票 (含 Nusa Penida)</div></td>
+        <td data-tier="1"><div class="cell">7,500</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">11,000</div></td>
+        <td data-tier="3"><div class="cell">21,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-utensils"></i> 餐食 (含 private chef 那餐)</div></td>
+        <td data-tier="1"><div class="cell">13,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">26,000</div></td>
+        <td data-tier="3"><div class="cell">55,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-spa"></i> SPA／按摩</div></td>
+        <td data-tier="1"><div class="cell">2,400</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">4,800</div></td>
+        <td data-tier="3"><div class="cell">12,000</div></td>
+      </tr>
+      <tr>
+        <td><div class="rowlabel"><i class="fa-solid fa-coins"></i> 小費＋雜支</div></td>
+        <td data-tier="1"><div class="cell">3,000</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">5,000</div></td>
+        <td data-tier="3"><div class="cell">10,000</div></td>
+      </tr>
+      <tr class="totalrow">
+        <td><div class="rowlabel"><i class="fa-solid fa-receipt" style="background:var(--coral);color:#fff"></i> 全團合計</div></td>
+        <td data-tier="1"><div class="cell">157,900</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">201,800</div></td>
+        <td data-tier="3"><div class="cell">328,000</div></td>
+      </tr>
+      <tr class="pprow">
+        <td><div class="rowlabel"><i class="fa-solid fa-user" style="background:var(--gold);color:#fff"></i> 平均每人</div></td>
+        <td data-tier="1"><div class="cell">39,500</div></td>
+        <td data-tier="2" class="show"><div class="cell t2c">50,500</div></td>
+        <td data-tier="3"><div class="cell">82,000</div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="note">
+  <div class="notecard">
+    <h3><i class="fa-solid fa-circle-info"></i> 級距差在哪</h3>
+    <ul>
+      <li><b>精打細算</b>：水明漾質感 villa＋烏布入門奢華，餐食以在地餐廳與小館為主，SPA 各 1 次。</li>
+      <li><b>舒適升級</b>：烏布升級含活動的招牌 villa、海灘俱樂部消費、加碼私廚晚餐，餐食與 SPA 預算翻倍。</li>
+      <li><b>衝頂級</b>：頂級招牌 villa（Viceroy／Hanging Gardens／Mandapa 類）、米其林級餐飲與每日 SPA。</li>
+      <li>機票與簽證三級距相同；金額為估算，實際依季節、匯率與訂房時間浮動。</li>
+      <li>烏布 villa（含早餐＋活動）：入門奢華約 8,000–14,000／晚；頂級招牌 25,000–50,000＋／晚（全團）。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="big">Plan the trip, not the stress.</div>
+  <div>峇里島 6 天 5 夜 · 2026.10.06 – 10.11 · <a href="index.html" class="fl">回行程頁</a></div>
+</footer>
+
+<script>
+// mobile tier switch
+const seg=document.getElementById('seg');
+seg.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const t=b.dataset.t;
+  seg.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('[data-tier]').forEach(el=>el.classList.toggle('show',el.dataset.tier===t));
+});
+</script>
+</body>
+</html>

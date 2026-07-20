@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUSAN 부산 · 釜山生日快閃 3天2夜 | 2026.07.24–07.26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#171C48;
+  --night-2:#10143A;
+  --paper:#FFF3EE;
+  --paper-2:#FFE9E2;
+  --ink:#2A2650;
+  --pink:#FF5C8A;
+  --pink-deep:#E8336E;
+  --tang:#FFA13D;
+  --candle:#FFD34D;
+  --sea:#3EC1CF;
+  --muted:#8A7F95;
+  --line:rgba(42,38,80,.14);
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans TC',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+.disp{font-family:'Black Han Sans',sans-serif;font-weight:400}
+.mono{font-family:'IBM Plex Mono',monospace}
+.pen{font-family:'Nanum Pen Script',cursive}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(20px,5vw,56px);
+  transition:background .35s,box-shadow .35s,padding .35s;
+}
+nav.scrolled{background:rgba(16,20,58,.94);backdrop-filter:blur(12px);padding:11px clamp(20px,5vw,56px);box-shadow:0 8px 30px rgba(16,20,58,.35)}
+nav .brand{font-family:'Black Han Sans',sans-serif;color:#fff;font-size:1.15rem;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
+nav .brand em{font-style:normal;color:var(--pink)}
+nav .links{display:flex;gap:24px;align-items:center}
+nav .links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.86rem;font-weight:500;letter-spacing:.08em;transition:color .2s}
+nav .links a:hover{color:var(--candle)}
+nav .links a.home{background:var(--pink);color:#fff;padding:7px 16px;border-radius:30px}
+nav .links a.home:hover{background:var(--pink-deep);color:#fff}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100svh;
+  background:
+    radial-gradient(110% 70% at 85% -10%, rgba(255,92,138,.32) 0%, rgba(255,92,138,0) 55%),
+    radial-gradient(80% 60% at 8% 110%, rgba(62,193,207,.22) 0%, rgba(62,193,207,0) 55%),
+    linear-gradient(170deg,#12163E 0%,#171C48 55%,#1E2358 100%);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:110px clamp(18px,5vw,60px) 80px;
+  overflow:hidden;
+}
+/* stars */
+.hero .stars{position:absolute;inset:0;pointer-events:none}
+.hero .stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.5;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.7}}
+/* confetti */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+.confetti i{
+  position:absolute;top:-4vh;width:9px;height:14px;border-radius:2px;opacity:.9;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-5vh) rotate(0deg) rotateY(0)}
+  100%{transform:translateY(108vh) rotate(660deg) rotateY(540deg)}
+}
+.hero-inner{position:relative;z-index:3;text-align:center;max-width:980px;width:100%}
+.hero .eyebrow{
+  display:inline-flex;align-items:center;gap:12px;color:var(--candle);
+  font-size:.8rem;letter-spacing:.42em;text-transform:uppercase;font-weight:600;margin-bottom:22px;
+  opacity:0;animation:rise .8s .1s forwards;
+}
+.hero .eyebrow .ln{width:44px;height:1px;background:var(--candle);opacity:.55}
+.hero .hangul{
+  font-family:'Black Han Sans',sans-serif;color:#fff;line-height:.92;letter-spacing:.01em;
+  font-size:clamp(4.6rem,17vw,12.5rem);
+}
+.hero .hangul .row{display:block;overflow:hidden;padding-bottom:.06em}
+.hero .hangul .row span{display:block;transform:translateY(108%);animation:reveal 1s cubic-bezier(.16,1,.3,1) forwards}
+.hero .hangul .r1 span{animation-delay:.2s}
+.hero .hangul .r2 span{animation-delay:.36s;color:var(--pink)}
+.hero .pen-line{
+  font-family:'Nanum Pen Script',cursive;color:var(--candle);
+  font-size:clamp(1.9rem,4.6vw,3rem);margin-top:14px;transform:rotate(-2deg);
+  opacity:0;animation:rise .9s .7s forwards;
+}
+.hero .sub{
+  margin:26px auto 0;max-width:560px;color:rgba(255,255,255,.78);
+  font-size:clamp(.98rem,1.4vw,1.12rem);line-height:1.85;font-weight:300;
+  opacity:0;animation:rise .9s .85s forwards;
+}
+@keyframes reveal{to{transform:translateY(0)}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* boarding pass */
+.pass{
+  position:relative;z-index:3;margin:46px auto 0;max-width:760px;width:100%;
+  background:#FFFDF8;border-radius:18px;color:var(--ink);text-align:left;
+  box-shadow:0 30px 70px -22px rgba(0,0,0,.55);
+  display:grid;grid-template-columns:1fr 168px;
+  opacity:0;animation:rise 1s 1s forwards;
+}
+.pass .main{padding:24px 28px}
+.pass .head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px dashed var(--line);padding-bottom:12px;margin-bottom:14px}
+.pass .head .lbl{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.28em;color:var(--pink-deep);font-weight:600}
+.pass .head .cls{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted)}
+.leg{display:flex;align-items:center;gap:18px;padding:10px 0}
+.leg + .leg{border-top:1px dashed var(--line)}
+.leg .apt{text-align:center;min-width:86px}
+.leg .apt .code{font-family:'Black Han Sans',sans-serif;font-size:1.9rem;line-height:1;color:var(--night)}
+.leg .apt .t{font-family:'IBM Plex Mono',monospace;font-size:.95rem;font-weight:600;color:var(--pink-deep);margin-top:3px}
+.leg .apt .d{font-size:.72rem;color:var(--muted);margin-top:2px}
+.leg .path{flex:1;position:relative;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px);min-width:60px}
+.leg .path::after{content:"✈";position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);background:#FFFDF8;padding:0 8px;color:var(--pink);font-size:1rem}
+.leg.back .path::after{content:"✈";transform:translate(-50%,-52%) scaleX(-1)}
+.pass .stub{
+  border-left:2px dashed rgba(42,38,80,.22);position:relative;
+  padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:12px;
+  background:linear-gradient(160deg,#FFF0F4,#FFE6EC);border-radius:0 18px 18px 0;
+}
+.pass .stub::before,.pass .stub::after{
+  content:"";position:absolute;left:-13px;width:24px;height:24px;border-radius:50%;background:var(--night);
+}
+.pass .stub::before{top:-12px}
+.pass .stub::after{bottom:-12px}
+.pass .stub .hbd{font-family:'Nanum Pen Script',cursive;font-size:1.7rem;color:var(--pink-deep);transform:rotate(-3deg);text-align:center;line-height:1.1}
+.pass .stub .barcode{width:100%;height:44px;background:repeating-linear-gradient(90deg,var(--night) 0 2px,transparent 2px 5px,var(--night) 5px 8px,transparent 8px 10px)}
+.pass .stub .no{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.2em;color:var(--muted)}
+.scroll-cue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:3;color:rgba(255,255,255,.55);font-size:.7rem;letter-spacing:.32em}
+.scroll-cue .bar{width:1px;height:34px;background:linear-gradient(rgba(255,255,255,.6),transparent);margin:8px auto 0;animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* ===== SECTIONS ===== */
+.wrap{max-width:1020px;margin:0 auto;padding:clamp(64px,10vw,120px) clamp(20px,5vw,40px)}
+.sec-head{margin-bottom:46px;max-width:660px}
+.tag{
+  display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;
+  font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600;color:var(--pink-deep);margin-bottom:16px;
+}
+.tag::before{content:"";width:26px;height:2px;background:var(--pink)}
+.sec-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(2rem,5vw,3rem);line-height:1.12;color:var(--night);letter-spacing:.01em}
+.sec-title em{font-style:normal;color:var(--pink)}
+.sec-desc{margin-top:16px;color:var(--muted);font-size:1rem;line-height:1.85;font-weight:300}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== FACTS ===== */
+.facts{background:var(--night);position:relative;overflow:hidden}
+.facts::before{
+  content:"부산 BUSAN 부산 BUSAN 부산 BUSAN";
+  position:absolute;top:50%;left:0;transform:translateY(-50%);white-space:nowrap;
+  font-family:'Black Han Sans',sans-serif;font-size:9rem;color:rgba(255,255,255,.035);letter-spacing:.05em;
+}
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;position:relative;z-index:2}
+.fact{text-align:center;color:#fff}
+.fact .big{font-family:'Black Han Sans',sans-serif;font-size:clamp(2.3rem,5vw,3.4rem);line-height:1;color:var(--candle)}
+.fact .big small{font-size:.45em;color:rgba(255,255,255,.6);font-family:'IBM Plex Mono',monospace;margin-left:2px}
+.fact .lbl{margin-top:10px;font-size:.86rem;letter-spacing:.1em;color:rgba(255,255,255,.85)}
+.fact .sub{margin-top:4px;font-size:.75rem;color:rgba(255,255,255,.45)}
+
+/* ===== ITINERARY / TICKETS ===== */
+.itin{background:linear-gradient(180deg,var(--paper) 0%,var(--paper-2) 100%)}
+.ticket{
+  position:relative;background:#FFFDF8;border-radius:var(--r);
+  box-shadow:0 22px 55px -24px rgba(42,38,80,.4);
+  margin-bottom:44px;overflow:hidden;
+  border:1px solid rgba(255,92,138,.14);
+}
+.ticket .thead{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:22px 30px;border-bottom:2px dashed var(--line);position:relative;
+}
+.ticket .thead::before,.ticket .thead::after{
+  content:"";position:absolute;bottom:-12px;width:24px;height:24px;border-radius:50%;background:var(--paper);z-index:2;
+  border:1px solid rgba(255,92,138,.14);
+}
+.ticket .thead::before{left:-13px}
+.ticket .thead::after{right:-13px}
+.ticket .dnum{
+  font-family:'Black Han Sans',sans-serif;font-size:2.5rem;line-height:1;color:var(--pink);
+  background:#FFF0F4;border-radius:14px;padding:10px 16px 8px;
+}
+.ticket .dinfo .date{font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.16em;color:var(--muted);font-weight:500}
+.ticket .dinfo h3{font-family:'Black Han Sans',sans-serif;font-size:clamp(1.25rem,2.6vw,1.6rem);color:var(--night);margin-top:4px;letter-spacing:.01em}
+.ticket .dtag{
+  margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.22em;
+  color:var(--pink-deep);border:1.5px solid var(--pink);border-radius:30px;padding:7px 15px;font-weight:600;white-space:nowrap;
+  transform:rotate(2deg);
+}
+.tbody{padding:14px 30px 26px}
+/* timetable rows */
+.tt{list-style:none}
+.tt li{display:flex;gap:22px;position:relative;padding:13px 0}
+.tt li + li{border-top:1px dashed rgba(42,38,80,.09)}
+.tt .tm{
+  font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.92rem;color:var(--pink-deep);
+  min-width:96px;padding-top:2px;white-space:nowrap;
+}
+.tt .tm.range{font-size:.78rem;line-height:1.5}
+.tt .tx{flex:1}
+.tt .tx b{font-size:1.02rem;color:var(--night);font-weight:700}
+.tt .tx p{color:var(--muted);font-size:.9rem;line-height:1.7;margin-top:3px;font-weight:300}
+.tt .tx .hl{color:var(--pink-deep);font-weight:600}
+.mapl{
+  display:inline-flex;align-items:center;gap:4px;color:var(--sea);text-decoration:none;font-weight:600;font-size:.85rem;
+  border-bottom:1.5px dotted var(--sea);padding-bottom:1px;transition:color .2s,border-color .2s;
+}
+.mapl:hover{color:var(--pink-deep);border-color:var(--pink-deep)}
+.stay{
+  margin:20px 30px 26px;display:inline-flex;align-items:center;gap:10px;
+  background:#FFF0F4;border:1px dashed var(--pink);border-radius:30px;
+  padding:9px 18px;font-size:.87rem;color:var(--pink-deep);font-weight:600;
+}
+.ticket .tbody + .stay{margin-top:0}
+
+/* ===== DAY 2 GIFT ===== */
+.gift-ticket{
+  background:
+    radial-gradient(90% 120% at 90% -20%, rgba(255,211,77,.25) 0%, transparent 55%),
+    linear-gradient(150deg,#241E5C 0%,#171C48 60%,#1C2152 100%);
+  border:1px solid rgba(255,211,77,.25);
+}
+.gift-ticket .thead{border-bottom-color:rgba(255,255,255,.16)}
+.gift-ticket .thead::before,.gift-ticket .thead::after{background:var(--paper-2);border-color:rgba(255,211,77,.25)}
+.gift-ticket .dnum{background:rgba(255,92,138,.16);color:var(--candle)}
+.gift-ticket .dinfo .date{color:rgba(255,255,255,.55)}
+.gift-ticket .dinfo h3{color:#fff}
+.gift-ticket .dtag{color:var(--candle);border-color:var(--candle)}
+.gift-ticket .tt li + li{border-top-color:rgba(255,255,255,.09)}
+.gift-ticket .tt .tm{color:var(--candle)}
+.gift-ticket .tt .tx b{color:#fff}
+.gift-ticket .tt .tx p{color:rgba(255,255,255,.68)}
+.gift-ticket .tt .tx .hl{color:var(--candle);font-weight:600}
+.gift-ticket .mapl{color:#7EDCE6;border-color:#7EDCE6}
+.gift-ticket .mapl:hover{color:var(--pink);border-color:var(--pink)}
+
+/* ===== TIPS ===== */
+.tips{background:var(--night);position:relative;overflow:hidden}
+.tips::after{
+  content:"생일 축하해 ✦ 생일 축하해 ✦ 생일 축하해 ✦ 생일 축하해";
+  position:absolute;bottom:26px;left:0;white-space:nowrap;
+  font-family:'Nanum Pen Script',cursive;font-size:2rem;color:rgba(255,255,255,.06);
+}
+.tips .sec-title{color:#fff}
+.tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative;z-index:2}
+.tcard{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  border-radius:var(--r);padding:28px;backdrop-filter:blur(4px);
+}
+.tcard h4{
+  font-family:'Black Han Sans',sans-serif;font-size:1.2rem;color:var(--candle);
+  display:flex;align-items:center;gap:10px;margin-bottom:16px;letter-spacing:.02em;
+}
+.tcard h4 .em{font-size:1.15rem}
+.tcard ul{list-style:none}
+.tcard ul li{
+  position:relative;padding:8px 0 8px 22px;font-size:.9rem;line-height:1.7;
+  color:rgba(255,255,255,.82);border-bottom:1px solid rgba(255,255,255,.06);font-weight:300;
+}
+.tcard ul li:last-child{border-bottom:none}
+.tcard ul li::before{content:"";position:absolute;left:2px;top:16px;width:6px;height:6px;border-radius:50%;background:var(--pink)}
+.tcard ul li b{color:#fff;font-weight:700}
+.tcard ul li a{color:var(--sea);text-decoration:none;border-bottom:1px dotted var(--sea)}
+
+/* ===== CAKE FINALE ===== */
+.finale{background:linear-gradient(180deg,var(--paper-2),var(--paper));text-align:center;position:relative;overflow:hidden}
+.finale .pen-big{font-family:'Nanum Pen Script',cursive;font-size:clamp(2.2rem,6vw,3.6rem);color:var(--pink-deep);transform:rotate(-1.5deg)}
+.finale .fd{color:var(--muted);margin-top:10px;font-size:.95rem}
+.cake{margin:44px auto 0;width:190px;cursor:pointer;position:relative;transition:transform .25s;-webkit-tap-highlight-color:transparent}
+.cake:hover{transform:scale(1.04)}
+.cake:focus-visible{outline:3px solid var(--pink);outline-offset:8px;border-radius:12px}
+.cake .flame{
+  width:14px;height:20px;margin:0 auto;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 75%, #fff 0%, var(--candle) 45%, var(--tang) 100%);
+  box-shadow:0 0 18px 4px rgba(255,211,77,.75);
+  animation:flick .38s ease-in-out infinite alternate;transform-origin:bottom center;
+  transition:opacity .3s,transform .3s;
+}
+@keyframes flick{from{transform:scaleX(.92) rotate(-2deg)}to{transform:scaleX(1.06) rotate(2.5deg)}}
+.cake.out .flame{opacity:0;transform:scale(.2)}
+.cake .smoke{opacity:0;font-size:1rem;height:0;transition:opacity .4s}
+.cake.out .smoke{opacity:.6}
+.cake .candle-stick{width:10px;height:34px;margin:2px auto 0;border-radius:4px;background:repeating-linear-gradient(-45deg,var(--pink) 0 6px,#fff 6px 12px)}
+.cake .layer{margin:0 auto;border-radius:10px}
+.cake .l1{width:110px;height:34px;background:linear-gradient(#FF7AA1,var(--pink));position:relative;z-index:2}
+.cake .l1::after{content:"";position:absolute;inset:0 0 auto 0;height:16px;border-radius:10px 10px 0 0;background:radial-gradient(circle at 10px 100%, #FFFDF8 8px, transparent 8.5px) 0 0/22px 16px repeat-x,#FFFDF8}
+.cake .l2{width:150px;height:40px;background:linear-gradient(#FFC66B,var(--tang));margin-top:-4px;position:relative}
+.cake .l3{width:190px;height:46px;background:linear-gradient(#67D3DE,var(--sea));margin-top:-4px;position:relative}
+.cake .plate{width:210px;height:10px;margin:2px auto 0;border-radius:50px;background:var(--night);opacity:.85}
+.cake .hint{margin-top:20px;font-size:.8rem;letter-spacing:.18em;color:var(--muted);font-family:'IBM Plex Mono',monospace}
+.wish{
+  margin-top:26px;font-family:'Nanum Pen Script',cursive;font-size:2.1rem;color:var(--pink-deep);
+  opacity:0;transform:translateY(12px) rotate(-2deg);transition:opacity .5s,transform .5s;pointer-events:none;
+}
+.wish.show{opacity:1;transform:translateY(0) rotate(-2deg)}
+/* burst confetti (finale) */
+.burst{position:absolute;left:50%;top:40%;pointer-events:none}
+.burst i{position:absolute;width:8px;height:12px;border-radius:2px;opacity:0}
+
+/* ===== FOOTER ===== */
+footer{background:var(--night-2);color:rgba(255,255,255,.5);text-align:center;padding:52px 20px 64px}
+footer .fbig{font-family:'Black Han Sans',sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);color:#fff;margin-bottom:12px;letter-spacing:.02em}
+footer .fbig em{font-style:normal;color:var(--pink)}
+footer .fmeta{font-size:.82rem;letter-spacing:.12em;line-height:1.9}
+footer a{color:var(--sea);text-decoration:none}
+
+/* ===== FAB ===== */
+.fab{position:fixed;bottom:24px;right:22px;z-index:1000}
+.fab a{
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--pink);color:#fff;
+  font-size:1.15rem;text-decoration:none;box-shadow:0 12px 28px -8px rgba(232,51,110,.6);transition:transform .25s;
+}
+.fab a:hover{transform:scale(1.1)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .facts-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  .tips-grid{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  nav .links{
+    position:fixed;inset:0 0 0 auto;width:72%;max-width:300px;background:rgba(16,20,58,.97);backdrop-filter:blur(14px);
+    flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);
+    transition:transform .4s cubic-bezier(.16,1,.3,1);padding:40px;z-index:1000;
+  }
+  nav .links.open{transform:translateX(0)}
+  nav .links a{font-size:1.05rem}
+  .nav-toggle{display:block;z-index:1001;position:relative}
+  .pass{grid-template-columns:1fr}
+  .pass .stub{border-left:none;border-top:2px dashed rgba(42,38,80,.22);border-radius:0 0 18px 18px;flex-direction:row;padding:16px 20px}
+  .pass .stub::before{top:auto;bottom:auto;left:-12px;top:-12px}
+  .pass .stub::after{right:-12px;left:auto;top:-12px;bottom:auto}
+  .pass .stub .barcode{height:34px;flex:1}
+  .leg .apt{min-width:70px}
+  .leg .apt .code{font-size:1.5rem}
+  .ticket .thead{padding:18px 20px;gap:14px}
+  .ticket .dtag{margin-left:0;transform:none}
+  .tbody{padding:10px 20px 20px}
+  .tt li{flex-direction:column;gap:4px;padding:14px 0}
+  .tt .tm{min-width:0}
+  .stay{margin:0 20px 22px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .reveal{opacity:1;transform:none}
+  .hero .hangul .row span{transform:none}
+  .hero .eyebrow,.hero .pen-line,.hero .sub,.pass{opacity:1}
+  .confetti{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="#">🎂 BUSAN <em>부산</em> ’26</a>
+  <button class="nav-toggle" id="navToggle" aria-label="開啟選單">☰</button>
+  <div class="links" id="navLinks">
+    <a href="#facts">概覽</a>
+    <a href="#itin">行程</a>
+    <a href="#tips">須知</a>
+    <a href="../index.html" class="home">所有行程</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="stars" id="stars"></div>
+  <div class="confetti" id="confetti"></div>
+
+  <div class="hero-inner">
+    <div class="eyebrow"><span class="ln"></span>2026.07.24 – 07.26 · 3天2夜 · 紅眼快閃<span class="ln"></span></div>
+    <h1 class="hangul">
+      <span class="row r1"><span>부산에서</span></span>
+      <span class="row r2"><span>생일 파티</span></span>
+    </h1>
+    <div class="pen-line">在釜山，過一個快閃生日 🎂</div>
+    <p class="sub">凌晨兩點的班機、清晨六點四十的落地——用 52 個小時,把鮑魚粥、韓牛燒肉、南浦洞和整座海港城市,全部變成生日禮物。</p>
+  </div>
+
+  <!-- BOARDING PASS -->
+  <div class="pass">
+    <div class="main">
+      <div class="head">
+        <span class="lbl">BOARDING PASS · 生日快閃專用</span>
+        <span class="cls">CLASS: BIRTHDAY 🎉</span>
+      </div>
+      <div class="leg">
+        <div class="apt"><div class="code">TPE</div><div class="t">02:10</div><div class="d">7/24 (五) 桃園</div></div>
+        <div class="path"></div>
+        <div class="apt"><div class="code">PUS</div><div class="t">06:40</div><div class="d">7/24 (五) 金海</div></div>
+      </div>
+      <div class="leg back">
+        <div class="apt"><div class="code">PUS</div><div class="t">10:50</div><div class="d">7/26 (日) 金海</div></div>
+        <div class="path"></div>
+        <div class="apt"><div class="code">TPE</div><div class="t">≈12:30</div><div class="d">7/26 (日) 桃園</div></div>
+      </div>
+    </div>
+    <div class="stub">
+      <div class="hbd">생일<br>축하해!</div>
+      <div class="barcode" role="presentation"></div>
+      <div class="no">NO. 20260724</div>
+    </div>
+  </div>
+
+  <div class="scroll-cue">SCROLL<div class="bar"></div></div>
+</header>
+
+<!-- FACTS -->
+<section class="facts" id="facts">
+  <div class="wrap" style="padding-top:clamp(56px,8vw,90px);padding-bottom:clamp(56px,8vw,90px)">
+    <div class="facts-grid">
+      <div class="fact reveal"><div class="big">52<small>hr</small></div><div class="lbl">釜山滯留時間</div><div class="sub">06:40 落地 → 10:50 起飛</div></div>
+      <div class="fact reveal"><div class="big">2<small>晚</small></div><div class="lbl">Allzib Archive 4H</div><div class="sub">1 號線凡一站旁 · 一路走跳的基地</div></div>
+      <div class="fact reveal"><div class="big">1<small>個</small></div><div class="lbl">生日 🎂</div><div class="sub">整趟都是慶生現場</div></div>
+      <div class="fact reveal"><div class="big">0<small>天</small></div><div class="lbl">可以浪費</div><div class="sub">快閃的精髓:醒著就出發</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section class="itin" id="itin">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">Timetable</div>
+      <h2 class="sec-title">三天 <em>時刻表</em></h2>
+      <p class="sec-desc">快閃的行程就是一張時刻表——每一分鐘都排好了,只等你上車。Day 2 是生日主場:市場早餐、世界最大百貨、韓牛慶生、無人機秀壓軸。</p>
+    </div>
+
+    <!-- DAY 1 -->
+    <article class="ticket reveal">
+      <div class="thead">
+        <div class="dnum">D1</div>
+        <div class="dinfo">
+          <div class="date">2026.07.24 · FRI</div>
+          <h3>紅眼落地 · ARTE MUSEUM · 南浦洞</h3>
+        </div>
+        <div class="dtag">FULL THROTTLE</div>
+      </div>
+      <div class="tbody">
+        <ul class="tt">
+          <li><span class="tm">02:10</span><div class="tx"><b>桃園機場出發 ✈️</b><p>紅眼班機,上機直接睡——落地就是釜山的早晨。</p></div></li>
+          <li><span class="tm">06:40</span><div class="tx"><b>抵達金海機場 (PUS)</b><p>入境、領行李,07:30 出關完成。</p></div></li>
+          <li><span class="tm">08:00</span><div class="tx"><b>計程車 → 飯店寄放行李</b><p><a class="mapl" href="https://maps.app.goo.gl/imJ8CL8FvtZWM8MR6" target="_blank" rel="noopener">📍 Allzib Archive 4H Busan</a>,1 號線凡一站旁。車程約 30–40 分,08:40 寄好行李輕裝出發。</p></div></li>
+          <li><span class="tm">09:10</span><div class="tx"><b>早餐:大海鮑魚粥(釜山站)</b><p><a class="mapl" href="https://maps.app.goo.gl/LPG3XBoSntQyLKJr5" target="_blank" rel="noopener">📍 대해전복죽</a> — 凡一站搭 1 號線 4 站到釜山站。落地第一碗熱粥,把紅眼班機的疲勞交給鮑魚粥。</p></div></li>
+          <li><span class="tm">10:30</span><div class="tx"><b>ARTE MUSEUM 釜山</b><p><a class="mapl" href="https://maps.app.goo.gl/8hLDwEDm7cjG5T8q7" target="_blank" rel="noopener">📍 沉浸式光影美術館</a>,拍好拍滿,約 12:30 結束參觀。</p></div></li>
+          <li><span class="tm">13:00</span><div class="tx"><b>前往南浦洞</b><p>地鐵或計程車進南浦洞商圈,準備開吃。</p></div></li>
+          <li><span class="tm">13:30</span><div class="tx"><b>午餐:Samhwan Livestock 韓牛燒肉 🥩</b><p><a class="mapl" href="https://maps.app.goo.gl/MUBjyCBpibmvwxmc7" target="_blank" rel="noopener">📍 삼환축산</a> — 把韓牛當生日大餐的前菜,約 14:30 收尾。</p></div></li>
+          <li><span class="tm range">14:45<br>–17:30</span><div class="tx"><b>南浦洞掃街</b><p>BIFF 廣場小吃 → 光復路逛街 → <span class="hl">樂天超市光復店</span>掃伴手禮(滿 ₩30,000 記得辦即時退稅)。</p></div></li>
+          <li><span class="tm">18:00</span><div class="tx"><b>回飯店正式 Check-in</b><p>行李歸位、稍作休息,替晚上充電。</p></div></li>
+          <li><span class="tm">19:00</span><div class="tx"><b>Connect Hyundai(來得及的話)</b><p>現代百貨的新地標,頂樓花園看夜景;體力不夠就直接跳晚餐。</p></div></li>
+          <li><span class="tm">20:00</span><div class="tx"><b>晚餐:豬肉湯飯 or 元祖奶奶章魚</b><p>釜山靈魂食物二選一——돼지국밥 暖胃收工,或辣炒章魚嗨到最後。</p></div></li>
+          <li><span class="tm">21:30</span><div class="tx"><b>回飯店休息</b><p>快閃第一天達成 ✅ 19 小時醒著,值得。</p></div></li>
+        </ul>
+      </div>
+      <span class="stay">🛏 宿 · Allzib Archive 4H Busan</span>
+    </article>
+
+    <!-- DAY 2 (GIFT) -->
+    <article class="ticket gift-ticket reveal">
+      <div class="thead">
+        <div class="dnum">D2</div>
+        <div class="dinfo">
+          <div class="date">2026.07.25 · SAT</div>
+          <h3>生日主場 · 釜田市場 · Centum City · 廣安里</h3>
+        </div>
+        <div class="dtag">BIRTHDAY MAIN 🎂</div>
+      </div>
+      <div class="tbody">
+        <ul class="tt">
+          <li><span class="tm">08:40</span><div class="tx"><b>出發往釜田市場</b><p>地鐵 1 號線凡一站 → 釜田站約 10 分,市場早上最有活力。</p></div></li>
+          <li><span class="tm">09:00</span><div class="tx"><b>早餐:釜田市場 🍲</b><p><a class="mapl" href="https://maps.app.goo.gl/yKb3VQ8UNqovudKGA" target="_blank" rel="noopener">📍 부전시장</a> — 釜山最大的傳統市場,鑽進巷子邊逛邊吃在地早餐。</p></div></li>
+          <li><span class="tm">10:45</span><div class="tx"><b>前往 Centum City</b><p>釜田站旁轉乘,往 Centum City 站約 30 分,出站與百貨地下直結。</p></div></li>
+          <li><span class="tm">11:15</span><div class="tx"><b>新世界百貨 Centum City 🛍</b><p><a class="mapl" href="https://maps.app.goo.gl/8uXo5WUQesLXL6CW9" target="_blank" rel="noopener">📍 신세계 센텀시티</a> — 金氏認證<span class="hl">全世界最大百貨</span>,逛街吹冷氣、美食街解決午餐;逛累了館內還有 Spa Land 汗蒸幕可以充電。</p></div></li>
+          <li><span class="tm">15:20</span><div class="tx"><b>前往燒肉店</b><p>預留交通時間,準時赴 16:00 的生日大餐。</p></div></li>
+          <li><span class="tm">16:00</span><div class="tx"><b>生日大餐:고결 GoGyeol 韓牛燒肉 🎂</b><p><a class="mapl" href="https://maps.app.goo.gl/jT7be6BzJ5SYWA8n6" target="_blank" rel="noopener">📍 고결</a> — 生日主餐提早開烤,慢慢吃、吃到飽,剛好接晚上的壓軸。</p></div></li>
+          <li><span class="tm">19:00</span><div class="tx"><b>廣安里海灘散步、卡位</b><p>廣安大橋夜景陪跑,沙灘上找個好位置等開演。</p></div></li>
+          <li><span class="tm">20:00</span><div class="tx"><b>廣安里無人機秀 ✨</b><p>週六 <span class="hl">20:00、22:00 各一場</span>——生日夜的煙火交給無人機;20:00 沒卡到位,還有 22:00 場。</p></div></li>
+          <li><span class="tm">PLAN B</span><div class="tx"><b>海雲台傳統市場</b><p><a class="mapl" href="https://maps.app.goo.gl/G4iFENNWRP7v3vS97" target="_blank" rel="noopener">📍 해운대전통시장</a> — 若天候不佳停飛或想換口味,轉往海雲台傳統市場吃吃喝喝收尾。</p></div></li>
+          <li><span class="tm">22:30</span><div class="tx"><b>回飯店</b><p>生日主場達成 ✅ 明早 07:00 起床,睡前把行李收一半。</p></div></li>
+        </ul>
+      </div>
+      <span class="stay" style="background:rgba(255,255,255,.08);border-color:var(--candle);color:var(--candle)">🛏 宿 · Allzib Archive 4H Busan</span>
+    </article>
+
+    <!-- DAY 3 -->
+    <article class="ticket reveal">
+      <div class="thead">
+        <div class="dnum">D3</div>
+        <div class="dinfo">
+          <div class="date">2026.07.26 · SUN</div>
+          <h3>快閃收尾 · 回程</h3>
+        </div>
+        <div class="dtag">HOME RUN</div>
+      </div>
+      <div class="tbody">
+        <ul class="tt">
+          <li><span class="tm">07:00</span><div class="tx"><b>起床、收行李</b><p>退稅單、護照放隨手可拿的地方;戰利品先秤一下別超重。</p></div></li>
+          <li><span class="tm">07:50</span><div class="tx"><b>Check-out → 計程車往金海機場</b><p>週日早晨不塞車,約 30 分鐘直達。</p></div></li>
+          <li><span class="tm">08:30</span><div class="tx"><b>抵達機場、報到託運</b><p>國際線起飛前 2 小時報到,留時間辦退稅、逛免稅店補最後的伴手禮。</p></div></li>
+          <li><span class="tm">10:50</span><div class="tx"><b>PUS → TPE 起飛 ✈️</b><p>再見釜山!約 <span class="hl">12:30 抵達桃園</span>(台灣時間)。</p></div></li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips" id="tips">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag" style="color:var(--candle)">Survival Kit</div>
+      <h2 class="sec-title">快閃 <em>生存包</em></h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tcard reveal">
+        <h4><span class="em">🚕</span> 交通</h4>
+        <ul>
+          <li><b>機場 → 飯店(凡一站)</b>:清晨拖行李直接搭計程車最快(約 30–40 分);回程週日早上同樣叫車。</li>
+          <li><b>市區移動</b>:飯店在 1 號線凡一站旁,釜山站、南浦洞、釜田市場一線直達;買一張 <b>T-money</b> 兩人各一張,便利商店就能加值。</li>
+          <li><b>導航用 Naver Map / Kakao Map</b>:Google Maps 在韓國不能導航,出發前先把口袋名單存進去。</li>
+          <li>叫車裝 <b>Kakao T</b>,綁信用卡或選現金付。</li>
+        </ul>
+      </div>
+      <div class="tcard reveal">
+        <h4><span class="em">💳</span> 錢與退稅</h4>
+        <ul>
+          <li><b>韓元現金</b>:市場小吃、部分計程車用得到;大部分店家刷卡暢通。</li>
+          <li><b>樂天超市即時退稅</b>:單筆滿 ₩30,000 出示護照,結帳直接扣稅,不用機場排隊。</li>
+          <li>百貨、免稅店記得帶護照;<b>海外刷卡手續費</b>先確認用哪張卡最划算。</li>
+        </ul>
+      </div>
+      <div class="tcard reveal">
+        <h4><span class="em">🛂</span> 行前必辦</h4>
+        <ul>
+          <li><b>K-ETA</b>:出發前確認台灣護照是否仍在免申請名單,一分鐘查一次最保險。</li>
+          <li><b>e-Arrival Card 電子入境卡</b>:抵達前 3 天內線上填,入境快一截。</li>
+          <li><b>網路</b>:eSIM 出發前先裝好,落地開機就有網。</li>
+          <li>護照效期 6 個月以上。</li>
+        </ul>
+      </div>
+      <div class="tcard reveal">
+        <h4><span class="em">🎒</span> 紅眼快閃裝備</h4>
+        <ul>
+          <li><b>頸枕 + 眼罩</b>:02:10 的班機,機上睡好 Day 1 才有電。</li>
+          <li><b>行動電源</b>:拍照導航一整天,保命必備。</li>
+          <li><b>摺疊購物袋</b>:樂天超市掃貨用,回程塞戰利品。</li>
+          <li>7 月底釜山悶熱,<b>防曬 + 小折傘</b>(偶有陣雨)。</li>
+          <li>🎂 偷偷準備:生日卡片、蠟燭——飯店房間就是派對現場。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAKE FINALE -->
+<section class="finale">
+  <div class="wrap" style="padding-top:clamp(60px,9vw,100px);padding-bottom:clamp(70px,10vw,110px)">
+    <div class="reveal">
+      <div class="pen-big">생일 축하합니다 🎉</div>
+      <p class="fd">生日快樂!在釜山,連 52 小時都是禮物。</p>
+    </div>
+    <div class="cake reveal" id="cake" role="button" tabindex="0" aria-label="點一下吹蠟燭">
+      <div class="flame" id="flame"></div>
+      <div class="smoke">💨</div>
+      <div class="candle-stick"></div>
+      <div class="layer l1"></div>
+      <div class="layer l2"></div>
+      <div class="layer l3"></div>
+      <div class="plate"></div>
+      <div class="hint">TAP TO BLOW 🌬</div>
+    </div>
+    <div class="wish" id="wish">許願成功!釜山見 ✈️</div>
+    <div class="burst" id="burst"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fbig">부산, <em>곧 만나</em> — 釜山,馬上見。</div>
+  <div class="fmeta">釜山生日快閃 3 天 2 夜 · 2026.07.24 – 07.26<br><a href="../index.html">← 回到所有行程</a></div>
+</footer>
+
+<!-- FAB -->
+<div class="fab"><a href="../index.html" title="所有行程">🏠</a></div>
+
+<script>
+// nav scroll state
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+// mobile menu
+const tgl=document.getElementById('navToggle'),lnk=document.getElementById('navLinks');
+tgl.addEventListener('click',()=>lnk.classList.toggle('open'));
+lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classList.remove('open')));
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3*0.08)+'s';io.observe(el)});
+
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const COLORS=['#FF5C8A','#FFA13D','#FFD34D','#3EC1CF','#FFFFFF'];
+
+// hero stars
+const stars=document.getElementById('stars');
+for(let i=0;i<40;i++){
+  const s=document.createElement('i');
+  s.style.left=(i*2.5+((i*7)%5))+'%';
+  s.style.top=((i*13)%70)+'%';
+  s.style.animationDelay=((i*137)%3000)+'ms';
+  stars.appendChild(s);
+}
+// hero confetti
+if(!reduced){
+  const box=document.getElementById('confetti');
+  for(let i=0;i<36;i++){
+    const c=document.createElement('i');
+    c.style.left=((i*89)%100)+'%';
+    c.style.background=COLORS[i%COLORS.length];
+    c.style.animationDuration=(5+((i*53)%50)/10)+'s';
+    c.style.animationDelay=((i*211)%4000)+'ms';
+    if(i%3===0)c.style.borderRadius='50%';
+    box.appendChild(c);
+  }
+}
+// cake interaction
+const cake=document.getElementById('cake'),wish=document.getElementById('wish'),burst=document.getElementById('burst');
+function blow(){
+  if(cake.classList.contains('out'))return relight();
+  cake.classList.add('out');
+  wish.classList.add('show');
+  if(!reduced)pop();
+}
+function relight(){cake.classList.remove('out');wish.classList.remove('show')}
+function pop(){
+  burst.innerHTML='';
+  for(let i=0;i<28;i++){
+    const p=document.createElement('i');
+    p.style.background=COLORS[i%COLORS.length];
+    const ang=(i/28)*Math.PI*2, d=90+((i*67)%80);
+    p.animate([
+      {transform:'translate(0,0) rotate(0)',opacity:1},
+      {transform:`translate(${Math.cos(ang)*d}px,${Math.sin(ang)*d-60}px) rotate(${420+i*20}deg)`,opacity:0}
+    ],{duration:900+((i*37)%400),easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'});
+    burst.appendChild(p);
+  }
+}
+cake.addEventListener('click',blow);
+cake.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();blow()}});
+</script>
+</body>
+</html>

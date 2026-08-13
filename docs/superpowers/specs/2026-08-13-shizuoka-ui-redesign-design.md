@@ -142,20 +142,24 @@ Hero title uses `clamp()`.
 │ 総覽 │ 一 │ 二 │ 三 │ 四 │ 五 │ 六 │ 七 │ 八 │ 九 │
 └────────────────────────────────────────────────┘
 ┌────────────────────────────────────────────────┐
-│ ┃三┃  10/06 (一)              [靜岡] [富士見2] │  ← 漢数字, vertical
-│ ┃景┃  靜岡 → 日本平夢テラス → 久能山東照宮      │
+│ ┃二┃  10/05　週日        [鎌倉][熱海][靜岡]    │  ← 漢数字, vertical
+│ ┃景┃  大船 → 熱海 → 靜岡・駿府城公園・歷史博物館 │
 ├───────┬────────────────────────────────────────┤
-│  9:00 │ 移 從JR靜岡車站出發，前往日本平          │
-│ (mono)│    ── 靜鐵巴士 約50分                   │
-│       │    ▸ 使用周遊券可免費搭乘                │
+│15:00左右│ 移 從熱海前往靜岡                      │
+│ (mono)│    ── JR東海道本線 普通車 (約 1小時20分) │
+│       │    ▸ (使用Pass) 開始使用周遊券 Mini      │
 ├───────┼────────────────────────────────────────┤
-│ 16:30 │ 見 駿府城公園蓋章               ▲ 富士見 │
-│  ❗   │    ⚠ 16:30 關門前必須抵達               │  ← --beni
+│ 16:25 │ 見 衝刺【駿府城公園】蓋章       ▲ 富士見 │
+│ -16:30│    ── 快速前往東御門券賣所               │
+│       │    ⚠ 僅剩5分鐘！優先目標：蓋百名城章     │  ← --beni
 ├───────┴────────────────────────────────────────┤
-│ 宿  ホテルプリヴェ静岡   ¥20,952  無早餐        │
+│ 宿  ホテルプリヴェ静岡   18,700日圓  不含早餐    │
 │ 連結  官網 · 地圖                               │
 └────────────────────────────────────────────────┘
 ```
+
+(Day 2 is used here because it carries both a 富士見 stop and the trip's one
+genuinely time-critical moment, so it exercises every device at once.)
 
 - Container `max-width: 68rem`, generous vertical rhythm.
 - **Stop rows are a two-column grid**: fixed left gutter for the time (tabular
@@ -234,10 +238,33 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   長谷寺見晴台). The hero shows the total: 「富士見 N 景」. **This is the signature
   element** — it ties the 三十六景 concept to real itinerary data, so the theme is
   informational rather than decorative.
-- **Note severity**, replacing today's uniform grey italics:
-  `▸` neutral tip · `⚠` vermilion time-critical/warning · `¥` cost. Derived from the
-  existing note text (e.g. 「⚠️ 緊急行程！」 becomes a warning; 「(不使用Pass)」
-  becomes a cost note).
+- **Note severity**, replacing today's uniform grey italics: `▸` neutral tip ·
+  `⚠` vermilion time-critical/warning · `¥` cost.
+
+  Classified by a **top-down, first-match decision list** on the note's own text:
+
+  | # | Trigger | Class | Marker / colour |
+  | --- | --- | --- | --- |
+  | 1 | ⚠️ / 緊急 / 僅剩 / 務必 / 關門 / 最晚 | warning | `⚠` `--beni` |
+  | 2 | 不使用Pass / 不能使用Pass / 需另外購買 / 需另外購票 / 自費 / 門票 / 車資 / `¥` | cost | `¥` `--cha` |
+  | 3 | anything else | neutral | `▸` `--sumi-mute` |
+
+  **Mixed content.** Severity outranks category: a note matching both rules 1 and 2
+  renders as a warning. Where the original note text contains sentences of *differing*
+  severity, it may be split at sentence boundaries into one note per class,
+  preserving each sentence verbatim and in its original order. Two constraints on
+  splitting:
+
+  - never split mid-sentence;
+  - a `(可使用Pass)` / `(不使用Pass)` / `(使用Pass)` qualifier always stays attached
+    to the sentence it qualifies, and never migrates to an adjacent note.
+
+  The literal `⚠️` emoji is dropped from note text where rule 1 fires, since the `⚠`
+  marker and vermilion colour now carry that meaning (consistent with the emoji rule
+  in §5).
+
+  A stop whose note is a warning also gets `.stop--urgent`, which tints its time in
+  `--beni` so the deadline is visible without reading the note.
 
 ### 3.6 Motion
 
@@ -245,8 +272,10 @@ Deliberately minimal:
 
 1. Hero ridge layers rise in sequence on load (~700ms, staggered).
 2. Sticky rail marks the active day via `IntersectionObserver`.
-3. Day expand/collapse uses `grid-template-rows: 0fr → 1fr` so there is no
-   `max-height: 5000px` clipping bug.
+3. Day expand/collapse is native `<details>`/`<summary>` (see §4). Closed content is
+   removed from layout entirely, so the old `max-height: 5000px` clipping bug cannot
+   occur and there is no row size to animate between. Opening plays a short
+   fade/slide (`@keyframes reveal`, ~300ms) on the panel instead.
 
 Nothing else animates. All of the above is disabled under
 `prefers-reduced-motion: reduce`.
@@ -268,8 +297,16 @@ Same tokens, same hero pattern, one shared inline stylesheet copied into each fi
 
 - Three self-contained static HTML files. No build step, no external CSS/JS, no
   webfonts, no CDN dependency. `lang="zh-TW"`, UTF-8.
-- All styling via CSS custom properties in `:root`. **Zero inline `style`
-  attributes** in the final markup.
+- **Design tokens** — every colour, font stack, and spacing step is declared once as a
+  custom property in `:root` (the `--bero`/`--washi`/`--sumi`… palette of §3.2, the
+  three `--display`/`--body`/`--data` stacks of §3.3, and a `--s1`…`--s8` spacing
+  scale) and referenced via `var()` everywhere else. No raw hex colour, font-family
+  list, or spacing value may be repeated in a rule body.
+  Exempt, because they are structural rather than tokens: grid/flex templates,
+  `font-size` values (which use a `clamp()` scale), SVG path data, `border-radius`,
+  z-index, animation timings, and the gradient stop `#27618F` plus the ridge fills
+  `#4E7FA6`/`#EAF2F8`/`#123A5C`/`#164368`, which exist only inside the hero artwork.
+- **Zero inline `style` attributes** in the final markup (down from 85).
 - Semantic HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`; day
   collapse built on `<details>`/`<summary>` so it works with JS disabled and is
   keyboard-accessible for free.
@@ -284,8 +321,9 @@ Same tokens, same hero pattern, one shared inline stylesheet copied into each fi
 - Keep all existing anchor ids (`#summary`, `#day1`…`#day9`) so old links and
   bookmarks still resolve.
 - Keep every existing link target and image source byte-identical (see §5 for the
-  exact inventory). New link targets may be *added* (§5), but none may be dropped or
-  altered.
+  exact inventory), with the **single exception of the one malformed URL listed in
+  §5.1**. New link targets may be *added* (§5), but none may be dropped, and none
+  altered apart from that one exception.
 
 ## 5. Content-handling rules
 
@@ -295,8 +333,8 @@ Restructuring is permitted, but factual data is inviolable.
 
 - Every time, price, flight/train number, reservation code
   (`20342479764521208`), hotel name, station name, place name, and opening hour.
-- **Link targets (`href`)** — every existing one survives. Current inventory of
-  unique values:
+- **Link targets (`href`)** — every existing one survives, except the single
+  malformed value corrected in §5.1. Current inventory of unique values:
 
   | File | External `http(s)` | In-page `#` anchors | Relative |
   | --- | --- | --- | --- |
@@ -319,6 +357,24 @@ Restructuring is permitted, but factual data is inviolable.
   writing and the reason the page is worth keeping; they are re-housed in a
   collapsible 「背景」 block, not trimmed.
 - All 4 alternative-train tables, including which row is 已預約.
+
+### 5.1 The one permitted `href` correction
+
+Exactly one existing link target changes value. Day 7's 鐮倉大佛地圖 link is malformed
+in the source — unbalanced quoting swallowed the `target` attribute into the URL:
+
+```html
+<a _blank"="" href="https://maps.app.goo.gl/wqHn1GF9DnGSzHBG7 target=">
+```
+
+| | Value | HTTP | Resolves to |
+| --- | --- | --- | --- |
+| Before | `https://maps.app.goo.gl/wqHn1GF9DnGSzHBG7 target=` | **400** | — |
+| After | `https://maps.app.goo.gl/wqHn1GF9DnGSzHBG7` | **200** | `鎌倉大佛殿高德院` (Kotoku-in) |
+
+Both were checked with `curl` before the change was applied; the destination matches
+the link's own label, confirming the trailing `target=` was the only defect. This is
+the **only** old→new `href` difference permitted in any of the three files.
 
 **Permitted additions** (the only `href` values that may be new):
 
@@ -349,6 +405,47 @@ Flagged for the human gate — each can be dropped without touching the rest:
 3. **No dark mode.** A woodblock print is a print; a night variant is off-concept
    and doubles the CSS surface. Out of scope for this run.
 
+## 6a. Amendment (2026-08-13, during implementation)
+
+Three deviations from the spec as approved. Each was found while implementing and
+is recorded here so the spec matches what was built.
+
+### A1 — One broken link target is corrected
+
+Day 7's 鐮倉大佛地圖 `href` is malformed in the source and is corrected. Resolved into
+the body of the spec rather than left as an exception here: see **§5.1** for the
+before/after values and the `curl` verification, **§4** and **§5** for the amended
+invariant, and **§8.1** for the exact old→new difference the parity check accepts.
+
+The user initially chose to keep the broken URL as-is, then asked for it to be fixed
+provided the fix could be verified. It was verified (400 → 200, resolving to
+`鎌倉大佛殿高德院`), so the correction stands.
+
+### A2 — 富士見 marks: seven stops, not six
+
+§3.5's criterion is "stops where Fuji is genuinely visible", illustrated with a
+six-item list. 駿府城公園 (day 2) also qualifies on the page's own evidence — its
+background essay states 「從這裡可眺望富士山」 — so it carries a mark too. The marked
+set is seven:
+
+駿府城公園 · 日本平夢テラス · 久能山東照宮 · 靜岡縣富士山世界遺產中心 ·
+白糸の滝 · 三島天空步道 · 長谷寺
+
+The hero counter reads 「富士見 七景」 accordingly. The criterion is unchanged; only
+the enumeration was incomplete.
+
+### A3 — Day collapse uses native `<details>`, not a `grid-template-rows` animation
+
+The spec as first approved was self-contradictory: §3.6.3 specified animating
+`grid-template-rows: 0fr → 1fr`, while §4 independently required
+`<details>`/`<summary>`. Native `<details>` removes closed content from layout
+entirely, so the `max-height: 5000px` clipping bug that motivated the grid technique
+cannot occur, and there is no row size to animate between.
+
+§4 wins — working without JS and being keyboard-accessible for free is worth more than
+the transition. **§3.6.3 has been rewritten** accordingly; a short fade/slide
+(`@keyframes reveal`) plays on open, still disabled under `prefers-reduced-motion`.
+
 ## 7. Out of scope
 
 - Root `index.html` and `map.html`, and all other trip folders.
@@ -366,10 +463,11 @@ new file against `git show <base>:<path>`.
    compares old vs new per file. **All quantity comparisons are multisets** (value +
    occurrence count, via `sort | uniq -c`), not sets, so a dropped duplicate is
    caught:
-   - `href` values: `new ⊇ old` as a *set*, and `new \ old` may contain only the
-     §5 additions (`../index.html`, sibling-page links). Nothing in `old` may be
-     missing. Set semantics here because re-housing links legitimately changes how
-     often a target repeats.
+   - `href` values: `new ⊇ old` as a *set*, with exactly two accepted differences:
+     `new \ old` may contain only the §5 additions (`../index.html`, sibling-page
+     links) plus the corrected URL from §5.1, and `old \ new` may contain only the
+     malformed URL from §5.1. Any other missing or new value fails. Set semantics
+     here because re-housing links legitimately changes how often a target repeats.
    - `<img src>` values: `new == old` as a multiset. No additions permitted.
    - Times `\d{1,2}:\d{2}`: `new == old` as a multiset.
    - Amounts `¥[\d,]+` / `[\d,]+ *日圓` / `[\d,]+ *元`: `new == old` as a multiset.
@@ -386,6 +484,21 @@ new file against `git show <base>:<path>`.
    - **Tables**: `index.html` still contains exactly 4 `<table>`; the total `<tr>`
      count matches old; and each 已預約 / 備選 marker still appears the same number
      of times.
+   - **Stop count**: the original's 93 `.timeline-item` elements split into 9 overview
+     rows and 84 day stops. Assert `index.html` has exactly 84 `.stop__body` and 9
+     `.outline li`, totalling 93 — so no stop was dropped or duplicated while
+     re-housing them.
+   - **Identifiers** (flight and service numbers): multiset of `[A-Z]{2,}\d{2,}`
+     (JX802, JX803, JT16, …) and of `\d+[号號]` (N'EX 34号/38号, 42號, 818號, 11號,
+     5號, …) must be `new == old`.
+   - **Proper nouns**: multisets of every `【…】` and every `「…」` span must satisfy
+     `new ⊇ old`. These brackets carry most attraction and line names
+     (【駿府城公園】,「富士山・靜岡地區周遊券 Mini」, …).
+   - **Hotel and station names**: assert each of the 5 distinct lodgings —
+     鎌倉大船JR東日本METS飯店 · ホテルプリヴェ静岡 · 修善寺温泉 桂川 ·
+     橫濱站前里士滿酒店 — plus each of its 8 nightly price strings is present, and
+     that every station name appearing in `old` still appears in `new` (covered by the
+     katakana and bracket checks above plus the ≥60-char prose check).
 2. **Content parity (manual).** Automated checks cannot prove the *right* text sits
    under the right day. Read old and new side by side, one pass per day, ticking a
    9-row checklist (一…九) plus 行程總覽 — confirming for each: the stop order is

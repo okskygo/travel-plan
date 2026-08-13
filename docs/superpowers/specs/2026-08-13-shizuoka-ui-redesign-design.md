@@ -260,9 +260,15 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
 - **Region tags** per day. Vocabulary (9 values): 東京 / 千葉 / 橫濱 / 鎌倉 / 熱海 /
   靜岡 / 富士 / 伊豆 / 三島. A day is tagged with every distinct region it actually
   *visits*, in itinerary order, capped at 3 — passing through a region by train does
-  not earn a tag. 成田機場 is in **千葉**, not 東京, so day 1 (land at Narita, ride
-  straight to Ofuna) never touches Tokyo, while day 9 visits 品川 and 新宿 (東京)
-  before departing from Narita (千葉). Derived from the existing 行程總覽 route lines:
+  not earn a tag.
+
+  **成田機場 is in 千葉, and is tagged 千葉.** Tags name the prefecture actually visited,
+  so day 1 (land at Narita, ride straight to Ofuna) never touches Tokyo, while day 9
+  visits 品川 and 新宿 (東京) before departing from Narita (千葉). Because day 1's
+  original header read 「抵達**東京**，前往大船」, which the 千葉 tag would contradict,
+  that header is corrected to 「抵達**成田**，前往大船」 — see §5's permitted corrections.
+
+  Derived from the existing 行程總覽 route lines:
 
   | Day | Route line | Region tags |
   | --- | --- | --- |
@@ -324,8 +330,16 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   reassurance, not a deadline, and stays neutral. Marking it red would misreport the
   one genuinely urgent moment of the trip.
 
-  A stop whose note is a warning also gets `.stop--urgent`, which tints its time in
-  `--beni` so the deadline is visible without reading the note.
+  **`.stop--urgent` is narrower than `.note--warn`.** It tints the stop's *time* in
+  `--beni`, so it may only be applied when the warning is about **this stop's clock**
+  — triggers 緊急 · 僅剩 · 提早 · 關門前 · 最晚. A warning that is not about timing
+  keeps a neutral time.
+
+  The distinction matters: 「請務必**提早**到碼頭」 (day 5 ferry) is a deadline and gets
+  a red time, while 「自費購票（不使用Pass），建議**提前**購買指定席車票」 (day 7) is a
+  ticketing advisory — it is still `.note--warn`, because the source carried a ⚠️, but
+  a red time there would falsely imply a departure you can miss. Note 提早 (arrive
+  early) is a trigger; 提前 (book in advance) is not.
 
 ### 3.6 Motion
 
@@ -473,6 +487,14 @@ No other new link targets. Nothing existing is dropped or altered.
   header's route verbatim).
 - Normalise mixed 靜岡/静岡 usage in *prose* to 靜岡 (zh-TW), while proper nouns keep
   their Japanese spelling (ホテルプリヴェ静岡, 日本平夢テラス).
+- **One factual correction, user-authorised:** day 1's header 「抵達東京，前往大船」
+  becomes 「抵達成田，前往大船」. The day lands at Narita (千葉) and rides straight to
+  大船 (神奈川) — it never visits Tokyo, so the original wording contradicted the day's
+  own itinerary and its 千葉 region tag. This is the only place where existing wording
+  is changed for accuracy rather than concision; it was put to the user, who chose
+  correcting the text over widening the tag vocabulary. The 行程總覽 line
+  「抵達**東京成田機場**」 is left untouched, since that is the airport's actual name
+  (Tokyo Narita) and claims no visit to Tokyo.
 
 ## 6. Explicitly reversible decisions
 
@@ -573,6 +595,50 @@ than only against `--bero-deep`, where a first pass had measured 4.38:1 and 3.36
 §4's 44px rule also gains the WCAG 2.5.8 exemption for in-sentence links, and §5's
 emoji rule now covers link-label markers (📍/🌐 → 地/網) as well as stop titles.
 
+## 6c. Amendment 3 (2026-08-13, after code review round 2)
+
+Round 2 raised seven findings. Four were implementation defects, fixed in code: two
+notes misclassified against the §3.5 table (a note whose source carried a ⚠️ was marked
+cost instead of warning; another was marked cost with no cost trigger present), the
+prose `📍` in day 9's 詳細位置 aside had been stripped, and `2.75rem` was repeated as a
+literal instead of a token (now `--touch`).
+
+Three needed the spec to change:
+
+### A7 — `.stop--urgent` is narrowed to time-critical warnings (§3.5)
+
+The spec said every warning note also makes its stop `.stop--urgent`, which tints the
+*time* vermilion. Applying that to day 7's 「自費購票（不使用Pass），建議提前購買指定席
+車票」 would paint 7:33 red — implying a train you can miss, when the note is about
+buying a ticket. `.stop--urgent` now requires the warning to concern this stop's clock
+(緊急 · 僅剩 · 提早 · 關門前 · 最晚), keeping the red time meaningful. Day 5's ferry
+warning 「請務必提早到碼頭」 gains it; day 7's advisory does not.
+
+### A8 — 千葉 is kept, and day 1's header is corrected (§3.5, §5)
+
+Amendment 2 added a 千葉 tag because Narita is in Chiba. Round 2 flagged the
+contradiction this created: day 1's header, which is the user's own text, read
+「抵達**東京**，前往大船」.
+
+Two ways out — widen 東京 to mean "the metropolitan gateway including Narita" and drop
+千葉, or keep 千葉 and correct the header. Both were put to the user, **who chose to
+correct the text**: day 1's header becomes 「抵達**成田**，前往大船」, the 千葉 tag stays,
+and the vocabulary keeps all 9 values.
+
+This is the only place in the redesign where existing wording changes for accuracy
+rather than concision, and it is recorded as such in §5. The 行程總覽 line
+「抵達東京成田機場」 is left untouched — that is the airport's real name and claims no
+visit to Tokyo.
+
+### A9 — §8.1's prose check allows sentence-level reflow (§8.1)
+
+§8.1 demanded every ≥60-char run survive verbatim in one piece, which contradicts §5's
+explicit permission to re-house prose. Day 5's original paragraph combines a movement
+sentence with a 土肥 place-name etymology; the etymology belongs in a 背景 block, not in
+a scannable stop title. §8.1 now accepts a run that is verbatim **or** reflowed at
+sentence boundaries with every sentence intact, and requires reflowed runs to be
+reported rather than silently passed.
+
 ## 7. Out of scope
 
 - Root `index.html` and `map.html`, and all other trip folders.
@@ -599,10 +665,20 @@ new file against `git show <base>:<path>`.
    - Times `\d{1,2}:\d{2}`: `new == old` as a multiset.
    - Amounts `¥[\d,]+` / `[\d,]+ *日圓` / `[\d,]+ *元`: `new == old` as a multiset.
    - Reservation code `20342479764521208`: present.
-   - **Long prose paragraphs**: strip tags, collapse whitespace, and extract every
-     text run ≥ 60 characters from `old` (this captures all 24 景點/歷史背景
-     paragraphs). Every one must appear verbatim as a substring of the normalised
-     new text. This is the check that proves no prose was silently trimmed.
+   - **Long prose**: strip tags, collapse whitespace, and extract every text run
+     ≥60 characters from `old` (this captures all 24 景點/歷史背景 paragraphs). Each
+     run must survive in one of two ways:
+     1. **verbatim** as a substring of the normalised new text; or
+     2. **reflowed** — split at sentence boundaries only, with *every* sentence
+        present verbatim (trailing 。！？ may be dropped where a sentence becomes a
+        heading). §5 permits re-housing prose into new containers, so a run may
+        legitimately span two elements; losing a sentence is never permitted.
+
+     Reflowed runs are reported as such, not silently accepted, and the count is
+     expected to be small. One run reflows in practice: day 5's
+     「從土肥港搭公車前往修善寺溫泉。因為土肥位在伊豆西邊…」 becomes a stop title plus a
+     collapsible 土肥地名由來 block, since a place-name etymology does not belong in a
+     scannable title.
    - **Japanese proper nouns**: extract every katakana/hiragana run
      (`[ぁ-んァ-ヶー]{2,}`) as a multiset; require `new ⊇ old`. Catches dropped names
      like ホテルプリヴェ静岡 or バリ勝男クン.

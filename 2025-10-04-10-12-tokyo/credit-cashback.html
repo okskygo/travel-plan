@@ -14,6 +14,9 @@
   --washi:#E9E6DD; --washi-hi:#F6F4EF;
   --sumi:#14181A; --sumi-mute:#4A5560;
   --beni:#A83B32; --cha:#55633A;
+  --kasumi:#C8DEEF;      /* 霞 — secondary text on dark grounds */
+  --wash:rgba(27,76,126,.05); --wash-firm:rgba(27,76,126,.09);
+  --beni-wash:rgba(168,59,50,.08);
   --rule:rgba(27,76,126,.16); --rule-firm:rgba(27,76,126,.32);
   --shadow:0 1px 2px rgba(14,43,71,.06), 0 8px 24px -12px rgba(14,43,71,.22);
   --display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Songti TC","Noto Serif TC",serif;
@@ -42,25 +45,28 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
   background:linear-gradient(178deg,var(--bero-deep) 0%,var(--bero) 70%,#27618F 100%);
   color:var(--washi-hi);padding:var(--s7) 0 0;overflow:hidden;
 }
-.hero__nav{
-  display:flex;flex-wrap:wrap;gap:var(--s4);align-items:baseline;
+.hero__nav{padding-bottom:var(--s6)}
+.hero__nav ul{
+  display:flex;flex-wrap:wrap;gap:0 var(--s5);align-items:center;
+  list-style:none;margin:0;padding:0;
   font-family:var(--data);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--nami);padding-bottom:var(--s6);
 }
-.hero__nav a{color:var(--nami)}
+.hero__nav a{
+  color:var(--kasumi);
+  display:inline-flex;align-items:center;min-height:2.75rem;
+}
 .hero__nav a:hover{color:var(--washi-hi)}
-.hero__nav .sep{opacity:.45}
 .hero__title{
   font-family:var(--display);font-weight:600;
   font-size:clamp(2.4rem,8vw,3.9rem);line-height:1.08;letter-spacing:.06em;margin:0;
 }
 .hero__sub{
   font-family:var(--display);font-size:clamp(1rem,3vw,1.25rem);
-  letter-spacing:.18em;margin:var(--s4) 0 0;color:#BFD6E8;
+  letter-spacing:.18em;margin:var(--s4) 0 0;color:var(--kasumi);
 }
 .hero__note{
   font-family:var(--data);font-size:.75rem;letter-spacing:.08em;
-  color:#BFD6E8;margin:var(--s5) 0 0;
+  color:var(--kasumi);margin:var(--s5) 0 0;
 }
 .ridge{display:block;width:100%;height:auto;margin-top:var(--s6)}
 .ridge__mid{fill:#123A5C}
@@ -107,7 +113,7 @@ main{padding-bottom:var(--s8)}
   font-family:var(--data);font-size:.74rem;letter-spacing:.08em;
   border:1px solid var(--rule-firm);border-radius:999px;
   padding:.45em 1em;display:inline-flex;align-items:center;gap:.4em;
-  min-height:2.3rem;
+  min-height:2.75rem;
 }
 .card__link:hover{border-color:var(--bero);text-decoration:none}
 
@@ -119,11 +125,11 @@ main{padding-bottom:var(--s8)}
   font-family:var(--display);
   font-size:1.15rem;letter-spacing:.04em;
   padding:.5em .8em;
-  background:rgba(27,76,126,.06);
+  background:var(--wash-firm);
   border-left:3px solid var(--bero);
   border-radius:0 2px 2px 0;
 }
-.tier--bonus .tier__rate{background:rgba(168,59,50,.07);border-left-color:var(--beni)}
+.tier--bonus .tier__rate{background:var(--beni-wash);border-left-color:var(--beni)}
 .tier__tag{
   font-family:var(--data);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--sumi-mute);
@@ -163,11 +169,11 @@ main{padding-bottom:var(--s8)}
 
 /* ---------- footer ---------- */
 .footer{
-  background:var(--bero-deep);color:#BFD6E8;
+  background:var(--bero-deep);color:var(--kasumi);
   padding:var(--s7) 0;margin-top:var(--s8);text-align:center;
 }
 .footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.1rem;letter-spacing:.14em;color:var(--washi-hi)}
-.footer a{color:#BFD6E8;font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3)}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3);display:inline-flex;align-items:center;min-height:2.75rem}
 .footer a:hover{color:var(--washi-hi)}
 
 @media(max-width:640px){
@@ -185,11 +191,11 @@ main{padding-bottom:var(--s8)}
 <header class="hero">
   <div class="wrap">
     <nav class="hero__nav" aria-label="頁面導覽">
-      <a href="index.html">← 回行程</a>
-      <span class="sep">·</span>
-      <a href="omiyage.html">お土産</a>
-      <span class="sep">·</span>
-      <a href="../index.html">所有行程</a>
+      <ul>
+        <li><a href="index.html">← 回行程</a></li>
+        <li><a href="omiyage.html">お土産</a></li>
+        <li><a href="../index.html">所有行程</a></li>
+      </ul>
     </nav>
     <h1 class="hero__title">信用卡回饋</h1>
     <p class="hero__sub">日韓旅遊最佳回饋方案</p>
@@ -219,7 +225,7 @@ main{padding-bottom:var(--s8)}
       </div>
 
       <div class="tier">
-        <p class="tier__rate"><span class="tier__tag">基本</span>日韓3%無上限、泰國1%無上限</p>
+        <p class="tier__rate"><span class="tier__tag">基本</span>【日韓3%無上限、泰國1%無上限】</p>
         <p class="tier__label">基本回饋條件</p>
         <ol class="terms">
           <li>活動期間以富邦J卡於日韓地區新增之一般消費享<b>3%無上限回饋</b>，泰國地區新增之一般消費享<b>1%無上限回饋</b>，以上消費需於<b>2026/1/15前請款</b>方可享回饋。</li>
@@ -229,7 +235,7 @@ main{padding-bottom:var(--s8)}
       </div>
 
       <div class="tier tier--bonus">
-        <p class="tier__rate"><span class="tier__tag">加碼</span>日韓加碼3%、泰國加碼5%</p>
+        <p class="tier__rate"><span class="tier__tag">加碼</span>【日韓加碼3%、泰國加碼5%】</p>
         <p class="tier__label">加碼回饋條件</p>
         <ol class="terms">
           <li>限日韓泰當地實體消費且成功登錄始可享回饋。活動期間每季每戶加碼<span class="num">上限1,000元</span>，每季限量60,000名，須以正卡持卡人資料登錄，額滿後恕無法補登及享有回饋資格，登錄未成功者亦同，登錄結果以本行系統顯示為準。</li>

@@ -21,6 +21,12 @@
   --sumi-mute:#4A5560;    /* secondary text */
   --beni:#A83B32;         /* 紅 — the one accent, time-critical only */
   --cha:#55633A;          /* 茶 — food & tea */
+  --kasumi:#C8DEEF;       /* 霞 — secondary text on dark grounds */
+  --beni-lite:#FAD2CD;    /* Fuji mark on dark grounds */
+  --yu:#7A5230;           /* 湯 chip ground */
+  --murasaki:#5A4A7A;     /* 買 chip ground */
+  --wash:rgba(27,76,126,.05); --wash-firm:rgba(27,76,126,.09);
+  --beni-wash:rgba(168,59,50,.08);
 
   --rule:rgba(27,76,126,.16);
   --rule-firm:rgba(27,76,126,.32);
@@ -70,10 +76,10 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
   gap:var(--s4);flex-wrap:wrap;
   font-family:var(--data);font-size:.72rem;letter-spacing:.14em;
   text-transform:uppercase;
-  color:var(--nami);
+  color:var(--kasumi);
   padding-bottom:var(--s6);
 }
-.hero__home{color:var(--nami)}
+.hero__home{color:var(--kasumi);display:inline-flex;align-items:center;min-height:2.75rem}
 .hero__home:hover{color:var(--washi-hi)}
 .hero__title{
   font-family:var(--display);
@@ -88,13 +94,13 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
   font-size:clamp(1.05rem,3.4vw,1.45rem);
   letter-spacing:.22em;
   margin:var(--s4) 0 0;
-  color:#BFD6E8;
+  color:var(--kasumi);
 }
 .hero__facts{
   list-style:none;margin:var(--s6) 0 0;padding:0;
   display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);
   font-family:var(--data);font-size:.82rem;letter-spacing:.06em;
-  color:#BFD6E8;
+  color:var(--kasumi);
 }
 .hero__facts b{color:var(--washi-hi);font-weight:600}
 .hero__views{
@@ -103,10 +109,10 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
   color:var(--washi-hi);
   margin:var(--s5) 0 0;
   padding:.3em .85em .3em .6em;
-  border:1px solid rgba(191,214,232,.4);
+  border:1px solid color-mix(in srgb, var(--kasumi) 40%, transparent);
   border-radius:999px;
 }
-.hero__views .fuji-mark{color:#F0A79E}
+.hero__views .fuji-mark{color:var(--beni-lite)}
 /* Atmospheric perspective: the distant cone is HAZIER (lighter) than the sky
    in front of it, the near hills darkest. Reversing this made Fuji invisible. */
 .ridge{display:block;width:100%;height:auto;margin-top:var(--s6)}
@@ -238,7 +244,7 @@ main{padding-bottom:var(--s8)}
   line-height:1.15;
 }
 .day__num .n{font-size:1.85rem;letter-spacing:.06em}
-.day__num .k{font-size:.7rem;letter-spacing:.2em;color:#BFD6E8}
+.day__num .k{font-size:.7rem;letter-spacing:.2em;color:var(--kasumi)}
 .day__head{padding:var(--s4) var(--s5);min-width:0}
 .day__date{
   display:block;
@@ -263,7 +269,7 @@ main{padding-bottom:var(--s8)}
 }
 .day__toggle{
   display:flex;align-items:center;justify-content:center;
-  width:3.25rem;flex:none;
+  flex:none;
   color:var(--bero);
   font-family:var(--display);font-size:1.5rem;line-height:1;
   transition:transform .25s ease;
@@ -282,7 +288,7 @@ main{padding-bottom:var(--s8)}
   .day__num .n{font-size:1.35rem;display:block}
   .day__num .k{font-size:.55rem;letter-spacing:.12em;display:block}
   .day__head{padding:var(--s3) var(--s4)}
-  .day__toggle{width:2.75rem;font-size:1.3rem}
+  .day__toggle{font-size:1.3rem}
   .day__body{padding:0 var(--s4) var(--s4)}
 }
 
@@ -324,16 +330,16 @@ main{padding-bottom:var(--s8)}
 }
 .chip--food{background:var(--cha)}
 .chip--stay{background:var(--bero-deep)}
-.chip--onsen{background:#7A5230}
+.chip--onsen{background:var(--yu)}
 .chip--move{background:transparent;color:var(--bero);border:1px solid var(--rule-firm)}
-.chip--shop{background:#5A4A7A}
+.chip--shop{background:var(--murasaki)}
 .fuji-mark{font-family:var(--display);color:var(--beni)}
 .stop__fuji{
   flex:none;
   display:inline-flex;align-items:center;gap:.25em;
   font-family:var(--data);font-size:.66rem;letter-spacing:.1em;
   color:var(--beni);
-  border:1px solid rgba(168,59,50,.35);border-radius:2px;
+  border:1px solid color-mix(in srgb, var(--beni) 35%, transparent);border-radius:2px;
   padding:.1em .45em;
   margin-top:.2em;
   font-weight:400;
@@ -356,6 +362,9 @@ main{padding-bottom:var(--s8)}
 .note--cost{color:var(--cha)}
 .note--cost::before{content:"¥";color:var(--cha);font-family:var(--data)}
 .note a{font-weight:500}
+/* A note whose whole content is a link is a standalone control and needs a full
+   touch target. Links inside a sentence stay inline (WCAG 2.5.8 exempts them). */
+.note > a:only-child{min-height:2.75rem;align-items:center}
 
 @media(max-width:640px){
   .stop{grid-template-columns:1fr;gap:0;padding:var(--s4) 0}
@@ -363,19 +372,19 @@ main{padding-bottom:var(--s8)}
     text-align:left;
     display:inline-block;
     color:var(--bero);
-    background:rgba(27,76,126,.07);
+    background:var(--wash-firm);
     border-radius:2px;
     padding:.1em .5em;
     margin-bottom:.5em;
     font-size:.78rem;
   }
-  .stop--urgent .stop__time{background:rgba(168,59,50,.09)}
+  .stop--urgent .stop__time{background:var(--beni-wash)}
 }
 
 /* ---------- background prose (collapsible) ---------- */
 .bg{
   margin:var(--s4) 0 0;
-  background:rgba(27,76,126,.045);
+  background:var(--wash);
   border-left:2.5px solid var(--nami);
   border-radius:0 2px 2px 0;
 }
@@ -403,18 +412,18 @@ caption{
   font-family:var(--data);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--sumi-mute);
   padding:.6em .8em;
-  background:rgba(27,76,126,.05);
+  background:var(--wash);
   border-bottom:1px solid var(--rule);
 }
 th,td{padding:.55em .8em;text-align:left;border-bottom:1px solid var(--rule)}
 th{
   font-family:var(--data);font-size:.7rem;letter-spacing:.08em;font-weight:600;
   color:var(--sumi-mute);text-transform:uppercase;
-  background:rgba(27,76,126,.03);
+  background:var(--wash);
 }
 td{font-family:var(--data);font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
-tr.is-booked{background:rgba(168,59,50,.07)}
+tr.is-booked{background:var(--beni-wash)}
 tr.is-booked td{color:var(--beni);font-weight:600}
 
 /* ---------- lodging & links ---------- */
@@ -423,7 +432,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   padding:var(--s4);
   border:1px solid var(--rule);
   border-radius:2px;
-  background:rgba(27,76,126,.035);
+  background:var(--wash);
 }
 .panel__label{
   display:flex;align-items:center;gap:.5em;
@@ -438,7 +447,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
 .stay dd{margin:0;font-weight:600}
 .stay .num{font-family:var(--data);font-variant-numeric:tabular-nums}
 .linklist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem var(--s4)}
-.linklist a{display:inline-flex;align-items:center;gap:.4em;font-size:.9rem;min-height:2.4rem}
+.linklist a{display:inline-flex;align-items:center;gap:.4em;font-size:.9rem;min-height:2.75rem}
 .linklist .gl{font-family:var(--display);color:var(--sumi-mute);font-size:.9rem}
 
 /* ---------- callout (per-day transport preface) ---------- */
@@ -463,6 +472,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   border:1px solid var(--rule-firm);border-radius:2px;
   box-shadow:var(--shadow);
 }
+.figure a{display:inline-block}
 .figure--qr img{max-width:13rem}
 .figure figcaption{
   font-size:.78rem;color:var(--sumi-mute);margin-top:.5em;
@@ -475,7 +485,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   font-variant-numeric:tabular-nums;
 }
 .code span{
-  display:block;font-size:.62rem;letter-spacing:.16em;color:var(--nami);
+  display:block;font-size:.62rem;letter-spacing:.16em;color:var(--kasumi);
   text-transform:uppercase;margin-bottom:.2em;
 }
 
@@ -496,7 +506,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   .outline .d small{display:inline;margin-left:.5em}
 }
 .flights{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:var(--s4);margin:0 0 var(--s5)}
-.flight{padding:var(--s4);border:1px solid var(--rule);border-radius:2px;background:rgba(27,76,126,.035)}
+.flight{padding:var(--s4);border:1px solid var(--rule);border-radius:2px;background:var(--wash)}
 .flight__no{font-family:var(--data);font-size:1.1rem;letter-spacing:.1em;color:var(--bero);font-weight:600}
 .flight__date{font-family:var(--data);font-size:.75rem;color:var(--sumi-mute);margin-bottom:var(--s3)}
 .flight__leg{display:flex;align-items:baseline;gap:.6em;font-size:.95rem;margin-top:.35em}
@@ -505,12 +515,12 @@ tr.is-booked td{color:var(--beni);font-weight:600}
 
 /* ---------- footer ---------- */
 .footer{
-  background:var(--bero-deep);color:#BFD6E8;
+  background:var(--bero-deep);color:var(--kasumi);
   padding:var(--s7) 0;margin-top:var(--s8);
   text-align:center;
 }
 .footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.15rem;letter-spacing:.14em;color:var(--washi-hi)}
-.footer a{color:#BFD6E8;font-family:var(--data);font-size:.78rem;letter-spacing:.1em}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;display:inline-flex;align-items:center;min-height:2.75rem}
 .footer a:hover{color:var(--washi-hi)}
 
 /* ---------- back to top ---------- */
@@ -688,7 +698,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
       <span class="day__head">
         <span class="day__date">10/04　週六</span>
         <span class="day__route">抵達東京，前往大船</span>
-        <span class="day__tags"><span class="tag">東京</span><span class="tag">鎌倉</span></span>
+        <span class="day__tags"><span class="tag">千葉</span><span class="tag">鎌倉</span></span>
       </span>
       <span class="day__toggle" aria-hidden="true">＋</span>
     </summary>
@@ -805,7 +815,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
         <li class="stop">
           <span class="stop__time">10:30 - 15:00</span>
           <div class="stop__body">
-            <p class="stop__title"><span class="chip" aria-hidden="true">見</span>自由逛逛熱海市區</p>
+            <p class="stop__title"><span class="chip chip--shop" aria-hidden="true">買</span>自由逛逛熱海市區</p>
             <p class="leg">步行</p>
             <p class="note">例如：熱海商店街、熱海陽光海灘等。</p>
           </div>
@@ -1729,7 +1739,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
         <li class="stop">
           <span class="stop__time">13:30 - 15:00</span>
           <div class="stop__body">
-            <p class="stop__title"><span class="chip chip--shop" aria-hidden="true">買</span>參觀【橫濱紅磚倉庫2號館】</p>
+            <p class="stop__title"><span class="chip" aria-hidden="true">見</span>參觀【橫濱紅磚倉庫2號館】</p>
             <p class="leg">從UNI COFFEE ROASTERY步行約7分鐘</p>
             <p class="note">逛街購物，體驗明治時代保稅倉庫改造的文化商業設施</p>
             <p class="note"><a href="https://maps.app.goo.gl/6kUoJbc7HEeHJifE6" target="_blank" rel="noopener">紅磚倉庫2號館地圖</a></p>
@@ -1769,7 +1779,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
         <li class="stop">
           <span class="stop__time">18:00 - 19:30</span>
           <div class="stop__body">
-            <p class="stop__title"><span class="chip chip--move" aria-hidden="true">移</span>【横浜ランドマークタワー スカイガーデン】準備看夜景</p>
+            <p class="stop__title"><span class="chip" aria-hidden="true">見</span>【横浜ランドマークタワー スカイガーデン】準備看夜景</p>
             <p class="leg">步行前往landmark tower</p>
             <p class="note">提早前往，準備登上69樓展望台看夜景</p>
             <p class="note"><a href="https://maps.app.goo.gl/4MYzHD5XNntuMSnA6" target="_blank" rel="noopener">横浜ランドマークタワー地圖</a></p>
@@ -1827,7 +1837,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
       <span class="day__head">
         <span class="day__date">10/12　週日</span>
         <span class="day__route">新宿御苑・東京最終巡禮・返家</span>
-        <span class="day__tags"><span class="tag">橫濱</span><span class="tag">東京</span></span>
+        <span class="day__tags"><span class="tag">橫濱</span><span class="tag">東京</span><span class="tag">千葉</span></span>
       </span>
       <span class="day__toggle" aria-hidden="true">＋</span>
     </summary>
@@ -1936,6 +1946,14 @@ tr.is-booked td{color:var(--beni);font-weight:600}
 (function(){
   'use strict';
 
+  /* CSS scroll-behavior is overridden by an explicit behavior in scrollTo/
+     scrollIntoView, so reduced motion has to be honoured here too. */
+  var reduceQuery = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var scrollBehavior = function(){
+    return (reduceQuery && reduceQuery.matches) ? 'auto' : 'smooth';
+  };
+
   /* ---- back to top ---- */
   var btn = document.getElementById('totop');
   var onScroll = function(){
@@ -1945,7 +1963,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
   btn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:scrollBehavior()});
   });
 
   /* ---- open today's day, else fall back to the overview ---- */
@@ -1977,7 +1995,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
     var a = byId[id];
     if (!a) return;
     a.setAttribute('aria-current','true');
-    if (a.scrollIntoView) a.scrollIntoView({block:'nearest', inline:'center'});
+    if (a.scrollIntoView) a.scrollIntoView({block:'nearest', inline:'center', behavior:scrollBehavior()});
   };
 
   if ('IntersectionObserver' in window) {

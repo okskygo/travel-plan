@@ -25,6 +25,7 @@
   --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem;
   --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
   --wrap:60rem;
+  --touch:2.75rem;       /* 44px — minimum touch target */
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -53,7 +54,7 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
 }
 .hero__nav a{
   color:var(--kasumi);
-  display:inline-flex;align-items:center;min-height:2.75rem;
+  display:inline-flex;align-items:center;min-height:var(--touch);
 }
 .hero__nav a:hover{color:var(--washi-hi)}
 .hero__title{
@@ -113,7 +114,7 @@ main{padding-bottom:var(--s8)}
   font-family:var(--data);font-size:.74rem;letter-spacing:.08em;
   border:1px solid var(--rule-firm);border-radius:999px;
   padding:.45em 1em;display:inline-flex;align-items:center;gap:.4em;
-  min-height:2.75rem;
+  min-height:var(--touch);
 }
 .card__link:hover{border-color:var(--bero);text-decoration:none}
 
@@ -173,7 +174,7 @@ main{padding-bottom:var(--s8)}
   padding:var(--s7) 0;margin-top:var(--s8);text-align:center;
 }
 .footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.1rem;letter-spacing:.14em;color:var(--washi-hi)}
-.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3);display:inline-flex;align-items:center;min-height:2.75rem}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3);display:inline-flex;align-items:center;min-height:var(--touch)}
 .footer a:hover{color:var(--washi-hi)}
 
 @media(max-width:640px){

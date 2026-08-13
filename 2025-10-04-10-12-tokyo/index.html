@@ -41,6 +41,7 @@
 
   --wrap:68rem;
   --rail-h:3.5rem;
+  --touch:2.75rem;        /* 44px — minimum touch target */
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -79,7 +80,7 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
   color:var(--kasumi);
   padding-bottom:var(--s6);
 }
-.hero__home{color:var(--kasumi);display:inline-flex;align-items:center;min-height:2.75rem}
+.hero__home{color:var(--kasumi);display:inline-flex;align-items:center;min-height:var(--touch)}
 .hero__home:hover{color:var(--washi-hi)}
 .hero__title{
   font-family:var(--display);
@@ -176,7 +177,7 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
 .rail__link[aria-current="true"] .rail__num{font-weight:600}
 @media(max-width:640px){
   .rail__list{padding:0 var(--s4)}
-  .rail__link{min-width:2.75rem;min-height:2.9rem;padding:0 .35rem}
+  .rail__link{min-width:var(--touch);min-height:var(--touch);padding:0 .35rem}
   .rail__date{display:none}
   .rail__num{font-size:1.2rem}
 }
@@ -188,7 +189,7 @@ a:hover{text-decoration:underline;text-underline-offset:.18em}
 }
 .quick__link{
   display:inline-flex;align-items:center;gap:.5em;
-  min-height:2.9rem;padding:.5em 1.1em;
+  min-height:var(--touch);padding:.5em 1.1em;
   border:1px solid var(--rule-firm);border-radius:999px;
   background:var(--washi-hi);
   font-size:.9rem;
@@ -282,7 +283,7 @@ main{padding-bottom:var(--s8)}
 @keyframes reveal{from{opacity:0;transform:translateY(-.4rem)}to{opacity:1;transform:none}}
 
 @media(max-width:640px){
-  .day__summary{grid-template-columns:2.9rem 1fr 2.75rem}
+  .day__summary{grid-template-columns:2.9rem 1fr var(--touch)}
   .day__num{padding:var(--s3) 0}
   .day__num .v{writing-mode:horizontal-tb;text-align:center}
   .day__num .n{font-size:1.35rem;display:block}
@@ -364,7 +365,7 @@ main{padding-bottom:var(--s8)}
 .note a{font-weight:500}
 /* A note whose whole content is a link is a standalone control and needs a full
    touch target. Links inside a sentence stay inline (WCAG 2.5.8 exempts them). */
-.note > a:only-child{min-height:2.75rem;align-items:center}
+.note > a:only-child{min-height:var(--touch);align-items:center}
 
 @media(max-width:640px){
   .stop{grid-template-columns:1fr;gap:0;padding:var(--s4) 0}
@@ -392,7 +393,7 @@ main{padding-bottom:var(--s8)}
   cursor:pointer;list-style:none;
   display:flex;align-items:center;gap:.5em;
   padding:.65em .9em;
-  min-height:2.75rem;
+  min-height:var(--touch);
   font-family:var(--display);font-size:.92rem;letter-spacing:.06em;
   color:var(--bero);
 }
@@ -447,7 +448,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
 .stay dd{margin:0;font-weight:600}
 .stay .num{font-family:var(--data);font-variant-numeric:tabular-nums}
 .linklist{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem var(--s4)}
-.linklist a{display:inline-flex;align-items:center;gap:.4em;font-size:.9rem;min-height:2.75rem}
+.linklist a{display:inline-flex;align-items:center;gap:.4em;font-size:.9rem;min-height:var(--touch)}
 .linklist .gl{font-family:var(--display);color:var(--sumi-mute);font-size:.9rem}
 
 /* ---------- callout (per-day transport preface) ---------- */
@@ -520,13 +521,13 @@ tr.is-booked td{color:var(--beni);font-weight:600}
   text-align:center;
 }
 .footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.15rem;letter-spacing:.14em;color:var(--washi-hi)}
-.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;display:inline-flex;align-items:center;min-height:2.75rem}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;display:inline-flex;align-items:center;min-height:var(--touch)}
 .footer a:hover{color:var(--washi-hi)}
 
 /* ---------- back to top ---------- */
 .totop{
   position:fixed;right:1.25rem;bottom:1.25rem;z-index:30;
-  width:2.9rem;height:2.9rem;
+  width:var(--touch);height:var(--touch);
   display:grid;place-items:center;
   border:1px solid var(--rule-firm);border-radius:50%;
   background:var(--washi-hi);color:var(--bero);
@@ -697,7 +698,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
       <span class="day__num"><span class="v"><span class="n">一</span><span class="k">景</span></span></span>
       <span class="day__head">
         <span class="day__date">10/04　週六</span>
-        <span class="day__route">抵達東京，前往大船</span>
+        <span class="day__route">抵達成田，前往大船</span>
         <span class="day__tags"><span class="tag">千葉</span><span class="tag">鎌倉</span></span>
       </span>
       <span class="day__toggle" aria-hidden="true">＋</span>
@@ -1237,7 +1238,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
             <p class="note">(可使用Pass) 搭JR至清水站，再搭公車或接駁車至清水港渡輪站。</p>
           </div>
         </li>
-        <li class="stop">
+        <li class="stop stop--urgent">
           <span class="stop__time">11:20 - 12:50</span>
           <div class="stop__body">
             <p class="stop__title"><span class="chip chip--move" aria-hidden="true">移</span>從清水港搭船前往土肥港</p>
@@ -1453,7 +1454,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
             <p class="stop__title"><span class="chip chip--move" aria-hidden="true">移</span>靜岡 → 小田原</p>
             <p class="leg">新幹線東海道 回聲818號 (42分，4站)</p>
             <p class="note">5號月台發車。</p>
-            <p class="note note--cost">自費購票（不使用Pass），建議提前購買指定席車票。</p>
+            <p class="note note--warn">自費購票（不使用Pass），建議提前購買指定席車票。</p>
           </div>
         </li>
         <li class="stop">
@@ -1550,7 +1551,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
           <div class="stop__body">
             <p class="stop__title"><span class="chip chip--move" aria-hidden="true">移</span>前往江之島</p>
             <p class="leg">步行回長谷站，搭乘江之電至江之島站</p>
-            <p class="note note--cost">購買江之電單程票券，準備展開江之島深度遊！</p>
+            <p class="note">購買江之電單程票券，準備展開江之島深度遊！</p>
           </div>
         </li>
         <li class="stop">
@@ -1879,7 +1880,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
               <summary class="bg__summary">🏯 皇室御花園</summary>
               <div class="bg__body">
                 <p><strong>新宿御苑</strong>是東京市中心的綠色奇蹟，佔地58公頃。原為江戶時代信州高遠藩主內藤家的宅邸，明治時代成為皇室御苑，1949年開放給一般民眾。園內完美融合日式、英式、法式三種造園風格，是世界園藝史的經典作品。春天的1500株櫻花、秋天的楓紅銀杏，四季美景各有千秋。這裡也是新海誠動畫《言葉之庭》的重要舞台，新宿門附近的涼亭就是男女主角初遇的地方！</p>
-                <p class="aside">詳細位置：〒160-0014 東京都新宿区内藤町11番地 (National Parks Discovery Center)</p>
+                <p class="aside"><strong>📍 詳細位置：</strong>〒160-0014 東京都新宿区内藤町11番地 (National Parks Discovery Center)</p>
                 <figure class="figure">
                   <img src="image/新宿御苑 スタンプ設置箇所.png" alt="新宿御苑スタンプ設置箇所">
                   <figcaption>🏮 スタンプ設置場所地圖</figcaption>

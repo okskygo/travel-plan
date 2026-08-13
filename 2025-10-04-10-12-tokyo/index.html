@@ -406,8 +406,8 @@ main{padding-bottom:var(--s8)}
 .bg__body .aside{font-size:.85rem;color:var(--sumi-mute)}
 
 /* ---------- tables ---------- */
-.tbl{margin:var(--s4) 0 0;overflow-x:auto;border:1px solid var(--rule);border-radius:2px}
-table{border-collapse:collapse;width:100%;min-width:22rem;font-size:.85rem}
+.tbl{margin:var(--s4) 0 0;border:1px solid var(--rule);border-radius:2px}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
 caption{
   caption-side:top;text-align:left;
   font-family:var(--data);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
@@ -426,6 +426,26 @@ td{font-family:var(--data);font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
 tr.is-booked{background:var(--beni-wash)}
 tr.is-booked td{color:var(--beni);font-weight:600}
+
+/* Narrow screens: the timetables become one labelled block per row rather than a
+   horizontally scrolling region — the day rail stays the only internal scroller. */
+@media(max-width:640px){
+  .tbl{border:0;border-radius:0}
+  table{border:0}
+  caption{border:1px solid var(--rule);border-radius:2px 2px 0 0}
+  thead{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+        clip-path:inset(50%);white-space:nowrap;border:0}
+  tr{display:block;border:1px solid var(--rule);border-top:0;padding:.5em .75em}
+  tr.is-booked{background:var(--beni-wash)}
+  td{display:grid;grid-template-columns:8em 1fr;gap:.5em;align-items:baseline;
+     padding:.2em 0;border:0}
+  td::before{
+    content:attr(data-label);
+    font-family:var(--data);font-size:.66rem;letter-spacing:.08em;
+    color:var(--sumi-mute);text-transform:uppercase;
+  }
+  td:last-child{border:0}
+}
 
 /* ---------- lodging & links ---------- */
 .panel{
@@ -542,7 +562,7 @@ tr.is-booked td{color:var(--beni);font-weight:600}
 
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  *,*::before,*::after{animation-duration:.001ms !important;animation-delay:0ms !important;transition-duration:.001ms !important}
+  *,*::before,*::after{animation:none !important;transition:none !important}
 }
 </style>
 </head>
@@ -744,8 +764,8 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>N'EX 班次選項</caption>
                 <thead><tr><th>班次</th><th>成田機場出發</th><th>抵達大船時間</th><th>備註</th></tr></thead>
                 <tbody>
-                  <tr><td>N'EX 34号</td><td>15:44</td><td>17:34</td><td>備選</td></tr>
-                  <tr class="is-booked"><td>N'EX 38号</td><td>16:44</td><td>18:32</td><td>已預約</td></tr>
+                  <tr><td data-label="班次">N'EX 34号</td><td data-label="成田機場出發">15:44</td><td data-label="抵達大船時間">17:34</td><td data-label="備註">備選</td></tr>
+                  <tr class="is-booked"><td data-label="班次">N'EX 38号</td><td data-label="成田機場出發">16:44</td><td data-label="抵達大船時間">18:32</td><td data-label="備註">已預約</td></tr>
                 </tbody>
               </table>
             </div>
@@ -942,9 +962,9 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>靜岡車站 → 日本平 巴士班次</caption>
                 <thead><tr><th>靜岡車站出發</th><th>日本平到達</th><th>所需時間</th><th>車資</th></tr></thead>
                 <tbody>
-                  <tr class="is-booked"><td>08:33</td><td>09:20</td><td>47分</td><td>現金 710円</td></tr>
-                  <tr><td>09:33</td><td>10:18</td><td>45分</td><td>-</td></tr>
-                  <tr><td>10:33</td><td>11:18</td><td>45分</td><td>-</td></tr>
+                  <tr class="is-booked"><td data-label="靜岡車站出發">08:33</td><td data-label="日本平到達">09:20</td><td data-label="所需時間">47分</td><td data-label="車資">現金 710円</td></tr>
+                  <tr><td data-label="靜岡車站出發">09:33</td><td data-label="日本平到達">10:18</td><td data-label="所需時間">45分</td><td data-label="車資">-</td></tr>
+                  <tr><td data-label="靜岡車站出發">10:33</td><td data-label="日本平到達">11:18</td><td data-label="所需時間">45分</td><td data-label="車資">-</td></tr>
                 </tbody>
               </table>
             </div>
@@ -998,9 +1018,9 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>久能山下 → 万世町 巴士班次</caption>
                 <thead><tr><th>久能山下出發</th><th>万世町到達</th><th>車資</th></tr></thead>
                 <tbody>
-                  <tr class="is-booked"><td>13:22</td><td>13:46</td><td rowspan="3">¥500</td></tr>
-                  <tr><td>15:16</td><td>15:54</td></tr>
-                  <tr><td>17:16</td><td>17:53</td></tr>
+                  <tr class="is-booked"><td data-label="久能山下出發">13:22</td><td data-label="万世町到達">13:46</td><td rowspan="3" data-label="車資">¥500</td></tr>
+                  <tr><td data-label="久能山下出發">15:16</td><td data-label="万世町到達">15:54</td></tr>
+                  <tr><td data-label="久能山下出發">17:16</td><td data-label="万世町到達">17:53</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1135,11 +1155,11 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>富士宮駅 → 白糸の滝 巴士班次</caption>
                 <thead><tr><th>富士宮駅出發</th><th>備註</th></tr></thead>
                 <tbody>
-                  <tr class="is-booked"><td>12:40</td><td>建議班次</td></tr>
-                  <tr class="is-booked"><td>12:50</td><td>建議班次</td></tr>
-                  <tr><td>13:20</td><td>-</td></tr>
-                  <tr><td>14:20</td><td>-</td></tr>
-                  <tr><td>14:40</td><td>-</td></tr>
+                  <tr class="is-booked"><td data-label="富士宮駅出發">12:40</td><td data-label="備註">建議班次</td></tr>
+                  <tr class="is-booked"><td data-label="富士宮駅出發">12:50</td><td data-label="備註">建議班次</td></tr>
+                  <tr><td data-label="富士宮駅出發">13:20</td><td data-label="備註">-</td></tr>
+                  <tr><td data-label="富士宮駅出發">14:20</td><td data-label="備註">-</td></tr>
+                  <tr><td data-label="富士宮駅出發">14:40</td><td data-label="備註">-</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1170,10 +1190,10 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>白糸の滝 → 富士宮駅 巴士班次</caption>
                 <thead><tr><th>白糸の滝出發</th><th>備註</th></tr></thead>
                 <tbody>
-                  <tr class="is-booked"><td>15:10</td><td>建議班次</td></tr>
-                  <tr><td>15:40</td><td>-</td></tr>
-                  <tr><td>16:40</td><td>-</td></tr>
-                  <tr><td>17:50</td><td>最晚班次</td></tr>
+                  <tr class="is-booked"><td data-label="白糸の滝出發">15:10</td><td data-label="備註">建議班次</td></tr>
+                  <tr><td data-label="白糸の滝出發">15:40</td><td data-label="備註">-</td></tr>
+                  <tr><td data-label="白糸の滝出發">16:40</td><td data-label="備註">-</td></tr>
+                  <tr><td data-label="白糸の滝出發">17:50</td><td data-label="備註">最晚班次</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1250,9 +1270,9 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>駿河灣渡輪 清水港 → 土肥港</caption>
                 <thead><tr><th>班次</th><th>清水港出發</th><th>土肥港到達</th></tr></thead>
                 <tbody>
-                  <tr><td>第1班</td><td>07:40</td><td>09:10</td></tr>
-                  <tr class="is-booked"><td>第2班</td><td>11:20</td><td>12:50</td></tr>
-                  <tr><td>第3班</td><td>14:40</td><td>16:10</td></tr>
+                  <tr><td data-label="班次">第1班</td><td data-label="清水港出發">07:40</td><td data-label="土肥港到達">09:10</td></tr>
+                  <tr class="is-booked"><td data-label="班次">第2班</td><td data-label="清水港出發">11:20</td><td data-label="土肥港到達">12:50</td></tr>
+                  <tr><td data-label="班次">第3班</td><td data-label="清水港出發">14:40</td><td data-label="土肥港到達">16:10</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1275,8 +1295,8 @@ tr.is-booked td{color:var(--beni);font-weight:600}
                 <caption>土肥港 → 修善寺インター 巴士班次</caption>
                 <thead><tr><th>土肥港出發</th><th>修善寺インター到達</th></tr></thead>
                 <tbody>
-                  <tr class="is-booked"><td>13:01</td><td>13:45</td></tr>
-                  <tr><td>16:47</td><td>17:31</td></tr>
+                  <tr class="is-booked"><td data-label="土肥港出發">13:01</td><td data-label="修善寺インター到達">13:45</td></tr>
+                  <tr><td data-label="土肥港出發">16:47</td><td data-label="修善寺インター到達">17:31</td></tr>
                 </tbody>
               </table>
             </div>

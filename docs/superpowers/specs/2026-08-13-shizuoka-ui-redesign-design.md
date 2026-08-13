@@ -352,7 +352,12 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
 
 Deliberately minimal:
 
-1. Hero ridge layers rise in sequence on load (~700ms, staggered).
+1. Hero ridge layers rise in sequence on load (~900ms, staggered by depth). This is
+   the page's single load moment, and it is the **ridge only** — the hero's title,
+   subtitle and counter are static. An earlier build also faded and lifted each line of
+   hero text in turn; that was cut. A staggered fade-in of every hero line is the most
+   over-used entrance on the web, and the restraint reads better: the mountain rises
+   behind type that is simply *there*.
 2. Sticky rail marks the active day via `IntersectionObserver`.
 3. Day expand/collapse is native `<details>`/`<summary>` (see §4). Closed content is
    removed from layout entirely, so the old `max-height: 5000px` clipping bug cannot
@@ -405,11 +410,20 @@ Same tokens, same hero pattern, one shared inline stylesheet copied into each fi
 - **Design tokens** — every colour, font stack, and spacing step is declared once as a
   custom property in `:root` (the `--bero`/`--washi`/`--sumi`… palette of §3.2, the
   three `--display`/`--body`/`--data` stacks of §3.3, and a `--s1`…`--s8` spacing
-  scale) and referenced via `var()` everywhere else. No raw hex colour, font-family
-  list, or spacing value may be repeated in a rule body.
-  Exempt, because they are structural rather than tokens: grid/flex templates,
-  `font-size` values (which use a `clamp()` scale), SVG path data, `border-radius`,
-  z-index, animation timings, and the gradient stop `#27618F` plus the ridge fills
+  scale plus `--touch`, `--rail-h`, `--wrap`) and referenced via `var()` everywhere
+  else. No raw hex colour and no raw font-family list may appear in a rule body.
+
+  **Spacing rule — `rem` versus `em`.** Layout spacing in *absolute* units is
+  page-level rhythm and must come from a token: **zero raw `rem` values** may appear in
+  any `margin`, `padding`, `gap`, or inset declaration. Spacing in **`em` is
+  type-relative and component-local** — `.5em` of padding on a chip and on a table cell
+  are deliberately different physical sizes, because each scales with its own
+  `font-size`. Converting those to `rem` tokens would break that scaling, so `em`
+  spacing is used directly and is exempt from the token requirement.
+
+  Also exempt, being structural rather than tokens: grid/flex templates, `font-size`
+  values (which use a `clamp()` scale), SVG path data, `border-radius`, z-index,
+  animation timings, and the gradient stop `#27618F` plus the ridge fills
   `#4E7FA6`/`#EAF2F8`/`#123A5C`/`#164368`, which exist only inside the hero artwork.
 - **Zero inline `style` attributes** in the final markup (down from 85).
 - Semantic HTML: `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`; day
@@ -774,7 +788,9 @@ new file against `git show <base>:<path>`.
    §3.5 ordered rule (title only) and compares it to the markup. Required result:
    **0 mismatches**, i.e. the rule fully explains the page with no editorial
    exceptions.
-3b. **Token discipline** — no six-digit hex literal appears anywhere in a `<style>`
+3b. **Token discipline** — no raw `rem` value appears in any `margin`/`padding`/`gap`/
+   inset declaration (`em` is exempt per §4); only two `@keyframes` exist per page
+   (`rise` and `reveal`, one on the sub-pages); no six-digit hex literal appears anywhere in a `<style>`
    block outside the `:root` token declarations and the exempt hero artwork
    (`.ridge__*` fills, the `linear-gradient` stops); and `color:var(--nami)` appears
    zero times, in any file.

@@ -30,7 +30,7 @@ Content inventory (must all survive the redesign):
 | Overview card | 1 (`#summary`) | 2 flights + 9-row trip outline |
 | Timeline stops | 93 | each = time + title + optional `.transport` + optional `.note` |
 | Background/info boxes | 24 `.info-card` | long 景點/歷史背景 prose |
-| Tables | 4 | train alternatives (N'EX, etc.) |
+| Tables | 7 | timetables: N'EX · 日本平巴士 · 久能山巴士 · 富士宮→白糸 · 白糸→富士宮 · 駿河灣渡輪 · 土肥→修善寺 |
 | 相關連結 blocks | 9 | official sites + Google Maps |
 | 住宿資訊 blocks | 8 | hotel name, price, breakfast |
 | Local images | 2 | `image/nex_ticket_qrcode.png`, `image/新宿御苑 スタンプ設置箇所.png` |
@@ -207,7 +207,14 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   document only — `document.documentElement.scrollWidth` must equal its
   `clientWidth` at every tested width. The rail is the single intentional exception:
   it is an internally scrolling element and does not widen the page. No other element
-  may overflow horizontally.
+  may overflow horizontally, and **no other element may introduce an internal
+  horizontal scroller.**
+
+  This is why the 7 timetables (§2) do not scroll. Below 640px each `<tr>` becomes a
+  labelled block: `<thead>` is visually hidden (kept in the DOM), every `<td>` carries
+  a `data-label` derived from its column header, and `td::before` renders that label
+  beside the value in a two-column grid. Timetable data stays visible rather than
+  hidden behind a swipe — which is also how the original page handled it.
 
 ### 3.5 Structural devices (each encodes something true)
 
@@ -352,8 +359,31 @@ Deliberately minimal:
    occur and there is no row size to animate between. Opening plays a short
    fade/slide (`@keyframes reveal`, ~300ms) on the panel instead.
 
-Nothing else animates. All of the above is disabled under
-`prefers-reduced-motion: reduce`.
+**No other orchestrated motion**: no scroll-triggered reveals on content, no ambient
+or looping animation, no parallax, no entrance animation on the day cards or stops.
+
+Separately from those three, **state-change transitions on interactive controls are
+permitted and expected**, because they are affordance rather than decoration. They are
+limited to this list, each ≤300ms and triggered only by hover, focus or open state:
+
+| Element | Property |
+| --- | --- |
+| `a`, `.rail__link`, `.quick__link`, `.card__link`, `.day__route` | `color` / `border-color` |
+| `.quick__link`, `.totop` | 1–2px `translateY` lift on hover |
+| `.day__toggle`, `.bg__summary::after` | `transform: rotate(45deg)` marking open state |
+| `.totop` | `opacity` / `visibility` as it appears past 400px of scroll |
+
+Everything above — the three animations and every transition — is **switched off
+entirely** under `prefers-reduced-motion: reduce`, via
+`animation: none !important; transition: none !important`. Not shortened to a near-zero
+duration: a `.001ms` animation still runs, and the acceptance criterion in §8.7 is that
+none runs at all. Every animated element renders directly in its final state, since the
+two keyframe sets only animate `transform` and `opacity` away from their default
+values.
+
+Reduced motion is also honoured in JavaScript: an explicit `behavior` in
+`scrollTo`/`scrollIntoView` overrides CSS, so both call sites query the media list and
+pass `'auto'` when it matches.
 
 ### 3.7 Sub-pages
 
@@ -442,7 +472,7 @@ Restructuring is permitted, but factual data is inviolable.
 - Every 歷史背景 / 景點介紹 paragraph — kept in full. These are the user's own
   writing and the reason the page is worth keeping; they are re-housed in a
   collapsible 「背景」 block, not trimmed.
-- All 4 alternative-train tables, including which row is 已預約.
+- All 7 timetables, including which row is 已預約 / 備選 / 建議班次 / 最晚班次.
 
 ### 5.1 The one permitted `href` correction
 
@@ -639,6 +669,36 @@ a scannable stop title. §8.1 now accepts a run that is verbatim **or** reflowed
 sentence boundaries with every sentence intact, and requires reflowed runs to be
 reported rather than silently passed.
 
+## 6d. Amendment 4 (2026-08-13, after code review round 3)
+
+Round 3 raised two findings, both spec defects rather than page defects.
+
+### A10 — §3.6 distinguishes orchestrated motion from control transitions
+
+§3.6 listed three animations and closed with "Nothing else animates", which read as
+banning the hover/focus/open transitions on links, the rail, the quick links and the
+disclosure carets. Those are affordance — removing them would make interactive
+elements feel dead, and they were never what the "deliberately minimal" intent was
+aimed at (ambient loops, parallax, scroll-triggered content reveals).
+
+§3.6 now states the ban precisely — no *orchestrated* motion beyond the three — and
+enumerates the permitted state-change transitions with their properties and their
+≤300ms bound. All of them remain neutralised under `prefers-reduced-motion`.
+
+### A11 — Timetables reflow instead of scrolling (§3.4)
+
+`.tbl` had `overflow-x:auto` with `min-width:22rem` on the table, creating a second
+internal horizontal scroller — which §3.4 explicitly reserved to the day rail alone.
+Rather than widen that exception, the tables were fixed: `overflow-x` and `min-width`
+are gone, and below 640px each row becomes a labelled block driven by a `data-label`
+on every one of the 58 `<td>` cells, with `<thead>` visually hidden but kept in the
+DOM. This restores the original page's mobile behaviour and keeps timetable data
+visible instead of hidden behind a swipe.
+
+Also corrected while here: §2, §5 and §8.1 said there were **4** tables. There are
+**7**. The parity check compared old against new so it never caught the error, but the
+stated inventory was wrong.
+
 ## 7. Out of scope
 
 - Root `index.html` and `map.html`, and all other trip folders.
@@ -684,7 +744,7 @@ new file against `git show <base>:<path>`.
      like ホテルプリヴェ静岡 or バリ勝男クン.
    - **Opening hours / ranges**: extract `\d{1,2}:\d{2}\s*[~～-]\s*\d{1,2}:\d{2}`
      as a multiset; require `new == old`.
-   - **Tables**: `index.html` still contains exactly 4 `<table>`; the total `<tr>`
+   - **Tables**: `index.html` still contains exactly 7 `<table>`; the total `<tr>`
      count matches old; and each 已預約 / 備選 marker still appears the same number
      of times.
    - **Stop count**: the original's 93 `.timeline-item` elements split into 9 overview
@@ -730,4 +790,7 @@ new file against `git show <base>:<path>`.
    item into view, back-to-top works, and the auto-expand fallback opens 行程總覽.
 6. **Keyboard/a11y** — tab through each page: every link and every day summary shows
    a visible focus ring and days toggle with Enter/Space.
-7. **Reduced motion** — with `prefers-reduced-motion: reduce`, no animation runs.
+7. **Reduced motion** — with `prefers-reduced-motion: reduce`, computed
+   `animation-name` is `none` and `transition-duration` is `0s` on every element, the
+   hero renders in its final state, and `scrollTo`/`scrollIntoView` receive
+   `behavior:'auto'`. Nothing animates at all, rather than animating imperceptibly.

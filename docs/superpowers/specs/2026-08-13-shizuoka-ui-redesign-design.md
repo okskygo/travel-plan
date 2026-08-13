@@ -82,6 +82,12 @@ Derived from ukiyo-e woodblock pigments, not from a generic palette:
 | `--beni` | `#A83B32` | 紅 vermilion — the ONE accent. Reserved for time-critical items only (e.g. the 16:30 駿府城 stamp deadline) and the Fuji summit mark. |
 | `--cha` | `#55633A` | 茶 tea green — secondary, food/tea items only. |
 | `--sumi-mute` | `#4A5560` | Muted ink — secondary text: inactive rail labels, captions, `.note` body. |
+| `--kasumi` | `#C8DEEF` | 霞 haze — secondary text **on the dark hero and footer** (hero nav, subtitle, facts, day numeral label). |
+| `--beni-lite` | `#FAD2CD` | The Fuji mark when it sits on a dark ground (the hero's 富士見 counter). |
+| `--yu` | `#7A5230` | 湯 — ground for the onsen chip. |
+| `--murasaki` | `#5A4A7A` | 買 — ground for the shopping chip. |
+| `--wash` / `--wash-firm` | `rgba(27,76,126,.05)` / `.09` | Pale blue washes for raised panels, table headers and captions. |
+| `--beni-wash` | `rgba(168,59,50,.08)` | Wash behind a booked table row or an urgent time chip. |
 
 Full-bleed blue carries the page so the cream ground never dominates.
 
@@ -95,13 +101,31 @@ Full-bleed blue carries the page so the cream ground never dominates.
 | `--cha` | 5.21:1 | 5.91:1 |
 | `--beni` | 5.04:1 | 5.73:1 |
 
-`--washi-hi` on `--bero` is 8.02:1 and `--washi` on `--bero` is 7.07:1, covering the
-hero and day headers.
+On the **dark** grounds, measured against the hero gradient's three stops
+(`--bero-deep` → `--bero` → `#27618F`) and the solid `--bero-deep` footer:
 
-**Text-bearing tokens** are exactly the five in the table above; every one clears
-4.5:1 on both ground colours. `--nami` (2.00:1 on washi) and `--bero-deep` are
-**non-text tokens** — permitted only for rules, ridge/wave fills, gradient steps, and
-borders, never for glyphs. Inactive rail labels use `--sumi-mute`, not `--nami`.
+| Foreground | worst of the three stops | on `--bero-deep` |
+| --- | --- | --- |
+| `--washi-hi` | 5.98:1 | 13.13:1 |
+| `--kasumi` | **4.75:1** | 10.41:1 |
+| `--beni-lite` | **4.75:1** | 10.42:1 |
+
+Both `--kasumi` and `--beni-lite` were darkened/lightened to reach 4.5:1 against the
+gradient's lightest stop rather than only against `--bero-deep`, so hero text stays
+compliant wherever it falls.
+
+Chip grounds carry `--washi-hi` text: `--bero` 8.02:1 · `--bero-deep` 13.13:1 ·
+`--cha` 5.91:1 · `--yu` 6.21:1 · `--murasaki` 7.09:1.
+
+**Text-bearing tokens** are exactly `--sumi`, `--sumi-mute`, `--bero`, `--cha`,
+`--beni` (on light grounds) and `--washi-hi`, `--kasumi`, `--beni-lite` (on dark
+grounds). Every one clears 4.5:1 against every ground it is actually used on.
+
+`--nami` (2.00:1 on washi) is a **non-text token** — permitted only for rules,
+ridge/wave fills, gradient steps and borders, **never for a glyph, on any
+background**. This is absolute, so the hero navigation uses `--kasumi` rather than
+`--nami`, inactive rail labels use `--sumi-mute`, and the `.leg` connector is a real
+`border-top` rather than a `──` text glyph.
 
 Earlier drafts of this spec used `#B4453C` for `--beni` and `#5C6B3E` for `--cha`;
 both measured below or uncomfortably near 4.5:1 on `--washi` (4.36:1 and 4.64:1) and
@@ -197,31 +221,52 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   derived from what the stop actually is. This is a deliberate, reversible taste call
   — see §6.
 
-  All 93 stops are classified by this **top-down, first-match decision list** applied
-  to the stop's own title and note text:
+  All 84 day stops are classified from the **stop title only**. Notes are advisory and
+  never determine the chip — this is load-bearing: 「參觀【久能山東照宮】」 whose note
+  mentions 「可在此附近用餐」 is a shrine visit (見), not a meal, and a transit leg
+  whose destination happens to be 「…溫泉」 or 「…公園」 is still 移.
 
-  | # | Trigger | Chip |
+  **Ordered rule, first match wins:**
+
+  | # | Test on the title | Result |
   | --- | --- | --- |
-  | 1 | 入住 / チェックイン / 辦理住宿 | 宿 |
-  | 2 | 溫泉 / 入湯 / 足湯 / 湯めぐり *as the activity* | 湯 |
-  | 3 | 早餐 / 午餐 / 晚餐 / 用餐 / 餐廳 / 品嚐 / 咖啡 | 食 |
-  | 4 | 購物 / 商店街 / 百貨 / 伴手禮 / 藥妝 / 免稅 | 買 |
-  | 5 | 神社 / 大社 / 寺 / 城 / 公園 / 博物館 / 美術館 / 展望 / 瀑布 / 樂園 / 參觀 / 遊覽 / 蓋章 | 見 |
-  | 6 | 搭乘 / 前往 / 出發 / 抵達 / 轉乘 / 步行 / 渡輪 / 退房 / 寄行李 | 移 |
-  | 7 | none of the above | **no chip** — the row renders normally without one |
+  | 1 | contains 入住 or 辦理住宿 | 宿 |
+  | 2 | contains 飯店/ホテル/酒店 **and** 休息 | 宿 |
+  | 3 | contains 溫泉區 / 入湯 / 足湯 | 湯 |
+  | 4 | begins with an activity verb (ignoring a leading 【 or ⭐️): 參觀 · 參拜 · 探訪 · 漫步 · 登上 · 體驗 · 衝刺 · 自由逛逛 · 逛逛 · 最後的 | → **activity test** |
+  | 5 | contains a movement verb: 搭乘 · 搭車 · 搭船 · 搭公車 · 前往 · 返回 · 回程 · 出發 · 抵達 · 入境 · 退房 · 轉乘 · 寄放 · 寄行李 · 取回 · 登機 | 移 |
+  | 6 | contains `→` with no 【 before it (a bare `A → B` leg) | 移 |
+  | 7 | otherwise | → **activity test** |
 
-  Because the list is evaluated top-down, 「飯店入住」 → 宿 while 「飯店退房，從大船前往
-  熱海」 falls through to rule 6 → 移 (退房 is a movement trigger, not a 宿 trigger).
-  Rule 7 is the explicit escape hatch: an unclassifiable stop is not forced into a
-  chip, and the layout must not assume a chip is present.
+  **Activity test** — of these keyword groups, whichever keyword occurs *earliest* in
+  the title wins; if none occur, the stop gets **no chip** and the layout must not
+  assume one is present:
 
-- **Region tags** per day. Vocabulary (8 values): 東京 / 橫濱 / 鎌倉 / 熱海 / 靜岡 /
-  富士 / 伊豆 / 三島. A day is tagged with every distinct region it actually touches,
-  in itinerary order, capped at 3. Derived from the existing 行程總覽 route lines:
+  | Chip | Keywords |
+  | --- | --- |
+  | 食 | 早餐 · 午餐 · 晚餐 · 用餐 · 餐廳 · 品嚐 · 咖啡 |
+  | 買 | 購物 · 逛街 · 商店街 · 百貨 · 採購 · 伴手禮 · 藥妝 · 免稅 · 逛 |
+  | 見 | 參觀 · 參拜 · 探訪 · 漫步 · 登上 · 體驗 · 衝刺 · 蓋章 · 神社 · 大社 · 寺 · 城 · 公園 · 博物館 · 美術館 · 展望 · 瀑布 · 樂園 · 步道 · 夕陽 · 夜景 · 燈塔 · 苑 · 湧水 · 岩屋 · 大佛 · 天空 |
+
+  Worked examples: 「飯店入住」→ 宿 (1); 「返回飯店休息」→ 宿 (2); 「參觀【修善寺溫泉區
+  景點】」→ 湯 (3, before the activity test); 「參拜【中津宮 → 奧津宮】」→ 見 (4, so the
+  arrow in rule 6 never fires); 「飯店退房，從大船前往熱海」→ 移 (5); 「山下公園→みなと
+  みらい」→ 移 (6, the 公園 in the station name is ignored); 「最後的採購與午餐」→ 買
+  (7 → activity, 採購 precedes 午餐).
+
+  This rule is **mechanically verifiable and produces zero exceptions** across all 84
+  stops (see §8.1).
+
+- **Region tags** per day. Vocabulary (9 values): 東京 / 千葉 / 橫濱 / 鎌倉 / 熱海 /
+  靜岡 / 富士 / 伊豆 / 三島. A day is tagged with every distinct region it actually
+  *visits*, in itinerary order, capped at 3 — passing through a region by train does
+  not earn a tag. 成田機場 is in **千葉**, not 東京, so day 1 (land at Narita, ride
+  straight to Ofuna) never touches Tokyo, while day 9 visits 品川 and 新宿 (東京)
+  before departing from Narita (千葉). Derived from the existing 行程總覽 route lines:
 
   | Day | Route line | Region tags |
   | --- | --- | --- |
-  | 一 10/04 | 抵達成田 → N'EX → 大船 | 東京・鎌倉 |
+  | 一 10/04 | 抵達成田 → N'EX → 大船 | 千葉・鎌倉 |
   | 二 10/05 | 大船 → 熱海 → 靜岡 | 鎌倉・熱海・靜岡 |
   | 三 10/06 | 靜岡 → 日本平 → 久能山 | 靜岡 |
   | 四 10/07 | 靜岡 → 富士 → 富士宮 | 靜岡・富士 |
@@ -229,13 +274,24 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   | 六 10/09 | 修善寺 → 三島 → 靜岡 | 伊豆・三島・靜岡 |
   | 七 10/10 | 靜岡 → 大船 → 鎌倉 | 靜岡・鎌倉 |
   | 八 10/11 | 大船 → 橫濱 | 鎌倉・橫濱 |
-  | 九 10/12 | 橫濱 → 品川 → 東京 → 成田 | 橫濱・東京 |
+  | 九 10/12 | 橫濱 → 品川 → 東京 → 成田 | 橫濱・東京・千葉 |
 
   A stop whose location differs from its day's tags needs no per-stop tag — tags are
   a day-level device only, so cross-region days are handled by simply listing both.
 - **富士見 mark** — a small vermilion Fuji glyph on stops where Fuji is genuinely
-  visible (日本平夢テラス, 久能山東照宮, 白糸の滝, 富士山世界遺產中心, 三島天空步道,
-  長谷寺見晴台). The hero shows the total: 「富士見 N 景」. **This is the signature
+  visible on the page's own evidence. Seven stops qualify:
+
+  | Day | Stop | Evidence |
+  | --- | --- | --- |
+  | 二 | 駿府城公園 | 背景：「從這裡可眺望富士山」 |
+  | 三 | 日本平夢テラス | 「欣賞富士山、駿河灣絕景」 |
+  | 三 | 久能山東照宮 | 同一山稜的展望點，背景述及富士 |
+  | 四 | 靜岡縣富士山世界遺產中心 | 「登螺旋坡到屋頂看富士山」 |
+  | 四 | 白糸の滝 | 富士山湧水瀑布群，正面望富士 |
+  | 六 | 三島天空步道 | 「360度欣賞富士山」 |
+  | 七 | 長谷寺 | 背景：「見晴台可遠眺江之島和富士山」 |
+
+  The hero counter therefore reads 「**富士見 七景**」. **This is the signature
   element** — it ties the 三十六景 concept to real itinerary data, so the theme is
   informational rather than decorative.
 - **Note severity**, replacing today's uniform grey italics: `▸` neutral tip ·
@@ -245,7 +301,7 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
 
   | # | Trigger | Class | Marker / colour |
   | --- | --- | --- | --- |
-  | 1 | ⚠️ / 緊急 / 僅剩 / 務必 / 關門 / 最晚 | warning | `⚠` `--beni` |
+  | 1 | ⚠️ / 緊急 / 僅剩 / 務必 / 關門**前** / 最晚 | warning | `⚠` `--beni` |
   | 2 | 不使用Pass / 不能使用Pass / 需另外購買 / 需另外購票 / 自費 / 門票 / 車資 / `¥` | cost | `¥` `--cha` |
   | 3 | anything else | neutral | `▸` `--sumi-mute` |
 
@@ -262,6 +318,11 @@ minimum touch target that needs ≥440px, which does not fit 320px. Resolution:
   The literal `⚠️` emoji is dropped from note text where rule 1 fires, since the `⚠`
   marker and vermilion colour now carry that meaning (consistent with the emoji rule
   in §5).
+
+  The trigger is 關門**前** (before closing), not 關門 alone. 「券賣所16:30關門後，仍可
+  在公園內參觀…」 tells the reader what remains *possible* after closing — it is
+  reassurance, not a deadline, and stays neutral. Marking it red would misreport the
+  one genuinely urgent moment of the trip.
 
   A stop whose note is a warning also gets `.stop--urgent`, which tints its time in
   `--beni` so the deadline is visible without reading the note.
@@ -311,8 +372,19 @@ Same tokens, same hero pattern, one shared inline stylesheet copied into each fi
   collapse built on `<details>`/`<summary>` so it works with JS disabled and is
   keyboard-accessible for free.
 - Accessibility floor: every text colour ≥4.5:1 against its actual background per the
-  §3.2 table, with `--nami`/`--bero-deep` never used for text; visible
-  `:focus-visible` rings; ≥44px touch targets;
+  §3.2 tables, with `--nami`/`--bero-deep` never used for text; visible
+  `:focus-visible` rings; **≥44px touch targets for every standalone control** — rail
+  links, day summaries, background-block summaries, quick links, link-list entries,
+  footer and hero nav links, the back-to-top button, and any link that is the sole
+  content of a `.note` (since `.note` is a flex container, such a link blockifies onto
+  its own row and is a standalone control in practice).
+  *Exempt:* links inline within a sentence of prose, per WCAG 2.5.8 Target Size
+  (Minimum), which excludes targets "in a sentence or block of text". Enlarging those
+  would break the line box.
+- Reduced motion must be honoured in **JavaScript as well as CSS**: an explicit
+  `behavior: 'smooth'` in `scrollTo`/`scrollIntoView` overrides
+  `scroll-behavior: auto`, so both call sites read
+  `matchMedia('(prefers-reduced-motion: reduce)')` and pass `'auto'` when it matches.
   `prefers-reduced-motion` respected; images have real `alt`; nav is a real list;
   the ridge SVG is `aria-hidden`.
 - Responsive: verified at 320 / 390 / 768 / 1280px.
@@ -387,8 +459,16 @@ No other new link targets. Nothing existing is dropped or altered.
 **Permitted changes:**
 
 - Re-house repeated 住宿資訊 / 相關連結 into one consistent block per day.
-- Drop purely decorative leading emoji from stop titles in favour of the kanji chip
-  (§3.5) — the emoji that carry meaning inside prose stay.
+- Drop purely decorative **leading** emoji in favour of the design's own glyph system,
+  in two places:
+  - **Stop titles** — the leading ✈️/🏨/🍽️/🏯/🎯 etc. are replaced by the kanji chip
+    (§3.5).
+  - **Link labels** — the 36 leading `📍` and 25 leading `🌐` markers become the
+    `地` / `網` display-face glyphs of `.linklist .gl`, which encode the same
+    distinction (map vs official site) in the page's own typographic voice.
+
+  Emoji that sit *inside* prose, or that head a background block's title
+  (🌊 溫泉度假勝地, 👑 德川家康居城, …), are the user's voice and stay untouched.
 - Trim duplicated connective wording (e.g. a stop title that repeats the day
   header's route verbatim).
 - Normalise mixed 靜岡/静岡 usage in *prose* to 靜岡 (zh-TW), while proper nouns keep
@@ -446,6 +526,53 @@ cannot occur, and there is no row size to animate between.
 the transition. **§3.6.3 has been rewritten** accordingly; a short fade/slide
 (`@keyframes reveal`) plays on open, still disabled under `prefers-reduced-motion`.
 
+## 6b. Amendment 2 (2026-08-13, after code review)
+
+Codex's code review raised nine findings. Six were straight implementation defects and
+were fixed in code with no spec change: `--nami` used for glyph colour on three pages,
+unapproved raw hex literals, `behavior:'smooth'` ignoring reduced motion, sub-44px
+controls, sub-page `<nav>`s that were not real lists, and the 【…】 emphasis brackets
+dropped from `credit-cashback.html` (restored).
+
+Three required the spec itself to change, because the spec — not the page — was wrong:
+
+### A4 — The chip decision list is rewritten (§3.5)
+
+The originally approved list keyed off "the stop's own title **and note text**" with a
+flat keyword precedence. Re-deriving all 84 chips from it produced **30 mismatches**,
+and inspection showed the rule was at fault in the great majority: a note reading
+「可在此附近用餐」 turned a shrine visit into 食, a bus ride to 「…修善寺溫泉」 became 湯,
+and a transit leg through 「山下公園」 became 見. The keyword lists were also incomplete
+(返回, 搭車, 逛街, 步道, 夜景 … all unmatched).
+
+§3.5 is replaced with an ordered, **title-only** rule that separates movement legs from
+activities and ranks multi-match titles by earliest keyword. It re-derives all 84 chips
+with **0 mismatches**. Three chips were corrected in the page to agree with it
+(自由逛逛熱海市區 → 買, 參觀【橫濱紅磚倉庫2號館】 → 見,
+【横浜ランドマークタワー…】準備看夜景 → 見).
+
+### A5 — Note-severity trigger narrowed to 關門前 (§3.5)
+
+`關門` alone would classify 「券賣所16:30關門後，仍可在公園內參觀…」 as a warning and tint
+its time vermilion. That sentence is reassurance about what remains possible *after*
+closing, not a deadline; marking it red would dilute the trip's one real deadline.
+Trigger narrowed to 關門**前**.
+
+### A6 — Palette gains on-dark and chip-ground tokens (§3.2)
+
+The implementation needed colours the approved palette did not name: secondary text on
+the dark hero, the Fuji mark on dark, grounds for the 湯/買 chips, and the pale washes
+behind panels and booked rows. These were raw hex/rgba literals, violating §4. They are
+now tokens (`--kasumi`, `--beni-lite`, `--yu`, `--murasaki`, `--wash`, `--wash-firm`,
+`--beni-wash`) with measured contrast, and §3.2 gains a dark-ground contrast table.
+
+Two values were adjusted to pass 4.5:1 against the *lightest* hero gradient stop rather
+than only against `--bero-deep`, where a first pass had measured 4.38:1 and 3.36:1:
+`--kasumi` `#BFD6E8` → `#C8DEEF`, `--beni-lite` `#F0A79E` → `#FAD2CD`.
+
+§4's 44px rule also gains the WCAG 2.5.8 exemption for in-sentence links, and §5's
+emoji rule now covers link-label markers (📍/🌐 → 地/網) as well as stop titles.
+
 ## 7. Out of scope
 
 - Root `index.html` and `map.html`, and all other trip folders.
@@ -494,11 +621,12 @@ new file against `git show <base>:<path>`.
    - **Proper nouns**: multisets of every `【…】` and every `「…」` span must satisfy
      `new ⊇ old`. These brackets carry most attraction and line names
      (【駿府城公園】,「富士山・靜岡地區周遊券 Mini」, …).
-   - **Hotel and station names**: assert each of the 5 distinct lodgings —
-     鎌倉大船JR東日本METS飯店 · ホテルプリヴェ静岡 · 修善寺温泉 桂川 ·
-     橫濱站前里士滿酒店 — plus each of its 8 nightly price strings is present, and
-     that every station name appearing in `old` still appears in `new` (covered by the
-     katakana and bracket checks above plus the ≥60-char prose check).
+   - **Hotel and station names**: assert all **4** distinct lodgings are present —
+     鎌倉大船JR東日本METS飯店 (nights 1 & 7) · ホテルプリヴェ静岡 (2, 3, 4, 6) ·
+     修善寺温泉 桂川 (5) · 橫濱站前里士滿酒店 (8) — covering all 8 nights, together
+     with the **7** distinct nightly price strings (`20,952日圓` recurs for nights 1
+     and 7). Station names are covered by the katakana, bracket and ≥60-char prose
+     checks above.
 2. **Content parity (manual).** Automated checks cannot prove the *right* text sits
    under the right day. Read old and new side by side, one pass per day, ticking a
    9-row checklist (一…九) plus 行程總覽 — confirming for each: the stop order is
@@ -506,6 +634,17 @@ new file against `git show <base>:<path>`.
    day's 住宿資訊 and 相關連結 carry that day's own values. Same pass for the two
    sub-pages (7 shop cards; 富邦 two 回饋 tiers + 玉山 two cards + 使用建議).
 3. **No inline styles** — `grep -c 'style="'` returns 0 on all three files.
+3a. **Chip classification** — a script re-derives the chip for all 84 stops from the
+   §3.5 ordered rule (title only) and compares it to the markup. Required result:
+   **0 mismatches**, i.e. the rule fully explains the page with no editorial
+   exceptions.
+3b. **Token discipline** — no six-digit hex literal appears anywhere in a `<style>`
+   block outside the `:root` token declarations and the exempt hero artwork
+   (`.ridge__*` fills, the `linear-gradient` stops); and `color:var(--nami)` appears
+   zero times, in any file.
+3c. **Touch targets** — measured in a real 320px viewport: every `a`/`button`/`summary`
+   whose computed `display` is not `inline` has a rendered height ≥44px. Inline
+   in-sentence links are exempt per §4.
 4. **Anchors** — `#summary` and `#day1`…`#day9` all present and reachable from the
    nav.
 5. **Rendering** — open each page in a browser at 320 / 390 / 768 / 1280px; confirm

@@ -1,301 +1,295 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💳 信用卡回饋活動</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信用卡回饋 — 日韓旅遊最佳回饋方案</title>
+<meta name="description" content="2025/10 靜岡行程的刷卡回饋整理：富邦J卡日韓3%無上限＋加碼3%，玉山熊本熊卡與 PayPay 樂享券。">
+<style>
+/* ============================================================
+   駿河三十六景 — shared design tokens
+   ============================================================ */
+:root{
+  --bero:#1B4C7E; --bero-deep:#0E2B47; --nami:#7FA9C9;
+  --washi:#E9E6DD; --washi-hi:#F6F4EF;
+  --sumi:#14181A; --sumi-mute:#4A5560;
+  --beni:#A83B32; --cha:#55633A;
+  --kasumi:#C8DEEF;      /* 霞 — secondary text on dark grounds */
+  --wash:rgba(27,76,126,.05); --wash-firm:rgba(27,76,126,.09);
+  --beni-wash:rgba(168,59,50,.08);
+  --rule:rgba(27,76,126,.16); --rule-firm:rgba(27,76,126,.32);
+  --shadow:0 1px 2px rgba(14,43,71,.06), 0 8px 24px -12px rgba(14,43,71,.22);
+  --display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Songti TC","Noto Serif TC",serif;
+  --body:"PingFang TC","Hiragino Sans","Noto Sans TC",system-ui,-apple-system,sans-serif;
+  --data:ui-monospace,"SF Mono","SFMono-Regular","Roboto Mono",Menlo,monospace;
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem;
+  --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
+  --wrap:60rem;
+  --touch:2.75rem;       /* 44px — minimum touch target */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--washi);color:var(--sumi);
+  font-family:var(--body);line-height:1.75;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--bero);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:.18em}
+:focus-visible{outline:2.5px solid var(--beni);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--s5)}
+@media(max-width:640px){.wrap{padding:0 var(--s4)}}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:linear-gradient(178deg,var(--bero-deep) 0%,var(--bero) 70%,#27618F 100%);
+  color:var(--washi-hi);padding:var(--s7) 0 0;overflow:hidden;
+}
+.hero__nav{padding-bottom:var(--s6)}
+.hero__nav ul{
+  display:flex;flex-wrap:wrap;gap:0 var(--s5);align-items:center;
+  list-style:none;margin:0;padding:0;
+  font-family:var(--data);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+}
+.hero__nav a{
+  color:var(--kasumi);
+  display:inline-flex;align-items:center;min-height:var(--touch);
+}
+.hero__nav a:hover{color:var(--washi-hi)}
+.hero__title{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(2.4rem,8vw,3.9rem);line-height:1.08;letter-spacing:.06em;margin:0;
+}
+.hero__sub{
+  font-family:var(--display);font-size:clamp(1rem,3vw,1.25rem);
+  letter-spacing:.18em;margin:var(--s4) 0 0;color:var(--kasumi);
+}
+.hero__note{
+  font-family:var(--data);font-size:.75rem;letter-spacing:.08em;
+  color:var(--kasumi);margin:var(--s5) 0 0;
+}
+.ridge{display:block;width:100%;height:auto;margin-top:var(--s6)}
+.ridge__mid{fill:#123A5C}
+.ridge__near{fill:var(--washi)}
+@media(prefers-reduced-motion:no-preference){
+  .ridge__mid,.ridge__near{animation:rise .9s cubic-bezier(.2,.75,.25,1) both}
+  .ridge__near{animation-delay:.14s}
+}
+@keyframes rise{from{transform:translateY(16%)}to{transform:translateY(0)}}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
+/* ---------- bank sections ---------- */
+main{padding-bottom:var(--s8)}
+.bank{margin-top:var(--s8)}
+.bank__head{
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:var(--s4);
+  margin-bottom:var(--s5);
+}
+.bank__glyph{
+  display:grid;place-items:center;
+  width:3rem;height:3rem;
+  background:var(--bero);color:var(--washi-hi);
+  font-family:var(--display);font-size:1.5rem;border-radius:2px;
+}
+.bank__name{font-family:var(--display);font-size:1.65rem;letter-spacing:.08em;margin:0;line-height:1.2}
+.bank__meta{font-family:var(--data);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sumi-mute);margin:.2em 0 0}
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
+/* ---------- card ---------- */
+.card{
+  background:var(--washi-hi);
+  border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);
+  padding:var(--s5);margin-bottom:var(--s4);
+}
+.card__top{
+  display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+  gap:var(--s3);margin-bottom:var(--s4);
+}
+.card__name{font-family:var(--display);font-size:1.35rem;letter-spacing:.04em;margin:0}
+.card__link{
+  font-family:var(--data);font-size:.74rem;letter-spacing:.08em;
+  border:1px solid var(--rule-firm);border-radius:999px;
+  padding:.45em 1em;display:inline-flex;align-items:center;gap:.4em;
+  min-height:var(--touch);
+}
+.card__link:hover{border-color:var(--bero);text-decoration:none}
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+/* ---------- benefit tiers ---------- */
+.tier{margin:0 0 var(--s5)}
+.tier:last-child{margin-bottom:0}
+.tier__rate{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.5em;
+  font-family:var(--display);
+  font-size:1.15rem;letter-spacing:.04em;
+  padding:.5em .8em;
+  background:var(--wash-firm);
+  border-left:3px solid var(--bero);
+  border-radius:0 2px 2px 0;
+}
+.tier--bonus .tier__rate{background:var(--beni-wash);border-left-color:var(--beni)}
+.tier__tag{
+  font-family:var(--data);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sumi-mute);
+}
+.tier__label{
+  font-family:var(--data);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sumi-mute);margin:var(--s4) 0 var(--s2);
+}
+.terms{margin:0;padding-left:1.5em;font-size:.92rem;color:var(--sumi-mute)}
+.terms li{margin:.5em 0}
+.terms b{color:var(--sumi);font-weight:600}
+.terms .num{font-family:var(--data);font-variant-numeric:tabular-nums;color:var(--beni);font-weight:600}
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
+/* ---------- figure ---------- */
+.figure{margin:0}
+.figure img{
+  border:1px solid var(--rule-firm);border-radius:2px;
+  box-shadow:var(--shadow);width:100%;
+}
 
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
+/* ---------- tips ---------- */
+.tips{
+  margin-top:var(--s8);
+  background:var(--washi-hi);
+  border:1px solid var(--rule);border-left:3px solid var(--cha);
+  border-radius:0 3px 3px 0;
+  box-shadow:var(--shadow);
+  padding:var(--s5);
+}
+.tips__name{
+  font-family:var(--display);font-size:1.25rem;letter-spacing:.06em;
+  margin:0 0 var(--s3);color:var(--cha);
+}
+.tips ul{margin:0;padding-left:1.4em;font-size:.94rem}
+.tips li{margin:.5em 0}
+.tips b{font-weight:600}
 
-        .back-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
+/* ---------- footer ---------- */
+.footer{
+  background:var(--bero-deep);color:var(--kasumi);
+  padding:var(--s7) 0;margin-top:var(--s8);text-align:center;
+}
+.footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.1rem;letter-spacing:.14em;color:var(--washi-hi)}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3);display:inline-flex;align-items:center;min-height:var(--touch)}
+.footer a:hover{color:var(--washi-hi)}
 
-        .content {
-            padding: 40px;
-        }
-
-        .bank-section {
-            margin-bottom: 50px;
-        }
-
-        .bank-title {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-item {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 5px solid #007bff;
-        }
-
-        .card-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .card-name {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .card-link {
-            display: inline-block;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding: 8px 15px;
-            background: #e3f2fd;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .card-link:hover {
-            background: #bbdefb;
-            transform: translateY(-1px);
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .benefit-list {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #28a745;
-        }
-
-        .benefit-list h4 {
-            color: #28a745;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .benefit-list ol, .benefit-list ul {
-            padding-left: 20px;
-        }
-
-        .benefit-list li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .strong-text {
-            background: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #856404;
-        }
-
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
-            margin: 40px 0;
-        }
-
-        .image-container {
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .bank-title {
-                font-size: 1.5em;
-            }
-            
-            .card-item {
-                padding: 20px;
-            }
-        }
-    </style>
+@media(max-width:640px){
+  .card{padding:var(--s4)}
+  .tips{padding:var(--s4)}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="back-link">← 返回行程</a>
-            <h1>💳 信用卡回饋活動</h1>
-            <p>日韓旅遊最佳回饋方案</p>
-        </div>
 
-        <div class="content">
-            <!-- 富邦銀行區域 -->
-            <div class="bank-section">
-                <h2 class="bank-title">🏦 富邦銀行</h2>
+<header class="hero">
+  <div class="wrap">
+    <nav class="hero__nav" aria-label="頁面導覽">
+      <ul>
+        <li><a href="index.html">← 回行程</a></li>
+        <li><a href="omiyage.html">お土産</a></li>
+        <li><a href="../index.html">所有行程</a></li>
+      </ul>
+    </nav>
+    <h1 class="hero__title">信用卡回饋</h1>
+    <p class="hero__sub">日韓旅遊最佳回饋方案</p>
+    <p class="hero__note">富邦J卡 · 玉山熊本熊卡 · 玉山PayPay樂享券</p>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="ridge__mid" d="M0 120 Q160 74 320 96 Q470 116 610 92 Q760 66 910 96 Q1060 122 1200 88 L1200 120 Z"/>
+    <path class="ridge__near" d="M0 120 Q100 106 210 112 Q330 119 430 108 Q560 95 660 106 Q790 119 900 109 Q1030 97 1120 107 Q1170 112 1200 108 L1200 120 Z"/>
+  </svg>
+</header>
 
-                <div class="card-item">
-                    <h3 class="card-name">富邦J卡</h3>
-                    <a href="https://www.fubon.com/banking/Personal/credit_card/all_card/omiyage/omiyage.htm" target="_blank" class="card-link">
-                        🔗 官方活動頁面
-                    </a>
-                    
-                    <div class="highlight-box">
-                        【日韓3%無上限、泰國1%無上限】
-                    </div>
+<main class="wrap">
 
-                    <div class="benefit-list">
-                        <h4>📋 基本回饋條件</h4>
-                        <ol>
-                            <li>活動期間以富邦J卡於日韓地區新增之一般消費享<span class="strong-text">3%無上限回饋</span>，泰國地區新增之一般消費享<span class="strong-text">1%無上限回饋</span>，以上消費需於<span class="strong-text">2026/1/15前請款</span>方可享回饋。</li>
-                            <li>日韓地區消費定義係消費幣別為日圓、韓圜或消費國別為日本、韓國。泰國地區消費定義係消費幣別為泰銖或消費國別為泰國。</li>
-                            <li>本活動消費金額以國際信用卡組織於匯率換算後入帳至持卡人帳單上之新臺幣為準。消費金額之計算以實際授權金額計算。</li>
-                        </ol>
-                    </div>
-
-                    <div class="highlight-box">
-                        【<span class="strong-text">日韓加碼3%</span>、泰國加碼5%】
-                    </div>
-
-                    <div class="benefit-list">
-                        <h4>🎁 加碼回饋條件</h4>
-                        <ol>
-                            <li>限日韓泰當地實體消費且成功登錄始可享回饋。活動期間每季每戶加碼<span class="strong-text">上限1,000元</span>，每季限量60,000名，須以正卡持卡人資料登錄，額滿後恕無法補登及享有回饋資格，登錄未成功者亦同，登錄結果以本行系統顯示為準。</li>
-                            <li>實體消費定義：該筆刷卡交易請款時，商店登記之國別碼為日本、韓國或泰國，且須為面對面交易，儲值不列入計算。</li>
-                            <li>加碼回饋採每季以刷卡金回饋，2025/10/1~2025/12/31之消費且於2026/1/15前請款入帳之交易，預計於2026/2底起回饋。</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- 玉山銀行區域 -->
-            <div class="bank-section">
-                <h2 class="bank-title">🏔️ 玉山銀行</h2>
-
-                <div class="card-item">
-                    <h3 class="card-name">熊本熊卡</h3>
-                    <div class="image-container">
-                        <img src="https://github.com/user-attachments/assets/09b426fc-37ba-47b7-84f0-000799b18cbd" alt="熊本熊卡活動資訊" />
-                    </div>
-                </div>
-
-                <div class="card-item">
-                    <h3 class="card-name">玉山PayPay樂享券</h3>
-                    <div class="image-container">
-                        <img src="https://github.com/user-attachments/assets/bd905274-b92e-426e-a1bb-f886424e909b" alt="玉山PayPay樂享券" />
-                    </div>
-                </div>
-            </div>
-
-            <!-- 使用建議 -->
-            <div class="card-item" style="border-left-color: #28a745;">
-                <h3 class="card-name" style="color: #28a745;">💡 使用建議</h3>
-                <div class="benefit-list">
-                    <ul>
-                        <li><strong>富邦J卡</strong>：適合日韓旅遊，基本3%回饋無上限，加碼回饋需登錄且有季度上限</li>
-                        <li><strong>玉山熊本熊卡</strong>：詳細優惠請參考上方圖片資訊</li>
-                        <li><strong>記得登錄</strong>：大部分銀行的海外回饋活動都需要事前登錄才能享有優惠</li>
-                        <li><strong>注意期限</strong>：請款期限通常有限制，記得在規定時間內完成請款</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+  <section class="bank">
+    <div class="bank__head">
+      <span class="bank__glyph" aria-hidden="true">富</span>
+      <div>
+        <h2 class="bank__name">富邦銀行</h2>
+        <p class="bank__meta">一張卡 · 兩段回饋</p>
+      </div>
     </div>
+
+    <div class="card">
+      <div class="card__top">
+        <h3 class="card__name">富邦J卡</h3>
+        <a class="card__link" href="https://www.fubon.com/banking/Personal/credit_card/all_card/omiyage/omiyage.htm" target="_blank" rel="noopener">官方活動頁面 ↗</a>
+      </div>
+
+      <div class="tier">
+        <p class="tier__rate"><span class="tier__tag">基本</span>【日韓3%無上限、泰國1%無上限】</p>
+        <p class="tier__label">基本回饋條件</p>
+        <ol class="terms">
+          <li>活動期間以富邦J卡於日韓地區新增之一般消費享<b>3%無上限回饋</b>，泰國地區新增之一般消費享<b>1%無上限回饋</b>，以上消費需於<b>2026/1/15前請款</b>方可享回饋。</li>
+          <li>日韓地區消費定義係消費幣別為日圓、韓圜或消費國別為日本、韓國。泰國地區消費定義係消費幣別為泰銖或消費國別為泰國。</li>
+          <li>本活動消費金額以國際信用卡組織於匯率換算後入帳至持卡人帳單上之新臺幣為準。消費金額之計算以實際授權金額計算。</li>
+        </ol>
+      </div>
+
+      <div class="tier tier--bonus">
+        <p class="tier__rate"><span class="tier__tag">加碼</span>【日韓加碼3%、泰國加碼5%】</p>
+        <p class="tier__label">加碼回饋條件</p>
+        <ol class="terms">
+          <li>限日韓泰當地實體消費且成功登錄始可享回饋。活動期間每季每戶加碼<span class="num">上限1,000元</span>，每季限量60,000名，須以正卡持卡人資料登錄，額滿後恕無法補登及享有回饋資格，登錄未成功者亦同，登錄結果以本行系統顯示為準。</li>
+          <li>實體消費定義：該筆刷卡交易請款時，商店登記之國別碼為日本、韓國或泰國，且須為面對面交易，儲值不列入計算。</li>
+          <li>加碼回饋採每季以刷卡金回饋，2025/10/1~2025/12/31之消費且於2026/1/15前請款入帳之交易，預計於2026/2底起回饋。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="bank">
+    <div class="bank__head">
+      <span class="bank__glyph" aria-hidden="true">玉</span>
+      <div>
+        <h2 class="bank__name">玉山銀行</h2>
+        <p class="bank__meta">兩項優惠 · 詳見活動圖</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card__top">
+        <h3 class="card__name">熊本熊卡</h3>
+      </div>
+      <figure class="figure">
+        <img src="https://github.com/user-attachments/assets/09b426fc-37ba-47b7-84f0-000799b18cbd" alt="玉山熊本熊卡海外消費回饋活動資訊" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="card">
+      <div class="card__top">
+        <h3 class="card__name">玉山PayPay樂享券</h3>
+      </div>
+      <figure class="figure">
+        <img src="https://github.com/user-attachments/assets/bd905274-b92e-426e-a1bb-f886424e909b" alt="玉山PayPay樂享券活動資訊" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="tips">
+    <h2 class="tips__name">使用建議</h2>
+    <ul>
+      <li><b>富邦J卡</b>：適合日韓旅遊，基本3%回饋無上限，加碼回饋需登錄且有季度上限</li>
+      <li><b>玉山熊本熊卡</b>：詳細優惠請參考上方圖片資訊</li>
+      <li><b>記得登錄</b>：大部分銀行的海外回饋活動都需要事前登錄才能享有優惠</li>
+      <li><b>注意期限</b>：請款期限通常有限制，記得在規定時間內完成請款</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>祝您旅途愉快</p>
+    <a href="index.html">← 回行程</a>
+    <a href="../index.html">所有行程</a>
+  </div>
+</footer>
+
 </body>
 </html>
-

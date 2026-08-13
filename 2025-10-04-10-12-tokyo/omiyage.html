@@ -1,314 +1,265 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛍️ お土産 - 伴手禮指南</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お土産 — 橫濱 × 靜岡 伴手禮指南</title>
+<meta name="description" content="2025/10 靜岡行程的伴手禮清單：橫濱 Vanilla Beans、紅鞋女孩、ARIAKE HARBOUR、香爐庵，靜岡一條亭、バリ勝男クン、田子之月。">
+<style>
+/* ============================================================
+   駿河三十六景 — shared design tokens
+   ============================================================ */
+:root{
+  --bero:#1B4C7E; --bero-deep:#0E2B47; --nami:#7FA9C9;
+  --washi:#E9E6DD; --washi-hi:#F6F4EF;
+  --sumi:#14181A; --sumi-mute:#4A5560;
+  --beni:#A83B32; --cha:#55633A;
+  --kasumi:#C8DEEF;      /* 霞 — secondary text on dark grounds */
+  --wash:rgba(27,76,126,.05); --wash-firm:rgba(27,76,126,.09);
+  --beni-wash:rgba(168,59,50,.08);
+  --rule:rgba(27,76,126,.16); --rule-firm:rgba(27,76,126,.32);
+  --shadow:0 1px 2px rgba(14,43,71,.06), 0 8px 24px -12px rgba(14,43,71,.22);
+  --display:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Songti TC","Noto Serif TC",serif;
+  --body:"PingFang TC","Hiragino Sans","Noto Sans TC",system-ui,-apple-system,sans-serif;
+  --data:ui-monospace,"SF Mono","SFMono-Regular","Roboto Mono",Menlo,monospace;
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem;
+  --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem;
+  --wrap:60rem;
+  --touch:2.75rem;       /* 44px — minimum touch target */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--washi);color:var(--sumi);
+  font-family:var(--body);line-height:1.75;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--bero);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:.18em}
+:focus-visible{outline:2.5px solid var(--beni);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--s5)}
+@media(max-width:640px){.wrap{padding:0 var(--s4)}}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:linear-gradient(178deg,var(--bero-deep) 0%,var(--bero) 70%,#27618F 100%);
+  color:var(--washi-hi);padding:var(--s7) 0 0;overflow:hidden;
+}
+.hero__nav{padding-bottom:var(--s6)}
+.hero__nav ul{
+  display:flex;flex-wrap:wrap;gap:0 var(--s5);align-items:center;
+  list-style:none;margin:0;padding:0;
+  font-family:var(--data);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+}
+.hero__nav a{
+  color:var(--kasumi);
+  display:inline-flex;align-items:center;min-height:var(--touch);
+}
+.hero__nav a:hover{color:var(--washi-hi)}
+.hero__title{
+  font-family:var(--display);font-weight:600;
+  font-size:clamp(2.6rem,9vw,4.2rem);line-height:1.05;letter-spacing:.08em;margin:0;
+}
+.hero__sub{
+  font-family:var(--display);font-size:clamp(1rem,3vw,1.3rem);
+  letter-spacing:.2em;margin:var(--s4) 0 0;color:var(--kasumi);
+}
+.hero__count{
+  font-family:var(--data);font-size:.78rem;letter-spacing:.1em;
+  color:var(--kasumi);margin:var(--s5) 0 0;
+}
+.ridge{display:block;width:100%;height:auto;margin-top:var(--s6)}
+.ridge__mid{fill:#123A5C}
+.ridge__near{fill:var(--washi)}
+@media(prefers-reduced-motion:no-preference){
+  .ridge__mid,.ridge__near{animation:rise .9s cubic-bezier(.2,.75,.25,1) both}
+  .ridge__near{animation-delay:.14s}
+}
+@keyframes rise{from{transform:translateY(16%)}to{transform:translateY(0)}}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
+/* ---------- city sections ---------- */
+main{padding-bottom:var(--s8)}
+.city{margin-top:var(--s8)}
+.city__head{
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:var(--s4);
+  margin-bottom:var(--s5);
+}
+.city__glyph{
+  display:grid;place-items:center;
+  width:3rem;height:3rem;
+  background:var(--bero);color:var(--washi-hi);
+  font-family:var(--display);font-size:1.5rem;
+  border-radius:2px;
+}
+.city__name{font-family:var(--display);font-size:1.75rem;letter-spacing:.1em;margin:0;line-height:1.2}
+.city__meta{font-family:var(--data);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sumi-mute);margin:.2em 0 0}
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
+/* ---------- shop cards ---------- */
+.shops{list-style:none;margin:0;padding:0;display:grid;gap:var(--s4)}
+.shop{
+  background:var(--washi-hi);
+  border:1px solid var(--rule);border-radius:3px;
+  box-shadow:var(--shadow);
+  padding:var(--s5);
+}
+.shop__no{
+  font-family:var(--data);font-size:.7rem;letter-spacing:.16em;
+  color:var(--sumi-mute);display:block;margin-bottom:.2em;
+}
+.shop__name{
+  font-family:var(--display);font-size:1.3rem;line-height:1.4;
+  letter-spacing:.02em;margin:0 0 var(--s3);
+}
+.shop__desc{
+  margin:0;font-size:.94rem;
+  padding-left:var(--s4);
+  border-left:2.5px solid var(--nami);
+  color:var(--sumi);
+}
+.shop__info{
+  margin:var(--s4) 0 0;padding:var(--s4) 0 0;
+  border-top:1px solid var(--rule);
+  display:grid;gap:var(--s2);
+}
+.shop__info div{display:grid;grid-template-columns:5.5rem 1fr;gap:var(--s3);align-items:baseline}
+.shop__info dt{
+  font-family:var(--data);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sumi-mute);margin:0;
+}
+.shop__info dd{margin:0;font-size:.92rem}
+.shop__info .hours{font-family:var(--data);font-variant-numeric:tabular-nums}
+@media(max-width:640px){
+  .shop{padding:var(--s4)}
+  .shop__info div{grid-template-columns:1fr;gap:0}
+}
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+/* ---------- footer ---------- */
+.footer{
+  background:var(--bero-deep);color:var(--kasumi);
+  padding:var(--s7) 0;margin-top:var(--s8);text-align:center;
+}
+.footer p{margin:0 0 var(--s3);font-family:var(--display);font-size:1.1rem;letter-spacing:.14em;color:var(--washi-hi)}
+.footer a{color:var(--kasumi);font-family:var(--data);font-size:.78rem;letter-spacing:.1em;margin:0 var(--s3);display:inline-flex;align-items:center;min-height:var(--touch)}
+.footer a:hover{color:var(--washi-hi)}
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .back-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        .city-section {
-            margin-bottom: 50px;
-        }
-
-        .city-title {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .shop-card {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-left: 5px solid #667eea;
-        }
-
-        .shop-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .shop-name {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .shop-description {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid #28a745;
-            font-style: italic;
-            color: #555;
-            line-height: 1.8;
-        }
-
-        .shop-info {
-            display: grid;
-            gap: 10px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-        }
-
-        .info-label {
-            font-weight: bold;
-            color: #495057;
-            min-width: 100px;
-        }
-
-        .info-value {
-            color: #666;
-        }
-
-        .map-link {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .map-link:hover {
-            text-decoration: underline;
-        }
-
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #667eea, transparent);
-            margin: 40px 0;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .city-title {
-                font-size: 1.5em;
-            }
-            
-            .shop-card {
-                padding: 20px;
-            }
-        }
-    </style>
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="back-link">← 返回行程</a>
-            <h1>🛍️ お土産</h1>
-            <p>橫濱 × 靜岡 伴手禮完全指南</p>
-        </div>
 
-        <div class="content">
-            <!-- 橫濱區域 -->
-            <div class="city-section">
-                <h2 class="city-title">🏙️ 橫濱</h2>
+<header class="hero">
+  <div class="wrap">
+    <nav class="hero__nav" aria-label="頁面導覽">
+      <ul>
+        <li><a href="index.html">← 回行程</a></li>
+        <li><a href="credit-cashback.html">信用卡回饋</a></li>
+        <li><a href="../index.html">所有行程</a></li>
+      </ul>
+    </nav>
+    <h1 class="hero__title">お土産</h1>
+    <p class="hero__sub">橫濱 × 靜岡　伴手禮指南</p>
+    <p class="hero__count">七家名店　二城</p>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path class="ridge__mid" d="M0 120 Q160 74 320 96 Q470 116 610 92 Q760 66 910 96 Q1060 122 1200 88 L1200 120 Z"/>
+    <path class="ridge__near" d="M0 120 Q100 106 210 112 Q330 119 430 108 Q560 95 660 106 Q790 119 900 109 Q1030 97 1120 107 Q1170 112 1200 108 L1200 120 Z"/>
+  </svg>
+</header>
 
-                <div class="shop-card">
-                    <h3 class="shop-name">Vanilla Beans 巧克力專賣店</h3>
-                    <div class="shop-description">
-                        「Vanilla Beans」為橫濱相當知名的巧克力專賣店，一開始從網路起家，現在已經有好幾間實體店舖，橫濱的這間「Vanilla Beans」更被譽為到橫濱必逛的伴手禮店之一，其中「巧克力夾心餅乾」更多次被媒體報導，盛傳一秒能賣出六個的超熱賣情境
-                    </div>
-                    <div class="shop-info">
-                        <div class="info-item">
-                            <span class="info-label">🕐 營業時間</span>
-                            <span class="info-value">11:00～19:00</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">🚇 交通方式</span>
-                            <span class="info-value">「橫濱站」步行約三分鐘</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">📍 地址</span>
-                            <span class="info-value">神奈川県横浜市中区海岸通5-25-2シャレール海岸通1F（<a href="https://maps.app.goo.gl/GnweZPjVvc4bNysJ6" target="_blank" class="map-link">Google Map</a>）</span>
-                        </div>
-                    </div>
-                </div>
+<main class="wrap">
 
-                <div class="shop-card">
-                    <h3 class="shop-name">紅鞋女孩 巧克力&餅乾</h3>
-                    <div class="shop-description">
-                        橫濱必買名產之一絕對少不了「紅鞋女孩」的巧克力與貓舌餅乾，而紅鞋女孩幾乎已經是在橫濱家喻戶曉的故事，甚至在橫濱站與山下公園都可以看到穿著紅色鞋子小女孩的雕像，這位紅鞋女孩從小被迫與父母分離，年紀輕輕又因重病而逝，後來這啟故事也發展出一首童謠「赤い靴」
-                    </div>
-                    <div class="shop-info">
-                        <div class="info-item">
-                            <span class="info-label">🕐 營業時間</span>
-                            <span class="info-value">11:00-20:00</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">🚇 交通方式</span>
-                            <span class="info-value">紅磚倉庫二號館 2F</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">📍 地址</span>
-                            <span class="info-value">横浜市中區新港1-1-1（<a href="https://maps.app.goo.gl/GKeNsgRpjASXsQMJ6" target="_blank" class="map-link">Google Map</a>）</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="shop-card">
-                    <h3 class="shop-name">ARIAKE HARBOUR 栗子蛋糕</h3>
-                    <div class="shop-description">
-                        「ARIAKE HARBOUR」是已經有超過 60 年開店歷史的甜點伴手禮店，在橫濱高島屋百貨 B1 樓層就能夠買得到，最受歡迎的不外乎就是橫濱知名度船型栗子蛋糕（ありあけ），小巧可愛的迷你蛋糕作成船的造型，光是外型就非常有特色跟記憶點
-                    </div>
-                    <div class="shop-info">
-                        <div class="info-item">
-                            <span class="info-label">🕐 營業時間</span>
-                            <span class="info-value">10:00-20:00</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">🚇 交通方式</span>
-                            <span class="info-value">「橫濱站」步行約三分鐘</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">📍 地址</span>
-                            <span class="info-value">神奈川県横浜市西区南幸1-6-31 B1F（<a href="https://maps.app.goo.gl/UH962Jcqf345KHxDA" target="_blank" class="map-link">Google Map</a>）</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="shop-card">
-                    <h3 class="shop-name">香爐庵 和菓子</h3>
-                    <div class="shop-description">
-                        「香爐庵」為橫濱知名的和菓子專賣店，開業至今已經將近20年的時間，其中「黑糖銅鑼燒」一直是店內的人氣伴手禮商品，濕潤的黑糖餅皮有濃郁的黑糖香氣，與內餡的蜜紅豆組合搭配非常完美
-                    </div>
-                    <div class="shop-info">
-                        <div class="info-item">
-                            <span class="info-label">🕐 營業時間</span>
-                            <span class="info-value">11:00-15:00、17:00-21:30</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">🚇 交通方式</span>
-                            <span class="info-value">「新高島站」步行約三分鐘</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">📍 地址</span>
-                            <span class="info-value">橫濱市西區港灣未來4-4-3（<a href="https://maps.app.goo.gl/ef2gnNAVNqA6vw4R8" target="_blank" class="map-link">Google Map</a>）</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- 靜岡區域 -->
-            <div class="city-section">
-                <h2 class="city-title">🗻 靜岡</h2>
-
-                <div class="shop-card">
-                    <h3 class="shop-name">一條亭</h3>
-                    <div class="shop-description">
-                        強調完全使用天然食材製作不添加任何添加物的茶葉餅乾，是受到靜岡市品牌「靜岡葵 Premium」認證的商品，材料中只有使用小麥粉、奶油、砂糖、可可粉、雞蛋、綠茶、生奶油、脫脂奶粉跟食鹽，是小朋友也能安心食用的產品。也因為天然無添加，所以保存時若是受到光照有可能會變色而影響風味，建議購買後盡早食用！
-                    </div>
-                </div>
-
-                <div class="shop-card">
-                    <h3 class="shop-name">バリ勝男クン</h3>
-                    <div class="shop-description">
-                        鰹魚和柴魚片也是當地非常具有代表性的商品，而 Sealuck 將通常用來加在料理中點綴或增添風味的鰹魚片搖身一變成為主角，成為可以作為下酒菜或零嘴的鰹魚脆片，至今已銷售突破2000萬袋。除了一定必買的醬油味外也推出了像是起士或柚子等讓人好奇的口味
-                    </div>
-                </div>
-
-                <div class="shop-card">
-                    <h3 class="shop-name">田子之月</h3>
-                    <div class="shop-description">
-                        在酥脆又香氣撲鼻的外殼中，夾有用北海道十勝的紅豆和冰糖製作的清淡豆餡，以及軟硬適中的求肥，三者完美地融為一體，一口咬下讓人驚豔。更特別的是，田子之月的最中還會在每個月 15 日推出富士山曆最中，以當月的季節性食材或日本具有代表性的食材等，製作成每月專屬口味的最中，特別的風味非常適合拿來送禮作為話題
-                    </div>
-                </div>
-            </div>
-        </div>
+  <section class="city">
+    <div class="city__head">
+      <span class="city__glyph" aria-hidden="true">濱</span>
+      <div>
+        <h2 class="city__name">橫濱</h2>
+        <p class="city__meta">四家 · 巧克力 · 和菓子 · 洋菓子</p>
+      </div>
     </div>
+    <ol class="shops">
+      <li class="shop">
+        <span class="shop__no">01</span>
+        <h3 class="shop__name">Vanilla Beans 巧克力專賣店</h3>
+        <p class="shop__desc">「Vanilla Beans」為橫濱相當知名的巧克力專賣店，一開始從網路起家，現在已經有好幾間實體店舖，橫濱的這間「Vanilla Beans」更被譽為到橫濱必逛的伴手禮店之一，其中「巧克力夾心餅乾」更多次被媒體報導，盛傳一秒能賣出六個的超熱賣情境</p>
+        <dl class="shop__info">
+          <div><dt>營業時間</dt><dd class="hours">11:00～19:00</dd></div>
+          <div><dt>交通方式</dt><dd>「橫濱站」步行約三分鐘</dd></div>
+          <div><dt>地址</dt><dd>神奈川県横浜市中区海岸通5-25-2シャレール海岸通1F（<a href="https://maps.app.goo.gl/GnweZPjVvc4bNysJ6" target="_blank" rel="noopener">Google Map</a>）</dd></div>
+        </dl>
+      </li>
+      <li class="shop">
+        <span class="shop__no">02</span>
+        <h3 class="shop__name">紅鞋女孩 巧克力&amp;餅乾</h3>
+        <p class="shop__desc">橫濱必買名產之一絕對少不了「紅鞋女孩」的巧克力與貓舌餅乾，而紅鞋女孩幾乎已經是在橫濱家喻戶曉的故事，甚至在橫濱站與山下公園都可以看到穿著紅色鞋子小女孩的雕像，這位紅鞋女孩從小被迫與父母分離，年紀輕輕又因重病而逝，後來這啟故事也發展出一首童謠「赤い靴」</p>
+        <dl class="shop__info">
+          <div><dt>營業時間</dt><dd class="hours">11:00-20:00</dd></div>
+          <div><dt>交通方式</dt><dd>紅磚倉庫二號館 2F</dd></div>
+          <div><dt>地址</dt><dd>横浜市中區新港1-1-1（<a href="https://maps.app.goo.gl/GKeNsgRpjASXsQMJ6" target="_blank" rel="noopener">Google Map</a>）</dd></div>
+        </dl>
+      </li>
+      <li class="shop">
+        <span class="shop__no">03</span>
+        <h3 class="shop__name">ARIAKE HARBOUR 栗子蛋糕</h3>
+        <p class="shop__desc">「ARIAKE HARBOUR」是已經有超過 60 年開店歷史的甜點伴手禮店，在橫濱高島屋百貨 B1 樓層就能夠買得到，最受歡迎的不外乎就是橫濱知名度船型栗子蛋糕（ありあけ），小巧可愛的迷你蛋糕作成船的造型，光是外型就非常有特色跟記憶點</p>
+        <dl class="shop__info">
+          <div><dt>營業時間</dt><dd class="hours">10:00-20:00</dd></div>
+          <div><dt>交通方式</dt><dd>「橫濱站」步行約三分鐘</dd></div>
+          <div><dt>地址</dt><dd>神奈川県横浜市西区南幸1-6-31 B1F（<a href="https://maps.app.goo.gl/UH962Jcqf345KHxDA" target="_blank" rel="noopener">Google Map</a>）</dd></div>
+        </dl>
+      </li>
+      <li class="shop">
+        <span class="shop__no">04</span>
+        <h3 class="shop__name">香爐庵 和菓子</h3>
+        <p class="shop__desc">「香爐庵」為橫濱知名的和菓子專賣店，開業至今已經將近20年的時間，其中「黑糖銅鑼燒」一直是店內的人氣伴手禮商品，濕潤的黑糖餅皮有濃郁的黑糖香氣，與內餡的蜜紅豆組合搭配非常完美</p>
+        <dl class="shop__info">
+          <div><dt>營業時間</dt><dd class="hours">11:00-15:00、17:00-21:30</dd></div>
+          <div><dt>交通方式</dt><dd>「新高島站」步行約三分鐘</dd></div>
+          <div><dt>地址</dt><dd>橫濱市西區港灣未來4-4-3（<a href="https://maps.app.goo.gl/ef2gnNAVNqA6vw4R8" target="_blank" rel="noopener">Google Map</a>）</dd></div>
+        </dl>
+      </li>
+    </ol>
+  </section>
+
+  <section class="city">
+    <div class="city__head">
+      <span class="city__glyph" aria-hidden="true">靜</span>
+      <div>
+        <h2 class="city__name">靜岡</h2>
+        <p class="city__meta">三家 · 茶菓子 · 鰹魚 · 最中</p>
+      </div>
+    </div>
+    <ol class="shops">
+      <li class="shop">
+        <span class="shop__no">05</span>
+        <h3 class="shop__name">一條亭</h3>
+        <p class="shop__desc">強調完全使用天然食材製作不添加任何添加物的茶葉餅乾，是受到靜岡市品牌「靜岡葵 Premium」認證的商品，材料中只有使用小麥粉、奶油、砂糖、可可粉、雞蛋、綠茶、生奶油、脫脂奶粉跟食鹽，是小朋友也能安心食用的產品。也因為天然無添加，所以保存時若是受到光照有可能會變色而影響風味，建議購買後盡早食用！</p>
+      </li>
+      <li class="shop">
+        <span class="shop__no">06</span>
+        <h3 class="shop__name">バリ勝男クン</h3>
+        <p class="shop__desc">鰹魚和柴魚片也是當地非常具有代表性的商品，而 Sealuck 將通常用來加在料理中點綴或增添風味的鰹魚片搖身一變成為主角，成為可以作為下酒菜或零嘴的鰹魚脆片，至今已銷售突破2000萬袋。除了一定必買的醬油味外也推出了像是起士或柚子等讓人好奇的口味</p>
+      </li>
+      <li class="shop">
+        <span class="shop__no">07</span>
+        <h3 class="shop__name">田子之月</h3>
+        <p class="shop__desc">在酥脆又香氣撲鼻的外殼中，夾有用北海道十勝的紅豆和冰糖製作的清淡豆餡，以及軟硬適中的求肥，三者完美地融為一體，一口咬下讓人驚豔。更特別的是，田子之月的最中還會在每個月 15 日推出富士山曆最中，以當月的季節性食材或日本具有代表性的食材等，製作成每月專屬口味的最中，特別的風味非常適合拿來送禮作為話題</p>
+      </li>
+    </ol>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>祝您旅途愉快</p>
+    <a href="index.html">← 回行程</a>
+    <a href="../index.html">所有行程</a>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曼谷五日 กรุงเทพฯ | 2026.09.24–09.28</title>
+<meta name="description" content="2026/09/24–09/28 曼谷五天四夜行程：航班、住宿、每日景點與美食筆記。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chocolate+Classical+Sans&family=IBM+Plex+Sans+TC:wght@400;500;700&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F7F4EC;
+  --panel:#FFFFFF;
+  --ink:#26241F;
+  --muted:#77705F;
+  --hairline:#E5DFCE;
+  --gold:#B08A2E;
+  /* Thai day-of-week colours for this trip's five days */
+  --thu:#E06E12;  /* 星期四・橙 */
+  --fri:#2560A8;  /* 星期五・藍 */
+  --sat:#7A4CA8;  /* 星期六・紫 */
+  --sun:#C23B3B;  /* 星期日・紅 */
+  --mon:#C79A05;  /* 星期一・黃 */
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'IBM Plex Sans TC',sans-serif;
+  font-size:16px;
+  line-height:1.75;
+}
+/* five-colour bunting band across the very top */
+.bunting{
+  height:8px;
+  background:linear-gradient(90deg,
+    var(--thu) 0 20%, var(--fri) 20% 40%, var(--sat) 40% 60%,
+    var(--sun) 60% 80%, var(--mon) 80% 100%);
+}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px 80px}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 36px;text-align:center}
+.hero .thai{
+  font-family:'Prompt',sans-serif;
+  font-weight:500;
+  color:var(--gold);
+  letter-spacing:.35em;
+  font-size:15px;
+  margin:0 0 4px;
+}
+.hero h1{
+  font-family:'Chocolate Classical Sans',sans-serif;
+  font-weight:400;
+  font-size:clamp(72px,20vw,132px);
+  line-height:1.05;
+  margin:0;
+  letter-spacing:.06em;
+}
+.hero .dates{
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:17px;
+  letter-spacing:.12em;
+  margin:10px 0 0;
+}
+.hero .dates .nights{color:var(--muted);font-weight:400;letter-spacing:.05em}
+.hero .lore{
+  max-width:520px;
+  margin:22px auto 0;
+  color:var(--muted);
+  font-size:14.5px;
+}
+.hero .lore strong{color:var(--ink)}
+
+/* day-colour garland: doubles as page navigation */
+.garland{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:26px 0 0;
+  padding:0;
+  list-style:none;
+}
+.garland a{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--panel);
+  border:1px solid var(--hairline);
+  text-decoration:none;
+  color:var(--ink);
+  font-family:'Prompt',sans-serif;
+  font-weight:500;
+  font-size:14px;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.garland a:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.garland a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.garland .dot{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none}
+.garland .wd{color:var(--c);font-weight:600}
+
+/* ---------- section headings ---------- */
+.sec-label{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:52px 0 18px;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:.3em;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+.sec-label::before,.sec-label::after{content:"";height:1px;background:var(--hairline);flex:1}
+.sec-label .zh{
+  font-family:'Chocolate Classical Sans',sans-serif;
+  font-size:22px;
+  letter-spacing:.2em;
+  color:var(--ink);
+}
+
+/* ---------- flight boarding passes ---------- */
+.flights{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.flights{grid-template-columns:1fr}}
+.pass{
+  background:var(--panel);
+  border:1px solid var(--hairline);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.pass-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:6px 10px;
+  flex-wrap:wrap;
+  padding:10px 16px;
+  font-family:'Prompt',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:#fff;
+  background:var(--c);
+}
+.pass-top .cabin{
+  font-family:'IBM Plex Sans TC',sans-serif;
+  font-weight:500;
+  background:rgba(255,255,255,.22);
+  padding:1px 10px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.pass-route{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 20px 6px;
+}
+.pass-route .apt{text-align:center}
+.pass-route .code{
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:34px;
+  line-height:1;
+}
+.pass-route .apt small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.pass-route .fly{
+  flex:1;
+  margin:0 12px;
+  border-top:2px dashed var(--hairline);
+  position:relative;
+  top:-8px;
+}
+.pass-route .fly::after{
+  content:"✈";
+  position:absolute;
+  top:-14px;left:50%;
+  transform:translateX(-50%);
+  color:var(--c);
+  background:var(--panel);
+  padding:0 6px;
+}
+.pass-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  padding:8px 20px 16px;
+  border-top:1px dashed var(--hairline);
+  margin-top:10px;
+  font-size:13.5px;
+  color:var(--muted);
+  flex-wrap:wrap;
+}
+.pass-meta b{color:var(--ink);font-family:'Prompt',sans-serif;font-weight:600}
+.pass-times{
+  display:flex;
+  justify-content:space-between;
+  padding:0 20px 4px;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:19px;
+}
+.pass-times small{
+  display:block;
+  font-family:'IBM Plex Sans TC',sans-serif;
+  font-weight:400;
+  color:var(--muted);
+  font-size:12px;
+}
+.pass-times .arr{text-align:right}
+.plus1{color:var(--sun);font-size:12px;vertical-align:super}
+
+/* ---------- hotel ---------- */
+.hotel{
+  background:var(--panel);
+  border:1px solid var(--hairline);
+  border-radius:var(--radius);
+  padding:22px 24px;
+}
+.hotel h3{
+  margin:0;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:21px;
+}
+.hotel .sub{margin:2px 0 14px;color:var(--muted);font-size:14px}
+.hotel-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  border-top:1px dashed var(--hairline);
+  padding-top:14px;
+}
+@media (max-width:640px){.hotel-grid{grid-template-columns:repeat(2,1fr)}}
+.hotel-grid dt{font-size:12px;color:var(--muted);margin:0}
+.hotel-grid dd{
+  margin:2px 0 0;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:15.5px;
+}
+.hotel-tags{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tag{
+  font-size:12.5px;
+  padding:3px 12px;
+  border-radius:999px;
+  border:1px solid var(--gold);
+  color:var(--gold);
+}
+.maplink{
+  display:inline-block;
+  margin-top:4px;
+  font-size:13.5px;
+  color:var(--fri);
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.maplink:hover{opacity:.75}
+.maplink:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---------- day sections ---------- */
+.day{margin-top:64px;scroll-margin-top:24px}
+.day-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  flex-wrap:wrap;
+  border-bottom:3px solid var(--c);
+  padding-bottom:10px;
+}
+.day-head .dnum{
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:.2em;
+  color:#fff;
+  background:var(--c);
+  padding:3px 12px;
+  border-radius:999px;
+}
+.day-head h2{
+  margin:0;
+  font-family:'Chocolate Classical Sans',sans-serif;
+  font-weight:400;
+  font-size:30px;
+  letter-spacing:.05em;
+}
+.day-head .wcolor{
+  font-size:13.5px;
+  color:var(--c);
+  font-weight:500;
+}
+.day-head .dtitle{
+  margin-left:auto;
+  color:var(--muted);
+  font-size:14px;
+}
+@media (max-width:640px){.day-head .dtitle{margin-left:0;width:100%}}
+
+/* timeline of stops */
+.stops{list-style:none;margin:0;padding:8px 0 0}
+.stop{
+  position:relative;
+  padding:16px 0 16px 118px;
+  border-left:0;
+}
+.stop::before{ /* rail */
+  content:"";
+  position:absolute;
+  left:92px;top:0;bottom:0;
+  width:2px;
+  background:color-mix(in srgb, var(--c) 30%, var(--paper));
+}
+.stop::after{ /* pier dot */
+  content:"";
+  position:absolute;
+  left:87px;top:26px;
+  width:12px;height:12px;
+  border-radius:50%;
+  background:var(--paper);
+  border:3px solid var(--c);
+}
+.stop-time{
+  position:absolute;
+  left:0;top:22px;
+  width:78px;
+  text-align:right;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:13.5px;
+  color:var(--c);
+  line-height:1.35;
+}
+.stop h3{
+  margin:0;
+  font-size:17.5px;
+  font-weight:700;
+}
+.stop h3 .alt{color:var(--muted);font-weight:400;font-size:14px}
+.badges{display:inline-flex;gap:6px;flex-wrap:wrap;vertical-align:2px;margin-left:8px}
+.badge{
+  font-size:11.5px;
+  font-weight:500;
+  padding:1px 9px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.badge.book{background:#FBEDE0;color:#B4561B;border:1px solid #EAC49E}
+.badge.ticket{background:#E8EEF8;color:#2560A8;border:1px solid #BCCEE8}
+.badge.hours{
+  background:transparent;color:var(--muted);border:1px solid var(--hairline);
+  font-family:'Prompt',sans-serif;
+}
+.note{margin:6px 0 0;font-size:14.5px}
+.note a{color:var(--fri)}
+.note a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.warn{
+  margin:8px 0 0;
+  font-size:13.5px;
+  color:#8A4A12;
+  background:#FBF1E2;
+  border:1px solid #EBD5AE;
+  border-radius:8px;
+  padding:8px 12px;
+}
+/* attraction introductions */
+.intro{
+  margin:10px 0 0;
+  padding:10px 14px;
+  font-size:14px;
+  color:#5C564A;
+  background:color-mix(in srgb, var(--c) 5%, var(--panel));
+  border-left:3px solid color-mix(in srgb, var(--c) 55%, var(--panel));
+  border-radius:0 10px 10px 0;
+}
+.intro::before{
+  content:"認識這裡";
+  display:block;
+  font-size:11px;
+  letter-spacing:.25em;
+  color:var(--c);
+  font-weight:600;
+  margin-bottom:2px;
+}
+
+@media (max-width:560px){
+  .stop{padding-left:0;padding-top:10px}
+  .stop::before,.stop::after{display:none}
+  .stop-time{
+    position:static;
+    display:block;
+    width:auto;
+    text-align:left;
+    margin-bottom:2px;
+  }
+  .stop{border-top:1px dashed var(--hairline)}
+  .stops .stop:first-child{border-top:0}
+}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:72px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+footer .strip{
+  display:inline-flex;
+  gap:6px;
+  margin-bottom:10px;
+}
+footer .strip span{width:14px;height:14px;border-radius:50%}
+footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="bunting" aria-hidden="true"></div>
+<div class="wrap">
+
+<header class="hero">
+  <p class="thai">สวัสดี · กรุงเทพฯ</p>
+  <h1>曼谷五日</h1>
+  <p class="dates">2026.09.24 – 09.28 <span class="nights">・五天四夜</span></p>
+  <p class="lore">泰國習俗裡，<strong>每個星期幾都有一個代表色</strong>：星期四橙、星期五藍、星期六紫、星期日紅、星期一黃。這趟五天，剛好串成一條五色花環 — 每一天，跟著它的顏色走。</p>
+  <ul class="garland">
+    <li><a href="#day1" style="--c:var(--thu)"><span class="dot"></span>9/24 <span class="wd">四・橙</span></a></li>
+    <li><a href="#day2" style="--c:var(--fri)"><span class="dot"></span>9/25 <span class="wd">五・藍</span></a></li>
+    <li><a href="#day3" style="--c:var(--sat)"><span class="dot"></span>9/26 <span class="wd">六・紫</span></a></li>
+    <li><a href="#day4" style="--c:var(--sun)"><span class="dot"></span>9/27 <span class="wd">日・紅</span></a></li>
+    <li><a href="#day5" style="--c:var(--mon)"><span class="dot"></span>9/28 <span class="wd">一・黃</span></a></li>
+  </ul>
+</header>
+
+<!-- ==================== flights ==================== -->
+<h2 class="sec-label"><span class="zh">航班</span>FLIGHTS</h2>
+<div class="flights">
+  <article class="pass" style="--c:var(--thu)">
+    <div class="pass-top">
+      <span>去程 · CHINA AIRLINES CI837 · 2026-09-24</span>
+      <span class="cabin">商務艙</span>
+    </div>
+    <div class="pass-route">
+      <div class="apt"><span class="code">TPE</span><small>桃園國際機場 · 1 航廈</small></div>
+      <div class="fly" aria-hidden="true"></div>
+      <div class="apt"><span class="code">BKK</span><small>蘇凡納布國際機場</small></div>
+    </div>
+    <div class="pass-times">
+      <div class="dep">22:40<small>9/24 起飛</small></div>
+      <div class="arr">01:25<span class="plus1">+1</span><small>9/25 抵達</small></div>
+    </div>
+    <div class="pass-meta"><span>航空公司 <b>中華航空</b></span><span>航班 <b>CI837</b></span></div>
+  </article>
+  <article class="pass" style="--c:var(--mon)">
+    <div class="pass-top">
+      <span>回程 · STARLUX JX742 · 2026-09-28</span>
+      <span class="cabin">豪華經濟艙</span>
+    </div>
+    <div class="pass-route">
+      <div class="apt"><span class="code">BKK</span><small>蘇凡納布國際機場</small></div>
+      <div class="fly" aria-hidden="true"></div>
+      <div class="apt"><span class="code">TPE</span><small>桃園國際機場 · 2 航廈</small></div>
+    </div>
+    <div class="pass-times">
+      <div class="dep">13:10<small>9/28 起飛</small></div>
+      <div class="arr">18:00<small>9/28 抵達</small></div>
+    </div>
+    <div class="pass-meta"><span>航空公司 <b>星宇航空</b></span><span>航班 <b>JX742</b></span></div>
+  </article>
+</div>
+
+<!-- ==================== hotel ==================== -->
+<h2 class="sec-label"><span class="zh">住宿</span>STAY</h2>
+<article class="hotel">
+  <h3>The Berkeley Hotel Pratunam</h3>
+  <p class="sub">水門市場（Pratunam）鬧區，樓下就是成衣批發商圈，鄰近 Platinum Fashion Mall 與 Big C。</p>
+  <dl class="hotel-grid">
+    <div><dt>Check-in</dt><dd>9/24（四）</dd></div>
+    <div><dt>Check-out</dt><dd>9/28（一）</dd></div>
+    <div><dt>住宿</dt><dd>4 晚 · 1 房</dd></div>
+    <div><dt>總價</dt><dd>THB 12,852</dd></div>
+  </dl>
+  <div class="hotel-tags"><span class="tag">有附早餐</span></div>
+  <a class="maplink" href="https://maps.app.goo.gl/knnNJARJEg6hwTZ49" target="_blank" rel="noopener">在 Google Maps 開啟 ↗</a>
+</article>
+
+<!-- ==================== day 1 ==================== -->
+<section class="day" id="day1" style="--c:var(--thu)">
+  <header class="day-head">
+    <span class="dnum">DAY 1</span>
+    <h2>9/24</h2>
+    <span class="wcolor">星期四・曜色橙</span>
+    <span class="dtitle">桃園出發，夜航曼谷</span>
+  </header>
+  <ol class="stops">
+    <li class="stop">
+      <span class="stop-time">19:40 前</span>
+      <div>
+        <h3>機場捷運 A1 台北車站・預辦登機</h3>
+        <p class="note">在 B1 辦理預辦登機與行李託運服務，須於班機起飛前 3 小時辦妥。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">登機前</span>
+      <div>
+        <h3>商務艙貴賓室</h3>
+        <p class="note">CI837 商務艙可使用華航貴賓室，先吃點東西休息。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">22:40</span>
+      <div>
+        <h3>飛機起飛 ✈ CI837</h3>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">25:25</span>
+      <div>
+        <h3>抵達曼谷</h3>
+        <p class="note">即 9/25 凌晨 01:25 抵達 BKK。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ==================== day 2 ==================== -->
+<section class="day" id="day2" style="--c:var(--fri)">
+  <header class="day-head">
+    <span class="dnum">DAY 2</span>
+    <h2>9/25</h2>
+    <span class="wcolor">星期五・曜色藍</span>
+    <span class="dtitle">One Bangkok・老城河岸夕陽</span>
+  </header>
+  <ol class="stops">
+    <li class="stop">
+      <span class="stop-time">01:25</span>
+      <div>
+        <h3>抵達 BKK・快速通關</h3>
+        <p class="note">抵達後可以走快速通關出境，位置位於泰國本地人驗證區的最右邊（網路訊息）。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">深夜</span>
+      <div>
+        <h3>叫 Grab 前往飯店</h3>
+        <p class="note">吃完早餐看要不要再回去睡。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">中午</span>
+      <div>
+        <h3>One Bangkok</h3>
+        <p class="note">寬敞、具現代感且充滿綠意的環境。這裡不是那種擠死人的傳統商場，而是一個結合了高端藝術與休閒的「微型城市」。推薦一定要去戶外廣場看水舞和公共藝術。</p>
+        <p class="intro">2024 年底開幕、泰國史上最大的私人開發案，把商場、藝文空間、辦公塔樓和大片綠地串成一整個街區，是曼谷最新的城市地標。室內冷氣充足、動線寬敞，很適合剛下紅眼班機的第一站。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">午餐</span>
+      <div>
+        <h3>Krua Apsorn <span class="alt">One Bangkok Branch</span><span class="badges"><span class="badge book">建議先訂位</span></span></h3>
+        <p class="note">連續八年米其林推薦。必吃招牌：黃咖哩炒蟹肉（Stir-fried Crab with Yellow Chilli / Pu Pat Pong）— 滿滿鮮甜的蟹腿肉搭配濃郁微辣的黃咖哩，超級下飯；招牌蟹肉蛋餅（Crab Omelette）— 外酥內嫩、用料扎實，充滿厚實的蟹肉鮮美；香酥炸雞翅 — 醃製入味後炸至皮酥肉嫩，讓人允指回味。其他名菜：綠咖哩魚丸、泰式葉包菜（Miang Kana），飯後經典椰子冰淇淋。</p>
+        <p class="intro">曼谷老字號家常泰菜食堂，創始店在老城區，主廚曾為泰國皇室掌廚，以「不花俏、但每道都準」聞名，是在地人與觀光客都排隊的名店。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">傍晚</span>
+      <div>
+        <h3>唐人街 <span class="alt">or 按摩（二選一）</span></h3>
+        <p class="intro">曼谷唐人街（耀華力路 Yaowarat）是世界規模最大的中國城之一，入夜後霓虹中文招牌全亮，整條路變成海鮮、烤麵包、粿條的街頭美食戰場。走累了就換成按摩，也很合理。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">晚餐</span>
+      <div>
+        <h3>RONGROS <span class="alt">or Supanniga Eating Room Tha Tien（二選一）</span><span class="badges"><span class="badge book">建議先訂位</span></span></h3>
+        <p class="note">可以看夕陽＋鄭王廟，都是米其林。上面兩個隨時可以換，還不確定去哪。</p>
+        <p class="intro">兩間都在昭披耶河畔、正對鄭王廟（Wat Arun）：RONGROS 是米其林入選的現代泰菜，河景第一排；Supanniga 以外婆食譜的東部傳統菜出名。日落時分鄭王廟的陶瓷佛塔會被打亮，是曼谷最經典的一幕。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">飯後</span>
+      <div>
+        <h3>Sawadee Sativa</h3>
+        <p class="note">買軟糖或者布朗尼吃，就在飯店旁邊。</p>
+        <p class="warn">留意：這類商品多為大麻成分食品。泰國 2025 年起已收緊大麻法規，且相關產品絕對不能帶回台灣（屬毒品重罪），出發前先確認現況。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ==================== day 3 ==================== -->
+<section class="day" id="day3" style="--c:var(--sat)">
+  <header class="day-head">
+    <span class="dnum">DAY 3</span>
+    <h2>9/26</h2>
+    <span class="wcolor">星期六・曜色紫</span>
+    <span class="dtitle">河岸日：ICONSIAM 到 Asiatique</span>
+  </header>
+  <ol class="stops">
+    <li class="stop">
+      <span class="stop-time">早上</span>
+      <div>
+        <h3>周圍水門市場晃晃</h3>
+        <p class="intro">水門市場（Pratunam Market）就在飯店周邊，是曼谷最大的成衣批發集散地，巷子裡塞滿平價服飾、飾品攤和街邊小吃，早上逛剛好避開人潮與烈日。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">中午</span>
+      <div>
+        <h3>ICONSIAM</h3>
+        <p class="note">在這邊吃吃喝喝。</p>
+        <p class="intro">昭披耶河西岸的巨型百貨，地標級的存在。G 樓的室內水上市場 SookSiam 把全泰國 77 府的小吃和手工藝搬進商場，光吃這層就能耗掉一個下午；河畔露台看對岸市景也很棒。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">17:00 後</span>
+      <div>
+        <h3>搭船前往 Asiatique</h3>
+        <p class="intro">從 ICONSIAM 沿昭披耶河搭船南下，傍晚的河面配兩岸廟宇和高樓，是曼谷最便宜的觀光航線。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">傍晚</span>
+      <div>
+        <h3>Jurassic World</h3>
+        <p class="intro">Asiatique 園區內的「Jurassic World: The Experience」沉浸式恐龍展，實體場景加聲光互動，遇到暴龍前先想好逃跑路線。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">晚上</span>
+      <div>
+        <h3>Calypso 看表演<span class="badges"><span class="badge book">可能要先訂位</span></span></h3>
+        <p class="note"><a href="https://booking.calypsocabaret.com/attraction/standard-seats-69820?currency=thb&amp;lang=thh" target="_blank" rel="noopener">Calypso 訂票連結 ↗</a></p>
+        <p class="intro">曼谷最著名的變裝歌舞秀（Cabaret）之一，駐點 Asiatique 三十多年，歌舞、服裝與燈光都是劇場等級，是很多人心中曼谷夜晚的必看節目。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">晚上</span>
+      <div>
+        <h3>Asiatique 河濱夜市</h3>
+        <p class="intro">由昭披耶河畔的百年舊碼頭倉庫改建，結合夜市、餐廳與遊樂設施，招牌是河邊的大摩天輪，飯後沿河散步剛剛好。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ==================== day 4 ==================== -->
+<section class="day" id="day4" style="--c:var(--sun)">
+  <header class="day-head">
+    <span class="dnum">DAY 4</span>
+    <h2>9/27</h2>
+    <span class="wcolor">星期日・曜色紅</span>
+    <span class="dtitle">市場、水族館與暹羅商圈</span>
+  </header>
+  <ol class="stops">
+    <li class="stop">
+      <span class="stop-time">早上</span>
+      <div>
+        <h3>Or Tor Kor Market<span class="badges"><span class="badge hours">06:00–18:00</span></span></h3>
+        <p class="note">吃水果。</p>
+        <p class="intro">被譽為泰國最高級的生鮮市場，乾淨明亮、以品質聞名，山竹、榴槤、芒果糯米飯都是頂規版本，就在恰圖恰週末市集對面。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">上午</span>
+      <div>
+        <h3>GUMP’s Ari Community Space<span class="badges"><span class="badge hours">10:00–22:00</span></span></h3>
+        <p class="note">逛逛。</p>
+        <p class="intro">Ari 文青社區裡的小型複合空間，白色貨櫃屋群塞滿獨立咖啡、甜點和選物小店，是曼谷年輕人拍照打卡的據點。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">中午</span>
+      <div>
+        <h3>Prik-Yuak <span class="alt">or Lay Lao（二選一）</span><span class="badges"><span class="badge book">要訂位</span></span></h3>
+        <p class="note">必比登跟米其林。</p>
+        <p class="intro">兩間都是 Ari 區的實力派：Lay Lao 以東北依善料理和海鮮出名、常年入選必比登；Prik-Yuak 則是米其林推薦的泰菜餐館，順路解決午餐正好。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">下午</span>
+      <div>
+        <h3>SEA LIFE Bangkok Ocean World<span class="badges"><span class="badge ticket">先在平台買好票</span></span></h3>
+        <p class="note">可以考慮跟 Madame Tussauds（杜莎夫人蠟像館）一起買套票。</p>
+        <p class="intro">位在 Siam Paragon 地下樓的大型水族館，是東南亞規模最大之一，海底隧道和鯊魚缸最有看頭，也是躲午後雷陣雨的好地方。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">下午</span>
+      <div>
+        <h3>Nextopia Siam Paragon</h3>
+        <p class="intro">Siam Paragon 內的沉浸式光影樂園，用互動投影和聲光裝置打造未來城市場景，適合拍一輪科幻感照片。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">傍晚</span>
+      <div>
+        <h3>暹羅購物中心</h3>
+        <p class="intro">Siam 商圈是曼谷的心臟：Siam Paragon、Siam Center、Siam Discovery 一路相連，精品、泰國設計師品牌到美食街一次逛完。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">晚餐</span>
+      <div>
+        <h3>晚餐待定</h3>
+        <p class="note">保留彈性，看當天在哪一區、想吃什麼再決定。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ==================== day 5 ==================== -->
+<section class="day" id="day5" style="--c:var(--mon)">
+  <header class="day-head">
+    <span class="dnum">DAY 5</span>
+    <h2>9/28</h2>
+    <span class="wcolor">星期一・曜色黃</span>
+    <span class="dtitle">最後採買，回家</span>
+  </header>
+  <ol class="stops">
+    <li class="stop">
+      <span class="stop-time">早上</span>
+      <div>
+        <h3>Big C 採買<span class="badges"><span class="badge hours">06:00–00:00</span></span></h3>
+        <p class="note">也可以前一天買好。</p>
+        <p class="intro">觀光客最愛的伴手禮補貨站：小老闆海苔、Bento 魷魚片、泰式奶茶粉、皇家蜂蜜通通一次掃齊，Ratchadamri 這間就在水門商圈、離飯店很近。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">10:00</span>
+      <div>
+        <h3>上車出發前往機場</h3>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">10:40</span>
+      <div>
+        <h3>抵達機場</h3>
+        <p class="note">起飛前 2.5 小時抵達 BKK 辦理登機。</p>
+      </div>
+    </li>
+    <li class="stop">
+      <span class="stop-time">13:10</span>
+      <div>
+        <h3>飛機起飛 ✈ JX742</h3>
+        <p class="note">18:00 抵達桃園（2 航廈）。</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<footer>
+  <div class="strip" aria-hidden="true">
+    <span style="background:var(--thu)"></span>
+    <span style="background:var(--fri)"></span>
+    <span style="background:var(--sat)"></span>
+    <span style="background:var(--sun)"></span>
+    <span style="background:var(--mon)"></span>
+  </div>
+  <p>曼谷五日 · 2026.09.24–09.28 · <a href="../index.html">回旅行首頁</a></p>
+</footer>
+
+</div>
+</body>
+</html>

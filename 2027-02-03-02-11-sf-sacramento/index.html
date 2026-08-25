@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>舊金山 ⇄ SACRAMENTO｜2027.02.03–02.11</title>
+<meta name="description" content="2027/02/03–02/11 舊金山＋Sacramento 九天：全程大眾運輸不自駕、國王主場兩連看、SFJAZZ 備選，含 27 吋行李與第一次赴美的安全筆記。">
+<meta name="theme-color" content="#C0362C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Martian+Mono:wght@300..700&family=Noto+Sans+TC:wght@400..900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BAY AREA LINE — 2027 SF ⇄ Sacramento
+   路線圖式版型：每一天是一個車站，線的顏色＝當晚睡哪座城市。
+   金門大橋國際橘 = 舊金山；國王紫 = Sacramento。
+   ============================================================ */
+:root{
+  --fog:#E7EBEE;          /* 灣區霧色紙 */
+  --panel:#FFFFFF;
+  --ink:#14181B;
+  --slate:#4E5C65;        /* 次要文字，對 --fog 5.7:1 */
+  --rule:#C6CED4;
+  --ggb:#C0362C;          /* Golden Gate Bridge International Orange */
+  --ggb-deep:#93261E;     /* 小字用的深橘紅 */
+  --kings:#5A2D81;        /* Sacramento Kings purple */
+  --railw:56px;
+  --linew:7px;
+  --dotw:21px;
+  --gap:34px;
+  --maxw:960px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+body{
+  margin:0;
+  background:var(--fog);
+  color:var(--ink);
+  font-family:'Noto Sans TC','Archivo',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.8;
+  font-feature-settings:"palt" 1;
+}
+.topline{height:6px;background:linear-gradient(90deg,var(--ggb) 0 46%,var(--kings) 46% 100%)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+a{color:var(--ggb-deep)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--kings);outline-offset:3px;border-radius:2px}
+.mono{font-family:'Martian Mono','Archivo',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+
+/* ---------------- hero ---------------- */
+.hero{padding:26px 0 8px}
+.hero-bar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  flex-wrap:wrap;
+  font-family:'Martian Mono',monospace;font-size:11px;font-weight:400;
+  letter-spacing:.06em;color:var(--slate);
+  border-bottom:1px solid var(--rule);padding-bottom:12px;
+}
+.hero-bar a{color:var(--slate);text-decoration:none;border-bottom:1px solid var(--rule)}
+.hero-bar a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.eyebrow{
+  font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:700;
+  text-transform:uppercase;letter-spacing:.26em;font-size:12.5px;
+  color:var(--slate);margin:30px 0 14px;
+}
+h1.title{margin:0;line-height:1;display:flex;flex-direction:column;gap:10px}
+h1.title .t1{
+  font-weight:900;font-size:clamp(54px,13vw,104px);letter-spacing:.02em;
+  color:var(--ggb);
+}
+h1.title .tlink{
+  display:block;height:var(--linew);width:min(240px,52%);border-radius:99px;
+  background:linear-gradient(90deg,var(--ggb) 0 50%,var(--kings) 50% 100%);
+}
+h1.title .t2{
+  font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:800;
+  text-transform:uppercase;font-size:clamp(34px,8.6vw,74px);letter-spacing:-.005em;
+  color:var(--kings);
+}
+.hero .dates{
+  font-family:'Martian Mono',monospace;font-weight:600;font-size:clamp(13px,3.4vw,17px);
+  letter-spacing:.02em;margin:22px 0 0;
+}
+.hero .dates span{color:var(--slate);font-weight:300}
+.hero .lede{max-width:44rem;margin:14px 0 0;color:var(--slate);font-size:15.5px}
+
+/* facts */
+.facts{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:6px;
+  overflow:hidden;margin:30px 0 0;
+}
+.facts div{background:var(--fog);padding:14px 12px;text-align:center}
+.facts b{
+  display:block;font-family:'Martian Mono',monospace;font-weight:600;
+  font-size:clamp(17px,4.4vw,24px);line-height:1.2;
+}
+.facts em{
+  display:block;font-style:normal;font-size:11px;color:var(--slate);
+  letter-spacing:.12em;margin-top:5px;
+}
+@media (max-width:560px){.facts{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------------- 路線帶（同時就是住宿分配） ---------------- */
+.strip{margin:34px 0 4px}
+.rs{display:flex;align-items:stretch}
+.rs-cell{display:flex;flex-direction:column;min-width:0}
+.rs-cell.stop{flex:0 0 auto}
+.rs-cell.line{flex:1 1 0}
+.rs .mark{position:relative;height:46px;display:block}
+.rs-cell.line .mark::before{
+  content:'';position:absolute;left:0;right:0;top:50%;height:var(--linew);
+  transform:translateY(-50%);background:var(--c);
+}
+.rs-cell.stop .mark::before{
+  content:'';position:absolute;left:0;right:0;top:50%;height:var(--linew);
+  transform:translateY(-50%);
+  background:linear-gradient(90deg,var(--l) 0 50%,var(--r) 50% 100%);
+}
+.rs .dot{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:22px;height:22px;border-radius:50%;background:var(--fog);
+  border:7px solid var(--ink);
+}
+.rs .dot.xf{width:26px;height:26px;border-width:5px;box-shadow:0 0 0 4px var(--fog),0 0 0 7px var(--ink)}
+.rs .lab{padding:10px 8px 0;text-align:center;line-height:1.35}
+.rs-cell.stop .lab{padding-left:2px;padding-right:2px}
+.rs .lab b{
+  display:block;font-family:'Martian Mono',monospace;font-weight:600;
+  font-size:12px;letter-spacing:-.02em;white-space:nowrap;
+}
+.rs .lab em{display:block;font-style:normal;font-size:11px;color:var(--slate);white-space:nowrap}
+.rs-cell.line.sf{--c:var(--ggb)}
+.rs-cell.line.sac{--c:var(--kings)}
+.rs-cell.line.sf .lab b{color:var(--ggb-deep)}
+.rs-cell.line.sac .lab b{color:var(--kings)}
+.rs-cell.stop.a{--l:transparent;--r:var(--ggb)}
+.rs-cell.stop.x1{--l:var(--ggb);--r:var(--kings)}
+.rs-cell.stop.x2{--l:var(--kings);--r:var(--ggb)}
+.rs-cell.stop.z{--l:var(--ggb);--r:transparent}
+@media (max-width:700px){
+  .rs{flex-direction:column;align-items:stretch}
+  .rs-cell{flex-direction:row;align-items:center;gap:14px}
+  .rs-cell.line{flex:0 0 auto}
+  .rs .mark{height:44px;width:46px;flex:0 0 46px}
+  .rs-cell.line .mark::before,.rs-cell.stop .mark::before{
+    left:50%;right:auto;top:0;bottom:0;height:auto;width:var(--linew);
+    transform:translateX(-50%);
+  }
+  .rs-cell.line .mark::before{background:var(--c)}
+  .rs-cell.stop .mark::before{background:linear-gradient(180deg,var(--l) 0 50%,var(--r) 50% 100%)}
+  .rs .lab{padding:0;text-align:left;display:flex;align-items:baseline;gap:10px}
+  .rs .lab b{font-size:13px}
+}
+
+/* ---------------- 區塊標題 ---------------- */
+section{margin:66px 0 0}
+.sign .rule{display:block;width:64px;height:var(--linew);border-radius:99px;background:var(--ink);margin-bottom:15px}
+.sign.sf .rule{background:var(--ggb)}
+.sign.sac .rule{background:var(--kings)}
+.sign h2{margin:0 0 4px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;line-height:1.2}
+.sign h2 .en{
+  font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:800;
+  text-transform:uppercase;letter-spacing:.02em;font-size:clamp(26px,6vw,40px);
+}
+.sign h2 .zh{font-weight:700;font-size:clamp(14px,3.4vw,17px);color:var(--slate);letter-spacing:.08em}
+.sign p.sub{margin:10px 0 0;color:var(--slate);font-size:14.5px;max-width:44rem}
+
+/* ---------------- 航段 ---------------- */
+.air{display:grid;gap:16px;margin-top:24px}
+.airseg{
+  background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+  padding:20px 22px 18px;
+}
+.airseg .no{
+  font-family:'Martian Mono',monospace;font-weight:600;font-size:12px;
+  letter-spacing:.04em;color:var(--slate);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.airseg .no .cls{color:var(--kings)}
+.legs{display:flex;align-items:center;gap:14px;margin:16px 0 0}
+.legs .port{flex:0 0 auto}
+.legs .port .code{
+  font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:800;
+  font-size:clamp(24px,6vw,34px);line-height:1;letter-spacing:.01em;
+}
+.legs .port .t{font-family:'Martian Mono',monospace;font-size:12px;font-weight:600;margin-top:7px;display:block}
+.legs .port .z{font-size:11px;color:var(--slate);display:block;letter-spacing:.04em}
+.legs .port.arr{text-align:right;margin-left:auto}
+.legs .path{flex:1 1 0;min-width:36px;position:relative;height:22px}
+.legs .path::before{
+  content:'';position:absolute;left:0;right:0;top:50%;height:0;
+  border-top:3px dashed var(--rule);
+}
+.legs .path span{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:var(--panel);padding:0 8px;color:var(--slate);font-size:15px;line-height:1;
+}
+.airseg .meta{margin:14px 0 0;font-size:13.5px;color:var(--slate);border-top:1px solid var(--rule);padding-top:12px}
+@media (min-width:760px){.air{grid-template-columns:1fr 1fr}}
+
+/* ---------------- 通用卡片 / 清單 ---------------- */
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:20px 22px}
+.card h3{margin:0 0 10px;font-size:16.5px;font-weight:700;letter-spacing:.02em}
+.card p{margin:0 0 10px}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+ul.plain{list-style:none;margin:0;padding:0}
+ul.plain li{position:relative;padding-left:18px;margin:0 0 8px;font-size:14.8px}
+ul.plain li::before{
+  content:'';position:absolute;left:0;top:.72em;width:7px;height:7px;
+  border-radius:2px;background:var(--rule);
+}
+ul.plain li:last-child{margin-bottom:0}
+
+/* 建議註記 */
+.sug{
+  margin:14px 0 0;padding:13px 16px 13px 15px;
+  background:#FBF3F1;border-left:5px solid var(--ggb);border-radius:0 6px 6px 0;
+  font-size:14.3px;line-height:1.75;
+}
+.sug .tag{
+  display:inline-block;font-family:'Martian Mono',monospace;font-weight:600;
+  font-size:10px;letter-spacing:.1em;color:#fff;background:var(--ggb);
+  padding:2px 7px;border-radius:3px;margin-right:9px;vertical-align:2px;
+}
+.sug.note{background:#F3F0F8;border-left-color:var(--kings)}
+.sug.note .tag{background:var(--kings)}
+.sug strong{font-weight:700}
+
+/* ---------------- 住宿 ---------------- */
+.stay{display:grid;gap:16px;margin-top:24px}
+@media (min-width:760px){.stay{grid-template-columns:1.15fr 1fr}}
+.pick{border-top:var(--linew) solid var(--kings);border-radius:0 0 8px 8px;background:var(--panel);border-left:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:20px 22px}
+.pick .kicker{font-family:'Martian Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--kings);font-weight:600}
+.pick h3{margin:8px 0 10px;font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:800;font-size:clamp(20px,4.6vw,26px);letter-spacing:.005em}
+.alt{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:20px 22px}
+.alt h3{margin:0 0 12px;font-size:14px;letter-spacing:.1em;color:var(--slate);font-weight:700}
+.alt ul{list-style:none;margin:0;padding:0}
+.alt li{font-size:14.5px;padding:8px 0;border-bottom:1px solid var(--rule)}
+.alt li:last-child{border-bottom:0;padding-bottom:0}
+.alt li small{display:block;color:var(--slate);font-size:12.5px;line-height:1.6}
+
+/* ---------------- 每日路線（簽名元素） ---------------- */
+.route{list-style:none;margin:28px 0 0;padding:0}
+.day{display:grid;grid-template-columns:var(--railw) 1fr;margin-bottom:var(--gap)}
+.day.sf{--c:var(--ggb)}
+.day.sac{--c:var(--kings)}
+.rail{position:relative}
+.rail::before{
+  content:'';position:absolute;top:0;bottom:calc(var(--gap) * -1);
+  left:calc((var(--railw) - var(--linew)) / 2);width:var(--linew);
+  background:var(--c);
+}
+.day.x-sac .rail::before{background:linear-gradient(180deg,var(--ggb) 0 26px,var(--kings) 26px 100%)}
+.day.x-sf .rail::before{background:linear-gradient(180deg,var(--kings) 0 26px,var(--ggb) 26px 100%)}
+.day:last-child .rail::before{bottom:auto;height:72px}
+.node{
+  position:absolute;top:16px;left:calc((var(--railw) - var(--dotw)) / 2);
+  width:var(--dotw);height:var(--dotw);border-radius:50%;
+  background:var(--fog);border:6px solid var(--c);
+}
+.node.term{border-width:8px}
+.node.xf{
+  width:calc(var(--dotw) + 6px);height:calc(var(--dotw) + 6px);
+  left:calc((var(--railw) - var(--dotw) - 6px) / 2);top:13px;border-width:5px;
+  box-shadow:0 0 0 4px var(--fog),0 0 0 7px var(--c);
+}
+.daycard{
+  background:var(--panel);border:1px solid var(--rule);border-radius:8px;
+  padding:18px 22px 20px;min-width:0;
+}
+.dayhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.dayhead .date{font-family:'Martian Mono',monospace;font-weight:700;font-size:16px;letter-spacing:-.03em}
+.dayhead .dow{font-size:12.5px;color:var(--slate);letter-spacing:.14em}
+.chip{
+  margin-left:auto;font-family:'Martian Mono',monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.05em;color:#fff;background:var(--c);padding:3px 9px;border-radius:99px;
+  white-space:nowrap;
+}
+.chip.ghost{background:transparent;color:var(--slate);border:1px solid var(--rule)}
+.daycard h3{
+  margin:0 0 14px;font-size:clamp(19px,4.6vw,24px);font-weight:900;letter-spacing:.02em;
+  line-height:1.35;
+}
+.stops{list-style:none;margin:0;padding:0}
+.stops li{position:relative;padding-left:20px;margin-bottom:9px;font-size:15px}
+.stops li::before{
+  content:'';position:absolute;left:1px;top:.68em;width:8px;height:8px;
+  border-radius:50%;border:2.5px solid var(--c);
+}
+.stops li.hi::before{background:var(--c)}
+.stops li.hi{font-weight:700}
+.stops .when{
+  font-family:'Martian Mono',monospace;font-size:11.5px;font-weight:600;
+  color:var(--slate);margin-right:9px;letter-spacing:-.02em;
+}
+.place{color:inherit;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:var(--slate);text-underline-offset:4px}
+.place:hover{text-decoration-color:var(--c);color:var(--c)}
+.tip{margin:14px 0 0;font-size:14px;color:var(--slate);border-top:1px solid var(--rule);padding-top:12px}
+@media (max-width:600px){
+  :root{--railw:38px;--linew:6px;--dotw:18px}
+  .daycard{padding:16px 16px 18px}
+  .chip{margin-left:0}
+}
+
+/* ---------------- 行李 ---------------- */
+.limits{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:24px;
+}
+.limits div{background:var(--panel);padding:20px 14px;text-align:center}
+.limits b{display:block;font-family:'Martian Mono',monospace;font-weight:600;font-size:clamp(15px,3.6vw,21px);line-height:1.3}
+.limits em{display:block;font-style:normal;font-size:11.5px;color:var(--slate);letter-spacing:.1em;margin-top:7px}
+@media (max-width:560px){.limits{grid-template-columns:1fr}}
+ol.steps{list-style:none;margin:18px 0 0;padding:0;counter-reset:s}
+ol.steps li{
+  counter-increment:s;position:relative;padding-left:44px;margin-bottom:12px;font-size:14.8px;
+}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);position:absolute;left:0;top:.1em;
+  font-family:'Martian Mono',monospace;font-weight:600;font-size:12px;
+  color:#fff;background:var(--ink);border-radius:4px;padding:2px 6px;letter-spacing:-.02em;
+}
+
+/* ---------------- 安全 ---------------- */
+.safety{display:grid;gap:16px;margin-top:24px}
+@media (min-width:720px){.safety{grid-template-columns:1fr 1fr}}
+.safety .card h3{
+  font-family:'Archivo',sans-serif;font-stretch:112%;font-weight:800;text-transform:uppercase;
+  font-size:13px;letter-spacing:.14em;color:var(--slate);
+  border-bottom:1px solid var(--rule);padding-bottom:10px;margin-bottom:13px;
+}
+.safety .card h3 span{font-family:'Noto Sans TC',sans-serif;font-stretch:normal;text-transform:none;letter-spacing:.08em;color:var(--ink);margin-left:10px;font-size:14.5px}
+.emergency{
+  margin-top:16px;background:var(--ggb);color:#fff;border-radius:8px;
+  padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.emergency b{font-family:'Martian Mono',monospace;font-weight:700;font-size:clamp(26px,7vw,38px);line-height:1}
+.emergency span{font-size:14px;opacity:.95}
+
+/* ---------------- 準備清單 ---------------- */
+.check{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--rule)}
+.check li{
+  position:relative;padding:14px 0 14px 38px;border-bottom:1px solid var(--rule);font-size:15px;
+}
+.check li::before{
+  content:'';position:absolute;left:2px;top:17px;width:17px;height:17px;
+  border:2px solid var(--slate);border-radius:4px;background:var(--panel);
+}
+
+/* ---------------- 連結 ---------------- */
+.links{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.links li{background:var(--panel);display:flex}
+.links a{
+  flex:1 1 auto;display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  padding:13px 18px;text-decoration:none;color:var(--ink);font-size:14.5px;
+}
+.links a:hover{background:#F4F7F9;color:var(--ggb-deep)}
+.links a .host{font-family:'Martian Mono',monospace;font-size:10.5px;color:var(--slate);white-space:nowrap}
+@media (min-width:760px){.links{grid-template-columns:1fr 1fr}}
+
+/* ---------------- footer ---------------- */
+footer{margin-top:80px;border-top:1px solid var(--rule);padding-top:24px;text-align:center}
+footer .fstrip{height:var(--linew);width:min(320px,70%);margin:0 auto 20px;border-radius:99px;background:linear-gradient(90deg,var(--ggb) 0 37.5%,var(--kings) 37.5% 62.5%,var(--ggb) 62.5% 100%)}
+footer p{margin:0;font-size:13.5px;color:var(--slate)}
+footer a{color:var(--ink)}
+
+/* 捲動點亮：只在有 JS 且未要求減少動態時啟用 */
+.js .rail{opacity:.3;transition:opacity .7s ease}
+.js .day.lit .rail{opacity:1}
+@media (prefers-reduced-motion:reduce){.js .rail{opacity:1}}
+</style>
+</head>
+<body>
+<div class="topline" aria-hidden="true"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-bar">
+    <a href="../index.html">← 旅行首頁</a>
+    <span>9 DAYS / 8 NIGHTS · NO CAR</span>
+  </div>
+
+  <p class="eyebrow">Bay Area Line · 2027 Winter</p>
+  <h1 class="title">
+    <span class="t1">舊金山</span>
+    <span class="tlink" aria-hidden="true"></span>
+    <span class="t2">Sacramento</span>
+  </h1>
+  <p class="dates mono">2027.02.03 <span>—</span> 02.11 <span>·</span> 週三抵達 <span>/</span> 週四離境</p>
+  <p class="lede">一條線走完：三晚舊金山、兩晚 Sacramento、再三晚舊金山。全程大眾運輸，不自駕。線的顏色代表當晚睡在哪座城市——橘色是舊金山，紫色是 Sacramento。</p>
+
+  <div class="facts">
+    <div><b>08</b><em>NIGHTS 晚</em></div>
+    <div><b>02</b><em>CITIES 城市</em></div>
+    <div><b>02</b><em>KINGS GAMES 主場</em></div>
+    <div><b>00</b><em>CARS 自駕</em></div>
+  </div>
+
+  <div class="strip">
+    <div class="rs" role="img" aria-label="路線：2月3日抵達 SFO，舊金山住 3 晚；2月6日轉乘前往 Sacramento 住 2 晚；2月8日轉乘回舊金山住 3 晚；2月11日從 SFO 離開。">
+      <span class="rs-cell stop a"><span class="mark" aria-hidden="true"><i class="dot"></i></span><span class="lab"><b>SFO</b><em>2/3 抵達</em></span></span>
+      <span class="rs-cell line sf"><span class="mark" aria-hidden="true"></span><span class="lab"><b>舊金山</b><em>3 晚</em></span></span>
+      <span class="rs-cell stop x1"><span class="mark" aria-hidden="true"><i class="dot xf"></i></span><span class="lab"><b>2/6</b><em>轉乘</em></span></span>
+      <span class="rs-cell line sac"><span class="mark" aria-hidden="true"></span><span class="lab"><b>SACRAMENTO</b><em>2 晚</em></span></span>
+      <span class="rs-cell stop x2"><span class="mark" aria-hidden="true"><i class="dot xf"></i></span><span class="lab"><b>2/8</b><em>轉乘</em></span></span>
+      <span class="rs-cell line sf"><span class="mark" aria-hidden="true"></span><span class="lab"><b>舊金山</b><em>3 晚</em></span></span>
+      <span class="rs-cell stop z"><span class="mark" aria-hidden="true"><i class="dot"></i></span><span class="lab"><b>SFO</b><em>2/11 離開</em></span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 航段 ============ -->
+<section id="flights">
+  <div class="sign">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Air</span><span class="zh">航段</span></h2>
+    <p class="sub">虛線是唯一不在地面上的兩段。星宇航空豪華經濟艙，桃園第二航廈進出。</p>
+  </div>
+
+  <div class="air">
+    <div class="airseg">
+      <p class="no"><span>STARLUX <strong>JX012</strong> · 去程</span><span class="cls">豪華經濟艙</span></p>
+      <div class="legs">
+        <span class="port">
+          <span class="code">TPE</span>
+          <span class="t">2/4 00:05</span>
+          <span class="z">台灣時間 · 第二航廈</span>
+        </span>
+        <span class="path" aria-hidden="true"><span>✈</span></span>
+        <span class="port arr">
+          <span class="code">SFO</span>
+          <span class="t">2/3 19:10</span>
+          <span class="z">美國時間 · 國際航廈</span>
+        </span>
+      </div>
+      <p class="meta">跨越國際換日線：台灣時間 2/4 凌晨起飛，抵達時當地還是 2/3 傍晚。訂當晚住宿要訂 <strong>2/3</strong>。</p>
+    </div>
+
+    <div class="airseg">
+      <p class="no"><span>STARLUX <strong>JX011</strong> · 回程</span><span class="cls">豪華經濟艙</span></p>
+      <div class="legs">
+        <span class="port">
+          <span class="code">SFO</span>
+          <span class="t">2/11 23:10</span>
+          <span class="z">美國時間</span>
+        </span>
+        <span class="path" aria-hidden="true"><span>✈</span></span>
+        <span class="port arr">
+          <span class="code">TPE</span>
+          <span class="t">2/13 05:15</span>
+          <span class="z">台灣時間 · 第二航廈</span>
+        </span>
+      </div>
+      <p class="meta">深夜班機，2/11 白天仍可安排半日行程，行李寄放在飯店。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 住宿 ============ -->
+<section id="stay">
+  <div class="sign sac">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Stay</span><span class="zh">住宿分配</span></h2>
+    <p class="sub">舊金山 3 晚 → Sacramento 2 晚 → 舊金山 3 晚。這個排法讓 27 吋行李只需要搬動兩次，看完球也不必趕末班車。</p>
+  </div>
+
+  <div class="stay">
+    <div class="pick">
+      <p class="kicker">SACRAMENTO 首選</p>
+      <h3>Kimpton Sawyer Hotel</h3>
+      <p>就在 Golden 1 Center 旁。看完球可以跟著散場人群一起走回飯店，最適合第一次到美國、沒有車、又擔心深夜交通的人。</p>
+      <ul class="plain">
+        <li>球場走回飯店：跟著人潮，全程不必單獨走暗路。</li>
+        <li>連住兩晚，中途完全不用移動行李。</li>
+      </ul>
+    </div>
+
+    <div class="alt">
+      <h3>其他可比較</h3>
+      <ul>
+        <li>Hyatt Centric Sacramento</li>
+        <li>Embassy Suites by Hilton Sacramento Riverfront Promenade</li>
+        <li>The Citizen Hotel</li>
+        <li>Delta King Hotel<small>停在河上的老船飯店，地點有特色，但拖大行李的便利性略差。</small></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>舊金山選哪一區</h3>
+    <p>優先選交通方便、夜間仍有人流的區域：Embarcadero、Financial District、Union Square 東側／Powell 一帶。訂房前看近期評論，特別搜尋 <span class="mono">location</span>、<span class="mono">night</span>、<span class="mono">noise</span>、<span class="mono">walk</span> 這幾個字。</p>
+    <div class="sug">
+      <span class="tag">建議</span>訂舊金山前後兩段住宿時，直接寫信問<strong>同一家飯店</strong>能否在 2/6－2/8 之間免費或付費保管大行李。如果飯店<strong>書面確認可以跨夜寄存</strong>，去 Sacramento 就只帶兩晚的小登機箱或背包。不是每間飯店都接受跨夜寄存，所以不能先假設一定可以。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 每日路線 ============ -->
+<section id="route">
+  <div class="sign sf">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Route</span><span class="zh">每日路線</span></h2>
+    <p class="sub">九個車站，兩個轉乘點。線的顏色是當晚住哪裡；雙圈站是移動日。</p>
+  </div>
+
+  <div class="sug note" style="margin-top:20px">
+    <span class="tag">提醒</span>二月是舊金山的雨季，白天大約 <span class="mono">9–15°C</span>，日落約 <span class="mono">17:40</span>。帶防水外套與折傘，戶外景點盡量排在中午前後；天氣不好時金門大橋區可以和 2/9、2/10 的行程互換。
+  </div>
+
+  <ol class="route">
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node term"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/03</span><span class="dow">週三</span><span class="chip">住 舊金山</span></div>
+        <h3>抵達舊金山</h3>
+        <ul class="stops">
+          <li><span class="when">19:10</span>抵達 SFO</li>
+          <li>入境、領行李後前往舊金山市區飯店</li>
+          <li>晚上不排景點：辦理入住、吃簡單晚餐、休息</li>
+        </ul>
+        <p class="tip">如果一個人帶著 27 吋行李、又是第一次到美國，抵達當晚可直接搭機場官方排班計程車或叫車服務。BART 也可行，但此時以減少轉乘、不要拖著行李找路為優先。</p>
+      </div>
+    </li>
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/04</span><span class="dow">週四</span><span class="chip">住 舊金山</span></div>
+        <h3>經典舊金山市區</h3>
+        <ul class="stops">
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Powell-Hyde+Cable+Car+Turnaround+San+Francisco" target="_blank" rel="noopener">Cable Car</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Lombard+Street+San+Francisco" target="_blank" rel="noopener">Lombard Street 九曲花街</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Fisherman%27s+Wharf+San+Francisco" target="_blank" rel="noopener">Fisherman's Wharf 漁人碼頭</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Pier+39+San+Francisco" target="_blank" rel="noopener">Pier 39</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Ferry+Building+San+Francisco" target="_blank" rel="noopener">Ferry Building</a>／Embarcadero</li>
+          <li><span class="when">19:30</span>備選：Cécile McLorin Salvant at SFJAZZ</li>
+        </ul>
+        <p class="tip">第一天不要塞得太滿，保留時差恢復空間。</p>
+      </div>
+    </li>
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/05</span><span class="dow">週五</span><span class="chip">住 舊金山</span></div>
+        <h3>Alcatraz ＋ North Beach ＋ Chinatown</h3>
+        <ul class="stops">
+          <li><span class="when">上午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Alcatraz+Island" target="_blank" rel="noopener">Alcatraz 惡魔島</a></li>
+          <li><span class="when">下午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Coit+Tower+San+Francisco" target="_blank" rel="noopener">North Beach、Coit Tower</a></li>
+          <li><span class="when">傍晚</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Chinatown+San+Francisco" target="_blank" rel="noopener">Chinatown</a></li>
+          <li class="hi"><span class="when">19:30</span>Cécile McLorin Salvant at SFJAZZ</li>
+        </ul>
+        <p class="tip">惡魔島只從官方網站購票，選上午船班，比較不會因延誤擠壓下午行程。</p>
+        <div class="sug">
+          <span class="tag">建議</span>爵士演出<strong>建議選 2/5 這晚</strong>，不要選 2/4。從亞洲飛美國的時差是「早醒、傍晚崩」，2/4 是落地後第一個整天，19:30 開演最容易在座位上睡著；2/5 已經多調整一天。2/4 那晚仍保留為備案，兩晚都有場次。
+        </div>
+        <div class="sug">
+          <span class="tag">建議</span>惡魔島船票大約<strong>開船前 90 天</strong>開放，請在 <span class="mono">2026/11</span> 上旬設好提醒，開賣當天就訂上午船班。
+        </div>
+        <div class="sug note">
+          <span class="tag">提醒</span>2027 年農曆春節初一是 <strong>2/6</strong>，所以 2/5 傍晚的 Chinatown 正好是除夕前後，年節氣氛與年花市集最濃。舊金山的大型農曆新年遊行通常在春節後約兩週，需另外查 2027 年官方日期。
+        </div>
+      </div>
+    </li>
+
+    <li class="day sac x-sac">
+      <div class="rail" aria-hidden="true"><span class="node xf"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/06</span><span class="dow">週六</span><span class="chip">住 Sacramento</span></div>
+        <h3>移動日：前往 Sacramento ＋ 國王 vs 太陽</h3>
+        <ul class="stops">
+          <li>舊金山飯店退房</li>
+          <li class="hi">搭 Amtrak／Capitol Corridor 前往 Sacramento</li>
+          <li>抵達後先到飯店寄放或入住——<strong>不要拖行李去逛街或進球場</strong></li>
+          <li><span class="when">下午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Old+Sacramento+Waterfront" target="_blank" rel="noopener">Old Sacramento Waterfront</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=California+State+Railroad+Museum" target="_blank" rel="noopener">California State Railroad Museum</a>（留意 <span class="mono">17:00</span> 閉館）</li>
+          <li class="hi"><span class="when">19:00</span>Sacramento Kings vs Phoenix Suns</li>
+          <li>賽後步行回 Golden 1 Center 附近飯店</li>
+        </ul>
+        <p class="tip">這天舊金山交響樂團 Lunar New Year Concert 約 17:00，也可當備案；但若保留國王對太陽，就不建議同日硬排兩場演出。</p>
+        <div class="sug">
+          <span class="tag">建議</span><strong>Capitol Corridor 不從舊金山發車。</strong>實際走法是先搭 Amtrak 官方接駁巴士（Thruway）從 <a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Salesforce+Transit+Center+San+Francisco" target="_blank" rel="noopener">Salesforce Transit Center</a> 到 <span class="mono">EMY</span> Emeryville 站，再轉 Capitol Corridor 到 <span class="mono">SAC</span> Sacramento Valley Station，門到門約 <span class="mono">2.5–3 小時</span>。備案是搭 BART 到 Richmond 站轉 Capitol Corridor。訂票時一次把巴士段一起訂進去。
+        </div>
+        <div class="sug">
+          <span class="tag">建議</span>這是全程<strong>最緊的一天</strong>：退房＋接駁＋火車＋老城區＋17:00 閉館的鐵道博物館＋19:00 開球。請訂<strong>上午出發</strong>的班次；如果只買得到中午以後的車，就把鐵道博物館往後挪到 2/7，不要硬排。
+        </div>
+      </div>
+    </li>
+
+    <li class="day sac">
+      <div class="rail" aria-hidden="true"><span class="node"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/07</span><span class="dow">週日</span><span class="chip">住 Sacramento</span></div>
+        <h3>Sacramento 市區 ＋ 國王 vs 火箭</h3>
+        <ul class="stops">
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=California+State+Capitol+Park" target="_blank" rel="noopener">California State Capitol Park</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Crocker+Art+Museum" target="_blank" rel="noopener">Crocker Art Museum</a>，或改逛 Midtown 咖啡店與街區</li>
+          <li><span class="when">下午</span>回飯店休息</li>
+          <li class="hi"><span class="when">待確認</span>Sacramento Kings vs Houston Rockets</li>
+          <li>賽後再住 Sacramento 一晚</li>
+        </ul>
+        <p class="tip">連住兩晚比每晚趕回舊金山安全、舒服，也不必受限於末班火車。這場的開球時間官方賽程尚未確定，訂票時一併確認。</p>
+      </div>
+    </li>
+
+    <li class="day sf x-sf">
+      <div class="rail" aria-hidden="true"><span class="node xf"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/08</span><span class="dow">週一</span><span class="chip">住 舊金山</span></div>
+        <h3>移動日：返回舊金山 ＋ 金門大橋區</h3>
+        <ul class="stops">
+          <li class="hi"><span class="when">上午</span>搭 Capitol Corridor 回舊金山（原路返回）</li>
+          <li>飯店寄放行李／入住</li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Palace+of+Fine+Arts+San+Francisco" target="_blank" rel="noopener">Palace of Fine Arts</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Presidio+of+San+Francisco" target="_blank" rel="noopener">Presidio</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Crissy+Field+San+Francisco" target="_blank" rel="noopener">Crissy Field</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Golden+Gate+Bridge" target="_blank" rel="noopener">Golden Gate Bridge</a></li>
+        </ul>
+        <p class="tip">若天候不好，可把金門大橋區與 2/9、2/10 的行程互換。</p>
+      </div>
+    </li>
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/09</span><span class="dow">週二</span><span class="chip">住 舊金山</span></div>
+        <h3>Painted Ladies ＋ Golden Gate Park</h3>
+        <ul class="stops">
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Painted+Ladies+Alamo+Square" target="_blank" rel="noopener">Painted Ladies／Alamo Square</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Haight-Ashbury+San+Francisco" target="_blank" rel="noopener">Haight-Ashbury</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Golden+Gate+Park" target="_blank" rel="noopener">Golden Gate Park</a></li>
+          <li>de Young Museum 或 California Academy of Sciences 二選一</li>
+          <li>體力與天氣許可再去 <a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Ocean+Beach+San+Francisco" target="_blank" rel="noopener">Ocean Beach</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/10</span><span class="dow">週三</span><span class="chip">住 舊金山</span></div>
+        <h3>Lands End ＋ Japantown</h3>
+        <ul class="stops">
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Lands+End+San+Francisco" target="_blank" rel="noopener">Lands End</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Sutro+Baths" target="_blank" rel="noopener">Sutro Baths</a></li>
+          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Japantown+San+Francisco" target="_blank" rel="noopener">Japantown</a></li>
+          <li><span class="when">傍晚</span>備選：<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Twin+Peaks+San+Francisco" target="_blank" rel="noopener">Twin Peaks</a>（只在天氣晴朗、視野良好時前往）</li>
+        </ul>
+        <p class="tip">二月日落約 17:40，Twin Peaks 要看夕陽就抓 17:00 前後上山；山上風大、氣溫比市區低，帶厚外套。</p>
+      </div>
+    </li>
+
+    <li class="day sf">
+      <div class="rail" aria-hidden="true"><span class="node term"></span></div>
+      <div class="daycard">
+        <div class="dayhead"><span class="date mono">02/11</span><span class="dow">週四</span><span class="chip ghost">SFO 23:10 起飛</span></div>
+        <h3>最後半日 ＋ 回程</h3>
+        <ul class="stops">
+          <li><span class="when">上午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Mission+District+Murals+San+Francisco" target="_blank" rel="noopener">Mission District 壁畫</a>、<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Dolores+Park+San+Francisco" target="_blank" rel="noopener">Dolores Park</a></li>
+          <li><span class="when">下午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Oracle+Park+San+Francisco" target="_blank" rel="noopener">Oracle Park</a> 外觀、<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Chase+Center+San+Francisco" target="_blank" rel="noopener">Chase Center</a>／Thrive City</li>
+          <li>回飯店取行李</li>
+          <li class="hi"><span class="when">19:00</span>前後出發前往 SFO</li>
+        </ul>
+        <div class="sug">
+          <span class="tag">建議</span>目標是 <span class="mono">19:30–20:00</span> 之間人已經在 SFO 國際航廈。19:00 從市區出發、加上尖峰時段路況，剛好落在這個區間；<span class="mono">23:10</span> 的長程國際線這樣最從容。
+        </div>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+<!-- ============ 行李 ============ -->
+<section id="baggage">
+  <div class="sign">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Baggage</span><span class="zh">27 吋行李，可行嗎？</span></h2>
+    <p class="sub">可行，而且不需要因為 27 吋行李放棄 Sacramento。</p>
+  </div>
+
+  <div class="limits">
+    <div><b>28 × 22 × 14</b><em>英吋 · 每件上限</em></div>
+    <div><b>50 lb / 23 kg</b><em>每件重量上限</em></div>
+    <div><b>× 2</b><em>每人可帶件數</em></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>先量一次，再決定</h3>
+    <p>27 吋行李通常符合 Amtrak／Capitol Corridor 的隨身行李規定，但「27 吋」可能只代表箱體大小。請把<strong>輪子和把手</strong>算進去，實際量一次外部的長、寬、高。</p>
+    <ul class="plain">
+      <li>Capitol Corridor <strong>沒有託運行李服務</strong>，行李會跟你一起上車。</li>
+      <li>車廂座位上方及車廂端部有行李空間。</li>
+      <li>若不想把 27 吋行李抬到頭頂，優先放車廂端部的大型行李架。</li>
+      <li>盡量提早到月台，上車後先安置行李，再找座位。</li>
+      <li>行李箱上鎖並放 AirTag；護照、手機、錢包、藥物和電子產品放在隨身小包，絕對不要留在大箱內。</li>
+      <li>行李架上的箱子保持在視線可及處，停站時稍微留意。</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>最省力的搬運方式</h3>
+    <ol class="steps">
+      <li>2/6 從舊金山飯店退房，前往 Amtrak 的舊金山市區接駁點（Salesforce Transit Center）。</li>
+      <li>大箱通常放接駁巴士下層行李艙；到 Emeryville 轉乘站後再自行帶上火車。</li>
+      <li>抵達 Sacramento Valley Station 後，若天候與路況良好，可步行約 10－15 分鐘到 Golden 1 Center 一帶。</li>
+      <li>若已天黑、下雨、疲累或不熟路，直接搭一小段計程車／叫車到飯店。</li>
+      <li>2/8 原路返回舊金山。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 安全 ============ -->
+<section id="safety">
+  <div class="sign">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Safety</span><span class="zh">第一次去美國</span></h2>
+    <p class="sub">舊金山和 Sacramento 的主要觀光區可以正常旅行，不必過度緊張。重點是降低「深夜、偏僻、分心、行李離身」這四種風險。</p>
+  </div>
+
+  <div class="safety">
+    <div class="card">
+      <h3>Transit <span>交通與步行</span></h3>
+      <ul class="plain">
+        <li>晚上看完球，住 Golden 1 Center 旁，跟著散場人群直接回飯店。</li>
+        <li>不要在球賽結束後拖到很晚，再獨自走去 Sacramento Valley Station；本行程本來就安排住兩晚。</li>
+        <li>帶大行李時，不走陌生、安靜或看不清楚的捷徑。</li>
+        <li>BART、Muni 或火車上，把行李放在身前、雙腿之間或視線內。</li>
+        <li>車廂太空或有人行為讓你不舒服，就換到人多的車廂、靠近司機／列車員的位置，必要時下車等下一班。</li>
+        <li>月台和車門旁不要一直低頭滑手機，避免手機在門關前被搶走。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Valuables <span>財物</span></h3>
+      <ul class="plain">
+        <li>使用有拉鍊、貼身的斜背包；不要把手機或錢包放褲子後口袋。</li>
+        <li>護照平常放飯店保險箱或隱蔽貼身袋，外出攜帶護照影本與加密雲端備份。</li>
+        <li>信用卡與少量現金分開放，不要一次拿出大量現金。</li>
+        <li>行李箱可上鎖，但 AirTag 只能協助定位，不能取代看管。</li>
+        <li>不接受陌生人主動幫忙操作售票機，也不要讓手機離手。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Lodging <span>住宿位置</span></h3>
+      <ul class="plain">
+        <li>舊金山優先選交通方便、夜間仍有人流的 Embarcadero、Financial District、Union Square 東側／Powell 一帶。</li>
+        <li>Sacramento 優先選 DOCO／Golden 1 Center 旁。</li>
+        <li>訂房前看近期評論，特別搜尋 location、night、noise、walk。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Emergency <span>緊急狀況</span></h3>
+      <ul class="plain">
+        <li>身體不舒服、迷路或覺得有人尾隨時，直接進飯店、餐廳、商店或有工作人員的場所。</li>
+        <li>先把飯店地址、航班、保險資料存成手機離線截圖。</li>
+        <li>準備行動網路或 eSIM，落地就能上網。</li>
+        <li>不自駕反而避開了舊金山常見的車內財物失竊風險。</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="emergency"><b>911</b><span>美國緊急電話：警消與救護共用同一組號碼。</span></p>
+</section>
+
+<!-- ============ 準備清單 ============ -->
+<section id="checklist">
+  <div class="sign sac">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Checklist</span><span class="zh">訂票與準備順序</span></h2>
+    <p class="sub">照這個順序訂，可取消的先卡位，不可取消的最後決定。</p>
+  </div>
+
+  <ul class="check">
+    <li>先訂可免費取消的 Sacramento 飯店，鎖定 Golden 1 Center 附近</li>
+    <li>訂舊金山前後兩段飯店，詢問能否跨夜寄放大行李</li>
+    <li>國王兩場門票先觀察座位與價格；若指定中線、球員席對面等熱門區域出現可接受價格就買</li>
+    <li>決定 Cécile McLorin Salvant 看 2/4 或 2/5（建議 2/5），避免兩晚都留到最後才決定</li>
+    <li>惡魔島開放相應日期後（約 2026/11 上旬），從官方網站購買上午船班</li>
+    <li>2027 年班表開放後，再確認 Capitol Corridor 往返班次與 Thruway 接駁巴士</li>
+    <li>出發前量行李箱含輪子與把手的外部尺寸，重量控制在 23 公斤內</li>
+    <li>購買旅遊保險、設定 eSIM、準備 AirTag 與行李鎖</li>
+  </ul>
+</section>
+
+<!-- ============ 連結 ============ -->
+<section id="links">
+  <div class="sign">
+    <span class="rule" aria-hidden="true"></span>
+    <h2><span class="en">Links</span><span class="zh">官方連結</span></h2>
+  </div>
+
+  <ul class="links">
+    <li><a href="https://www.nba.com/kings/news/kings-announce-2026-27-regular-season-schedule" target="_blank" rel="noopener">Sacramento Kings 2026–27 賽程<span class="host">nba.com</span></a></li>
+    <li><a href="https://www.golden1center.com/faqs/" target="_blank" rel="noopener">Golden 1 Center 附近住宿資訊<span class="host">golden1center.com</span></a></li>
+    <li><a href="https://www.amtrak.com/carry-on-baggage" target="_blank" rel="noopener">Amtrak 隨身行李規定<span class="host">amtrak.com</span></a></li>
+    <li><a href="https://support.capitolcorridor.org/portal/en/kb/articles/carry-on-luggage" target="_blank" rel="noopener">Capitol Corridor 行李規定<span class="host">capitolcorridor.org</span></a></li>
+    <li><a href="https://www.capitolcorridor.org/on_board/" target="_blank" rel="noopener">Capitol Corridor 車上設施與行李空間<span class="host">capitolcorridor.org</span></a></li>
+    <li><a href="https://www.capitolcorridor.org/trainschedule/Train_Schedules.pdf" target="_blank" rel="noopener">Capitol Corridor 現行時刻表（2027 班次待確認）<span class="host">PDF</span></a></li>
+    <li><a href="https://www.bart.gov/guide/safety/safety" target="_blank" rel="noopener">BART 官方安全提醒<span class="host">bart.gov</span></a></li>
+    <li><a href="https://alcatrazcitycruises.com/" target="_blank" rel="noopener">Alcatraz 官方購票<span class="host">alcatrazcitycruises.com</span></a></li>
+    <li><a href="https://www.nps.gov/alcatraz/planyourvisit/hours.htm" target="_blank" rel="noopener">Alcatraz 國家公園資訊<span class="host">nps.gov</span></a></li>
+    <li><a href="https://www.californiarailroad.museum/visit/general-information" target="_blank" rel="noopener">California State Railroad Museum<span class="host">californiarailroad.museum</span></a></li>
+    <li><a href="https://www.crockerart.org/visit" target="_blank" rel="noopener">Crocker Art Museum<span class="host">crockerart.org</span></a></li>
+    <li><a href="https://www.sfjazz.org/tickets/productions/26-27/cecile-mclorin-salvant/" target="_blank" rel="noopener">SFJAZZ：Cécile McLorin Salvant<span class="host">sfjazz.org</span></a></li>
+    <li><a href="https://www.sfsymphony.org/SanFrancisco/media/SanFrancisco/2026-27-Season-Calendar.pdf" target="_blank" rel="noopener">San Francisco Symphony 2026–27 行事曆<span class="host">PDF</span></a></li>
+    <li><a href="https://www.sfmta.com/fares/1-day-visitor-passport" target="_blank" rel="noopener">Muni Visitor Passport<span class="host">sfmta.com</span></a></li>
+  </ul>
+</section>
+
+<footer>
+  <div class="fstrip" aria-hidden="true"></div>
+  <p>舊金山 ⇄ Sacramento · 2027.02.03–02.11 · <a href="../index.html">回旅行首頁</a></p>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('lit'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -15% 0px', threshold: 0.05 });
+  document.querySelectorAll('.day').forEach(function (d) { io.observe(d); });
+})();
+</script>
+</body>
+</html>

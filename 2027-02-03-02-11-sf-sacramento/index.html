@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>舊金山 ⇄ SACRAMENTO｜2027.02.03–02.11</title>
+<title>舊金山 ⇄ 沙加緬度｜2027.02.03–02.11</title>
 <meta name="description" content="2027/02/03–02/11 舊金山＋Sacramento 九天：全程大眾運輸不自駕、國王主場兩連看、SFJAZZ 備選，含 27 吋行李與第一次赴美的安全筆記。">
 <meta name="theme-color" content="#C0362C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,18 +70,17 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--kings);outline-offs
   color:var(--slate);margin:30px 0 14px;
 }
 h1.title{margin:0;line-height:1;display:flex;flex-direction:column;gap:10px}
-h1.title .t1{
-  font-weight:900;font-size:clamp(54px,13vw,104px);letter-spacing:.02em;
-  color:var(--ggb);
-}
-h1.title .tlink{
-  display:block;height:var(--linew);width:min(240px,52%);border-radius:99px;
-  background:linear-gradient(90deg,var(--ggb) 0 50%,var(--kings) 50% 100%);
-}
-h1.title .t2{
+/* Both city names set in the same face; SAN FRANCISCO runs at ~0.78x so the
+   two lines come out to roughly the same measure despite the extra letters. */
+h1.title .t1,h1.title .t2{
   font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:800;
-  text-transform:uppercase;font-size:clamp(34px,8.6vw,74px);letter-spacing:-.005em;
-  color:var(--kings);
+  text-transform:uppercase;letter-spacing:-.005em;
+}
+h1.title .t1{font-size:clamp(24px,7.8vw,69px);color:var(--ggb)}
+h1.title .t2{font-size:clamp(28px,9.0vw,80px);color:var(--kings)}
+h1.title .tlink{
+  display:block;height:var(--linew);width:min(300px,58%);border-radius:99px;
+  background:linear-gradient(90deg,var(--ggb) 0 50%,var(--kings) 50% 100%);
 }
 .hero .dates{
   font-family:'Martian Mono',monospace;font-weight:600;font-size:clamp(13px,3.4vw,17px);
@@ -294,6 +293,7 @@ ul.plain li:last-child{margin-bottom:0}
   content:'';position:absolute;left:1px;top:.68em;width:8px;height:8px;
   border-radius:50%;border:2.5px solid var(--c);
 }
+.stops li.opt::before{width:11px;height:11px;border-width:1.5px;border-style:dashed;left:-.5px;top:.6em}
 .stops li.hi::before{background:var(--c)}
 .stops li.hi{font-weight:700}
 .stops .when{
@@ -389,7 +389,7 @@ footer a{color:var(--ink)}
 
   <p class="eyebrow">Bay Area Line · 2027 Winter</p>
   <h1 class="title">
-    <span class="t1">舊金山</span>
+    <span class="t1">San Francisco</span>
     <span class="tlink" aria-hidden="true"></span>
     <span class="t2">Sacramento</span>
   </h1>
@@ -507,7 +507,7 @@ footer a{color:var(--ink)}
   <div class="sign sf">
     <span class="rule" aria-hidden="true"></span>
     <h2><span class="en">Route</span><span class="zh">每日路線</span></h2>
-    <p class="sub">九個車站，兩個轉乘點。線的顏色是當晚住哪裡；雙圈站是移動日。</p>
+    <p class="sub">九個車站，兩個轉乘點。線的顏色是當晚住哪裡；雙圈站是移動日。行程項目前的虛線小圈代表備選、還沒定的項目。</p>
   </div>
 
   <div class="sug note" style="margin-top:20px">
@@ -541,9 +541,13 @@ footer a{color:var(--ink)}
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Fisherman%27s+Wharf+San+Francisco" target="_blank" rel="noopener">Fisherman's Wharf 漁人碼頭</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Pier+39+San+Francisco" target="_blank" rel="noopener">Pier 39</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Ferry+Building+San+Francisco" target="_blank" rel="noopener">Ferry Building</a>／Embarcadero</li>
-          <li><span class="when">19:30</span>備選：Cécile McLorin Salvant at SFJAZZ</li>
+          <li class="opt"><span class="when">傍晚</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Chase+Center+San+Francisco" target="_blank" rel="noopener">Chase Center</a>／Thrive City：拍照、Warriors Shop 買周邊</li>
+          <li class="opt"><span class="when">19:30</span>備選：Cécile McLorin Salvant at SFJAZZ</li>
         </ul>
         <p class="tip">第一天不要塞得太滿，保留時差恢復空間。</p>
+        <div class="sug">
+          <span class="tag">建議</span><strong>Chase Center 排在這天最順。</strong>2/4 最後一站是 Ferry Building／Embarcadero，往南搭 Muni <span class="mono">T Third</span> 線到 UCSF／Chase Center 站，就是同一條路線的延伸；爵士演出已建議移到 2/5，這晚空著。<strong>出發前先查 Chase Center 活動行事曆，挑當天沒有球賽或演唱會的日子</strong>——有活動時廣場人多，不好拍照。2027 年 2 月的檔期與 Warriors Shop 營業時間都要等官方公布後再確認。若 2/4 當天有活動，備援是 <strong>2/9 或 2/10 下午</strong>（都要跨城移動），最後還有 2/11 下午原本的安排。
+        </div>
       </div>
     </li>
 
@@ -602,7 +606,7 @@ footer a{color:var(--ink)}
         <h3>Sacramento 市區 ＋ 國王 vs 火箭</h3>
         <ul class="stops">
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=California+State+Capitol+Park" target="_blank" rel="noopener">California State Capitol Park</a></li>
-          <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Crocker+Art+Museum" target="_blank" rel="noopener">Crocker Art Museum</a>，或改逛 Midtown 咖啡店與街區</li>
+          <li class="opt"><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Crocker+Art+Museum" target="_blank" rel="noopener">Crocker Art Museum</a>，或改逛 Midtown 咖啡店與街區</li>
           <li><span class="when">下午</span>回飯店休息</li>
           <li class="hi"><span class="when">待確認</span>Sacramento Kings vs Houston Rockets</li>
           <li>賽後再住 Sacramento 一晚</li>
@@ -637,8 +641,8 @@ footer a{color:var(--ink)}
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Painted+Ladies+Alamo+Square" target="_blank" rel="noopener">Painted Ladies／Alamo Square</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Haight-Ashbury+San+Francisco" target="_blank" rel="noopener">Haight-Ashbury</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Golden+Gate+Park" target="_blank" rel="noopener">Golden Gate Park</a></li>
-          <li>de Young Museum 或 California Academy of Sciences 二選一</li>
-          <li>體力與天氣許可再去 <a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Ocean+Beach+San+Francisco" target="_blank" rel="noopener">Ocean Beach</a></li>
+          <li class="opt">de Young Museum 或 California Academy of Sciences 二選一</li>
+          <li class="opt">體力與天氣許可再去 <a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Ocean+Beach+San+Francisco" target="_blank" rel="noopener">Ocean Beach</a></li>
         </ul>
       </div>
     </li>
@@ -652,7 +656,7 @@ footer a{color:var(--ink)}
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Lands+End+San+Francisco" target="_blank" rel="noopener">Lands End</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Sutro+Baths" target="_blank" rel="noopener">Sutro Baths</a></li>
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Japantown+San+Francisco" target="_blank" rel="noopener">Japantown</a></li>
-          <li><span class="when">傍晚</span>備選：<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Twin+Peaks+San+Francisco" target="_blank" rel="noopener">Twin Peaks</a>（只在天氣晴朗、視野良好時前往）</li>
+          <li class="opt"><span class="when">傍晚</span>備選：<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Twin+Peaks+San+Francisco" target="_blank" rel="noopener">Twin Peaks</a>（只在天氣晴朗、視野良好時前往）</li>
         </ul>
         <div class="sug note">
           <span class="tag">提醒</span>二月日落約 <span class="mono">17:40</span>，所以 Twin Peaks 排成傍晚備選。
@@ -667,7 +671,7 @@ footer a{color:var(--ink)}
         <h3>最後半日 ＋ 回程</h3>
         <ul class="stops">
           <li><span class="when">上午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Mission+District+Murals+San+Francisco" target="_blank" rel="noopener">Mission District 壁畫</a>、<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Dolores+Park+San+Francisco" target="_blank" rel="noopener">Dolores Park</a></li>
-          <li><span class="when">下午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Oracle+Park+San+Francisco" target="_blank" rel="noopener">Oracle Park</a> 外觀、<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Chase+Center+San+Francisco" target="_blank" rel="noopener">Chase Center</a>／Thrive City</li>
+          <li class="opt"><span class="when">下午</span><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Oracle+Park+San+Francisco" target="_blank" rel="noopener">Oracle Park</a> 外觀、<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Chase+Center+San+Francisco" target="_blank" rel="noopener">Chase Center</a>／Thrive City（若 2/4 已經去過 Chase Center，這裡只看 Oracle Park 就好）</li>
           <li>回飯店取行李</li>
           <li class="hi"><span class="when">19:00</span>前後出發前往 SFO</li>
         </ul>
@@ -789,6 +793,7 @@ footer a{color:var(--ink)}
     <li>惡魔島開放相應日期後（約 2026/11 上旬），從官方網站購買上午船班</li>
     <li>2027 年班表開放後，再確認 Capitol Corridor 往返班次與 Thruway 接駁巴士</li>
     <li>出發前量行李箱含輪子與把手的外部尺寸，重量控制在 23 公斤內</li>
+    <li>查 Chase Center 活動行事曆與 Warriors Shop 營業時間，挑一天沒有活動的日子去拍照、買周邊</li>
     <li>購買旅遊保險、設定 eSIM、準備 AirTag 與行李鎖</li>
   </ul>
 </section>
@@ -814,13 +819,15 @@ footer a{color:var(--ink)}
     <li><a href="https://www.crockerart.org/visit" target="_blank" rel="noopener">Crocker Art Museum<span class="host">crockerart.org</span></a></li>
     <li><a href="https://www.sfjazz.org/tickets/productions/26-27/cecile-mclorin-salvant/" target="_blank" rel="noopener">SFJAZZ：Cécile McLorin Salvant<span class="host">sfjazz.org</span></a></li>
     <li><a href="https://www.sfsymphony.org/SanFrancisco/media/SanFrancisco/2026-27-Season-Calendar.pdf" target="_blank" rel="noopener">San Francisco Symphony 2026–27 行事曆<span class="host">PDF</span></a></li>
+    <li><a href="https://www.chasecenter.com/events" target="_blank" rel="noopener">Chase Center 活動行事曆<span class="host">chasecenter.com</span></a></li>
+    <li><a href="https://www.nba.com/warriors/schedule" target="_blank" rel="noopener">Golden State Warriors 賽程<span class="host">nba.com</span></a></li>
     <li><a href="https://www.sfmta.com/fares/1-day-visitor-passport" target="_blank" rel="noopener">Muni Visitor Passport<span class="host">sfmta.com</span></a></li>
   </ul>
 </section>
 
 <footer>
   <div class="fstrip" aria-hidden="true"></div>
-  <p>舊金山 ⇄ Sacramento · 2027.02.03–02.11 · <a href="../index.html">回旅行首頁</a></p>
+  <p>SAN FRANCISCO ⇄ SACRAMENTO · 2027.02.03–02.11 · <a href="../index.html">回旅行首頁</a></p>
 </footer>
 
 </div>

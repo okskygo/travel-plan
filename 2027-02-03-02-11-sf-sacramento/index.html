@@ -11,18 +11,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Martian+Mono:wght@300..700&family=Noto+Sans+TC:wght@400..900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   BAY AREA LINE — 2027 SF ⇄ Sacramento
-   路線圖式版型：每一天是一個車站，線的顏色＝當晚睡哪座城市。
-   金門大橋國際橘 = 舊金山；國王紫 = Sacramento。
+   BAY AREA LINE — 2027 SF <-> Sacramento
+   Transit-diagram layout: every day is a station, and the line
+   colour is the city the traveller sleeps in that night.
+   Golden Gate International Orange = San Francisco.
+   Sacramento Kings purple = Sacramento.
    ============================================================ */
 :root{
-  --fog:#E7EBEE;          /* 灣區霧色紙 */
+  --fog:#E7EBEE;          /* Bay Area fog paper */
   --panel:#FFFFFF;
   --ink:#14181B;
-  --slate:#4E5C65;        /* 次要文字，對 --fog 5.7:1 */
+  --slate:#4E5C65;        /* secondary text, 5.7:1 on --fog */
   --rule:#C6CED4;
   --ggb:#C0362C;          /* Golden Gate Bridge International Orange */
-  --ggb-deep:#93261E;     /* 小字用的深橘紅 */
+  --ggb-deep:#93261E;     /* darker orange for small text */
   --kings:#5A2D81;        /* Sacramento Kings purple */
   --railw:56px;
   --linew:7px;
@@ -105,7 +107,7 @@ h1.title .t2{
 }
 @media (max-width:560px){.facts{grid-template-columns:repeat(2,1fr)}}
 
-/* ---------------- 路線帶（同時就是住宿分配） ---------------- */
+/* ------------- route strip (doubles as the nights-per-city plan) ------------- */
 .strip{margin:34px 0 4px}
 .rs{display:flex;align-items:stretch}
 .rs-cell{display:flex;flex-direction:column;min-width:0}
@@ -157,7 +159,7 @@ h1.title .t2{
   .rs .lab b{font-size:13px}
 }
 
-/* ---------------- 區塊標題 ---------------- */
+/* ---------------- section signs ---------------- */
 section{margin:66px 0 0}
 .sign .rule{display:block;width:64px;height:var(--linew);border-radius:99px;background:var(--ink);margin-bottom:15px}
 .sign.sf .rule{background:var(--ggb)}
@@ -170,7 +172,7 @@ section{margin:66px 0 0}
 .sign h2 .zh{font-weight:700;font-size:clamp(14px,3.4vw,17px);color:var(--slate);letter-spacing:.08em}
 .sign p.sub{margin:10px 0 0;color:var(--slate);font-size:14.5px;max-width:44rem}
 
-/* ---------------- 航段 ---------------- */
+/* ---------------- air segments ---------------- */
 .air{display:grid;gap:16px;margin-top:24px}
 .airseg{
   background:var(--panel);border:1px solid var(--rule);border-radius:8px;
@@ -203,7 +205,7 @@ section{margin:66px 0 0}
 .airseg .meta{margin:14px 0 0;font-size:13.5px;color:var(--slate);border-top:1px solid var(--rule);padding-top:12px}
 @media (min-width:760px){.air{grid-template-columns:1fr 1fr}}
 
-/* ---------------- 通用卡片 / 清單 ---------------- */
+/* ---------------- generic cards and lists ---------------- */
 .card{background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:20px 22px}
 .card h3{margin:0 0 10px;font-size:16.5px;font-weight:700;letter-spacing:.02em}
 .card p{margin:0 0 10px}
@@ -216,7 +218,7 @@ ul.plain li::before{
 }
 ul.plain li:last-child{margin-bottom:0}
 
-/* 建議註記 */
+/* suggestion callouts */
 .sug{
   margin:14px 0 0;padding:13px 16px 13px 15px;
   background:#FBF3F1;border-left:5px solid var(--ggb);border-radius:0 6px 6px 0;
@@ -231,7 +233,7 @@ ul.plain li:last-child{margin-bottom:0}
 .sug.note .tag{background:var(--kings)}
 .sug strong{font-weight:700}
 
-/* ---------------- 住宿 ---------------- */
+/* ---------------- lodging ---------------- */
 .stay{display:grid;gap:16px;margin-top:24px}
 @media (min-width:760px){.stay{grid-template-columns:1.15fr 1fr}}
 .pick{border-top:var(--linew) solid var(--kings);border-radius:0 0 8px 8px;background:var(--panel);border-left:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:20px 22px}
@@ -244,7 +246,7 @@ ul.plain li:last-child{margin-bottom:0}
 .alt li:last-child{border-bottom:0;padding-bottom:0}
 .alt li small{display:block;color:var(--slate);font-size:12.5px;line-height:1.6}
 
-/* ---------------- 每日路線（簽名元素） ---------------- */
+/* ---------------- daily route: the signature element ---------------- */
 .route{list-style:none;margin:28px 0 0;padding:0}
 .day{display:grid;grid-template-columns:var(--railw) 1fr;margin-bottom:var(--gap)}
 .day.sf{--c:var(--ggb)}
@@ -307,7 +309,7 @@ ul.plain li:last-child{margin-bottom:0}
   .chip{margin-left:0}
 }
 
-/* ---------------- 行李 ---------------- */
+/* ---------------- baggage ---------------- */
 .limits{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
   border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin-top:24px;
@@ -326,7 +328,7 @@ ol.steps li::before{
   color:#fff;background:var(--ink);border-radius:4px;padding:2px 6px;letter-spacing:-.02em;
 }
 
-/* ---------------- 安全 ---------------- */
+/* ---------------- safety ---------------- */
 .safety{display:grid;gap:16px;margin-top:24px}
 @media (min-width:720px){.safety{grid-template-columns:1fr 1fr}}
 .safety .card h3{
@@ -342,7 +344,7 @@ ol.steps li::before{
 .emergency b{font-family:'Martian Mono',monospace;font-weight:700;font-size:clamp(26px,7vw,38px);line-height:1}
 .emergency span{font-size:14px;opacity:.95}
 
-/* ---------------- 準備清單 ---------------- */
+/* ---------------- checklist ---------------- */
 .check{list-style:none;margin:24px 0 0;padding:0;border-top:1px solid var(--rule)}
 .check li{
   position:relative;padding:14px 0 14px 38px;border-bottom:1px solid var(--rule);font-size:15px;
@@ -352,7 +354,7 @@ ol.steps li::before{
   border:2px solid var(--slate);border-radius:4px;background:var(--panel);
 }
 
-/* ---------------- 連結 ---------------- */
+/* ---------------- links ---------------- */
 .links{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden}
 .links li{background:var(--panel);display:flex}
 .links a{
@@ -369,7 +371,7 @@ footer .fstrip{height:var(--linew);width:min(320px,70%);margin:0 auto 20px;borde
 footer p{margin:0;font-size:13.5px;color:var(--slate)}
 footer a{color:var(--ink)}
 
-/* 捲動點亮：只在有 JS 且未要求減少動態時啟用 */
+/* scroll reveal: only when JS runs and motion is not reduced */
 .js .rail{opacity:.3;transition:opacity .7s ease}
 .js .day.lit .rail{opacity:1}
 @media (prefers-reduced-motion:reduce){.js .rail{opacity:1}}
@@ -414,7 +416,7 @@ footer a{color:var(--ink)}
   </div>
 </header>
 
-<!-- ============ 航段 ============ -->
+<!-- ============ air segments ============ -->
 <section id="flights">
   <div class="sign">
     <span class="rule" aria-hidden="true"></span>
@@ -438,7 +440,7 @@ footer a{color:var(--ink)}
           <span class="z">美國時間 · 國際航廈</span>
         </span>
       </div>
-      <p class="meta">跨越國際換日線：台灣時間 2/4 凌晨起飛，抵達時當地還是 2/3 傍晚。訂當晚住宿要訂 <strong>2/3</strong>。</p>
+      <p class="meta">跨越國際換日線：台灣時間 2/4 凌晨起飛，抵達時當地還是 2/3 傍晚。住宿也是從 <strong>2/3</strong> 起算三晚。</p>
     </div>
 
     <div class="airseg">
@@ -456,17 +458,17 @@ footer a{color:var(--ink)}
           <span class="z">台灣時間 · 第二航廈</span>
         </span>
       </div>
-      <p class="meta">深夜班機，2/11 白天仍可安排半日行程，行李寄放在飯店。</p>
+      <p class="meta">深夜班機，所以 2/11 白天仍排了半日行程，行李先放飯店。</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 住宿 ============ -->
+<!-- ============ lodging ============ -->
 <section id="stay">
   <div class="sign sac">
     <span class="rule" aria-hidden="true"></span>
     <h2><span class="en">Stay</span><span class="zh">住宿分配</span></h2>
-    <p class="sub">舊金山 3 晚 → Sacramento 2 晚 → 舊金山 3 晚。這個排法讓 27 吋行李只需要搬動兩次，看完球也不必趕末班車。</p>
+    <p class="sub">舊金山 3 晚 → Sacramento 2 晚 → 舊金山 3 晚，這是原行程評估後最平衡的排法。</p>
   </div>
 
   <div class="stay">
@@ -475,8 +477,8 @@ footer a{color:var(--ink)}
       <h3>Kimpton Sawyer Hotel</h3>
       <p>就在 Golden 1 Center 旁。看完球可以跟著散場人群一起走回飯店，最適合第一次到美國、沒有車、又擔心深夜交通的人。</p>
       <ul class="plain">
-        <li>球場走回飯店：跟著人潮，全程不必單獨走暗路。</li>
-        <li>連住兩晚，中途完全不用移動行李。</li>
+        <li>賽後跟著散場人群走回飯店。</li>
+        <li>連住兩晚，不必每晚趕回舊金山。</li>
       </ul>
     </div>
 
@@ -486,7 +488,7 @@ footer a{color:var(--ink)}
         <li>Hyatt Centric Sacramento</li>
         <li>Embassy Suites by Hilton Sacramento Riverfront Promenade</li>
         <li>The Citizen Hotel</li>
-        <li>Delta King Hotel<small>停在河上的老船飯店，地點有特色，但拖大行李的便利性略差。</small></li>
+        <li>Delta King Hotel<small>地點有特色，但拖大行李的便利性略差。</small></li>
       </ul>
     </div>
   </div>
@@ -500,7 +502,7 @@ footer a{color:var(--ink)}
   </div>
 </section>
 
-<!-- ============ 每日路線 ============ -->
+<!-- ============ daily route ============ -->
 <section id="route">
   <div class="sign sf">
     <span class="rule" aria-hidden="true"></span>
@@ -509,7 +511,7 @@ footer a{color:var(--ink)}
   </div>
 
   <div class="sug note" style="margin-top:20px">
-    <span class="tag">提醒</span>二月是舊金山的雨季，白天大約 <span class="mono">9–15°C</span>，日落約 <span class="mono">17:40</span>。帶防水外套與折傘，戶外景點盡量排在中午前後；天氣不好時金門大橋區可以和 2/9、2/10 的行程互換。
+    <span class="tag">提醒</span>二月是舊金山的雨季，白天大約 <span class="mono">9–15°C</span>，日落約 <span class="mono">17:40</span>。帶防水外套與折傘；天氣不好時金門大橋區可以和 2/9、2/10 的行程互換。
   </div>
 
   <ol class="route">
@@ -561,10 +563,10 @@ footer a{color:var(--ink)}
           <span class="tag">建議</span>爵士演出<strong>建議選 2/5 這晚</strong>，不要選 2/4。從亞洲飛美國的時差是「早醒、傍晚崩」，2/4 是落地後第一個整天，19:30 開演最容易在座位上睡著；2/5 已經多調整一天。2/4 那晚仍保留為備案，兩晚都有場次。
         </div>
         <div class="sug">
-          <span class="tag">建議</span>惡魔島船票大約<strong>開船前 90 天</strong>開放，請在 <span class="mono">2026/11</span> 上旬設好提醒，開賣當天就訂上午船班。
+          <span class="tag">建議</span>惡魔島船票大約<strong>開船前 90 天</strong>開放，請在 <span class="mono">2026/11</span> 上旬設好提醒，開放後從官方網站訂上午船班。
         </div>
         <div class="sug note">
-          <span class="tag">提醒</span>2027 年農曆春節初一是 <strong>2/6</strong>——那天人已經在 Sacramento，所以 <strong>2/5 傍晚這趟 Chinatown 是唯一能碰到年節氣氛的時段</strong>。舊金山的大型農曆新年遊行通常在春節後約兩週，需另外查 2027 年官方日期。
+          <span class="tag">提醒</span>2027 年農曆春節初一是 <strong>2/6</strong>，<strong>2/5－2/6</strong> 前後的 Chinatown 會有年節氣氛；本行程在 2/5 傍晚經過。舊金山的大型農曆新年遊行通常在春節後約兩週，需另外查 2027 年官方日期。
         </div>
       </div>
     </li>
@@ -652,7 +654,7 @@ footer a{color:var(--ink)}
           <li><a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Japantown+San+Francisco" target="_blank" rel="noopener">Japantown</a></li>
           <li><span class="when">傍晚</span>備選：<a class="place" href="https://www.google.com/maps/search/?api=1&amp;query=Twin+Peaks+San+Francisco" target="_blank" rel="noopener">Twin Peaks</a>（只在天氣晴朗、視野良好時前往）</li>
         </ul>
-        <p class="tip">二月日落約 17:40，Twin Peaks 要看夕陽就抓 17:00 前後上山。</p>
+        <p class="tip">二月日落約 17:40，所以 Twin Peaks 排成傍晚備選。</p>
       </div>
     </li>
 
@@ -676,7 +678,7 @@ footer a{color:var(--ink)}
   </ol>
 </section>
 
-<!-- ============ 行李 ============ -->
+<!-- ============ baggage ============ -->
 <section id="baggage">
   <div class="sign">
     <span class="rule" aria-hidden="true"></span>
@@ -715,7 +717,7 @@ footer a{color:var(--ink)}
   </div>
 </section>
 
-<!-- ============ 安全 ============ -->
+<!-- ============ safety ============ -->
 <section id="safety">
   <div class="sign">
     <span class="rule" aria-hidden="true"></span>
@@ -767,15 +769,14 @@ footer a{color:var(--ink)}
     </div>
   </div>
 
-  <p class="emergency"><b>911</b><span>美國緊急電話：警消與救護共用同一組號碼。</span></p>
+  <p class="emergency"><b>911</b><span>美國緊急電話。</span></p>
 </section>
 
-<!-- ============ 準備清單 ============ -->
+<!-- ============ checklist ============ -->
 <section id="checklist">
   <div class="sign sac">
     <span class="rule" aria-hidden="true"></span>
     <h2><span class="en">Checklist</span><span class="zh">訂票與準備順序</span></h2>
-    <p class="sub">照這個順序訂，可取消的先卡位，不可取消的最後決定。</p>
   </div>
 
   <ul class="check">
@@ -790,7 +791,7 @@ footer a{color:var(--ink)}
   </ul>
 </section>
 
-<!-- ============ 連結 ============ -->
+<!-- ============ links ============ -->
 <section id="links">
   <div class="sign">
     <span class="rule" aria-hidden="true"></span>

@@ -195,6 +195,17 @@ section{position:relative}
 .acts li .txt .hl{color:var(--coral-deep);font-weight:600}
 .stay-pill{margin-top:22px;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(203,164,90,.3);padding:9px 18px;border-radius:30px;font-size:.88rem;color:var(--jungle);font-weight:500;box-shadow:0 8px 20px -12px rgba(12,53,40,.4)}
 .stay-pill i{color:var(--coral)}
+/* recommended dishes */
+.dishes{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dishes .dish{background:#fff;border:1px solid rgba(203,164,90,.28);border-radius:12px;padding:12px 14px;box-shadow:0 6px 16px -12px rgba(12,53,40,.35)}
+.dishes .dish b{display:block;color:var(--coral-deep);font-size:.88rem}
+.dishes .dish p{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:4px}
+.dishes.cols3{grid-template-columns:repeat(3,1fr)}
+.dish .tag{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.05em;color:#fff;background:var(--coral);padding:2px 9px;border-radius:12px;margin-bottom:7px}
+.dish .tag.alt{background:var(--jungle-3)}
+.dish .tag.warn{background:var(--gold)}
+@media(max-width:860px){.dishes.cols3{grid-template-columns:1fr}}
+@media(max-width:680px){.dishes{grid-template-columns:1fr}}
 
 /* ===== PRACTICAL ===== */
 .prac{background:var(--jungle);color:var(--sand);position:relative;overflow:hidden}
@@ -322,7 +333,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     <div class="sec-head reveal">
       <div class="sec-tag"><span class="num">01</span> Logistics</div>
       <h2 class="sec-title">航班與 <em>住宿配置</em></h2>
-      <p class="sec-desc">前 2 晚住 AYANA（金巴蘭）享受頂級度假村，再北上 Seminyak 私人泳池 villa 住 3 晚當逛街、浮潛、海神廟的據點。四人最划算——兩房 villa，獨立客廳與泳池待在一起。</p>
+      <p class="sec-desc">前 2 晚住 AYANA 園區的 RIMBA by AYANA（金巴蘭）享受頂級度假村，再北上 Seminyak 私人泳池 villa 住 3 晚當逛街、浮潛、海神廟的據點。四人最划算——兩房 villa，獨立客廳與泳池待在一起。</p>
     </div>
 
     <div class="info-grid">
@@ -356,7 +367,7 @@ footer .fl{color:var(--coral);text-decoration:none}
         <h3><i class="fa-solid fa-bed"></i> 住宿 · AYANA → Seminyak</h3>
         <div class="stay-row ubud">
           <div class="ni">N1·N2<small style="display:block;font-size:.62rem;font-weight:400">10/7–8</small></div>
-          <div class="info"><b>AYANA Villas（金巴蘭）</b><span>頂級度假村，2BR pool villa＋管家＋buggy，Rock Bar 就在園區</span></div>
+          <div class="info"><b>RIMBA by AYANA（金巴蘭）</b><span>AYANA 園區內的 RIMBA 館，園區 Tram 串聯 Rock Bar、泳池與各餐廳</span></div>
         </div>
         <div class="stay-row">
           <div class="ni">N3–N5<small style="display:block;font-size:.62rem;font-weight:400">10/9–11</small></div>
@@ -402,11 +413,22 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS</b><p>桃園 T1 09:10 起飛。包車到 AYANA 僅 <span class="hl">15–20 分</span>，管家迎接、buggy 送進 villa，泡私人泳池調時差。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-martini-glass-citrus"></i></div><div class="txt"><b>17:00 Rock Bar 崖上落日</b><p>就在園區內搭纜車下去，日落約 <span class="hl">18:15–18:30</span>。AYANA 房客有優先通道、villa 還可訂落日 VIP 圓形等候區（App 或管家代訂）。smart casual、現場只收電子支付。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐：二選一</b><p>省錢版：Rock Bar 喝一杯 → 叫 <span class="hl">Grab／GoFood 外送</span>回 villa；海鮮版：AYANA 沙灘上的 Kisik 金巴蘭式海鮮燒烤（可留第 2 晚）。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS</b><p>桃園 T1 09:10 起飛。包車到 AYANA 僅 <span class="hl">15–20 分</span>，入住 <span class="hl">RIMBA 館</span>，先泡泳池調時差。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-martini-glass-citrus"></i></div><div class="txt"><b>17:00 Rock Bar 崖上落日</b><p><span class="hl">提早用 AYANA App 預約</span>，卡好位置一邊喝調酒一邊看夕陽。就在園區內搭纜車下去，日落約 <span class="hl">18:15–18:30</span>。AYANA 房客有優先通道、還可訂落日 VIP 圓形等候區。smart casual、現場只收電子支付。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐首選：Karang（Segara 館）· 道地印尼菜</b><p>Rock Bar 喝一杯後，搭園區 Tram 電車約 <span class="hl">5 分鐘</span>。東南亞／印尼平價熱炒蓋飯，1 人約 <span class="hl">NT$ 600–800</span>。設計感強、精緻優雅、有儀式感——想深度品嚐道地印尼菜、好好享受晚餐時光選這家。</p>
+            <div class="dishes">
+              <div class="dish"><b>Bebek Betutu 峇里島慢燉香料鴨</b><p>複雜香料醃製＋長時間慢燉，鴨肉軟嫩入味，峇里島著名的傳統節慶料理，Karang 做得相當道地。</p></div>
+              <div class="dish"><b>Sop Buntut 牛尾湯</b><p>印尼國菜之一，湯頭濃郁、牛尾燉到軟爛，配一碗白飯和蝦餅，是印尼晚餐最溫暖、最經典的吃法。</p></div>
+              <div class="dish"><b>Ayam Taliwang 龍目島烤雞</b><p>帶點香辣感的烤雞，醬料非常夠味，很有印尼特色。</p></div>
+              <div class="dish"><b>Sate Campur 綜合沙嗲</b><p>印尼烤肉串，Karang 的擺盤比路邊攤精緻許多，配花生醬沾料，四人分食剛剛好。</p></div>
+            </div>
+          </div></li>
+          <li><div class="ic"><i class="fa-solid fa-bowl-food"></i></div><div class="txt"><b>備案 1：To’Ge（RIMBA 館）· 休閒簡餐</b><p>全天候休閒簡餐、亞洲麵食、熱炒，1 人約 <span class="hl">NT$ 350–550</span>。Nasi Goreng 印尼炒飯、Mie Goreng 印尼炒麵、亞洲拉麵／湯麵、漢堡輕食。輕鬆休閒、像明亮咖啡館，玩累了想快速下樓吃飽或宵夜首選。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-pepper-hot"></i></div><div class="txt"><b>備案 2：Padi（Main 主館）· 泰式＋印尼風味</b><p>搭園區 Tram 電車約 <span class="hl">5 分鐘</span>，1 人約 <span class="hl">NT$ 500–750</span>。Pad Thai 泰式海鮮炒河粉、綠咖哩、打拋肉、冬蔭功海鮮湯、峇里島風味烤魚。傳統開放式茅草屋、圍繞梯田水池，想吃酸辣開胃的泰國菜與印尼熱炒合菜選這裡。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-motorcycle"></i></div><div class="txt"><b>省錢版：Grab／GoFood 外送回 villa</b><p>真的玩累不想再出門，直接叫 <span class="hl">Grab／GoFood 外送</span>回 villa，泳池邊吃最放鬆。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-champagne-glasses"></i></div><div class="txt"><b>如果還有活力：UNIQUE 屋頂酒吧 → After Rock 岩石後音樂酒廊</b><p><span class="hl">UNIQUE Rooftop Bar & Restaurant</span> 就在 <span class="hl">RIMBA 館頂樓</span>——住 RIMBA 搭電梯就到，喝完直接回房。白天是泳池酒吧，入夜變成眺望叢林與海的夜景調酒吧，<span class="hl">躺在水床上看星空</span>，營業至 <span class="hl">23:00</span>。更晚想續攤就轉場 <span class="hl">After Rock 岩石後音樂酒廊</span>（園區內、SAKA 博物館旁）：2024 年新開的 Rock Bar 深夜版，<span class="hl">20:00–02:00</span>，戶外屋頂區＋室內冷氣酒吧，有 live 音樂、調酒與小食。</p></div></li>
         </ul>
-        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · AYANA Villas（金巴蘭）</span>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · RIMBA by AYANA（金巴蘭）</span>
       </div>
     </div>
 
@@ -415,17 +437,28 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div class="meta">
         <div class="dnum"><small>DAY 02</small>2</div>
         <div class="ddate">10/8 (四)</div>
-        <div class="dloc">AYANA 設施 + 情人崖火舞 🔥</div>
-        <span class="badge">Resort + Highlight</span>
+        <div class="dloc">H2O 泳池拍照 + 情人崖火舞 🔥</div>
+        <span class="badge">Photo + Highlight</span>
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-water-ladder"></i></div><div class="txt"><b>白天：把度假村玩好玩滿（挑 2–3 樣）</b><p><span class="hl">14 座泳池</span>（含無邊際海景泳池、滑水道）／ Aquatonic 海水療池 ／ Spa on the Rocks 海景按摩（前一天先約）／ 搭電梯下崖的私人 Kubu Beach。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-camera-retro"></i></div><div class="txt"><b>06:30 H2O 泳池晨間拍照（每日 06:30–09:30）</b><p><span class="hl">06:30 提早到拿號碼牌</span>。住 RIMBA 要搭園區 Tram 過去，<span class="hl">預留 10–15 分鐘搭車＋步行</span>，清晨 Tram 班次間隔可能稍長。出發前<span class="hl">裡面先穿好泳裝或拍照服裝</span>、外面套罩衫，到場直接拍。</p><p style="margin-top:8px"><strong>排隊規則</strong>：現場發號碼牌或依序排隊，工作人員在上方拍照平台計時，<span class="hl">每組通常限時 1–2 分鐘</span>——拍照的人在二樓露台取景、被拍的人在下方泳池邊。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-mug-saucer"></i></div><div class="txt"><b>拍完吃早餐：三館三選一</b><p>想先換衣服就搭 Tram 回 RIMBA 吃 <span class="hl">To’ge</span>；離拍照泳池<span class="hl">最近的是 Padi</span>，拍完走過去最順路；想吹冷氣選 <span class="hl">Karang</span>。三館主要菜色不同，兩天早餐可以換著吃——譬如第一天 Padi 或 Karang、第二天 To’ge。台灣網友（PTT／Dcard／旅遊部落格）綜合評價最推 <span class="hl">Karang 與 To’ge</span>。</p>
+            <div class="dishes cols3">
+              <div class="dish"><span class="tag">綜合好評冠軍</span><b>Karang（Segara 新館）</b><p>精緻現代、泛亞洲與地中海輕食，現點現做比例高（精緻班尼迪克蛋、特色熱壓吐司），擺盤與飲品最細膩。環境最新、有舒適冷氣、人潮明顯較少不必排隊，被許多住客評為「體驗最舒服的一間」。適合喜歡安靜精緻、偏好輕食與西式早午餐的人。</p></div>
+              <div class="dish"><span class="tag alt">品項豐富度首選</span><b>To’ge（RIMBA 本館）</b><p>西式烘焙與國際多元菜色最多，招牌「獨立烘焙玻璃屋」現烤可頌、丹麥麵包與甜點品項極豐富，另有現煮麵食檔（湯麵／米粉）與豐富沙拉冷盤。圍繞錦鯉水池、明亮活潑，有室內冷氣區與戶外座；住 RIMBA 下樓就能吃，便利度滿分。</p></div>
+              <div class="dish"><span class="tag warn">評價兩極</span><b>Padi（AYANA 主館）</b><p>亞洲與東南亞料理最強，Nasi Goreng／Mie Goreng 調味道地，印度咖哩、烤餅與中日韓熱食選擇最多。傳統茅草頂半露天建築、緊鄰蓮花池，渡假感濃厚，離拍照泳池最近。留意：團客人潮多較吵雜，無空調近 8–9 點偏熱，口味偏重香料，接受度較兩極。</p></div>
+            </div>
+          </div></li>
+          <li><div class="ic"><i class="fa-solid fa-cable-car"></i></div><div class="txt"><b>10:00–12:00 搭懸崖纜車下 Kubu Beach</b><p>上午太陽還不頂曬，搭<span class="hl">透明懸崖纜車</span>下到 AYANA 私人海灘，看巨石懸崖、在俱樂部躺椅上<span class="hl">喝椰子水</span>。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-water-ladder"></i></div><div class="txt"><b>接著：Ocean Beach Pool 懸崖無邊際海景泳池</b><p>早上的懸崖海景<span class="hl">光線極美</span>，在緊鄰浪花的無邊際泳池邊拍照、看海、放空，補足前一天沒泡到的經典海景泳池。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-umbrella-beach"></i></div><div class="txt"><b>中午回 RIMBA：林畔涼亭泳池</b><p>回 RIMBA 館泡<span class="hl">林畔涼亭泳池</span>放空休息。午餐可在<span class="hl">達瑪餐廳</span>吃，或泳池旁的<span class="hl">幽蘭茶室</span>、<span class="hl">圖格餐廳（To’ge）</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-gopuram"></i></div><div class="txt"><b>17:00 情人崖斷崖廟 Uluwatu Temple</b><p>16:30 buggy 出園、包車約 30–40 分。斷崖海景，<span class="hl">注意猴子搶眼鏡、手機、帽子</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-fire"></i></div><div class="txt"><b>18:00 Kecak 火舞</b><p>斷崖＋火舞＋落日。⚠️ 週四人多，<span class="hl">提早到場或先線上訂票卡位</span>。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-fish"></i></div><div class="txt"><b>晚餐：金巴蘭海鮮（若昨晚沒吃）</b><p>火舞後約 30–40 分到金巴蘭，回 AYANA 的 Kisik，或 Muaya Beach 海鮮一條街（Menega 那帶，較親民）。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-fish"></i></div><div class="txt"><b>晚餐：金巴蘭海鮮</b><p>火舞後約 30–40 分回到金巴蘭，AYANA 沙灘上的 Kisik 金巴蘭式海鮮燒烤，或 Muaya Beach 海鮮一條街（Menega 那帶，較親民）。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-champagne-glasses"></i></div><div class="txt"><b>如果還有活力：夜生活續攤</b><p>回園區先上 <span class="hl">UNIQUE 屋頂酒吧</span>（RIMBA 館頂樓，至 23:00）喝一杯 360° 夜景調酒、<span class="hl">躺在水床上看星空</span>；還想更晚就轉場 <span class="hl">After Rock 岩石後音樂酒廊</span>（SAKA 博物館旁，<span class="hl">20:00–02:00</span>），室內冷氣酒吧配 live 音樂，聽到深夜再回房。</p></div></li>
         </ul>
-        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · AYANA Villas（金巴蘭）</span>
+        <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · RIMBA by AYANA（金巴蘭）</span>
       </div>
     </div>
 
@@ -527,7 +560,7 @@ footer .fl{color:var(--coral);text-decoration:none}
           <li><b>觀光稅 Tourist Levy</b>：IDR 150,000／人（約 TWD 300），上官方 <b>lovebali.baliprov.go.id</b> 線上付，存 QR；⚠️ 只用官方平台，仿站會超收；往返佩尼達不需再付。</li>
           <li><b>簽證</b>：落地簽／電子簽 e-VOA，護照效期 6 個月以上。</li>
           <li><b>電子海關申報 e-CD</b>：抵達前 48 小時內線上填，取得 QR 碼。</li>
-          <li><b>Rock Bar</b>：用 AYANA App 或請管家確認 villa 的落日訂位／圓形等候區；smart casual、現場只收電子支付。</li>
+          <li><b>Rock Bar</b>：<b>提早用 AYANA App 預約</b>落日時段／VIP 圓形等候區，邊喝調酒邊看夕陽；smart casual、現場只收電子支付。</li>
           <li><b>外送 App</b>：裝好 Grab／Gojek、綁 GoPay／GrabPay，AYANA 第一晚就能叫 GoFood／GrabFood。</li>
         </ul>
       </div>

@@ -175,7 +175,17 @@ section{position:relative}
 
 /* ===== ITINERARY ===== */
 .itin{background:linear-gradient(180deg,var(--sand) 0%,#F1E6D3 100%)}
+.daynav{position:sticky;top:60px;z-index:900;display:flex;gap:8px;overflow-x:auto;padding:12px 0 14px;margin:-6px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.daynav::-webkit-scrollbar{display:none}
+.daynav::before{content:"";position:absolute;inset:0 -24px;background:linear-gradient(var(--sand) 62%,rgba(246,238,225,0));z-index:-1}
+.daynav a{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;padding:6px 15px;border-radius:20px;background:#fff;border:1px solid rgba(203,164,90,.38);color:var(--jungle);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-decoration:none;transition:background .22s,border-color .22s,color .22s;box-shadow:0 6px 16px -12px rgba(12,53,40,.5)}
+.daynav a small{font-size:.64rem;font-weight:500;letter-spacing:0;color:var(--muted);margin-top:1px}
+.daynav a:hover{border-color:var(--coral)}
+.daynav a.on{background:var(--jungle);border-color:var(--jungle);color:var(--gold-soft)}
+.daynav a.on small{color:rgba(226,201,138,.78)}
+@media(max-width:680px){.daynav{top:50px;padding:10px 0 12px}.daynav a{padding:5px 12px;font-size:.72rem}}
 .day{
+  scroll-margin-top:120px;
   display:grid;grid-template-columns:200px 1fr;gap:40px;padding:46px 0;
   border-top:1px solid rgba(35,26,18,.12);
 }
@@ -306,14 +316,17 @@ footer .fl{color:var(--coral);text-decoration:none}
   .day .meta{position:static}
   .day .dnum{font-size:3.4rem}
 }
-@media(max-width:680px){
-  nav .links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;background:rgba(10,45,34,.98);backdrop-filter:blur(16px);flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);padding:40px}
+@media(max-width:900px){
+  nav .links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;background:rgba(10,45,34,.98);backdrop-filter:blur(16px);flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:26px;transform:translateX(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);padding:40px}
   nav .links.open{transform:translateX(0)}
   nav .links a{font-size:1.05rem}
+  nav .links a.cta{align-self:center}
   .nav-toggle{display:block;z-index:1001}
+}
+@media(max-width:680px){
   .bc-inner{flex-direction:column;align-items:flex-start}
   .bc-mini{flex-wrap:wrap;gap:20px}
-  .fab{bottom:18px;right:16px}
+  .fab{display:none}
 }
 </style>
 </head>
@@ -329,6 +342,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     <a href="#stay">航班住宿</a>
     <a href="#itin">行程</a>
     <a href="#prac">須知</a>
+    <a href="../index.html">所有行程</a>
     <a href="expenses.html" class="cta">消費紀錄 →</a>
   </div>
 </nav>
@@ -488,8 +502,17 @@ footer .fl{color:var(--coral);text-decoration:none}
       <p class="sec-desc">前段在 AYANA 把度假村玩好玩滿，後段北上 Seminyak 逛街、音療靜心、看海神廟、浮潛。每天只做一件「累的事」，四個落日場景互不重複。</p>
     </div>
 
+    <div class="daynav" id="daynav">
+      <a href="#d1">DAY 1<small>10/7 三</small></a>
+      <a href="#d2">DAY 2<small>10/8 四</small></a>
+      <a href="#d3">DAY 3<small>10/9 五</small></a>
+      <a href="#d4">DAY 4<small>10/10 六</small></a>
+      <a href="#d5">DAY 5<small>10/11 日</small></a>
+      <a href="#d6">DAY 6<small>10/12 一</small></a>
+    </div>
+
     <!-- DAY 1 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d1">
       <div class="meta">
         <div class="dnum"><small>DAY 01</small>1</div>
         <div class="ddate">10/7 (三)</div>
@@ -520,7 +543,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     </div>
 
     <!-- DAY 2 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d2">
       <div class="meta">
         <div class="dnum"><small>DAY 02</small>2</div>
         <div class="ddate">10/8 (四)</div>
@@ -556,7 +579,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     </div>
 
     <!-- DAY 3 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d3">
       <div class="meta">
         <div class="dnum"><small>DAY 03</small>3</div>
         <div class="ddate">10/9 (五)</div>
@@ -586,7 +609,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     </div>
 
     <!-- DAY 4 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d4">
       <div class="meta">
         <div class="dnum"><small>DAY 04</small>4</div>
         <div class="ddate">10/10 (六)</div>
@@ -605,7 +628,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     </div>
 
     <!-- DAY 5 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d5">
       <div class="meta">
         <div class="dnum"><small>DAY 05</small>5</div>
         <div class="ddate">10/11 (日)</div>
@@ -630,7 +653,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     </div>
 
     <!-- DAY 6 -->
-    <div class="day reveal">
+    <div class="day reveal" id="d6">
       <div class="meta">
         <div class="dnum"><small>DAY 06</small>6</div>
         <div class="ddate">10/12 (一)</div>
@@ -763,6 +786,23 @@ lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classLis
   });
   document.getElementById('bkReset').addEventListener('click',()=>{state={};save();paint()});
   paint();
+})();
+// sticky day nav active state
+(function(){
+  const links=[...document.querySelectorAll('.daynav a')];
+  const days=links.map(a=>document.querySelector(a.getAttribute('href')));
+  if(!links.length||days.some(d=>!d))return;
+  const sync=()=>{
+    let idx=-1;
+    days.forEach((d,i)=>{if(d.getBoundingClientRect().top<=180)idx=i});
+    links.forEach((a,i)=>a.classList.toggle('on',i===idx));
+    if(idx>-1){const a=links[idx],bar=a.parentElement;
+      const l=a.offsetLeft-bar.offsetLeft,r=l+a.offsetWidth;
+      if(l<bar.scrollLeft||r>bar.scrollLeft+bar.clientWidth)bar.scrollTo({left:l-16,behavior:'smooth'});}
+  };
+  addEventListener('scroll',sync,{passive:true});
+  addEventListener('resize',sync);
+  sync();
 })();
 // reveal on scroll
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});

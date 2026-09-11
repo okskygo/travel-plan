@@ -216,6 +216,39 @@ b .loc-link{font-weight:inherit}
 @media(max-width:860px){.dishes.cols3{grid-template-columns:1fr}}
 @media(max-width:680px){.dishes{grid-template-columns:1fr}}
 
+/* ===== BOOKINGS ===== */
+.book{background:var(--sand-2)}
+.bk-top{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-bottom:30px}
+.bk-count{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--jungle);white-space:nowrap}
+.bk-count b{color:var(--coral-deep);font-size:1.9rem;font-weight:500}
+.bk-bar{flex:1;min-width:200px;height:9px;border-radius:9px;background:rgba(12,53,40,.13);overflow:hidden}
+.bk-bar span{display:block;height:100%;width:0;border-radius:9px;background:linear-gradient(90deg,var(--gold),var(--coral));transition:width .5s cubic-bezier(.16,1,.3,1)}
+.bk-reset{border:1px solid rgba(12,53,40,.22);background:transparent;color:var(--muted);font:inherit;font-size:.78rem;padding:7px 16px;border-radius:20px;cursor:pointer;transition:.2s}
+.bk-reset:hover{border-color:var(--coral);color:var(--coral-deep)}
+.bk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.bk-group{background:#fff;border:1px solid rgba(203,164,90,.3);border-radius:var(--r);padding:24px 26px;box-shadow:0 16px 38px -26px rgba(12,53,40,.55)}
+.bk-group h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.2rem;color:var(--jungle);display:flex;align-items:center;gap:11px;margin-bottom:4px}
+.bk-group h4 i{color:var(--coral);font-size:.95rem}
+.bk-group ul{list-style:none}
+.bk-item{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed rgba(35,26,18,.12);cursor:pointer}
+.bk-item:last-child{border-bottom:none}
+.bk-item:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:8px}
+.bk-box{width:22px;height:22px;flex-shrink:0;margin-top:3px;border-radius:7px;border:2px solid rgba(12,53,40,.28);display:grid;place-items:center;color:#fff;font-size:.66rem;transition:.2s}
+.bk-box i{opacity:0;transform:scale(.6);transition:.2s}
+.bk-item.done .bk-box{background:var(--jungle-3);border-color:var(--jungle-3)}
+.bk-item.done .bk-box i{opacity:1;transform:none}
+.bk-item>span:last-child{min-width:0;flex:1}
+.bk-t{display:block;font-size:.95rem;color:var(--jungle);font-weight:600;line-height:1.55}
+.bk-m{display:block;font-size:.8rem;color:var(--muted);line-height:1.72;margin-top:3px}
+.bk-item.done .bk-t{text-decoration:line-through;text-decoration-color:rgba(12,53,40,.35);color:var(--muted);font-weight:500}
+.bk-item.done .bk-m{opacity:.55}
+.bk-when{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.06em;color:var(--coral-deep);background:rgba(226,114,78,.14);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:2px}
+.bk-when.pre{color:var(--jungle-3);background:rgba(22,81,60,.11)}
+.bk-m b{color:var(--coral-deep);font-weight:600}
+.book .sec-desc .hl{color:var(--coral-deep);font-weight:600}
+.bk-note{margin-top:16px;font-size:.8rem;color:var(--muted);line-height:1.7}
+@media(max-width:780px){.bk-grid{grid-template-columns:1fr}}
+
 /* ===== PRACTICAL ===== */
 .prac{background:var(--jungle);color:var(--sand);position:relative;overflow:hidden}
 .prac .leaf{position:absolute;top:-50px;left:-50px;width:320px;color:#0A2B1F;opacity:.45;transform:rotate(160deg)}
@@ -291,6 +324,7 @@ footer .fl{color:var(--coral);text-decoration:none}
   <button class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></button>
   <div class="links" id="navLinks">
     <a href="#facts">概覽</a>
+    <a href="#book">預訂</a>
     <a href="#stay">航班住宿</a>
     <a href="#itin">行程</a>
     <a href="#prac">須知</a>
@@ -336,11 +370,51 @@ footer .fl{color:var(--coral);text-decoration:none}
   </div>
 </section>
 
+<!-- BOOKINGS -->
+<section class="book" id="book">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-tag"><span class="num">01</span> Bookings</div>
+      <h2 class="sec-title">預訂 <em>進度</em></h2>
+      <p class="sec-desc">全部要事先訂的東西都在這裡。<span class="hl">點一下就打勾</span>，一眼看出還剩什麼沒訂。（勾選只存在你這台裝置的瀏覽器，不會同步給其他人。）</p>
+    </div>
+
+    <div class="bk-top reveal">
+      <div class="bk-count"><b id="bkDone">0</b> / <span id="bkTotal">0</span> 已完成</div>
+      <div class="bk-bar"><span></span></div>
+      <button class="bk-reset" id="bkReset" type="button">全部重設</button>
+    </div>
+
+    <div class="bk-grid">
+      <div class="bk-group reveal">
+        <h4><i class="fa-solid fa-passport"></i> 出發前線上辦</h4>
+        <ul>
+        <li class="bk-item" data-bk="levy" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when pre">出發前</span>觀光稅 Tourist Levy</span><span class="bk-m">IDR 150,000／人（約 TWD 300）。⚠️ 只用官方 <b>lovebali.baliprov.go.id</b> 線上付，仿站會超收；付完存好 QR。往返佩尼達不需再付。</span></span></li>
+        <li class="bk-item" data-bk="visa" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when pre">出發前</span>簽證 e-VOA／落地簽</span><span class="bk-m">護照效期需 6 個月以上。線上辦 e-VOA 可省掉機場排隊。</span></span></li>
+        <li class="bk-item" data-bk="ecd" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when pre">抵達前 48h</span>電子海關申報 e-CD</span><span class="bk-m">抵達前 48 小時內線上填寫，取得 QR 碼，入境時要掃。</span></span></li>
+        <li class="bk-item" data-bk="cash" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when pre">出發前</span>在台灣換美金 · 每人至少 USD 200</span><span class="bk-m">峇里島用 <b>美金換印尼盾比台幣划算很多</b>，所以在台灣換的是 <b>USD 不是 IDR</b>，落地當天再到 Central Kuta 換成 IDR。⚠️ 一定要換 <b>$100 面額、2013 年後新版、無摺痕無破損</b>的鈔票——舊版、有摺痕或髒污的常被拒收或砍匯率；小面額鈔票匯率也明顯較差。<b>每人至少 USD 200</b>。</span></span></li>
+        </ul>
+      </div>
+      <div class="bk-group reveal">
+        <h4><i class="fa-solid fa-calendar-check"></i> 活動與接送預約</h4>
+        <ul>
+        <li class="bk-item" data-bk="pickup" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>Bali Made Tour 私人接機</span><span class="bk-m">DPS → RIMBA by AYANA，4 大人＋4 件行李，路上停兩站（Central Kuta 換錢、Pepito 買零食）。<b>已去信詢價、等回覆中。</b>回信要確認：<b>含兩站停留的總價（等候／停車／過路費算不算）、4 大 4 箱的車型、機場等候時間與班機延誤政策、付款方式與取消條件、怎麼確認訂單</b>。</span></span></li>
+        <li class="bk-item" data-bk="rockbar" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>Rock Bar 崖上落日（17:00）</span><span class="bk-m">用 <b>AYANA App</b> 預約落日時段，可加訂 VIP 圓形等候區。smart casual、現場只收電子支付。</span></span></li>
+        <li class="bk-item" data-bk="kecak" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>情人崖 Kecak 火舞（18:00）</span><span class="bk-m">線上訂票卡位。⚠️ 週四人多，票訂好也要提早到場挑位置。</span></span></li>
+        <li class="bk-item" data-bk="sundari" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/9</span>SUNDARI Wellness 峇里島式按摩</span><span class="bk-m">Traditional Balinese 90 分 IDR 650K／120 分 IDR 800K。從官網聯絡頁預約，順便約 Seminyak 區免費接送。</span></span></li>
+        <li class="bk-item" data-bk="udara" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/10</span>Udara 頌缽音療 12:00–14:30</span><span class="bk-m">Sacred Sounds Of Surya，IDR 500,000／人（約 NT$ 900）。<b>場次已定週六 12:00 場，務必線上訂位。</b></span></span></li>
+        <li class="bk-item" data-bk="snorkel" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/11</span>佩尼達西線浮潛一日團</span><span class="bk-m">Manta Bay／Crystal Bay／Gamat Bay 含午餐。⚠️ 一定要選<b>含 Seminyak 飯店接送</b>的團，不然要自己到 Sanur 碼頭。</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FLIGHTS + STAY -->
 <section id="stay">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag"><span class="num">01</span> Logistics</div>
+      <div class="sec-tag"><span class="num">02</span> Logistics</div>
       <h2 class="sec-title">航班與 <em>住宿配置</em></h2>
       <p class="sec-desc">前 2 晚住 AYANA 園區的 RIMBA by AYANA（金巴蘭）享受頂級度假村，再北上 Seminyak 私人泳池 villa 住 3 晚當逛街、浮潛、海神廟的據點。四人最划算——兩房 villa，獨立客廳與泳池待在一起。</p>
     </div>
@@ -407,7 +481,7 @@ footer .fl{color:var(--coral);text-decoration:none}
 <section class="itin" id="itin">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag"><span class="num">02</span> Day by Day</div>
+      <div class="sec-tag"><span class="num">03</span> Day by Day</div>
       <h2 class="sec-title">六天 <em>行程</em></h2>
       <p class="sec-desc">前段在 AYANA 把度假村玩好玩滿，後段北上 Seminyak 逛街、音療靜心、看海神廟、浮潛。每天只做一件「累的事」，四個落日場景互不重複。</p>
     </div>
@@ -422,7 +496,9 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS</b><p>桃園 T1 09:10 起飛。包車到 AYANA 僅 <span class="hl">15–20 分</span>，入住 <span class="hl">RIMBA 館</span>，先泡泳池調時差。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS → 接機司機 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 詢價中！！</span></b><p>桃園 T1 09:10 起飛。已直接向 <span class="hl">Bali Made Tour</span> 訂私人接機：4 大人＋4 件行李，DPS → RIMBA by AYANA，路上安排<span class="hl">兩站停留</span>。</p><p>入境先掃 e-VOA／e-CD／觀光稅的 QR，領完行李出來到 Arrival Hall <span class="hl">找舉牌的司機</span>，不用自己叫車。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-money-bill-transfer"></i></div><div class="txt"><b>第 1 站 · 換錢：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Kuta+Money+Exchange+Kalimas+Arcade+Jimbaran" target="_blank">Central Kuta Money Exchange（Kalimas Arcade, Jimbaran）<i class="fa-solid fa-location-arrow"></i></a> · 約 10–15 分</b><p>Central Kuta 是峇里島最知名的<span class="hl">合法連鎖換錢所（Authorized Money Changer）</span>，匯率透明、不玩手法，比路邊掛超高匯率的小攤安全太多。把在台灣換好的<span class="hl">美金換成 IDR</span>。</p><p>⚠️ 遞 <span class="hl">$100 面額、2013 年後新版、無摺痕無破損</span>的鈔票匯率最好；舊版或有摺痕的可能被拒收。拿到錢<span class="hl">當場數清楚、確認金額無誤再離開櫃檯</span>——印尼盾零很多，很容易看錯位數。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-cart-shopping"></i></div><div class="txt"><b>第 2 站 · 買零食：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Pepito+Express+Karang+Mas+Jimbaran" target="_blank">Pepito Express Karang Mas <i class="fa-solid fa-location-arrow"></i></a> · 約 15–20 分</b><p>就開在 <span class="hl">Jl. Karang Mas</span> 上——AYANA／RIMBA 所在的那條路，完全順路不繞。峇里島在地連鎖超市，水、零食、啤酒、防曬、水果一次補齊，<span class="hl">比飯店 minibar 便宜非常多</span>。</p><p>買完直接上山進 AYANA 入住 <span class="hl">RIMBA 館</span>。</p><p>⚠️ 照信裡寫的停留時間（10–15 分＋15–20 分）加上車程，抵達 RIMBA 大約 <span class="hl">16:30–16:45</span>，離 17:00 Rock Bar 很緊——<span class="hl">行李先丟房間、晚點再整理</span>；真的趕不上就把 Rock Bar 往後挪，日落 <span class="hl">18:15–18:30</span> 還有空間。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-martini-glass-citrus"></i></div><div class="txt"><b>17:00 Rock Bar 崖上落日 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 要預約！！</span></b><p>Rock Bar 就在園區內，搭懸崖纜車下去即到。<span class="hl">提早用 AYANA App 預約</span>卡好位置，一邊喝調酒一邊等 <span class="hl">18:15–18:30</span> 的日落；房客有優先通道，還可加訂落日 VIP 圓形等候區。著 smart casual，現場只收電子支付。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐首選：Karang（Segara 館）· 道地印尼菜</b><p>Rock Bar 喝一杯後，搭園區 Tram 電車約 <span class="hl">5 分鐘</span>。主打道地印尼與峇里島料理，1 人約 <span class="hl">NT$ 600–800</span>。空間設計感強、精緻優雅、有儀式感——想在第一晚就深度品嚐印尼菜、好好享受晚餐時光選這家。</p>
             <div class="dishes">
@@ -462,7 +538,7 @@ footer .fl{color:var(--coral);text-decoration:none}
           <li><div class="ic"><i class="fa-solid fa-cable-car"></i></div><div class="txt"><b>10:00–12:00 搭懸崖纜車下 Kubu Beach</b><p>上午太陽還不頂曬，搭<span class="hl">透明懸崖纜車</span>下到 AYANA 私人海灘，看巨石懸崖、在俱樂部躺椅上<span class="hl">喝椰子水</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-water-ladder"></i></div><div class="txt"><b>接著：Ocean Beach Pool 懸崖無邊際海景泳池</b><p>早上的懸崖海景<span class="hl">光線極美</span>，在緊鄰浪花的無邊際泳池邊拍照、看海、放空，補足前一天沒泡到的經典海景泳池。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-umbrella-beach"></i></div><div class="txt"><b>中午回 RIMBA：林畔涼亭泳池</b><p>回 RIMBA 館泡<span class="hl">林畔涼亭泳池</span>放空休息。午餐可在<span class="hl">達瑪餐廳</span>吃，或泳池旁的<span class="hl">幽蘭茶室</span>、<span class="hl">圖格餐廳（To’ge）</span>。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-gopuram"></i></div><div class="txt"><b>17:00 情人崖斷崖廟 Uluwatu Temple</b><p>16:30 buggy 出園、包車約 30–40 分。斷崖海景，<span class="hl">注意猴子搶眼鏡、手機、帽子</span>。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-gopuram"></i></div><div class="txt"><b>17:00 情人崖斷崖廟 Uluwatu Temple</b><p>16:30 buggy 出園、<span class="hl">叫 Grab</span> 約 30–40 分。斷崖海景，<span class="hl">注意猴子搶眼鏡、手機、帽子</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-fire"></i></div><div class="txt"><b>18:00 Kecak 火舞 <span class="book-pill"><i class="fa-solid fa-ticket"></i> 要先訂票！！</span></b><p>斷崖＋火舞＋落日。⚠️ 週四人多，<span class="hl">提早到場或先線上訂票卡位</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐：火舞後三選一</b><p>看完火舞就近在情人崖一帶吃，或回程順路停金巴蘭：</p>
             <div class="dishes cols3">
@@ -487,7 +563,7 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>中午：包車北上 Seminyak</b><p>AYANA 泡到中午退房，車程約 45 分–1 小時，入住私人泳池 villa、放行李。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>中午：叫 Grab 北上 Seminyak</b><p>AYANA 泡到中午退房，車程約 45 分–1 小時，入住私人泳池 villa、放行李。四人＋行李叫 <span class="hl">XL／6 人座</span>；請櫃檯幫忙叫或走到園區大門口上車比較順。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-mug-saucer"></i></div><div class="txt"><b>放好行李先來杯咖啡：<a href="https://maps.app.goo.gl/SufRbfDMYnFSk9YV7" target="_blank" class="loc-link">Starbucks Reserve Dewata <i class="fa-solid fa-location-arrow"></i></a></b><p><span class="hl">飯店走路約 12 分鐘</span>就到。這裡是<span class="hl">東南亞最大的星巴克旗艦店</span>：挑高玻璃屋配戶外咖啡樹苗圃，可以看現場烘豆、在手沖吧台點 Reserve 稀有豆；峇里島限定杯與周邊也是這裡最齊，咖啡控必收。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>中午吃：<a href="https://maps.app.goo.gl/oTLCYGKE3FGWxLta7" target="_blank" class="loc-link">Naughty Nuri's Warung Seminyak <i class="fa-solid fa-location-arrow"></i></a>（要坐車）</b><p>Ubud 起家的<span class="hl">烤豬肋排名店</span>，炭火直烤、BBQ 醬香甜入味，<span class="hl">軟嫩到輕鬆脫骨</span>——連 Anthony Bourdain 都是粉絲。四人點肋排＋沙嗲＋炒飯分食剛剛好；用餐尖峰常排隊，建議提早到或錯峰。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-ice-cream"></i></div><div class="txt"><b>吃完走過去：<a href="https://maps.app.goo.gl/BnzjYR4kkmUhGiZE6" target="_blank" class="loc-link">Gusto Gelato &amp; Caffé <i class="fa-solid fa-location-arrow"></i></a></b><p>從 Naughty Nuri's <span class="hl">散步就到</span>的峇里島人氣義式冰淇淋店，<span class="hl">每日現做</span>、口味超過 30 種（在地水果口味必試），份量實在、價格親民，飯後甜點完美收尾。</p></div></li>
@@ -531,15 +607,21 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div class="meta">
         <div class="dnum"><small>DAY 05</small>5</div>
         <div class="ddate">10/11 (日)</div>
-        <div class="dloc">佩尼達西線浮潛 🤿</div>
+        <div class="dloc">佩尼達浮潛 → 逛街 🤿</div>
         <span class="badge">Snorkel</span>
       </div>
       <div>
         <ul class="acts">
           <li><div class="ic"><i class="fa-solid fa-ship"></i></div><div class="txt"><b>清晨：浮潛公司到 villa 接 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 要先報名！！</span></b><p>開往 <span class="hl">Sanur 碼頭</span>（約 45 分–1 小時）→ 快艇出海。空手出發、行李留 villa，含飯店接送的一日團最省事。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-mask-snorkel"></i></div><div class="txt"><b>西線跳點：Manta Bay · Crystal Bay · Gamat Bay</b><p>含午餐。⚠️ <span class="hl">不會游泳者全程穿救生衣、跟教練</span>；下水以 Crystal Bay 等平緩點為主，Manta Bay 流強可在船上看鬼蝠魟。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-couch"></i></div><div class="txt"><b>傍晚：返回 villa 休息</b><p>這天只做浮潛一件累事，行程零負擔。會暈船先吃暈船藥。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-bowl-food"></i></div><div class="txt"><b>晚餐：<a href="https://maps.app.goo.gl/p6EsDZ8z4cXKUZYK9" target="_blank" class="loc-link">Made's Warung Seminyak <i class="fa-solid fa-location-arrow"></i></a></b><p><span class="hl">1969 年創業</span>的峇里島老字號食堂，從路邊小攤做成傳奇餐廳。招牌 <span class="hl">Nasi Campur 綜合飯</span>一盤吃遍印尼經典，另有沙嗲、Gado-Gado 涼拌與泰式菜色；<span class="hl">晚間常有傳統舞蹈或現場表演</span>，浮潛完正好吃一頓熱鬧的在地菜收尾。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-shirt"></i></div><div class="txt"><b>A · 不回飯店：Sanur 下船 → 換乾衣服 → <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=ICON+Bali+Mall+Sanur" target="_blank">ICON Bali 逛街 <i class="fa-solid fa-location-arrow"></i></a></b><p>快艇約 <span class="hl">15:30–17:00 回到 Sanur 碼頭</span>，在碼頭／船公司的沖洗間換掉濕衣服，直接殺去 ICON Bali——就在 Jl. Danau Tamblingan 上，<span class="hl">離碼頭車程只要 5–10 分</span>，是全程唯一「上岸即逛街」的點，省下來回一趟 Seminyak 的車程。</p><p>2024 年 6 月開幕的濱海購物中心、約 200 家店：Uniqlo、H&amp;M、Marks &amp; Spencer、Sephora、Lacoste、Swarovski，在地品牌有 Sensatia Botanicals（峇里島保養品）與 Falala Chocolates。一樓 <span class="hl">Jaje Bali 漂浮市集</span>集合 50＋ 小攤賣印尼小吃與手作，伴手禮一次補齊。</p><p>還有峇里島第一座 IMAX（Cinema XXI）、頂樓海景餐廳與直通沙灘的通道；<span class="hl">營業到 22:00</span>，可以在這裡吃完晚餐再回 Seminyak。⚠️ 一日團預設直接送回 Seminyak 飯店，<span class="hl">要在 Sanur 下車得先跟導遊說</span>，之後自己叫 Grab 回住處（約 45 分–1 小時）。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-shower"></i></div><div class="txt"><b>B · 回飯店洗漱再出門</b><p>跟著一日團的接送回 Blue Karma 沖澡換衣服，休息一下再出門。這樣體力最舒服，但等於放掉 Sanur，逛街範圍限縮在 Seminyak／Kuta 一帶。三個走法：</p>            <div class="dishes cols3">
+              <div class="dish"><span class="tag">度假風小店</span><b><a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Seminyak+Village+Bali" target="_blank">Seminyak 街區 ＋ Seminyak Village <i class="fa-solid fa-location-arrow"></i></a></b><p><b>適合</b>：想找度假服、飾品、設計小物，逛完順便吃飯。</p><p><b>怎麼逛</b>：搭車到 Seminyak Village（有冷氣的精品小商場，<span class="hl">10:00–22:00</span>），再沿 <span class="hl">Jalan Kayu Aya／Eat Street</span> 逛街邊店，走到哪吃到哪。</p></div>
+              <div class="dish"><span class="tag alt">國際品牌</span><b><a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Beachwalk+Shopping+Center+Kuta+Bali" target="_blank">Beachwalk・Kuta <i class="fa-solid fa-location-arrow"></i></a></b><p><b>適合</b>：想逛國際品牌，購物和晚餐集中在一個地方。</p><p><b>怎麼逛</b>：直接搭車去商場，吃飯＋逛約 <span class="hl">2–3 小時</span>。半露天海景設計，逛完走幾步就是庫塔海灘；10/11 是<span class="hl">週日，營業 10:30–22:30</span>。</p></div>
+              <div class="dish"><span class="tag warn">最省力</span><b><a class="loc-link" href="https://maps.app.goo.gl/hGHdbKnU9mgE7vLs6" target="_blank">飯店附近 Jalan Raya Seminyak ＋ Bintang 超市 <i class="fa-solid fa-location-arrow"></i></a></b><p><b>適合</b>：浮潛後有點累，只想輕鬆買東西。</p><p><b>怎麼逛</b>：附近走走、吃原訂的 Made's Warung，再到 Bintang 補零食伴手禮（Day 3 沒買完的這天補齊）。</p></div>
+            </div>
+          </div></li>
+          <li><div class="ic"><i class="fa-solid fa-bowl-food"></i></div><div class="txt"><b>晚餐（走 B 方案）：<a href="https://maps.app.goo.gl/p6EsDZ8z4cXKUZYK9" target="_blank" class="loc-link">Made's Warung Seminyak <i class="fa-solid fa-location-arrow"></i></a></b><p><span class="hl">1969 年創業</span>的峇里島老字號食堂，從路邊小攤做成傳奇餐廳。招牌 <span class="hl">Nasi Campur 綜合飯</span>一盤吃遍印尼經典，另有沙嗲、Gado-Gado 涼拌與泰式菜色；<span class="hl">晚間常有傳統舞蹈或現場表演</span>，浮潛完正好吃一頓熱鬧的在地菜收尾。</p><p>走 <b>A 方案</b>就在 ICON Bali 頂樓海景餐廳或 Jaje 市集解決晚餐，回到 Seminyak 已經是晚上，這家就留到下次。</p></div></li>
         </ul>
         <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · Blue Karma Dijiwa Seminyak</span>
       </div>
@@ -556,7 +638,7 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div>
         <ul class="acts">
           <li><div class="ic"><i class="fa-solid fa-water-ladder"></i></div><div class="txt"><b>上午：villa 泳池放鬆、收拾</b><p>把握最後的悠閒時光。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-car"></i></div><div class="txt"><b>中午退房 → 機場</b><p>Seminyak 到機場約 45 分–1 小時，午後易塞，<span class="hl">建議 12:30–13:00 先出發</span>。想補伴手禮可請司機繞 Krisna 或超市。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-car"></i></div><div class="txt"><b>中午退房 → 機場</b><p>Seminyak 到機場約 45 分–1 小時，午後易塞，<span class="hl">建議 12:30–13:00 先出發</span>。</p><p><span class="hl">Blue Karma 照理說有機場接送</span>——入住時先問清楚是否含在房價、還是要加價、要不要提前一天預約；有的話最省事，沒有就叫 Grab（大車）。想補伴手禮可請司機繞 Krisna 或超市。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-plane-departure"></i></div><div class="txt"><b>CI772 · 15:55 DPS → TPE</b><p>登巴薩國際航廈起飛，<span class="hl">21:20 抵達桃園 T1</span>。</p></div></li>
         </ul>
       </div>
@@ -569,19 +651,21 @@ footer .fl{color:var(--coral);text-decoration:none}
   <svg class="leaf" viewBox="0 0 200 200" fill="currentColor"><path d="M100 10C60 40 30 90 20 180c40-50 60-60 80-60-30 30-40 60-40 60 30-30 50-40 70-40-20 30-20 50-20 50 30-40 40-100 -10-180z"/></svg>
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-tag"><span class="num">03</span> Good to Know</div>
+      <div class="sec-tag"><span class="num">04</span> Good to Know</div>
       <h2 class="sec-title">行前 <em>須知</em></h2>
     </div>
     <div class="prac-grid">
       <div class="pcard reveal">
-        <h4><i class="fa-solid fa-car-side"></i> 包車 vs 一日跟團</h4>
+        <h4><i class="fa-solid fa-car-side"></i> 交通：全程叫 Grab</h4>
         <ul>
-          <li><b>10/7 接機</b>：單程包車（機場 → AYANA，約 15–20 分）。</li>
-          <li><b>10/8 火舞</b>：半天包車，白天在 AYANA 內，傍晚才出發去情人崖。</li>
-          <li><b>10/9 北上＋逛街</b>：含行李北上 → Seminyak 入住 → 逛街 → beach club。</li>
-          <li><b>10/10 音療＋海神廟</b>：約 11:00 出發包車——Seminyak → Udara（Seseh，約 40–50 分）→ 海神廟逛逛＋夕陽 → 回 Seminyak，一條路線不走回頭。</li>
-          <li><b>10/11 浮潛</b>：報名<b>含 Seminyak 接送</b>的西線一日團（Sanur 出發），已含交通。</li>
-          <li>四人＋行李建議訂大車（Avanza／Innova）；可請 villa 管家代訂固定司機。</li>
+          <li><b>10/7 接機</b>：已直接向 <b>Bali Made Tour</b> 訂私人接機（DPS → RIMBA，含兩站停留：Central Kuta 換錢、Pepito Karang Mas 買零食）。⚠️ 回信要確認<b>總價是否含等候／停車／過路費</b>、4 大 4 箱的車型，以及<b>班機延誤怎麼算</b>。</li>
+          <li><b>10/8 火舞</b>：白天都在 AYANA 內，傍晚叫 Grab 去情人崖（約 30–40 分）。⚠️ 情人崖一帶是在地車隊地盤，<b>Grab 常常不能在廟口接客</b>，火舞散場又一次湧出人潮——回程可能要走一段到指定點，或現場跟在地車議價。</li>
+          <li><b>10/9 北上</b>：含行李從 AYANA 叫 Grab 到 Seminyak，約 45 分–1 小時。</li>
+          <li><b>10/10 音療＋海神廟</b>：約 11:00 出發——Seminyak → Udara（Seseh，約 40–50 分）→ 海神廟逛逛＋夕陽 → 回 Seminyak，一條路線不走回頭。⚠️ 海神廟跟情人崖一樣不好叫車，<b>夕陽散場尤其難</b>；可以請 Udara 櫃檯幫忙，或到海神廟後先跟一位司機約好回程時間。</li>
+          <li><b>10/11 浮潛＋逛街</b>：報名<b>含 Seminyak 接送</b>的西線一日團（Sanur 出發），已含交通。走<b>方案 A</b>（Sanur 上岸直接逛 ICON Bali）要先跟導遊說在碼頭下車，回程自己叫 Grab（約 45 分–1 小時）；走<b>方案 B</b> 就跟團車回飯店，之後 Grab 往返 Seminyak／Kuta。</li>
+          <li><b>10/12 送機</b>：<b>Blue Karma 照理說有機場接送，入住時先問</b>（是否含房價／要不要加價／要不要前一天預約）；沒有再叫 Grab。</li>
+          <li><b>叫車小抄</b>：四人＋行李一律選 <b>XL／6 人座</b>；綁好 GoPay／GrabPay，但身上一定要留現金付小費和臨時議價；景點難叫車時請店家或飯店櫃檯代叫最快。萬一 10/7 接機出狀況，DPS 的 <b>Grab／Gojek Lounge 在停車樓</b>（航廈路邊不給接客），走過去叫車就好。</li>
+          <li><b>臨時想包車？三個管道</b>——情人崖、海神廟散場真的卡住時的解法：<br>① <b>Grab app 內建「Rent by the Hour」</b>：選 4／6／8／10 小時，<b>同一個司機全程跟著、每站在停車場等你</b>，不用離開已經在用的 app；南峇里島 10 小時約 <b>IDR 500,000</b> 起。<br>② <b>KKday／Klook</b>：全中文介面、線上刷卡，可<b>指定中文司機</b>、備註想去的景點，司機會幫忙排順路順序——出發前就能訂好。<br>③ <b>飯店櫃檯代訂</b>固定司機：RIMBA 與 Blue Karma 都能代叫，最快但通常也最貴。</li>
         </ul>
       </div>
       <div class="pcard reveal">
@@ -601,7 +685,7 @@ footer .fl{color:var(--coral);text-decoration:none}
           <li><b>一套 smart casual</b>（Rock Bar、Ku De Ta 用到；夾腳拖／藍白拖／泳裝不能進 Rock Bar）。</li>
           <li>輕便雨衣／防水外套（午後有時短暫陣雨）、好走的鞋。</li>
           <li>進廟遮膝衣（現場多有 sarong 可租借）。</li>
-          <li><b>現金</b>：小店、warung、包車費、清潔費常只收現金。</li>
+          <li><b>現金</b>：小店、warung、司機小費、清潔費常只收現金。</li>
           <li>暈船藥（佩尼達沿岸較浪）。</li>
         </ul>
       </div>
@@ -624,7 +708,7 @@ footer .fl{color:var(--coral);text-decoration:none}
     <div class="bc-inner reveal">
       <div>
         <h2>邊玩邊記，<em>消費紀錄</em></h2>
-        <p>機票、住宿、包車、餐食、活動——花了多少一頁追蹤，隨時更新。</p>
+        <p>機票、住宿、交通、餐食、活動——花了多少一頁追蹤，隨時更新。</p>
         <div class="bc-mini">
           <div><div class="v">TWD 74,248</div><div class="k">目前累計支出</div></div>
           <div><div class="v">18,562</div><div class="k">每人均攤 · 機票</div></div>
@@ -655,6 +739,29 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
 const tgl=document.getElementById('navToggle'),lnk=document.getElementById('navLinks');
 tgl.addEventListener('click',()=>lnk.classList.toggle('open'));
 lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classList.remove('open')));
+// booking checklist
+(function(){
+  const KEY='bali2026-bookings';
+  const items=[...document.querySelectorAll('.bk-item')];
+  if(!items.length)return;
+  const bar=document.querySelector('.bk-bar span'),done=document.getElementById('bkDone');
+  document.getElementById('bkTotal').textContent=items.length;
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
+  const paint=()=>{
+    let n=0;
+    items.forEach(li=>{const on=!!state[li.dataset.bk];li.classList.toggle('done',on);li.setAttribute('aria-checked',on);if(on)n++});
+    done.textContent=n;bar.style.width=(n/items.length*100)+'%';
+  };
+  const toggle=li=>{state[li.dataset.bk]=!state[li.dataset.bk];save();paint()};
+  items.forEach(li=>{
+    li.addEventListener('click',()=>toggle(li));
+    li.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle(li)}});
+  });
+  document.getElementById('bkReset').addEventListener('click',()=>{state={};save();paint()});
+  paint();
+})();
 // reveal on scroll
 const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el)});

@@ -211,6 +211,7 @@ section{position:relative}
 b .loc-link{font-weight:inherit}
 .book-pill{display:inline-flex;align-items:center;gap:6px;background:var(--coral-deep);color:#fff;font-size:.76rem;font-weight:700;line-height:1.2;padding:3px 12px;border-radius:20px;letter-spacing:.06em;margin:0 4px;vertical-align:middle;box-shadow:0 4px 14px -6px rgba(201,81,46,.65);white-space:nowrap}
 .book-pill i{font-size:.8em}
+.book-pill.ok{background:var(--jungle-3);box-shadow:0 4px 14px -6px rgba(22,81,60,.6)}
 .stay-pill{margin-top:22px;display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid rgba(203,164,90,.3);padding:9px 18px;border-radius:30px;font-size:.88rem;color:var(--jungle);font-weight:500;box-shadow:0 8px 20px -12px rgba(12,53,40,.4)}
 .stay-pill i{color:var(--coral)}
 /* recommended dishes */
@@ -414,12 +415,12 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div class="bk-group reveal">
         <h4><i class="fa-solid fa-calendar-check"></i> 活動與接送預約</h4>
         <ul>
-        <li class="bk-item" data-bk="pickup" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>Bali Made Tour 私人接機</span><span class="bk-m">DPS → RIMBA by AYANA，4 大人＋4 件行李，路上停兩站（Central Kuta 換錢、Pepito 買零食）。<b>已去信詢價、等回覆中。</b>回信要確認：<b>含兩站停留的總價（等候／停車／過路費算不算）、4 大 4 箱的車型、機場等候時間與班機延誤政策、付款方式與取消條件、怎麼確認訂單</b>。</span></span></li>
+        <li class="bk-item" data-bk="pickup" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>機場接送（DPS → RIMBA）</span><span class="bk-m"><b>不包車了，單純訂一趟機場接送</b>——KKday／Klook、飯店代訂或直接叫 Grab 都可以，選得下 <b>4 大人＋4 件行李</b>的大車。訂的時候確認<b>機場等候時間與班機延誤政策</b>。中途停留<b>不預約</b>，上車後再問司機。</span></span></li>
         <li class="bk-item" data-bk="rockbar" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>Rock Bar 崖上落日（17:00）</span><span class="bk-m">用 <b>AYANA App</b> 預約落日時段，可加訂 VIP 圓形等候區。smart casual、現場只收電子支付。</span></span></li>
         <li class="bk-item" data-bk="kecak" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>情人崖 Kecak 火舞（18:00）</span><span class="bk-m">線上訂票卡位。⚠️ 週四人多，票訂好也要提早到場挑位置。</span></span></li>
         <li class="bk-item" data-bk="sundari" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/9</span>SUNDARI Wellness 峇里島式按摩</span><span class="bk-m">Traditional Balinese 90 分 IDR 650K／120 分 IDR 800K。從官網聯絡頁預約，順便約 Seminyak 區免費接送。</span></span></li>
         <li class="bk-item" data-bk="udara" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/10</span>Udara 頌缽音療 12:00–14:30</span><span class="bk-m">Sacred Sounds Of Surya，IDR 500,000／人（約 NT$ 900）。<b>場次已定週六 12:00 場，務必線上訂位。</b></span></span></li>
-        <li class="bk-item" data-bk="snorkel" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/11</span>佩尼達西線浮潛一日團</span><span class="bk-m">Manta Bay／Crystal Bay／Gamat Bay 含午餐。⚠️ 一定要選<b>含 Seminyak 飯店接送</b>的團，不然要自己到 Sanur 碼頭。</span></span></li>
+        <li class="bk-item done" data-bk="snorkel" role="checkbox" aria-checked="true" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/11</span>佩尼達西線浮潛一日團</span><span class="bk-m"><b>已在 KKday 訂好，含飯店接送，NT$ 5,512（4 人，約 NT$ 1,378／人）。</b>Manta Bay／Crystal Bay／Gamat Bay 含午餐。出發前再確認一次 <b>Seminyak 接送的時間與上車地點</b>，並把憑證存離線。</span></span></li>
         </ul>
       </div>
     </div>
@@ -521,9 +522,9 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS → 接機司機 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 詢價中！！</span></b><p>桃園 T1 09:10 起飛。已直接向 <span class="hl">Bali Made Tour</span> 訂私人接機：4 大人＋4 件行李，DPS → RIMBA by AYANA，路上安排<span class="hl">兩站停留</span>。</p><p>入境先掃 e-VOA／e-CD／觀光稅的 QR，領完行李出來到 Arrival Hall <span class="hl">找舉牌的司機</span>，不用自己叫車。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-money-bill-transfer"></i></div><div class="txt"><b>第 1 站 · 換錢：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Kuta+Money+Exchange+Kalimas+Arcade+Jimbaran" target="_blank">Central Kuta Money Exchange（Kalimas Arcade, Jimbaran）<i class="fa-solid fa-location-arrow"></i></a> · 約 10–15 分</b><p>Central Kuta 是峇里島最知名的<span class="hl">合法連鎖換錢所（Authorized Money Changer）</span>，匯率透明、不玩手法，比路邊掛超高匯率的小攤安全太多。把在台灣換好的<span class="hl">美金換成 IDR</span>。</p><p>⚠️ 遞 <span class="hl">$100 面額、2013 年後新版、無摺痕無破損</span>的鈔票匯率最好；舊版或有摺痕的可能被拒收。拿到錢<span class="hl">當場數清楚、確認金額無誤再離開櫃檯</span>——印尼盾零很多，很容易看錯位數。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-cart-shopping"></i></div><div class="txt"><b>第 2 站 · 買零食：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Pepito+Express+Karang+Mas+Jimbaran" target="_blank">Pepito Express Karang Mas <i class="fa-solid fa-location-arrow"></i></a> · 約 15–20 分</b><p>就開在 <span class="hl">Jl. Karang Mas</span> 上——AYANA／RIMBA 所在的那條路，完全順路不繞。峇里島在地連鎖超市，水、零食、啤酒、防曬、水果一次補齊，<span class="hl">比飯店 minibar 便宜非常多</span>。</p><p>買完直接上山進 AYANA 入住 <span class="hl">RIMBA 館</span>。</p><p>⚠️ 照信裡寫的停留時間（10–15 分＋15–20 分）加上車程，抵達 RIMBA 大約 <span class="hl">16:30–16:45</span>，離 17:00 Rock Bar 很緊——<span class="hl">行李先丟房間、晚點再整理</span>；真的趕不上就把 Rock Bar 往後挪，日落 <span class="hl">18:15–18:30</span> 還有空間。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-plane-arrival"></i></div><div class="txt"><b>CI771 · 14:35 落地 DPS → 機場接送</b><p>桃園 T1 09:10 起飛。<span class="hl">不包車了</span>，單純訂一趟機場接送（DPS → RIMBA，約 15–20 分）；KKday／Klook、飯店代訂或直接叫 Grab 都行，四人＋行李記得選<span class="hl">大車（XL／6 人座）</span>。入境先掃 e-VOA／e-CD／觀光稅的 QR，領完行李出來找司機。</p><p>⚠️ <span class="hl">中途停留不預約</span>——上車後直接問司機能不能順路停兩站，願意的話<span class="hl">下車時多給小費</span>（兩站抓 IDR 50,000–100,000 就很有誠意）。不願意也沒關係，兩站都有備案。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-money-bill-transfer"></i></div><div class="txt"><b>想停第 1 站 · 換錢：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Central+Kuta+Money+Exchange+Kalimas+Arcade+Jimbaran" target="_blank">Central Kuta Money Exchange（Kalimas Arcade, Jimbaran）<i class="fa-solid fa-location-arrow"></i></a> · 約 10–15 分</b><p>Central Kuta 是峇里島最知名的<span class="hl">合法連鎖換錢所（Authorized Money Changer）</span>，匯率透明、不玩手法，比路邊掛超高匯率的小攤安全太多。把在台灣換好的<span class="hl">美金換成 IDR</span>。</p><p>⚠️ 遞 <span class="hl">$100 面額、2013 年後新版、無摺痕無破損</span>的鈔票匯率最好；舊版或有摺痕的可能被拒收。拿到錢<span class="hl">當場數清楚、確認金額無誤再離開櫃檯</span>——印尼盾零很多，很容易看錯位數。</p><p><span class="hl">停不成的備案</span>：先用 Rex 帶的 IDR 撐第一晚，隔天再叫 Grab 來這間換；飯店櫃檯也能換一點應急，但匯率明顯差。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-cart-shopping"></i></div><div class="txt"><b>想停第 2 站 · 買零食：<a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=Pepito+Express+Karang+Mas+Jimbaran" target="_blank">Pepito Express Karang Mas <i class="fa-solid fa-location-arrow"></i></a> · 約 15–20 分</b><p>就開在 <span class="hl">Jl. Karang Mas</span> 上——AYANA／RIMBA 所在的那條路，完全順路不繞，司機答應的機率最高。峇里島在地連鎖超市，水、零食、啤酒、防曬、水果一次補齊，<span class="hl">比飯店 minibar 便宜非常多</span>。</p><p><span class="hl">停不成的備案</span>：用 <span class="hl">GrabMart／GoMart 外送到飯店</span>，或走 AYANA 園區內的商店（貴但方便）。</p><p>進 AYANA 入住 <span class="hl">RIMBA 館</span>。⚠️ 兩站都停的話抵達約 <span class="hl">16:30–16:45</span>，離 17:00 Rock Bar 很緊——行李先丟房間、晚點再整理；趕不上就把 Rock Bar 往後挪，日落 <span class="hl">18:15–18:30</span> 還有空間。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-martini-glass-citrus"></i></div><div class="txt"><b>17:00 Rock Bar 崖上落日 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 要預約！！</span></b><p>Rock Bar 就在園區內，搭懸崖纜車下去即到。<span class="hl">提早用 AYANA App 預約</span>卡好位置，一邊喝調酒一邊等 <span class="hl">18:15–18:30</span> 的日落；房客有優先通道，還可加訂落日 VIP 圓形等候區。著 smart casual，現場只收電子支付。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐首選：Karang（Segara 館）· 道地印尼菜</b><p>Rock Bar 喝一杯後，搭園區 Tram 電車約 <span class="hl">5 分鐘</span>。主打道地印尼與峇里島料理，1 人約 <span class="hl">NT$ 600–800</span>。空間設計感強、精緻優雅、有儀式感——想在第一晚就深度品嚐印尼菜、好好享受晚餐時光選這家。</p>
             <div class="dishes">
@@ -637,7 +638,7 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-ship"></i></div><div class="txt"><b>清晨：浮潛公司到 villa 接 <span class="book-pill"><i class="fa-solid fa-calendar-check"></i> 要先報名！！</span></b><p>開往 <span class="hl">Sanur 碼頭</span>（約 45 分–1 小時）→ 快艇出海。空手出發、行李留 villa，含飯店接送的一日團最省事。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-ship"></i></div><div class="txt"><b>清晨：浮潛公司到 villa 接 <span class="book-pill ok"><i class="fa-solid fa-circle-check"></i> KKday 已訂！</span></b><p>已在 <span class="hl">KKday 訂好含飯店接送</span>的西線一日團（<span class="hl">NT$ 5,512／4 人</span>）。開往 <span class="hl">Sanur 碼頭</span>（約 45 分–1 小時）→ 快艇出海。空手出發、行李留 villa。</p><p>出發前再跟客服確認一次<span class="hl">接送時間與上車地點</span>，憑證存離線備用。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-mask-snorkel"></i></div><div class="txt"><b>西線跳點：Manta Bay · Crystal Bay · Gamat Bay</b><p>含午餐。⚠️ <span class="hl">不會游泳者全程穿救生衣、跟教練</span>；下水以 Crystal Bay 等平緩點為主，Manta Bay 流強可在船上看鬼蝠魟。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-shirt"></i></div><div class="txt"><b>A · 不回飯店：Sanur 下船 → 換乾衣服 → <a class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=ICON+Bali+Mall+Sanur" target="_blank">ICON Bali 逛街 <i class="fa-solid fa-location-arrow"></i></a></b><p>快艇約 <span class="hl">15:30–17:00 回到 Sanur 碼頭</span>，在碼頭／船公司的沖洗間換掉濕衣服，直接殺去 ICON Bali——就在 Jl. Danau Tamblingan 上，<span class="hl">離碼頭車程只要 5–10 分</span>，是全程唯一「上岸即逛街」的點，省下來回一趟 Seminyak 的車程。</p><p>2024 年 6 月開幕的濱海購物中心、約 200 家店：Uniqlo、H&amp;M、Marks &amp; Spencer、Sephora、Lacoste、Swarovski，在地品牌有 Sensatia Botanicals（峇里島保養品）與 Falala Chocolates。一樓 <span class="hl">Jaje Bali 漂浮市集</span>集合 50＋ 小攤賣印尼小吃與手作，伴手禮一次補齊。</p><p>還有峇里島第一座 IMAX（Cinema XXI）、頂樓海景餐廳與直通沙灘的通道；<span class="hl">營業到 22:00</span>，可以在這裡吃完晚餐再回 Seminyak。⚠️ 一日團預設直接送回 Seminyak 飯店，<span class="hl">要在 Sanur 下車得先跟導遊說</span>，之後自己叫 Grab 回住處（約 45 分–1 小時）。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-shower"></i></div><div class="txt"><b>B · 回飯店洗漱再出門</b><p>跟著一日團的接送回 Blue Karma 沖澡換衣服，休息一下再出門。這樣體力最舒服，但等於放掉 Sanur，逛街範圍限縮在 Seminyak／Kuta 一帶。三個走法：</p>            <div class="dishes cols3">
@@ -683,11 +684,11 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div class="pcard reveal">
         <h4><i class="fa-solid fa-car-side"></i> 交通：全程叫 Grab</h4>
         <ul>
-          <li><b>10/7 接機</b>：已直接向 <b>Bali Made Tour</b> 訂私人接機（DPS → RIMBA，含兩站停留：Central Kuta 換錢、Pepito Karang Mas 買零食）。⚠️ 回信要確認<b>總價是否含等候／停車／過路費</b>、4 大 4 箱的車型，以及<b>班機延誤怎麼算</b>。</li>
+          <li><b>10/7 接機</b>：<b>不包車</b>，訂一趟機場接送（DPS → RIMBA，約 15–20 分），選 4 大 4 箱的大車、確認機場等候與班機延誤政策。<b>停留不預約</b>——上車再問司機能不能順路停 Central Kuta 換錢與 Pepito 買零食，願意就多給小費（兩站抓 IDR 50,000–100,000）。</li>
           <li><b>10/8 火舞</b>：白天都在 AYANA 內，傍晚叫 Grab 去情人崖（約 30–40 分）。⚠️ 情人崖一帶是在地車隊地盤，<b>Grab 常常不能在廟口接客</b>，火舞散場又一次湧出人潮——回程可能要走一段到指定點，或現場跟在地車議價。</li>
           <li><b>10/9 北上</b>：含行李從 AYANA 叫 Grab 到 Seminyak，約 45 分–1 小時。</li>
           <li><b>10/10 音療＋海神廟</b>：約 11:00 出發——Seminyak → Udara（Seseh，約 40–50 分）→ 海神廟逛逛＋夕陽 → 回 Seminyak，一條路線不走回頭。⚠️ 海神廟跟情人崖一樣不好叫車，<b>夕陽散場尤其難</b>；可以請 Udara 櫃檯幫忙，或到海神廟後先跟一位司機約好回程時間。</li>
-          <li><b>10/11 浮潛＋逛街</b>：報名<b>含 Seminyak 接送</b>的西線一日團（Sanur 出發），已含交通。走<b>方案 A</b>（Sanur 上岸直接逛 ICON Bali）要先跟導遊說在碼頭下車，回程自己叫 Grab（約 45 分–1 小時）；走<b>方案 B</b> 就跟團車回飯店，之後 Grab 往返 Seminyak／Kuta。</li>
+          <li><b>10/11 浮潛＋逛街</b>：<b>已在 KKday 訂好含飯店接送</b>的西線一日團（Sanur 出發，NT$ 5,512／4 人），交通已含。走<b>方案 A</b>（Sanur 上岸直接逛 ICON Bali）要先跟導遊說在碼頭下車，回程自己叫 Grab（約 45 分–1 小時）；走<b>方案 B</b> 就跟團車回飯店，之後 Grab 往返 Seminyak／Kuta。</li>
           <li><b>10/12 送機</b>：<b>Blue Karma 照理說有機場接送，入住時先問</b>（是否含房價／要不要加價／要不要前一天預約）；沒有再叫 Grab。</li>
           <li><b>叫車小抄</b>：四人＋行李一律選 <b>XL／6 人座</b>；綁好 GoPay／GrabPay，但身上一定要留現金付小費和臨時議價；景點難叫車時請店家或飯店櫃檯代叫最快。萬一 10/7 接機出狀況，DPS 的 <b>Grab／Gojek Lounge 在停車樓</b>（航廈路邊不給接客），走過去叫車就好。</li>
           <li><b>臨時想包車？三個管道</b>——情人崖、海神廟散場真的卡住時的解法：<br>① <b>Grab app 內建「Rent by the Hour」</b>：選 4／6／8／10 小時，<b>同一個司機全程跟著、每站在停車場等你</b>，不用離開已經在用的 app；南峇里島 10 小時約 <b>IDR 500,000</b> 起。<br>② <b>KKday／Klook</b>：全中文介面、線上刷卡，可<b>指定中文司機</b>、備註想去的景點，司機會幫忙排順路順序——出發前就能訂好。<br>③ <b>飯店櫃檯代訂</b>固定司機：RIMBA 與 Blue Karma 都能代叫，最快但通常也最貴。</li>
@@ -771,8 +772,11 @@ lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classLis
   if(!items.length)return;
   const bar=document.querySelector('.bk-bar span'),done=document.getElementById('bkDone');
   document.getElementById('bkTotal').textContent=items.length;
+  const defaults={};
+  items.forEach(li=>{defaults[li.dataset.bk]=li.classList.contains('done')});
   let state={};
   try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+  state=Object.assign({},defaults,state);
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
   const paint=()=>{
     let n=0;
@@ -784,7 +788,7 @@ lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classLis
     li.addEventListener('click',()=>toggle(li));
     li.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle(li)}});
   });
-  document.getElementById('bkReset').addEventListener('click',()=>{state={};save();paint()});
+  document.getElementById('bkReset').addEventListener('click',()=>{state=Object.assign({},defaults);save();paint()});
   paint();
 })();
 // sticky day nav active state

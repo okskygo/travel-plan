@@ -325,6 +325,59 @@ body{
   font-size:13.5px;
 }
 
+/* ---------- pre-departure checklist ---------- */
+.prep-lede{margin:0 0 18px;color:var(--muted);font-size:14.5px}
+.prep{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.prep-item{
+  background:var(--panel);
+  border:1px solid var(--hairline);
+  border-left:4px solid var(--c);
+  border-radius:var(--radius);
+  padding:18px 20px;
+}
+.prep-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.prep-kind{
+  flex:none;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:.14em;
+  padding:3px 10px;
+  border-radius:999px;
+  color:#fff;
+  background:var(--c);
+}
+.prep-head h3{
+  margin:0;
+  font-family:'Prompt',sans-serif;
+  font-weight:600;
+  font-size:18px;
+}
+.prep-item p{margin:8px 0 0;font-size:14.5px}
+.prep-item p.sub{color:var(--muted);font-size:13.5px}
+.prep-item ul{margin:8px 0 0;padding-left:1.25em;font-size:14.5px}
+.prep-item ul li{margin:2px 0}
+.prep-item .link{
+  display:inline-block;
+  margin-top:10px;
+  font-size:13.5px;
+  color:var(--fri);
+  text-decoration:none;
+  border-bottom:1px solid currentColor;
+  word-break:break-all;
+}
+.prep-item .link:hover{opacity:.75}
+.prep-item .link:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.callout{
+  margin:12px 0 0;
+  background:var(--paper);
+  border:1px dashed var(--c);
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:14px;
+}
+.callout b{color:var(--c)}
+
 /* ---------- day sections ---------- */
 .day{margin-top:64px;scroll-margin-top:24px}
 .day-head{
@@ -552,7 +605,7 @@ footer a{color:var(--muted)}
 </article>
 
 <!-- ==================== esim ==================== -->
-<h2 class="sec-label"><span class="zh">網卡</span>eSIM</h2>
+<h2 class="sec-label" id="esim"><span class="zh">網卡</span>eSIM</h2>
 <div class="esims">
   <article class="esim" style="--c:var(--thu)">
     <p class="esim-who"><span class="name">阿宇</span><span class="plan">票券 2</span></p>
@@ -578,6 +631,67 @@ footer a{color:var(--muted)}
   </article>
 </div>
 <p class="esim-note">KKday 訂單 26KK269334969 · 確認號碼 2789798656942241。兩張都是 15GB／7 日、啟用日 9/24。建議<strong>出發前在台灣先掃 QR Code 安裝</strong>（安裝需要網路，落地後沒網路會很麻煩），但先別開啟，到曼谷再把 eSIM 打開即可。QR 只能掃一次，別掃錯人的。</p>
+
+<!-- ==================== before you go ==================== -->
+<h2 class="sec-label"><span class="zh">行前</span>BEFORE YOU GO</h2>
+<p class="prep-lede">泰國不用辦簽證，但<strong>入境卡一定要先在網路上填</strong>，而且有時間窗口。以下依急迫度排序。</p>
+<ol class="prep">
+
+  <li class="prep-item" style="--c:var(--sun)">
+    <div class="prep-head"><span class="prep-kind">必做</span><h3>填 TDAC 泰國數位入境卡</h3></div>
+    <p>2025/05 起強制實施，取代舊的紙本 TM6 入境卡。沒填會在海關被擋下來。免費，兩人各填一份。</p>
+    <div class="callout">
+      <b>最容易填錯的一點：抵達日要填 9/25，不是 9/24。</b><br>
+      CI837 是 9/24 晚上 22:40 從桃園起飛，落地曼谷已經是 9/25 凌晨 01:25。
+    </div>
+    <p class="sub">只能在抵達前 72 小時內填 → <b>9/22 起開放</b>。建議 9/22–9/23 填掉，留時間改錯。</p>
+    <ul>
+      <li>要準備：護照、航班編號 <b>CI837</b>、住宿地址（The Berkeley Hotel Pratunam）</li>
+      <li>送出後 email 會收到 QR Code，<b>截圖存手機</b>，落地沒網路也叫得出來</li>
+      <li>只認官網，別用會收費的代辦網站</li>
+    </ul>
+    <a class="link" href="https://tdac.immigration.go.th/" target="_blank" rel="noopener">tdac.immigration.go.th ↗</a>
+  </li>
+
+  <li class="prep-item" style="--c:var(--fri)">
+    <div class="prep-head"><span class="prep-kind">免辦</span><h3>簽證：台灣護照免簽</h3></div>
+    <p>觀光免簽，不用事先申請。</p>
+    <div class="callout">
+      <b>2026/09/15 起免簽停留從 60 天縮短為 30 天</b>，且限觀光目的。我們待 5 天，完全在範圍內，只是別再拿舊的 60 天資訊跟人說嘴。
+    </div>
+  </li>
+
+  <li class="prep-item" style="--c:var(--sun)">
+    <div class="prep-head"><span class="prep-kind">必查</span><h3>護照效期 6 個月以上</h3></div>
+    <p>入境日 9/25 起算，護照要有效到 <b>2027/03/25 之後</b>。現在就翻開來確認，不夠的話補辦來不及。</p>
+  </li>
+
+  <li class="prep-item" style="--c:var(--thu)">
+    <div class="prep-head"><span class="prep-kind">禁帶</span><h3>電子煙、加熱菸一律不要帶</h3></div>
+    <p>泰國連<b>持有</b>都違法，不是罰錢了事，最重可判刑，機場確實會查。行李裡有的話出發前就拿出來。</p>
+  </li>
+
+  <li class="prep-item" style="--c:var(--sat)">
+    <div class="prep-head"><span class="prep-kind">帶著</span><h3>隨身現金與證明文件</h3></div>
+    <p>免簽旅客規定每人須備 <b>20,000 泰銖</b>（或家庭 40,000）等值旅費，<b>信用卡與網銀截圖不算</b>。實務上是抽查，但身上放一些現金比較保險。</p>
+    <ul>
+      <li>回程電子機票：<b>JX742</b>，9/28 13:10 BKK → 18:00 TPE</li>
+      <li>訂房確認信（The Berkeley Hotel Pratunam，9/24–9/28）</li>
+    </ul>
+  </li>
+
+  <li class="prep-item" style="--c:#8A6B04">
+    <div class="prep-head"><span class="prep-kind">先裝</span><h3>eSIM 在台灣先安裝好</h3></div>
+    <p>安裝過程需要網路，落地後沒網路會卡住。QR Code 與安裝碼都在上面的 <a class="link" href="#esim" style="margin-top:0">網卡區塊</a>。裝好先別啟用，到曼谷再打開。</p>
+  </li>
+
+  <li class="prep-item" style="--c:var(--fri)">
+    <div class="prep-head"><span class="prep-kind">建議</span><h3>換泰銖、買旅平險</h3></div>
+    <p class="sub">台灣先換一點小額泰銖應急（計程車、路邊攤），大額在曼谷市區匯兌所（如 SuperRich）比機場划算。海外刷卡記得開通。</p>
+    <p class="sub">另建議保旅平險＋不便險；紅眼班機延誤時理賠得上。</p>
+  </li>
+
+</ol>
 
 <!-- ==================== day 1 ==================== -->
 <section class="day" id="day1" style="--c:var(--thu)">

@@ -242,6 +242,7 @@ b .loc-link{font-weight:inherit}
 .bk-group h4 i{color:var(--coral);font-size:.95rem}
 .bk-group ul{list-style:none}
 .bk-item{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px dashed rgba(35,26,18,.12);cursor:pointer}
+.bk-item[data-locked="true"]{cursor:default}
 .bk-item:last-child{border-bottom:none}
 .bk-item:focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:8px}
 .bk-box{width:22px;height:22px;flex-shrink:0;margin-top:3px;border-radius:7px;border:2px solid rgba(12,53,40,.28);display:grid;place-items:center;color:#fff;font-size:.66rem;transition:.2s}
@@ -253,6 +254,8 @@ b .loc-link{font-weight:inherit}
 .bk-m{display:block;font-size:.8rem;color:var(--muted);line-height:1.72;margin-top:3px}
 .bk-item.done .bk-t{text-decoration:line-through;text-decoration-color:rgba(12,53,40,.35);color:var(--muted);font-weight:500}
 .bk-item.done .bk-m{opacity:.55}
+.bk-item[data-locked="true"] .bk-t{text-decoration:none;color:var(--ink)}
+.bk-item[data-locked="true"] .bk-m{opacity:1}
 .bk-when{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.06em;color:var(--coral-deep);background:rgba(226,114,78,.14);padding:2px 8px;border-radius:10px;margin-right:7px;vertical-align:2px}
 .bk-when.pre{color:var(--jungle-3);background:rgba(22,81,60,.11)}
 .bk-when.who{color:#fff;background:var(--gold);letter-spacing:.04em}
@@ -392,13 +395,13 @@ footer .fl{color:var(--coral);text-decoration:none}
     <div class="sec-head reveal">
       <div class="sec-tag"><span class="num">01</span> Bookings</div>
       <h2 class="sec-title">預訂 <em>進度</em></h2>
-      <p class="sec-desc">全部要事先訂的東西都在這裡。<span class="hl">點一下就打勾</span>，一眼看出還剩什麼沒訂。（勾選只存在你這台裝置的瀏覽器，不會同步給其他人。）</p>
+      <p class="sec-desc"><span class="hl">已預訂項目已固定打勾，無法取消</span>。其他待辦可點一下勾選；自行勾選的進度只存在這台裝置的瀏覽器，不會同步給其他人。</p>
     </div>
 
     <div class="bk-top reveal">
       <div class="bk-count"><b id="bkDone">0</b> / <span id="bkTotal">0</span> 已完成</div>
       <div class="bk-bar"><span></span></div>
-      <button class="bk-reset" id="bkReset" type="button">全部重設</button>
+      <button class="bk-reset" id="bkReset" type="button">重設個人勾選</button>
     </div>
 
     <div class="bk-grid">
@@ -415,12 +418,14 @@ footer .fl{color:var(--coral);text-decoration:none}
       <div class="bk-group reveal">
         <h4><i class="fa-solid fa-calendar-check"></i> 活動與接送預約</h4>
         <ul>
-        <li class="bk-item done" data-bk="pickup" role="checkbox" aria-checked="true" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>機場接送（DPS → RIMBA）</span><span class="bk-m"><b>已訂好。</b>4 大人＋4 件行李的大車。出發前把接送憑證存離線、確認司機碰面點與班機延誤時的聯絡方式。中途停留<b>不預約</b>，上車後再問司機。</span></span></li>
-        <li class="bk-item" data-bk="rockbar" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>Rock Bar 崖上落日（17:00）</span><span class="bk-m">用 <b>AYANA App</b> 預約落日時段，可加訂 VIP 圓形等候區。smart casual、現場只收電子支付。</span></span></li>
-        <li class="bk-item" data-bk="kecak" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>情人崖 Kecak 火舞（18:00）</span><span class="bk-m">線上訂票卡位。⚠️ 週四人多，票訂好也要提早到場挑位置。</span></span></li>
-        <li class="bk-item done" data-bk="sundari" role="checkbox" aria-checked="true" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/9</span>SUNDARI Wellness 峇里島式按摩 18:00</span><span class="bk-m"><b>已訂好，4 人 Traditional Balinese 90 分，18:00 開始。</b>店家來信確認：<b>接送車 17:15 到 Blue Karma，要先在大廳等</b>。出發前把確認信存離線。</span></span></li>
-        <li class="bk-item done" data-bk="udara" role="checkbox" aria-checked="true" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/10</span>Udara 頌缽音療 12:00–14:30</span><span class="bk-m"><b>已訂並付款，4 人 TWD 3,605（IDR 500,000／人）。</b>Sacred Sounds Of Surya，週六 12:00–14:30 場。出發前把訂位確認信存離線，當天提早 15 分鐘到報到。</span></span></li>
-        <li class="bk-item done" data-bk="snorkel" role="checkbox" aria-checked="true" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/11</span>佩尼達西線浮潛一日團</span><span class="bk-m"><b>已在 KKday 訂好，NT$ 7,728（4 人，約 NT$ 1,932／人）——阿婷先付的，回來記得結算。</b>Manta Bay／Crystal Bay／Gamat Bay 含午餐。⚠️ <b>去回都不含接送</b>。<b>05:45 準時出發、07:00 前要到 Sanur 的 Golden Mountain Fast Cruise 報到</b>，<b>前一晚先請 Blue Karma 櫃檯預約 05:45 的車</b>（清晨不一定叫得到 Grab）。憑證存離線。</span></span></li>
+        <li class="bk-item done" data-bk="pickup" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>機場接送（DPS → RIMBA）</span><span class="bk-m"><b>已訂好。</b>4 大人＋4 件行李的大車。出發前把接送憑證存離線、確認司機碰面點與班機延誤時的聯絡方式。中途停留<b>不預約</b>，上車後再問司機。</span></span></li>
+        <li class="bk-item" data-bk="rockbar" role="checkbox" aria-checked="false" tabindex="0"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/7</span>Rock Bar 崖上落日（17:00）</span><span class="bk-m">用 <b>AYANA App</b> 預約落日時段，可加訂 VIP 圓形等候區。smart casual、現場只收電子支付。</span></span></li>
+        <li class="bk-item done" data-bk="kecak" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>情人崖 Kecak 火舞（19:00）</span><span class="bk-m"><b>已訂票，19:00 場。</b>票券存離線，提早到場依票券指示報到。</span></span></li>
+        <li class="bk-item done" data-bk="uluwatu-car" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/8</span>情人崖包車（16:30 出發）</span><span class="bk-m"><b>已預訂，16:30 出發。</b>看完 19:00 火舞後到 La Baracca Uluwatu 吃晚餐，預計 20:30–21:00 用餐；出發前先吃點東西墊肚子。</span></span></li>
+        <li class="bk-item done" data-bk="hotel-transfer" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/9</span>退房接送 RIMBA → Blue Karma（12:15）</span><span class="bk-m"><b>已預訂 12:15 兩台車，費用較便宜。</b>12:00 前辦好退房，分配好人員與行李，提早到接送點等車。</span></span></li>
+        <li class="bk-item done" data-bk="sundari" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/9</span>SUNDARI Wellness 峇里島式按摩 18:00</span><span class="bk-m"><b>已訂好，4 人 Traditional Balinese 90 分，18:00 開始。</b>店家來信確認：<b>接送車 17:15 到 Blue Karma，要先在大廳等</b>。出發前把確認信存離線。</span></span></li>
+        <li class="bk-item done" data-bk="udara" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/10</span>Udara 頌缽音療 12:00–14:30</span><span class="bk-m"><b>已訂並付款，4 人 TWD 3,605（IDR 500,000／人）。</b>Sacred Sounds Of Surya，週六 12:00–14:30 場。出發前把訂位確認信存離線，當天提早 15 分鐘到報到。</span></span></li>
+        <li class="bk-item done" data-bk="snorkel" role="checkbox" aria-checked="true" aria-disabled="true" data-locked="true"><span class="bk-box"><i class="fa-solid fa-check"></i></span><span><span class="bk-t"><span class="bk-when">10/11</span>佩尼達西線浮潛一日團</span><span class="bk-m"><b>已在 KKday 訂好，NT$ 7,728（4 人，約 NT$ 1,932／人）——阿婷先付的，回來記得結算。</b>Manta Bay／Crystal Bay／Gamat Bay 含午餐。⚠️ <b>去回都不含接送</b>。<b>05:45 準時出發、07:00 前要到 Sanur 的 Golden Mountain Fast Cruise 報到</b>，<b>前一晚先請 Blue Karma 櫃檯預約 05:45 的車</b>（清晨不一定叫得到 Grab）。憑證存離線。</span></span></li>
         </ul>
       </div>
     </div>
@@ -564,15 +569,11 @@ footer .fl{color:var(--coral);text-decoration:none}
           <li><div class="ic"><i class="fa-solid fa-cable-car"></i></div><div class="txt"><b>10:00–12:00 搭懸崖纜車下 Kubu Beach</b><p>上午太陽還不頂曬，搭<span class="hl">透明懸崖纜車</span>下到 AYANA 私人海灘，看巨石懸崖、在俱樂部躺椅上<span class="hl">喝椰子水</span>。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-water-ladder"></i></div><div class="txt"><b>接著：Ocean Beach Pool 懸崖無邊際海景泳池</b><p>早上的懸崖海景<span class="hl">光線極美</span>，在緊鄰浪花的無邊際泳池邊拍照、看海、放空，補足前一天沒泡到的經典海景泳池。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-umbrella-beach"></i></div><div class="txt"><b>中午回 RIMBA：林畔涼亭泳池</b><p>回 RIMBA 館泡<span class="hl">林畔涼亭泳池</span>放空休息。午餐可在<span class="hl">達瑪餐廳</span>吃，或泳池旁的<span class="hl">幽蘭茶室</span>、<span class="hl">圖格餐廳（To’ge）</span>。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-gopuram"></i></div><div class="txt"><b>17:00 情人崖斷崖廟 Uluwatu Temple</b><p>16:30 buggy 出園、<span class="hl">叫 Grab</span> 約 30–40 分。斷崖海景，<span class="hl">注意猴子搶眼鏡、手機、帽子</span>。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-fire"></i></div><div class="txt"><b>18:00 Kecak 火舞 <span class="book-pill"><i class="fa-solid fa-ticket"></i> 要先訂票！！</span></b><p>斷崖＋火舞＋落日。⚠️ 週四人多，<span class="hl">提早到場或先線上訂票卡位</span>。</p></div></li>
-          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>晚餐：火舞後三選一</b><p>看完火舞就近在情人崖一帶吃，或回程順路停金巴蘭：</p>
-            <div class="dishes cols3">
-              <div class="dish"><b><a class="loc-link" href="https://maps.app.goo.gl/dYk6AspgcH3e1Ar26" target="_blank">SUKA ULUWATU <i class="fa-solid fa-location-arrow"></i></a> · 澳洲風格咖啡館</b><p>情人崖一帶的澳式咖啡館，看完火舞最快能坐下的一間；漢堡、碗食與咖啡都有水準，氣氛放鬆不趕人。</p></div>
-              <div class="dish"><b><a class="loc-link" href="https://maps.app.goo.gl/Y9bFkLd6gRWkxyiX6" target="_blank">La Baracca Bali（Uluwatu）<i class="fa-solid fa-location-arrow"></i></a> · 義大利餐廳</b><p>熱鬧的義式小酒館，柴燒 pizza、手工義麵高 CP 值，火舞後想好好吃一頓熱食選這家。</p></div>
-              <div class="dish"><b><a class="loc-link" href="https://maps.app.goo.gl/3ANh8aM3tDeLqV7Q6" target="_blank">Wahaha Pork Ribs Jimbaran <i class="fa-solid fa-location-arrow"></i></a> · 峇里風味豬肋排</b><p>金巴蘭人氣豬肋排店，甜香醬料炭烤入味；就在回 AYANA 的順路上，吃完直接回飯店休息。</p></div>
-            </div>
-          </div></li>
+          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>15:30–16:00 先吃點東西墊肚子</b><p>晚餐要到 <span class="hl">20:30–21:00</span> 才吃，出發前先吃輕食、三明治或麵包，補水並帶些小點心，避免空腹等火舞。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>16:30 包車出發 → 情人崖 <span class="book-pill ok"><i class="fa-solid fa-circle-check"></i> 已預訂</span></b><p>提早到約定接送點等車，前往 Uluwatu Temple，車程約 <span class="hl">30–40 分</span>，依路況調整。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-gopuram"></i></div><div class="txt"><b>約 17:00–17:15 情人崖斷崖廟 Uluwatu Temple</b><p>先逛斷崖廟、看海景與夕陽，再依票券指示提早報到。<span class="hl">注意猴子搶眼鏡、手機、帽子</span>。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-fire"></i></div><div class="txt"><b>19:00 Kecak 火舞 <span class="book-pill ok"><i class="fa-solid fa-circle-check"></i> 已訂票</span></b><p><span class="hl">已訂 19:00 場</span>，票券先存離線。看完後前往 La Baracca Uluwatu 吃晚餐。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>20:30–21:00 晚餐：<a class="loc-link" href="https://maps.app.goo.gl/Y9bFkLd6gRWkxyiX6" target="_blank">La Baracca Uluwatu <i class="fa-solid fa-location-arrow"></i></a></b><p>看完火舞後到義大利餐廳吃 pizza、義大利麵，預計 <span class="hl">20:30–21:00 才開始用餐</span>，實際依散場與路況調整。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-champagne-glasses"></i></div><div class="txt"><b>如果還有活力：夜生活續攤</b><p>回園區先上 <span class="hl">UNIQUE 屋頂酒吧</span>（RIMBA 館頂樓，至 23:00），喝一杯 360° 夜景調酒、<span class="hl">躺在水床上看星空</span>。</p><p>想安靜一點就到 <span class="hl">Luna Rooftop Bar 頂樓無邊際泳池</span>（Segara 館頂樓，至 23:00／24:00），在夜空下靜靜泡水、看林冠夜景。</p><p>還想更晚就轉場 <span class="hl">After Rock 岩石後音樂酒廊</span>（SAKA 博物館旁，<span class="hl">20:00–02:00</span>），室內冷氣酒吧配 live 音樂，聽到深夜再回房。</p></div></li>
         </ul>
         <span class="stay-pill"><i class="fa-solid fa-bed"></i> 宿 · RIMBA by AYANA（金巴蘭）</span>
@@ -589,7 +590,7 @@ footer .fl{color:var(--coral);text-decoration:none}
       </div>
       <div>
         <ul class="acts">
-          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>12:00–13:30 RIMBA 退房 → Blue Karma 寄行李</b><p>AYANA 泡到中午退房，叫 Grab 北上 Seminyak，車程約 <span class="hl">45 分–1 小時</span>。四人＋行李叫 <span class="hl">XL／6 人座</span>，請櫃檯代叫或走到園區大門口上車比較順。</p><p>這時間還不能入住，<span class="hl">先把行李寄在 Blue Karma 櫃檯</span>再出門。⚠️ 這段刻意抓寬，Sunset Road 中午開始就容易塞。</p></div></li>
+          <li><div class="ic"><i class="fa-solid fa-van-shuttle"></i></div><div class="txt"><b>12:00 退房 · 12:15 接送 → Blue Karma 寄行李</b><p><span class="hl">退房接送已預訂：12:15，兩台車（比較便宜）</span>。12:00 前辦好退房，分配好人員與行李、提早到接送點等車。北上 Seminyak 車程約 <span class="hl">45 分–1 小時</span>。</p><p>這時間還不能入住，<span class="hl">先把行李寄在 Blue Karma 櫃檯</span>再出門。⚠️ 這段刻意抓寬，Sunset Road 中午開始就容易塞。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-utensils"></i></div><div class="txt"><b>13:30–14:30 午餐：<a href="https://maps.app.goo.gl/oTLCYGKE3FGWxLta7" target="_blank" class="loc-link">Naughty Nuri's Warung Seminyak <i class="fa-solid fa-location-arrow"></i></a></b><p>Ubud 起家的<span class="hl">烤豬肋排名店</span>，炭火直烤、BBQ 醬香甜入味，<span class="hl">軟嫩到輕鬆脫骨</span>——連 Anthony Bourdain 都是粉絲。四人點肋排＋沙嗲＋炒飯分食剛剛好。</p><p>⚠️ 用餐尖峰常排隊，想準時 14:30 收工<span class="hl">最好 13:15 前先到</span>，或先打電話留位。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-ice-cream"></i></div><div class="txt"><b>14:30–15:00 想吃再去：<a href="https://maps.app.goo.gl/BnzjYR4kkmUhGiZE6" target="_blank" class="loc-link">Gusto Gelato &amp; Caffé <i class="fa-solid fa-location-arrow"></i></a></b><p>從 Naughty Nuri's <span class="hl">散步就到</span>的峇里島人氣義式冰淇淋店，<span class="hl">每日現做</span>、口味超過 30 種（在地水果口味必試），份量實在、價格親民。</p><p><span class="hl">肋排吃太飽就直接跳過</span>，把這 30 分鐘挪給星巴克，後面會更從容。</p></div></li>
           <li><div class="ic"><i class="fa-solid fa-mug-saucer"></i></div><div class="txt"><b>15:00–16:15 搭車去 <a href="https://maps.app.goo.gl/SufRbfDMYnFSk9YV7" target="_blank" class="loc-link">Starbucks Reserve Dewata <i class="fa-solid fa-location-arrow"></i></a></b><p>在 Sunset Road 上，<span class="hl">車程約 10–15 分</span>。這裡是<span class="hl">東南亞最大的星巴克旗艦店</span>：挑高玻璃屋配戶外咖啡樹苗圃，可以看現場烘豆、在手沖吧台點 Reserve 稀有豆。</p><p>峇里島限定杯與周邊也是這裡最齊，咖啡控必收；喝咖啡、逛店、拍照抓一小時剛好。</p></div></li>
@@ -687,8 +688,8 @@ footer .fl{color:var(--coral);text-decoration:none}
         <h4><i class="fa-solid fa-car-side"></i> 交通：全程叫 Grab</h4>
         <ul>
           <li><b>10/7 接機</b>：<b>機場接送已訂好</b>（DPS → RIMBA，約 15–20 分，4 大 4 箱的大車），出來依憑證上的碰面點找司機。<b>停留不預約</b>——上車再問司機能不能順路停 Central Kuta 換錢與 Pepito 買零食，願意就多給小費（兩站抓 IDR 50,000–100,000）。</li>
-          <li><b>10/8 火舞</b>：白天都在 AYANA 內，傍晚叫 Grab 去情人崖（約 30–40 分）。⚠️ 情人崖一帶是在地車隊地盤，<b>Grab 常常不能在廟口接客</b>，火舞散場又一次湧出人潮——回程可能要走一段到指定點，或現場跟在地車議價。</li>
-          <li><b>10/9 北上</b>：12:00 退房，含行李從 AYANA 叫 Grab 到 Seminyak，約 45 分–1 小時（Sunset Road 中午起易塞，時間抓寬）。先寄行李再出門吃飯，16:15 回飯店才正式入住。<b>SUNDARI 免費接送已約好，17:15 車到飯店、先在大廳等，18:00 開始按摩</b>，這段不用自己叫車。</li>
+          <li><b>10/8 火舞</b>：<b>包車已預訂，16:30 出發，火舞票已訂 19:00 場</b>。先逛情人崖，看完火舞到 La Baracca Uluwatu，預計 <b>20:30–21:00 才吃晚餐</b>，出發前先吃輕食墊肚子。</li>
+          <li><b>10/9 北上</b>：12:00 前退房，<b>12:15 接送已預訂兩台車（比較便宜）</b>，含行李從 RIMBA 到 Blue Karma／Seminyak，約 45 分–1 小時（Sunset Road 中午起易塞，時間抓寬）。先寄行李再出門吃飯，16:15 回飯店才正式入住。<b>SUNDARI 免費接送已約好，17:15 車到飯店、先在大廳等，18:00 開始按摩</b>，這段不用自己叫車。</li>
           <li><b>10/10 音療＋海神廟</b>：約 11:00 出發——Seminyak → Udara（Seseh，約 40–50 分）→ 海神廟逛逛＋夕陽 → 回 Seminyak，一條路線不走回頭。⚠️ 海神廟跟情人崖一樣不好叫車，<b>夕陽散場尤其難</b>；可以請 Udara 櫃檯幫忙，或到海神廟後先跟一位司機約好回程時間。</li>
           <li><b>10/11 浮潛＋逛街</b>：<b>已在 KKday 訂好</b>西線一日團（NT$ 7,728／4 人，阿婷先付）。<b>去程自理</b>——05:45 出發、07:00 到 Sanur 的 Golden Mountain Fast Cruise 報到，<b>前一晚請飯店櫃檯預約 05:45 的車</b>。<b>回程一樣自理</b>，上岸後自己叫 Grab 回 Seminyak（約 45 分–1 小時）。走<b>方案 A</b>（Sanur 上岸直接逛 ICON Bali）要先跟導遊說在碼頭下車，回程自己叫 Grab（約 45 分–1 小時）；走<b>方案 B</b> 就跟團車回飯店，之後 Grab 往返 Seminyak／Kuta。</li>
           <li><b>10/12 送機</b>：<b>Blue Karma 照理說有機場接送，入住時先問</b>（是否含房價／要不要加價／要不要前一天預約）；沒有再叫 Grab。</li>
@@ -779,14 +780,16 @@ lnk.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>lnk.classLis
   let state={};
   try{state=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
   state=Object.assign({},defaults,state);
+  items.filter(li=>li.dataset.locked==='true').forEach(li=>{state[li.dataset.bk]=true});
   const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}};
   const paint=()=>{
     let n=0;
     items.forEach(li=>{const on=!!state[li.dataset.bk];li.classList.toggle('done',on);li.setAttribute('aria-checked',on);if(on)n++});
     done.textContent=n;bar.style.width=(n/items.length*100)+'%';
   };
-  const toggle=li=>{state[li.dataset.bk]=!state[li.dataset.bk];save();paint()};
+  const toggle=li=>{if(li.dataset.locked==='true')return;state[li.dataset.bk]=!state[li.dataset.bk];save();paint()};
   items.forEach(li=>{
+    if(li.dataset.locked==='true')return;
     li.addEventListener('click',()=>toggle(li));
     li.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggle(li)}});
   });

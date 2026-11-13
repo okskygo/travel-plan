@@ -96,10 +96,6 @@
 - 原本這天的 Golden Gate Park、Tartine 早餐、海岸加選景點，已移到「其他想去的地方」。
 
 #### Outlet 購物筆記（HTML 2/10 卡片內 `data-outlet-notes`）
-- 為什麼選 Great Mall：BART＋步行就到、室內不怕雨，四家店都有。
-- 備選 Livermore SF Premium Outlets：要轉 Wheels Route 14 公車，露天，品牌 outlet 較多，四家店也都有。
-- 不建議 Vacaville：在 Capitol Corridor 沿線，但出站後接駁不好確認。
-- 已關閉：SF Union Square 的 TNF（180 Post St，2024 年關）、Berkeley 的 TNF Outlet。
 - 店面大小和庫存查不到，想買特定款式或尺寸就出發前打電話問；先買外套，邊買邊估行李空間。
 - 銷售稅約 9–10%，不能退；台灣入境免稅額每人約 NT$20,000；行李不夠可在 outlet 買折扣行李箱；兩人各準備 Clipper 卡。
 

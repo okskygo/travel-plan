@@ -8,8 +8,8 @@
 
 - 9 天 8 晚、2 人同行、全程大眾運輸不自駕；第一次去美國。
 - 住宿動線：舊金山 3 晚（2/3–2/6）→ Sacramento 2 晚（2/6–2/8）→ 舊金山 3 晚（2/8–2/11）。
-- 主軸：2/4 勇士 Chase Center（館外＋商店）、2/6 與 2/7 國王兩場主場球賽。
-- 二月雨季，白天約 9–15°C，日落約 17:40；天氣差時 2/9（金門大橋）可與 2/10 對調。
+- 主軸：2/4 勇士 Chase Center（館外＋商店）、2/6 與 2/7 國王兩場主場球賽、2/10 Great Mall outlet 購物日。
+- 二月雨季，白天約 9–15°C，日落約 17:40；天氣差時 2/9（金門大橋）可與 2/10（室內 outlet）對調。
 
 ## 航班（星宇豪華經濟艙，桃園 T2）
 
@@ -46,7 +46,7 @@
 - 12:15–13:45 Embarcadero 海濱散步；Oracle Park 外觀為加選。
 - 14:00–16:30 **Chase Center／Thrive City**（必排，拍照＋勇士商店 2–3 小時）。
 - 16:30–18:00 晚餐 **Gott's Roadside**（Thrive City，US$40–60）或 The Bird SoMa 炸雞（二選一）。
-- 待查：Chase Center 是否有導覽／公開參觀、勇士商店非比賽日營業時間。若未完成，改 2/9 或 2/10 補，2/11 最後備援。
+- 待查：Chase Center 是否有導覽／公開參觀、勇士商店非比賽日營業時間。若未完成，改 2/9 補（2/10 是 outlet 日），2/11 最後備援。
 
 ### 2/5（五）住舊金山｜纜車、看惡魔島、North Beach
 - 08:00 早餐（HI 東側 O'Farrell／Powell 找店）。
@@ -84,14 +84,24 @@
 - 12:30 午餐 Presidio 咖啡／熟食（US$35–50）。
 - 14:00–15:00 **Golden Gate Bridge** Welcome Center 看橋、短走，不預設過橋。
 - 16:00 Marina Chestnut St 逛店 → 17:00 晚餐候選 **A16**（2355 Chestnut St，US$90–140）；若前晚吃了 State Bird，改外帶。
-- 留給晴天、風小的一天，可與 2/10 對調。
+- 留給晴天、風小的一天；下雨就與 2/10 室內 outlet 日對調。
 
-### 2/10（三）住舊金山｜Golden Gate Park＋Haight-Ashbury
-- 09:30 早餐 **Tartine Inner Sunset**（1226 9th Ave，Morning Bun，US$25–40）。
-- 10:30–13:00 California Academy of Sciences 或 de Young 二選一。
-- 13:00 午餐館內咖啡廳或 Irving St 簡餐（US$35–50）。
-- 14:45 Haight-Ashbury 逛街 → 17:00 **Slice House Haight**（1535 Haight St，切片 Pizza 共 2 片，US$30–45）。
-- 加選：Painted Ladies、Ocean Beach、Lands End＋Sutro Baths、Twin Peaks。雨備 Exploratorium／SFMOMA（SFMOMA 週三休館）。
+### 2/10（三）住舊金山｜Great Mall Outlet 購物日＋Haight 切片 Pizza
+- 08:00 早餐（HI 東側 O'Farrell／Powell，US$15–25）。
+- 08:30 從 Powell St 搭 BART 往 Berryessa 方向到 **Milpitas**，再走到 **Great Mall**（447 Great Mall Dr，室內購物中心）；單程含步行約 1.5 小時，2027 年班表待確認。
+- 10:00–15:00 購物順序：**The North Face**（458 Great Mall Dr，近 Entrance 4）→ **Columbia** Factory Store（#256A，(408) 273-7000）→ **Coach** Outlet（234 Great Mall Dr）→ **Polo Ralph Lauren** Factory Store（在 Coach 隔壁）。Nike Factory Store、Puma、Converse、Levi's 有空再逛。午餐在商場內吃（US$25–40）。
+- 15:00–16:30 搭 BART 回 Powell，東西先放回 HI。
+- 16:45 搭 Muni 去 Haight 短逛 → 17:30–18:30 **Slice House Haight**（1535 Haight St，US$30–45）；太累就改在 HI 附近 O'Farrell St 吃。
+- 19:00 後整理行李、確認重量。2/9 下雨的話可與這天對調。
+- 原本這天的 Golden Gate Park、Tartine 早餐、海岸加選景點，已移到「其他想去的地方」。
+
+#### Outlet 購物筆記（HTML 2/10 卡片內 `data-outlet-notes`）
+- 為什麼選 Great Mall：BART＋步行就到、室內不怕雨，四家店都有。
+- 備選 Livermore SF Premium Outlets：要轉 Wheels Route 14 公車，露天，品牌 outlet 較多，四家店也都有。
+- 不建議 Vacaville：在 Capitol Corridor 沿線，但出站後接駁不好確認。
+- 已關閉：SF Union Square 的 TNF（180 Post St，2024 年關）、Berkeley 的 TNF Outlet。
+- 店面大小和庫存查不到，想買特定款式或尺寸就出發前打電話問；先買外套，邊買邊估行李空間。
+- 銷售稅約 9–10%，不能退；台灣入境免稅額每人約 NT$20,000；行李不夠可在 outlet 買折扣行李箱；兩人各準備 Clipper 卡。
 
 ### 2/11（四）SFO 23:10 起飛｜Mission＋回程
 - 11:00 前退房、寄放行李（另付費）。
@@ -107,7 +117,7 @@
 - 可選補充：美式早餐 Diner（Sacramento The Morning Fork, 1111 21st St）、Deli Board（1058 Folsom St，僅週二至週日午間外帶）。
 
 ## 備選池（不必全部完成）
-Exploratorium／SFMOMA、Oakland Museum of California＋Lake Merritt、Sausalito 渡輪半日、SF Symphony Lunar New Year Concert（與 2/6 球賽衝突，僅參考）。不排 Google／矽谷、不登惡魔島。
+Golden Gate Park＋Tartine Inner Sunset（原 2/10 行程，可選 Academy of Sciences／de Young，晴天可加 Ocean Beach、Lands End、Twin Peaks、Painted Ladies）、Exploratorium／SFMOMA、Oakland Museum of California＋Lake Merritt、Sausalito 渡輪半日、SF Symphony Lunar New Year Concert（與 2/6 球賽衝突，僅參考）。不排 Google／矽谷、不登惡魔島。
 
 ## 行李（27 吋可行）
 - Amtrak／Capitol Corridor：每人 2 件、每件 28×22×14 吋、50 lb／23 kg；無託運，行李隨身上車（車廂端部大型行李架）。
@@ -123,6 +133,7 @@ Exploratorium／SFMOMA、Oakland Museum of California＋Lake Merritt、Sausalito
 - [ ] 2027 班表開放後訂 Capitol Corridor 往返＋Thruway 接駁。
 - [ ] 量行李尺寸、控制 23 kg 內。
 - [ ] 查 Chase Center 導覽／公開參觀、勇士商店非比賽日營業時間。
+- [ ] 2/10 Great Mall：確認四家店的營業時間、2027 年 BART 往 Milpitas 班次；兩人各準備 Clipper 卡。
 - [ ] 買旅遊保險、設定 eSIM、準備 AirTag 與行李鎖。
 - [ ] 視需要訂 State Bird Provisions／A16。
 
